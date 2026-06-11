@@ -11,8 +11,8 @@ if str(_bg_root) not in sys.path:
     sys.path.insert(0, str(_bg_root))
 
 from storage.elasticsearch import ElasticsearchService
+from storage.models import KnowledgeBase, UploadedFile, Document, DocumentChunk, IngestionJob
 from storage.postgres import get_session, init_db
-from storage.postgres import KnowledgeBase, UploadedFile, Document, DocumentChunk, IngestionJob
 from storage.qdrant import QdrantService
 
 

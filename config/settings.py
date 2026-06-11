@@ -39,8 +39,8 @@ class Settings:
     ES_ANALYZER: str = os.getenv("ES_ANALYZER", "standard")
 
     # --- Embedding ---
-    EMBEDDING_MODEL: str = os.getenv("EMBEDDING_MODEL", "bge-large-zh-v1.5")
-    EMBEDDING_BASE_URL: str = os.getenv("EMBEDDING_BASE_URL", "http://localhost:1234/v1")
+    EMBEDDING_MODEL: str = os.getenv("EMBEDDING_MODEL", "bge-m3")
+    EMBEDDING_BASE_URL: str = os.getenv("EMBEDDING_BASE_URL", "http://localhost:1233/v1")
     EMBEDDING_API_KEY: str = os.getenv("EMBEDDING_API_KEY", "123123")
 
     # --- Chunking ---

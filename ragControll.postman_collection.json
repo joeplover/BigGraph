@@ -1,0 +1,188 @@
+{
+	"info": {
+		"name": "文档知识库管理系统",
+		"description": "RAG 文档知识库管理系统 API — 支持知识库 CRUD、文件上传处理、向量检索、文档删除",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "ragControll"
+	},
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8000",
+			"type": "string"
+		},
+		{
+			"key": "tenant_id",
+			"value": "default",
+			"type": "string"
+		}
+	],
+	"item": [
+		{
+			"name": "知识库管理",
+			"description": "知识库的创建与查询",
+			"item": [
+				{
+					"name": "创建知识库",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/knowledge_bases/?tenant_id={{tenant_id}}&name=我的知识库&description=这是一个示例知识库",
+							"host": ["{{base_url}}"],
+							"path": ["knowledge_bases", ""],
+							"query": [
+								{
+									"key": "tenant_id",
+									"value": "{{tenant_id}}",
+									"description": "租户 ID"
+								},
+								{
+									"key": "name",
+									"value": "我的知识库",
+									"description": "知识库名称"
+								},
+								{
+									"key": "description",
+									"value": "这是一个示例知识库",
+									"description": "知识库描述（可选）"
+								}
+							]
+						},
+						"description": "创建一个新的知识库。\n\n请求参数（Query）：\n- tenant_id: string (必填) — 租户 ID\n- name: string (必填) — 知识库名称\n- description: string (可选) — 知识库描述"
+					}
+				},
+				{
+					"name": "获取知识库详情",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/knowledge_bases/{{kb_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["knowledge_bases", "{{kb_id}}"]
+						},
+						"description": "根据知识库 ID 获取知识库详情。\n\n路径参数：\n- kb_id: string — 知识库 ID"
+					}
+				}
+			]
+		},
+		{
+			"name": "文件上传与处理",
+			"description": "文件上传、后台处理流水线",
+			"item": [
+				{
+					"name": "上传文件",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "",
+									"description": "要上传的文件（支持 PDF / Word / Markdown / 文本等格式）"
+								},
+								{
+									"key": "tenant_id",
+									"type": "text",
+									"value": "{{tenant_id}}",
+									"description": "租户 ID"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/upload/{{kb_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["upload", "{{kb_id}}"]
+						},
+						"description": "上传文件并启动后台处理流水线（解析 → 清洗 → 切片 → 向量索引）。\n\n路径参数：\n- knowledge_base_id: string — 知识库 ID\n\n请求体（multipart/form-data）：\n- file: File (必填) — 上传的文件\n- tenant_id: string (必填) — 租户 ID\n\n返回 job_id 可用于轮询处理进度。"
+					}
+				},
+				{
+					"name": "查询导入任务状态",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/jobs/{{job_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["jobs", "{{job_id}}"]
+						},
+						"description": "查询文件导入任务的当前状态。\n\n路径参数：\n- job_id: string — 导入任务 ID（上传文件时返回）\n\n返回状态：pending → parsing → cleaning → chunking → embedding → completed / failed"
+					}
+				}
+			]
+		},
+		{
+			"name": "文档查询与管理",
+			"description": "文档详情查询、语义搜索、删除",
+			"item": [
+				{
+					"name": "获取文档详情",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/documents/{{doc_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["documents", "{{doc_id}}"]
+						},
+						"description": "根据文档 ID 获取文档详细信息和元数据。\n\n路径参数：\n- doc_id: string — 文档 ID"
+					}
+				},
+				{
+					"name": "搜索文档（向量语义检索）",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/search/{{kb_id}}?query=搜索关键词&limit=10&tenant_id={{tenant_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["search", "{{kb_id}}"],
+							"query": [
+								{
+									"key": "query",
+									"value": "搜索关键词",
+									"description": "搜索查询文本"
+								},
+								{
+									"key": "limit",
+									"value": "10",
+									"description": "返回结果数量上限（默认 10）"
+								},
+								{
+									"key": "tenant_id",
+									"value": "{{tenant_id}}",
+									"description": "租户 ID（默认 default）"
+								}
+							]
+						},
+						"description": "在指定知识库中执行向量语义搜索（Qdrant 向量检索 + Elasticsearch 全文补充）。\n\n路径参数：\n- knowledge_base_id: string — 知识库 ID\n\n查询参数：\n- query: string (必填) — 搜索文本\n- limit: int (可选，默认 10) — 返回条数\n- tenant_id: string (可选，默认 \"default\") — 租户 ID"
+					}
+				},
+				{
+					"name": "删除文档",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/documents/{{doc_id}}",
+							"host": ["{{base_url}}"],
+							"path": ["documents", "{{doc_id}}"]
+						},
+						"description": "删除文档及其关联的所有数据（PostgreSQL 软删除 + Qdrant 向量删除 + Elasticsearch 删除）。\n\n路径参数：\n- doc_id: string — 文档 ID"
+					}
+				}
+			]
+		}
+	]
+}

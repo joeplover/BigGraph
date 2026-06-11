@@ -59,12 +59,15 @@ class QdrantService:
             results.append({
                 "chunk_id": payload.get("chunk_id", ""),
                 "document_id": payload.get("document_id", ""),
+                "file_id": payload.get("file_id", ""),
                 "file_name": payload.get("file_name"),
                 "content": payload.get("content", ""),
                 "heading_path": payload.get("heading_path"),
                 "page_start": payload.get("page_start"),
                 "page_end": payload.get("page_end"),
                 "content_type": payload.get("content_type"),
+                "keywords": payload.get("keywords", []),
+                "token_count": payload.get("token_count", 0),
                 "score": float(hit.score or 0),
             })
         return results
