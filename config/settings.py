@@ -47,5 +47,12 @@ class Settings:
     CHUNK_SIZE: int = int(os.getenv("CHUNK_SIZE", "800"))
     CHUNK_OVERLAP: int = int(os.getenv("CHUNK_OVERLAP", "120"))
 
+    # --- Timezone ---
+    TIMEZONE: str = os.getenv("TIMEZONE", "Asia/Shanghai")
+
+    # --- Logging ---
+    LOG_LEVEL: str = os.getenv("LOG_LEVEL", "INFO")
+    LOG_DIR: str = os.getenv("LOG_DIR", "logs")
+
 
 settings = Settings()

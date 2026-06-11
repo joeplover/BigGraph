@@ -12,7 +12,7 @@ if str(_bg_root) not in sys.path:
 
 from storage.elasticsearch import ElasticsearchService
 from storage.models import KnowledgeBase, UploadedFile, Document, DocumentChunk, IngestionJob
-from storage.postgres import get_session, init_db
+from storage.postgres import get_session, init_db, drop_db
 from storage.qdrant import QdrantService
 
 
@@ -42,15 +42,10 @@ def clean_all():
     es.ensure_index()
     print("  ES index 已重建")
 
-    # 3. PG
+    # 3. PG — 重建所有表，确保 ORM 模型变更（如 default=datetime.now）生效
+    drop_db()
     init_db()
-    with get_session() as db:
-        db.query(IngestionJob).delete()
-        db.query(DocumentChunk).delete()
-        db.query(Document).delete()
-        db.query(UploadedFile).delete()
-        db.query(KnowledgeBase).delete()
-        print("  PG 数据已清空")
+    print("  PG 表已重建")
 
     print("\n清理完成，三库已恢复初始状态")
 

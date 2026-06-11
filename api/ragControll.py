@@ -12,6 +12,7 @@ from __future__ import annotations
 import asyncio
 import hashlib
 import uuid
+from datetime import datetime
 from pathlib import Path
 
 from fastapi import BackgroundTasks, FastAPI, File, Form, HTTPException, UploadFile
@@ -20,6 +21,7 @@ from config.settings import settings
 from core.ingestion.chunker import StructureAwareChunker
 from core.ingestion.parser_base import Chunk
 from core.ingestion.registry import ParserRegistry
+from core.logging import RequestIDMiddleware, get_logger, make_request_id
 from storage.elasticsearch import ElasticsearchService
 from storage.error_codes import ErrorCode
 from storage.models import (
@@ -44,6 +46,21 @@ from storage.qdrant import QdrantService
 # ---------------------------------------------------------------------------
 
 app = FastAPI(title="文档知识库管理系统", version="1.0.0")
+app.add_middleware(RequestIDMiddleware)
+
+logger = get_logger(__name__)
+
+
+# ---------------------------------------------------------------------------
+# 时间工具
+# ---------------------------------------------------------------------------
+
+
+def _local_iso(dt: datetime | None) -> str | None:
+    """格式化时间，格式: 2026-06-11 15:11:16"""
+    if dt is None:
+        return None
+    return dt.strftime("%Y-%m-%d %H:%M:%S")
 
 
 # ---------------------------------------------------------------------------
@@ -55,7 +72,12 @@ async def global_exception_handler(request, exc):
     """兜底处理器：将未捕获的异常转为标准错误响应"""
     from fastapi.responses import JSONResponse
 
+    rid = request.scope.get("request_id", "-")
     if isinstance(exc, HTTPException):
+        logger.warning(
+            "HTTP %d: %s", exc.status_code, exc.detail,
+            extra={"request_id": rid},
+        )
         return JSONResponse(
             status_code=exc.status_code,
             content={
@@ -64,6 +86,11 @@ async def global_exception_handler(request, exc):
             },
         )
     # 非 HTTPException 的统一兜底
+    logger.error(
+        "未捕获异常: %s", str(exc),
+        extra={"request_id": rid},
+        exc_info=True,
+    )
     return JSONResponse(
         status_code=500,
         content={
@@ -86,25 +113,29 @@ _es = ElasticsearchService()
 @app.post("/knowledge_bases/")
 async def create_knowledge_base(tenant_id: str, name: str, description: str = ""):
     """创建知识库"""
+    rid = make_request_id()
     with get_session() as db:
         kb = KnowledgeBaseStore.create(db, tenant_id=tenant_id, name=name, description=description)
+        logger.info("创建知识库: name=%s tenant=%s", name, tenant_id, extra={"request_id": rid})
         return {"id": str(kb.id), "name": kb.name, "tenant_id": kb.tenant_id}
 
 
 @app.get("/knowledge_bases/{kb_id}")
 async def get_knowledge_base(kb_id: str):
     """获取知识库详情"""
+    rid = make_request_id()
     with get_session() as db:
         kb = KnowledgeBaseStore.get(db, kb_id)
         if not kb:
+            logger.warning("知识库不存在: kb_id=%s", kb_id, extra={"request_id": rid})
             raise ErrorCode.KB_NOT_FOUND.exception()
         return {
             "id": str(kb.id),
             "name": kb.name,
             "tenant_id": kb.tenant_id,
             "description": kb.description,
-            "created_at": kb.created_at.isoformat(),
-            "updated_at": kb.updated_at.isoformat(),
+            "created_at": _local_iso(kb.created_at),
+            "updated_at": _local_iso(kb.updated_at),
         }
 
 
@@ -120,6 +151,12 @@ async def upload_file(
     background_tasks: BackgroundTasks = BackgroundTasks(),
 ):
     """上传文件并启动后台处理流水线。"""
+    rid = make_request_id()
+    logger.info(
+        "收到上传请求: name=%s kb=%s tenant=%s",
+        file.filename, knowledge_base_id, tenant_id,
+        extra={"request_id": rid},
+    )
     # 先保存文件到磁盘（不涉及DB，出错也没脏数据）
     content = await file.read()
     file_ext = Path(file.filename).suffix
@@ -161,7 +198,13 @@ async def upload_file(
         file_id = str(uploaded_file.id)
 
         # 后台处理
-        background_tasks.add_task(process_uploaded_document, job_id, file_id)
+        background_tasks.add_task(process_uploaded_document, job_id, file_id, rid)
+
+        logger.info(
+            "上传完成: job_id=%s file_id=%s size=%d",
+            job_id, file_id, len(content),
+            extra={"request_id": rid},
+        )
 
         return {
             "job_id": job_id,
@@ -172,8 +215,11 @@ async def upload_file(
     # ── 出 with 块 → commit；如果上面任意一步抛异常 → rollback，DB 无脏数据
 
 
-async def process_uploaded_document(job_id: str, file_id: str):
+async def process_uploaded_document(job_id: str, file_id: str, request_id: str = "-"):
     """后台处理流水线：解析 → 清洗 → 切片 → 向量索引。"""
+    pid = make_request_id()
+    log_extra = {"request_id": f"{request_id}/{pid}"}
+    logger.info("后台任务开始: job_id=%s file_id=%s", job_id, file_id, extra=log_extra)
     try:
         with get_session() as db:
             uploaded_file = UploadedFileStore.get(db, file_id)
@@ -212,6 +258,7 @@ async def process_uploaded_document(job_id: str, file_id: str):
         parser = _parser_registry.get_parser(file_path)
         parsed_doc = parser.parse(file_path)
         chunks: list[Chunk] = _chunker.chunk(parsed_doc)
+        logger.info("解析完成: chunks=%d", len(chunks), extra=log_extra)
 
         # 组装成 DocumentChunkStore.bulk_create 需要的 dict 列表
         chunks_data = []
@@ -305,7 +352,12 @@ async def process_uploaded_document(job_id: str, file_id: str):
         except OSError:
             pass  # 删除失败不影响主流程
 
+        logger.info("后台任务完成: job_id=%s chunks=%d qdrant=%s es=%s",
+                     job_id, len(chunks), qdrant_ok, es_ok, extra=log_extra)
+
     except Exception as e:
+        logger.error("后台任务失败: job_id=%s error=%s", job_id, str(e),
+                      extra=log_extra, exc_info=True)
         with get_session() as db:
             IngestionJobStore.update_status(db, job_id, IngestionJobStatus.failed, error_message=str(e))
 
@@ -356,8 +408,8 @@ async def get_job_status(job_id: str):
             "status": job.status.value,
             "progress": job.progress,
             "error_message": job.error_message,
-            "created_at": job.created_at.isoformat(),
-            "updated_at": job.updated_at.isoformat(),
+            "created_at": _local_iso(job.created_at),
+            "updated_at": _local_iso(job.updated_at),
         }
 
 
@@ -376,8 +428,8 @@ async def get_document(doc_id: str):
             "version": doc.version,
             "parser_name": doc.parser_name,
             "parser_version": doc.parser_version,
-            "created_at": doc.created_at.isoformat(),
-            "updated_at": doc.updated_at.isoformat(),
+            "created_at": _local_iso(doc.created_at),
+            "updated_at": _local_iso(doc.updated_at),
         }
 
 
@@ -389,6 +441,9 @@ async def search_documents(
     tenant_id: str = "default",
 ):
     """在知识库中执行向量语义搜索。"""
+    rid = make_request_id()
+    logger.info("搜索请求: query=%s kb=%s tenant=%s",
+                 query, knowledge_base_id, tenant_id, extra={"request_id": rid})
     # 校验知识库存在且属于该租户
     with get_session() as db:
         kb = KnowledgeBaseStore.get(db, knowledge_base_id)
@@ -414,6 +469,7 @@ async def search_documents(
     )
 
     if not qdrant_hits:
+        logger.info("搜索无结果: query=%s", query, extra={"request_id": rid})
         return {"results": [], "query": query, "knowledge_base_id": knowledge_base_id}
 
     # 3. 从 ES 补充完整内容
@@ -437,6 +493,8 @@ async def search_documents(
             "keywords": hit.get("keywords", []),
             "token_count": hit.get("token_count", 0),
         })
+
+    logger.info("搜索完成: results=%d", len(results), extra={"request_id": rid})
 
     return {"results": results, "query": query, "knowledge_base_id": knowledge_base_id}
 
