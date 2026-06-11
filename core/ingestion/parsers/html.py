@@ -1,6 +1,6 @@
 from pathlib import Path
 from bs4 import BeautifulSoup
-from graphs.document_ingestion_graph.parser_base import ParsedDocument, ParsedSection
+from core.ingestion.parser_base import ParsedDocument, ParsedSection
 
 
 class HtmlParser:

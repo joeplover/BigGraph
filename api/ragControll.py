@@ -17,9 +17,9 @@ from pathlib import Path
 from fastapi import BackgroundTasks, FastAPI, File, Form, HTTPException, UploadFile
 
 from config.settings import settings
-from graphs.document_ingestion_graph.chunker import StructureAwareChunker
-from graphs.document_ingestion_graph.parser_base import Chunk
-from graphs.document_ingestion_graph.registry import ParserRegistry
+from core.ingestion.chunker import StructureAwareChunker
+from core.ingestion.parser_base import Chunk
+from core.ingestion.registry import ParserRegistry
 from storage.elasticsearch import ElasticsearchService
 from storage.error_codes import ErrorCode
 from storage.models import (
@@ -180,13 +180,20 @@ async def process_uploaded_document(job_id: str, file_id: str):
             if not uploaded_file:
                 raise ErrorCode.FILE_NOT_FOUND.exception()
 
+            # 查出知识库，后续都以知识库的 tenant_id 为准
+            kb_id_str = str(uploaded_file.knowledge_base_id)
+            kb = KnowledgeBaseStore.get(db, kb_id_str)
+            if not kb:
+                raise ErrorCode.KB_NOT_FOUND.exception()
+            kb_tenant_id = kb.tenant_id
+
             IngestionJobStore.update_status(db, job_id, IngestionJobStatus.parsing)
 
-            # 创建文档记录
+            # 创建文档记录（tenant_id 以知识库为准）
             document = DocumentStore.create(
                 db=db,
-                tenant_id=uploaded_file.tenant_id,
-                knowledge_base_id=str(uploaded_file.knowledge_base_id),
+                tenant_id=kb_tenant_id,
+                knowledge_base_id=kb_id_str,
                 file_id=file_id,
                 title=Path(uploaded_file.original_name).stem,
                 source_uri=uploaded_file.storage_path,
@@ -195,8 +202,7 @@ async def process_uploaded_document(job_id: str, file_id: str):
             # ← 在 session 内提取所有需要的字段，避免 detached 错误
             doc_id = str(document.id)
             storage_path = uploaded_file.storage_path
-            kb_id_str = str(uploaded_file.knowledge_base_id)
-            tenant_id_str = uploaded_file.tenant_id
+            tenant_id_str = kb_tenant_id
             original_name = uploaded_file.original_name
 
             IngestionJobStore.update_status(db, job_id, IngestionJobStatus.cleaning)

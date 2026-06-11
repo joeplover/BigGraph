@@ -1,6 +1,6 @@
 import csv
 from pathlib import Path
-from graphs.document_ingestion_graph.parser_base import ParsedDocument, ParsedSection
+from core.ingestion.parser_base import ParsedDocument, ParsedSection
 
 
 class CsvParser:

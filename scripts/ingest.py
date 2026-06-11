@@ -12,9 +12,9 @@ _bg_root = Path(__file__).resolve().parent.parent
 if str(_bg_root) not in sys.path:
     sys.path.insert(0, str(_bg_root))
 
-from graphs.document_ingestion_graph.chunker import StructureAwareChunker
-from graphs.document_ingestion_graph.registry import ParserRegistry
-from graphs.rag_query_graph.embedding import EmbeddingService
+from core.ingestion.chunker import StructureAwareChunker
+from core.ingestion.registry import ParserRegistry
+from core.retrieval.embedding import EmbeddingService
 from storage.elasticsearch import ElasticsearchService
 from storage.models import QdrantChunkModel, VectorSyncStatus
 from storage.postgres import (

@@ -3,9 +3,9 @@ from uuid import uuid4
 import re
 
 from config.settings import settings
-from graphs.document_ingestion_graph.cleaner import TextCleaner
-from graphs.document_ingestion_graph.parser_base import Chunk, ParsedDocument, ParsedSection
-from graphs.document_ingestion_graph.tokenizer import ChineseTokenizer
+from core.ingestion.cleaner import TextCleaner
+from core.ingestion.parser_base import Chunk, ParsedDocument, ParsedSection
+from core.ingestion.tokenizer import ChineseTokenizer
 
 
 # 中英文句子结束符

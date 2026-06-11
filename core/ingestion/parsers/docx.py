@@ -1,6 +1,6 @@
 from pathlib import Path
 from docx import Document as DocxDocument
-from graphs.document_ingestion_graph.parser_base import ParsedDocument, ParsedSection
+from core.ingestion.parser_base import ParsedDocument, ParsedSection
 
 
 class DocxParser:

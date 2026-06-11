@@ -1,5 +1,5 @@
-from graphs.rag_query_graph.embedding import EmbeddingService
-from graphs.rag_query_graph.rrf import reciprocal_rank_fusion
+from core.retrieval.embedding import EmbeddingService
+from core.retrieval.rrf import reciprocal_rank_fusion
 from storage.elasticsearch import ElasticsearchService
 from storage.qdrant import QdrantService
 

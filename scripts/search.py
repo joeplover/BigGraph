@@ -11,7 +11,7 @@ _bg_root = Path(__file__).resolve().parent.parent
 if str(_bg_root) not in sys.path:
     sys.path.insert(0, str(_bg_root))
 
-from graphs.rag_query_graph.hybrid import HybridRetrievalService
+from core.retrieval.hybrid import HybridRetrievalService
 
 
 def search(query_text: str, tenant_id: str = "default",

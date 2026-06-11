@@ -1,14 +1,14 @@
 from pathlib import Path
 from typing import Protocol
 
-from graphs.document_ingestion_graph.parser_base import ParsedDocument
-from graphs.document_ingestion_graph.parsers.csv import CsvParser
-from graphs.document_ingestion_graph.parsers.docx import DocxParser
-from graphs.document_ingestion_graph.parsers.excel import ExcelParser
-from graphs.document_ingestion_graph.parsers.html import HtmlParser
-from graphs.document_ingestion_graph.parsers.markdown import MarkdownParser
-from graphs.document_ingestion_graph.parsers.pdf import PdfParser
-from graphs.document_ingestion_graph.parsers.txt import TxtParser
+from core.ingestion.parser_base import ParsedDocument
+from core.ingestion.parsers.csv import CsvParser
+from core.ingestion.parsers.docx import DocxParser
+from core.ingestion.parsers.excel import ExcelParser
+from core.ingestion.parsers.html import HtmlParser
+from core.ingestion.parsers.markdown import MarkdownParser
+from core.ingestion.parsers.pdf import PdfParser
+from core.ingestion.parsers.txt import TxtParser
 
 
 class DocumentParser(Protocol):

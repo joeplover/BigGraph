@@ -1,6 +1,6 @@
 from pathlib import Path
 import fitz
-from graphs.document_ingestion_graph.parser_base import ParsedDocument, ParsedSection
+from core.ingestion.parser_base import ParsedDocument, ParsedSection
 
 
 class PdfParser:
