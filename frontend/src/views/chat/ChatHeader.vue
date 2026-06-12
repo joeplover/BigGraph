@@ -9,6 +9,8 @@
         type="success"
         effect="light"
         size="small"
+        closable
+        @close="turnOffRag"
       >
         RAG 模式
       </el-tag>
@@ -17,6 +19,8 @@
         type="warning"
         effect="light"
         size="small"
+        closable
+        @close="turnOffPpt"
       >
         PPT 模式
       </el-tag>
@@ -41,6 +45,14 @@ const sessionTitle = computed(() => {
   }
   return '新对话'
 })
+
+function turnOffRag() {
+  chatStore.ragMode = false
+}
+
+function turnOffPpt() {
+  chatStore.pptMode = false
+}
 </script>
 
 <style scoped>

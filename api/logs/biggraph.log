@@ -1369,3 +1369,63 @@ email
 [2026-06-12 22:34:12] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
 [2026-06-12 22:34:12] [INFO ] [__main__                 ] [-] AI 回复成功: len=32 history=9 request_id=8e8a31c87b62
 [2026-06-12 22:34:12] [INFO ] [http                     ] [fc7fcada7f88] POST /chat → 200
+[2026-06-12 22:41:45] [INFO ] [http                     ] [8d6b0184997c] GET /chat/sessions → 200
+[2026-06-12 22:41:45] [INFO ] [__main__                 ] [aa59f4b30037] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 22:41:45] [INFO ] [http                     ] [b0e2abbf3d9f] GET /knowledge_bases/ → 200
+[2026-06-12 22:41:45] [INFO ] [http                     ] [4c922e50730e] GET /chat/history/eb6d6300-d1cc-474f-8a19-86df44fd9366 → 200
+[2026-06-12 22:41:49] [INFO ] [http                     ] [e08585e010a4] GET /chat/sessions → 200
+[2026-06-12 22:41:49] [INFO ] [__main__                 ] [0ebb8994feb8] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 22:41:49] [INFO ] [http                     ] [de587196cba8] GET /knowledge_bases/ → 200
+[2026-06-12 22:41:49] [INFO ] [http                     ] [cde9fcb9a8ae] GET /chat/history/eb6d6300-d1cc-474f-8a19-86df44fd9366 → 200
+[2026-06-12 22:42:32] [INFO ] [__main__                 ] [165cf5bc531e] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 22:42:32] [INFO ] [http                     ] [fdab0368f53d] GET /knowledge_bases/ → 200
+[2026-06-12 22:42:37] [INFO ] [__main__                 ] [c1f2707bc0a6] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 22:42:37] [INFO ] [http                     ] [b19ab4f2eb98] GET /knowledge_bases/ → 200
+[2026-06-12 22:42:37] [INFO ] [http                     ] [67e7d47af52e] GET /chat/sessions → 200
+[2026-06-12 22:42:37] [INFO ] [http                     ] [5d547628affe] GET /chat/history/eb6d6300-d1cc-474f-8a19-86df44fd9366 → 200
+[2026-06-12 22:42:39] [INFO ] [__main__                 ] [34e46de5c8d1] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 22:42:39] [INFO ] [http                     ] [f71a1b0d1d42] GET /knowledge_bases/ → 200
+[2026-06-12 22:42:39] [INFO ] [http                     ] [938ef390cc32] GET /chat/sessions → 200
+[2026-06-12 22:42:39] [INFO ] [http                     ] [1ea10da9ea93] GET /chat/history/eb6d6300-d1cc-474f-8a19-86df44fd9366 → 200
+[2026-06-12 22:42:40] [INFO ] [http                     ] [8d6c8cf71f93] GET /chat/sessions → 200
+[2026-06-12 22:42:40] [INFO ] [__main__                 ] [452fcddb034b] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 22:42:40] [INFO ] [http                     ] [f83e10ca5fc3] GET /knowledge_bases/ → 200
+[2026-06-12 22:42:40] [INFO ] [http                     ] [2da545c97261] GET /chat/history/eb6d6300-d1cc-474f-8a19-86df44fd9366 → 200
+[2026-06-12 22:42:43] [INFO ] [__main__                 ] [2bd0569df65a] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 22:42:43] [INFO ] [http                     ] [17835997b205] GET /knowledge_bases/ → 200
+[2026-06-12 22:42:43] [INFO ] [http                     ] [b90a22501d7d] GET /chat/sessions → 200
+[2026-06-12 22:42:43] [INFO ] [http                     ] [e3914539a109] GET /chat/history/eb6d6300-d1cc-474f-8a19-86df44fd9366 → 200
+[2026-06-12 22:42:43] [INFO ] [__main__                 ] [8bef7735db36] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 22:42:43] [INFO ] [http                     ] [4e537734dd4c] GET /knowledge_bases/ → 200
+[2026-06-12 22:42:43] [INFO ] [http                     ] [f4a49fb0046a] GET /chat/sessions → 200
+[2026-06-12 22:42:43] [INFO ] [http                     ] [f7c11b05a127] GET /chat/history/eb6d6300-d1cc-474f-8a19-86df44fd9366 → 200
+[2026-06-12 22:42:44] [INFO ] [http                     ] [4c85ef696a41] GET /chat/sessions → 200
+[2026-06-12 22:42:44] [INFO ] [__main__                 ] [5ee2036759bb] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 22:42:44] [INFO ] [http                     ] [ce63be0c428e] GET /knowledge_bases/ → 200
+[2026-06-12 22:42:44] [INFO ] [http                     ] [e14d5ebdabf5] GET /chat/history/eb6d6300-d1cc-474f-8a19-86df44fd9366 → 200
+[2026-06-12 22:42:44] [INFO ] [__main__                 ] [a0b058f75d48] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 22:42:44] [INFO ] [http                     ] [667842f9324e] GET /knowledge_bases/ → 200
+[2026-06-12 22:42:44] [INFO ] [http                     ] [04b66085a346] GET /chat/sessions → 200
+[2026-06-12 22:42:44] [INFO ] [http                     ] [e72ca81b9931] GET /chat/history/eb6d6300-d1cc-474f-8a19-86df44fd9366 → 200
+[2026-06-12 22:42:44] [INFO ] [http                     ] [86eabe0eaf73] GET /chat/sessions → 200
+[2026-06-12 22:42:44] [INFO ] [__main__                 ] [323b189212ea] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 22:42:44] [INFO ] [http                     ] [0f214f827a62] GET /knowledge_bases/ → 200
+[2026-06-12 22:42:44] [INFO ] [http                     ] [05d2c9a140f4] GET /chat/history/eb6d6300-d1cc-474f-8a19-86df44fd9366 → 200
+[2026-06-12 22:42:51] [INFO ] [__main__                 ] [3ae5dfd79c5b] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 22:42:51] [INFO ] [http                     ] [c0e73414b6e0] GET /knowledge_bases/ → 200
+[2026-06-12 22:45:44] [INFO ] [http                     ] [8c4f32d14956] GET /chat/history/348a61c9-da35-40f9-a1f8-9ddcc2e69b60 → 200
+[2026-06-12 22:45:45] [INFO ] [http                     ] [6d3f3fbff976] GET /chat/history/c5859679-9ec9-4977-ae0d-38c4441fefbf → 200
+[2026-06-12 22:45:46] [INFO ] [http                     ] [d9aa5c10b6a3] GET /chat/history/348a61c9-da35-40f9-a1f8-9ddcc2e69b60 → 200
+[2026-06-12 22:45:47] [INFO ] [http                     ] [4264b3210f6e] GET /chat/history/eb6d6300-d1cc-474f-8a19-86df44fd9366 → 200
+[2026-06-12 22:47:24] [INFO ] [__main__                 ] [a60ed0ef8e3d] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 22:47:24] [INFO ] [http                     ] [7efd35e966a4] GET /knowledge_bases/ → 200
+[2026-06-12 22:49:28] [INFO ] [__main__                 ] [303152e35696] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 22:49:28] [INFO ] [http                     ] [2100b5ea4b31] GET /knowledge_bases/ → 200
+[2026-06-12 22:51:52] [INFO ] [http                     ] [e127e28df3c5] GET /chat/sessions → 200
+[2026-06-12 22:51:52] [INFO ] [__main__                 ] [e03359c59456] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 22:51:52] [INFO ] [http                     ] [9db31587923e] GET /knowledge_bases/ → 200
+[2026-06-12 22:51:52] [INFO ] [http                     ] [7b46e09ef93a] GET /chat/history/eb6d6300-d1cc-474f-8a19-86df44fd9366 → 200
+[2026-06-12 22:55:59] [INFO ] [__main__                 ] [2e411b78c07e] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 22:55:59] [INFO ] [http                     ] [6cb7b857038d] GET /knowledge_bases/ → 200
+[2026-06-12 22:57:25] [INFO ] [http                     ] [9472186596fe] GET /chat/history/348a61c9-da35-40f9-a1f8-9ddcc2e69b60 → 200
+[2026-06-12 22:57:25] [INFO ] [http                     ] [d03efc9c0249] GET /chat/history/c5859679-9ec9-4977-ae0d-38c4441fefbf → 200

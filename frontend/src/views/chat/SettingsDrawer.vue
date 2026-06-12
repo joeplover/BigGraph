@@ -30,24 +30,26 @@
         <h3 class="section-title">聊天模式</h3>
         <div class="mode-switch">
           <div class="mode-info">
-            <span class="mode-label">RAG 模式</span>
+          <el-tag v-if="chatStore.ragMode" type="success" closable @close="chatStore.toggleRagMode()" size="small" effect="plain">RAG 模式</el-tag>
+          <span v-else class="mode-label">RAG 模式</span>
             <span class="mode-desc">开启后将基于知识库内容回答</span>
           </div>
           <el-switch
             :model-value="chatStore.ragMode"
-            @change="chatStore.toggleRagMode"
+            @change="onRagModeChange"
           />
         </div>
 
         <!-- PPT Agent 模式 -->
         <div class="mode-switch" style="margin-top: 12px;">
           <div class="mode-info">
-            <span class="mode-label">PPT Agent 模式</span>
+          <el-tag v-if="chatStore.pptMode" type="warning" closable @close="chatStore.togglePptMode()" size="small" effect="plain">PPT Agent 模式</el-tag>
+          <span v-else class="mode-label">PPT Agent 模式</span>
             <span class="mode-desc">开启后将进入专业的 PPT 制作助手模式</span>
           </div>
           <el-switch
             :model-value="chatStore.pptMode"
-            @change="chatStore.togglePptMode"
+            @change="onPptModeChange"
           />
         </div>
 
@@ -216,6 +218,14 @@ import { createKnowledgeBase, shareKnowledgeBase, joinKnowledgeBase } from '@/ap
 
 const props = defineProps({ modelValue: Boolean })
 const emit = defineEmits(['update:modelValue'])
+
+function onPptModeChange() {
+  chatStore.togglePptMode()
+}
+
+function onRagModeChange() {
+  chatStore.toggleRagMode()
+}
 const chatStore = useChatStore()
 const authStore = useAuthStore()
 const router = useRouter()
