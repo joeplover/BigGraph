@@ -1291,3 +1291,81 @@ email
 [2026-06-12 22:28:50] [INFO ] [http                     ] [4eaa01301da2] GET /chat/history/3a29429b-46b4-4ee0-881c-539a7461ee25 → 200
 [2026-06-12 22:28:50] [INFO ] [http                     ] [37a6ab84e54c] GET /chat/history/348a61c9-da35-40f9-a1f8-9ddcc2e69b60 → 200
 [2026-06-12 22:28:51] [INFO ] [http                     ] [4c59b50d1a4d] GET /chat/history/3a29429b-46b4-4ee0-881c-539a7461ee25 → 200
+[2026-06-12 22:29:03] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-12 22:29:06] [INFO ] [__main__                 ] [5867dfd6e870] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 22:29:06] [INFO ] [http                     ] [8123ff691e09] GET /knowledge_bases/ → 200
+[2026-06-12 22:29:06] [INFO ] [http                     ] [60f70178f79c] GET /chat/sessions → 200
+[2026-06-12 22:29:06] [INFO ] [http                     ] [d79725a8201f] GET /chat/history/3a29429b-46b4-4ee0-881c-539a7461ee25 → 200
+[2026-06-12 22:29:07] [INFO ] [http                     ] [315ae00881ba] GET /chat/history/3a29429b-46b4-4ee0-881c-539a7461ee25 → 200
+[2026-06-12 22:29:08] [INFO ] [http                     ] [5eeb8586b599] GET /chat/history/348a61c9-da35-40f9-a1f8-9ddcc2e69b60 → 200
+[2026-06-12 22:29:08] [INFO ] [http                     ] [6ecde83f10ce] GET /chat/history/3a29429b-46b4-4ee0-881c-539a7461ee25 → 200
+[2026-06-12 22:29:10] [INFO ] [http                     ] [ce9d86b323d1] GET /chat/history/348a61c9-da35-40f9-a1f8-9ddcc2e69b60 → 200
+[2026-06-12 22:29:10] [INFO ] [http                     ] [86bd14c79c59] GET /chat/history/eb6d6300-d1cc-474f-8a19-86df44fd9366 → 200
+[2026-06-12 22:29:11] [INFO ] [http                     ] [b87039799962] GET /chat/history/348a61c9-da35-40f9-a1f8-9ddcc2e69b60 → 200
+[2026-06-12 22:29:12] [INFO ] [http                     ] [89f06bcf9e41] GET /chat/history/3a29429b-46b4-4ee0-881c-539a7461ee25 → 200
+[2026-06-12 22:29:13] [INFO ] [http                     ] [e1158fcc3389] GET /chat/history/3a29429b-46b4-4ee0-881c-539a7461ee25 → 200
+[2026-06-12 22:29:13] [INFO ] [http                     ] [33e6ae086550] GET /chat/history/348a61c9-da35-40f9-a1f8-9ddcc2e69b60 → 200
+[2026-06-12 22:29:14] [INFO ] [http                     ] [681b9ac16c42] GET /chat/history/eb6d6300-d1cc-474f-8a19-86df44fd9366 → 200
+[2026-06-12 22:29:16] [INFO ] [http                     ] [ceea762213d9] GET /chat/history/3a29429b-46b4-4ee0-881c-539a7461ee25 → 200
+[2026-06-12 22:29:21] [INFO ] [__main__                 ] [-] 会话已删除: session_id=3a29429b-46b4-4ee0-881c-539a7461ee25
+[2026-06-12 22:29:21] [INFO ] [http                     ] [a66e6f6748d3] DELETE /chat/history/3a29429b-46b4-4ee0-881c-539a7461ee25 → 200
+[2026-06-12 22:29:21] [INFO ] [http                     ] [d359da16c0f3] GET /chat/history/348a61c9-da35-40f9-a1f8-9ddcc2e69b60 → 200
+[2026-06-12 22:29:22] [INFO ] [__main__                 ] [-] 会话已创建: session_id=c5859679-9ec9-4977-ae0d-38c4441fefbf
+[2026-06-12 22:29:22] [INFO ] [http                     ] [72056c3fa988] POST /chat/sessions → 200
+[2026-06-12 22:29:29] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=c5859679-9ec9-4977-ae0d-38c4441fefbf msg_len=6
+[2026-06-12 22:29:29] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 22:29:31] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=c5859679-9ec9-4977-ae0d-38c4441fefbf status=waiting_user reply_len=137
+[2026-06-12 22:29:31] [INFO ] [http                     ] [09230678e1c1] POST /api/ppt/chat → 200
+[2026-06-12 22:29:31] [INFO ] [http                     ] [0284123a9a22] PATCH /chat/sessions/c5859679-9ec9-4977-ae0d-38c4441fefbf → 200
+[2026-06-12 22:29:55] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=c5859679-9ec9-4977-ae0d-38c4441fefbf msg_len=25
+[2026-06-12 22:29:55] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 22:30:00] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=c5859679-9ec9-4977-ae0d-38c4441fefbf status=waiting_user reply_len=45
+[2026-06-12 22:30:00] [INFO ] [http                     ] [c4ff078d612c] POST /api/ppt/chat → 200
+[2026-06-12 22:30:11] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=c5859679-9ec9-4977-ae0d-38c4441fefbf msg_len=6
+[2026-06-12 22:30:11] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 22:30:14] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=c5859679-9ec9-4977-ae0d-38c4441fefbf status=waiting_user reply_len=45
+[2026-06-12 22:30:14] [INFO ] [http                     ] [ff4b695fb673] POST /api/ppt/chat → 200
+[2026-06-12 22:30:29] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=c5859679-9ec9-4977-ae0d-38c4441fefbf msg_len=5
+[2026-06-12 22:30:29] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 22:30:31] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=c5859679-9ec9-4977-ae0d-38c4441fefbf status=waiting_user reply_len=45
+[2026-06-12 22:30:31] [INFO ] [http                     ] [c5ce7a1ec3c5] POST /api/ppt/chat → 200
+[2026-06-12 22:30:38] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=c5859679-9ec9-4977-ae0d-38c4441fefbf msg_len=11
+[2026-06-12 22:30:38] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 22:30:44] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=c5859679-9ec9-4977-ae0d-38c4441fefbf status=waiting_user reply_len=45
+[2026-06-12 22:30:44] [INFO ] [http                     ] [53fb67355943] POST /api/ppt/chat → 200
+[2026-06-12 22:30:51] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=c5859679-9ec9-4977-ae0d-38c4441fefbf msg_len=7
+[2026-06-12 22:30:52] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 22:30:57] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=c5859679-9ec9-4977-ae0d-38c4441fefbf status=waiting_material reply_len=98
+[2026-06-12 22:30:57] [INFO ] [http                     ] [3c67efb3f9ec] POST /api/ppt/chat → 200
+[2026-06-12 22:31:02] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=c5859679-9ec9-4977-ae0d-38c4441fefbf msg_len=2
+[2026-06-12 22:31:03] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 22:31:06] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=c5859679-9ec9-4977-ae0d-38c4441fefbf status=waiting_confirm reply_len=251
+[2026-06-12 22:31:06] [INFO ] [http                     ] [2ac6708a5f82] POST /api/ppt/chat → 200
+[2026-06-12 22:31:15] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务开始: session=c5859679-9ec9-4977-ae0d-38c4441fefbf
+[2026-06-12 22:31:15] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务已启动: session=c5859679-9ec9-4977-ae0d-38c4441fefbf
+[2026-06-12 22:31:15] [INFO ] [http                     ] [2b549fa69547] POST /api/ppt/chat → 200
+[2026-06-12 22:31:16] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 22:31:16] [INFO ] [http                     ] [9ff0a5b7a6cb] GET /api/ppt/stream/c5859679-9ec9-4977-ae0d-38c4441fefbf → 200
+[2026-06-12 22:31:28] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 22:31:38] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 22:32:36] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务完成: session=c5859679-9ec9-4977-ae0d-38c4441fefbf status=ppt_exported reply_len=18
+[2026-06-12 22:32:40] [INFO ] [http                     ] [005186d5528a] GET /api/ppt/download/c5859679-9ec9-4977-ae0d-38c4441fefbf → 200
+[2026-06-12 22:32:57] [INFO ] [http                     ] [342812ba1ffb] GET /chat/history/348a61c9-da35-40f9-a1f8-9ddcc2e69b60 → 200
+[2026-06-12 22:32:58] [INFO ] [http                     ] [b6ff50916979] GET /chat/history/c5859679-9ec9-4977-ae0d-38c4441fefbf → 200
+[2026-06-12 22:33:05] [INFO ] [http                     ] [5e3d082aca4c] GET /chat/history/348a61c9-da35-40f9-a1f8-9ddcc2e69b60 → 200
+[2026-06-12 22:33:05] [INFO ] [http                     ] [984dff0724c6] GET /chat/history/eb6d6300-d1cc-474f-8a19-86df44fd9366 → 200
+[2026-06-12 22:33:07] [INFO ] [http                     ] [adddca954909] GET /chat/history/348a61c9-da35-40f9-a1f8-9ddcc2e69b60 → 200
+[2026-06-12 22:33:08] [INFO ] [http                     ] [b6555cd6e734] GET /chat/history/c5859679-9ec9-4977-ae0d-38c4441fefbf → 200
+[2026-06-12 22:33:36] [INFO ] [http                     ] [8f98197b3388] GET /chat/history/348a61c9-da35-40f9-a1f8-9ddcc2e69b60 → 200
+[2026-06-12 22:33:39] [INFO ] [http                     ] [11f2901c3460] GET /chat/history/eb6d6300-d1cc-474f-8a19-86df44fd9366 → 200
+[2026-06-12 22:33:50] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 22:33:50] [INFO ] [__main__                 ] [-] AI 回复成功: len=308 history=6 request_id=11fea8be73db
+[2026-06-12 22:33:50] [INFO ] [http                     ] [89cd7ad8a880] POST /chat → 200
+[2026-06-12 22:34:06] [INFO ] [__main__                 ] [7e75f42ef0a1] 搜索请求: query=解码器由多少个相同层堆叠 kb=06d1a48e-2533-4a72-88fc-3853575f011b tenant=tenant_4bb1d927 user=e703fa66-3318-45c6-9660-d41818663354
+[2026-06-12 22:34:08] [INFO ] [httpx                    ] [-] HTTP Request: POST http://localhost:6333/collections/enterprise_knowledge_chunks/points/search "HTTP/1.1 200 OK"
+[2026-06-12 22:34:08] [INFO ] [elastic_transport.transport] [-] POST http://localhost:9200/enterprise_knowledge_chunks/_search [status:200 duration:0.118s]
+[2026-06-12 22:34:08] [INFO ] [__main__                 ] [7e75f42ef0a1] 搜索完成: results=5
+[2026-06-12 22:34:08] [INFO ] [http                     ] [61a89cc08f6d] GET /search/06d1a48e-2533-4a72-88fc-3853575f011b → 200
+[2026-06-12 22:34:12] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 22:34:12] [INFO ] [__main__                 ] [-] AI 回复成功: len=32 history=9 request_id=8e8a31c87b62
+[2026-06-12 22:34:12] [INFO ] [http                     ] [fc7fcada7f88] POST /chat → 200
