@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>生长简报</title>
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+  <body>
+    <main class="app-shell">
+      <header class="topbar">
+        <div class="brand-block">
+          <span class="brand-mark">简</span>
+          <div>
+            <p class="eyebrow">演示文稿创作室</p>
+            <h1>生长简报</h1>
+            <p>把资料、想法和表达目标整理成一份可下载的 PPT。</p>
+          </div>
+        </div>
+        <div class="status-pill" id="statusPill">收集中</div>
+      </header>
+
+      <section class="workspace">
+        <section class="chat-pane" aria-label="需求对话">
+          <div class="pane-header">
+            <div>
+              <h2>需求对话</h2>
+              <p>描述 PPT 主题、场景、受众、页数和风格。</p>
+            </div>
+          </div>
+
+          <div class="messages" id="messages">
+            <article class="message agent">
+              <div class="avatar">简</div>
+              <div class="bubble">
+                你可以先上传参考资料，也可以直接描述要制作的 PPT。我会根据你的需求整理大纲并生成演示文稿。
+              </div>
+            </article>
+          </div>
+
+          <form class="composer" id="chatForm">
+            <div class="composer-row">
+              <textarea
+                id="messageInput"
+                rows="3"
+                placeholder="例如：我要做一个项目汇报 PPT，20 页，科技蓝风格，给团队和负责人看..."
+              ></textarea>
+              <div class="composer-actions">
+                <label class="chat-upload-btn" id="chatUploadLabel" title="上传资料文件">
+                  <input id="chatFileInput" type="file" multiple accept=".txt,.md,.markdown,.pdf,.docx,.doc,.xlsx,.xlsm,.pptx,.epub,.html" />
+                  <span>📎</span>
+                </label>
+                <button type="submit" id="sendButton">发送</button>
+              </div>
+            </div>
+            <div class="chat-file-preview" id="chatFilePreview" style="display:none"></div>
+          </form>
+        </section>
+
+        <aside class="side-pane" aria-label="资料和状态">
+          <section class="panel">
+            <div class="pane-header compact">
+              <div>
+                <h2>资料上传</h2>
+                <p>支持 .txt、.md、.markdown，单文件不超过 2 兆字节。</p>
+              </div>
+            </div>
+
+            <label class="dropzone" id="dropzone">
+              <input id="fileInput" type="file" multiple accept=".txt,.md,.markdown" />
+              <span class="drop-title">选择或拖入资料文件</span>
+              <span class="drop-subtitle">资料只用于本次制作，支持文本与标记文档</span>
+            </label>
+
+            <button class="secondary-button" id="uploadButton" type="button">上传资料</button>
+            <ul class="file-list" id="fileList"></ul>
+          </section>
+
+          <section class="panel">
+            <div class="pane-header compact">
+              <h2>流程状态</h2>
+            </div>
+            <dl class="state-grid">
+              <div>
+                <dt>资料数</dt>
+                <dd id="materialCount">0</dd>
+              </div>
+              <div>
+                <dt>需求完整</dt>
+                <dd id="requirementComplete">否</dd>
+              </div>
+              <div>
+                <dt>项目状态</dt>
+                <dd id="projectStatus">暂无</dd>
+              </div>
+              <div>
+                <dt>PPT 下载</dt>
+                <dd id="pptxDownload">暂无</dd>
+              </div>
+            </dl>
+          </section>
+
+          <section class="panel">
+            <div class="pane-header compact">
+              <h2>页面大纲</h2>
+            </div>
+            <ol class="outline-list" id="outlineList">
+              <li>暂无大纲</li>
+            </ol>
+          </section>
+        </aside>
+      </section>
+    </main>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <script src="/static/app.js"></script>
+  </body>
+</html>

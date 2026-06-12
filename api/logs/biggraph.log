@@ -584,3 +584,710 @@ fastapi.exceptions.HTTPException: 502: 无法连接到向量模型服务 (http:/
 [2026-06-12 17:54:51] [INFO ] [http                     ] [e5d73e2cc45e] GET /knowledge_bases/ → 200
 [2026-06-12 17:55:16] [INFO ] [__main__                 ] [-] 数据库表已就绪
 [2026-06-12 18:00:15] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-12 18:05:38] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-12 18:05:42] [INFO ] [http                     ] [7b7e245cfbde] GET /chat/sessions → 200
+[2026-06-12 18:05:42] [INFO ] [__main__                 ] [73c9f6358f8c] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 18:05:42] [INFO ] [http                     ] [929d45c6bb65] GET /knowledge_bases/ → 200
+[2026-06-12 18:05:42] [INFO ] [http                     ] [d9c58475cada] GET /chat/history/eb6d6300-d1cc-474f-8a19-86df44fd9366 → 200
+[2026-06-12 18:05:43] [INFO ] [http                     ] [157e06ee7a9a] GET /chat/history/348a61c9-da35-40f9-a1f8-9ddcc2e69b60 → 200
+[2026-06-12 18:05:43] [INFO ] [http                     ] [afda98682455] GET /chat/history/eb6d6300-d1cc-474f-8a19-86df44fd9366 → 200
+[2026-06-12 18:05:46] [INFO ] [http                     ] [6ed336ac5ad6] GET /chat/history/348a61c9-da35-40f9-a1f8-9ddcc2e69b60 → 200
+[2026-06-12 18:47:01] [INFO ] [__main__                 ] [f772008cfd3d] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 18:47:01] [INFO ] [http                     ] [3d687469bf49] GET /knowledge_bases/ → 200
+[2026-06-12 18:48:15] [INFO ] [__main__                 ] [cc0f0335e970] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 18:48:15] [INFO ] [http                     ] [071e489af8bf] GET /knowledge_bases/ → 200
+[2026-06-12 18:48:35] [INFO ] [__main__                 ] [0821df339090] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 18:48:35] [INFO ] [http                     ] [013e6ef57dd3] GET /knowledge_bases/ → 200
+[2026-06-12 18:48:51] [INFO ] [__main__                 ] [673d5b065ac4] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 18:48:51] [INFO ] [http                     ] [ea4099f05e68] GET /knowledge_bases/ → 200
+[2026-06-12 18:55:45] [INFO ] [__main__                 ] [d5381bacf218] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 18:55:45] [INFO ] [http                     ] [d38c268ed68e] GET /knowledge_bases/ → 200
+[2026-06-12 18:55:45] [INFO ] [http                     ] [8b54880a6e24] GET /chat/sessions → 200
+[2026-06-12 18:55:45] [INFO ] [http                     ] [aba47cf60521] GET /chat/history/348a61c9-da35-40f9-a1f8-9ddcc2e69b60 → 200
+[2026-06-12 18:59:39] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-12 18:59:59] [INFO ] [http                     ] [94a4e0c0409d] POST /ppt/chat → 404
+[2026-06-12 19:00:05] [INFO ] [__main__                 ] [-] 会话已创建: session_id=09827039-1ade-4845-a15b-653ff95b09e3
+[2026-06-12 19:00:05] [INFO ] [http                     ] [c116dab601da] POST /chat/sessions → 200
+[2026-06-12 19:00:13] [INFO ] [http                     ] [24538a3d910a] POST /ppt/chat → 404
+[2026-06-12 19:03:35] [WARNING] [api.auth                 ] [97d844b967e4] Token 无效或已过期
+[2026-06-12 19:03:35] [INFO ] [http                     ] [a1e22579e0ca] GET /chat/sessions → 401
+[2026-06-12 19:03:35] [WARNING] [api.auth                 ] [7881a249d56a] Token 无效或已过期
+[2026-06-12 19:03:35] [INFO ] [http                     ] [3ded7a135b57] GET /knowledge_bases/ → 401
+[2026-06-12 19:03:35] [INFO ] [api.auth                 ] [e350970b44ac] Token 刷新成功: user_id=e703fa66-3318-45c6-9660-d41818663354
+[2026-06-12 19:03:35] [ERROR] [__main__                 ] [456e0c67ec18] 未捕获异常: 1 validation error for UserInfoResponse
+email
+  Field required [type=missing, input_value={'user_id': 'e703fa66-331...27', 'created_at': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.10/v/missing
+Traceback (most recent call last):
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "F:\photo_to_vedio\BigGraph\core\logging.py", line 148, in __call__
+    await self.app(scope, receive, log_send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\fastapi\routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\fastapi\routing.py", line 214, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\concurrency.py", line 39, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\anyio\_backends\_asyncio.py", line 2518, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\anyio\_backends\_asyncio.py", line 1002, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\api\auth.py", line 286, in refresh
+    user=UserInfoResponse(
+         ^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\pydantic\main.py", line 214, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pydantic_core._pydantic_core.ValidationError: 1 validation error for UserInfoResponse
+email
+  Field required [type=missing, input_value={'user_id': 'e703fa66-331...27', 'created_at': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.10/v/missing
+[2026-06-12 19:03:35] [INFO ] [api.auth                 ] [56f6fe87224b] Token 刷新成功: user_id=e703fa66-3318-45c6-9660-d41818663354
+[2026-06-12 19:03:35] [ERROR] [__main__                 ] [6834c45f7afe] 未捕获异常: 1 validation error for UserInfoResponse
+email
+  Field required [type=missing, input_value={'user_id': 'e703fa66-331...27', 'created_at': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.10/v/missing
+Traceback (most recent call last):
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "F:\photo_to_vedio\BigGraph\core\logging.py", line 148, in __call__
+    await self.app(scope, receive, log_send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\fastapi\routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\fastapi\routing.py", line 214, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\concurrency.py", line 39, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\anyio\_backends\_asyncio.py", line 2518, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\anyio\_backends\_asyncio.py", line 1002, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\api\auth.py", line 286, in refresh
+    user=UserInfoResponse(
+         ^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\pydantic\main.py", line 214, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pydantic_core._pydantic_core.ValidationError: 1 validation error for UserInfoResponse
+email
+  Field required [type=missing, input_value={'user_id': 'e703fa66-331...27', 'created_at': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.10/v/missing
+[2026-06-12 19:04:57] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-12 19:05:05] [INFO ] [api.auth                 ] [37b360eeb58e] 用户登录成功: username=joeplover user_id=e703fa66-3318-45c6-9660-d41818663354 tenant=tenant_4bb1d927
+[2026-06-12 19:05:05] [INFO ] [http                     ] [721f281080e2] POST /auth/login → 200
+[2026-06-12 19:05:05] [INFO ] [http                     ] [93842d2381f1] GET /chat/sessions → 200
+[2026-06-12 19:05:06] [INFO ] [__main__                 ] [d593920e396c] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 19:05:06] [INFO ] [http                     ] [49352e880bca] GET /knowledge_bases/ → 200
+[2026-06-12 19:05:06] [INFO ] [http                     ] [2086f5c1747e] GET /chat/history/09827039-1ade-4845-a15b-653ff95b09e3 → 200
+[2026-06-12 19:05:07] [INFO ] [http                     ] [37b3eedd04c6] GET /chat/history/09827039-1ade-4845-a15b-653ff95b09e3 → 200
+[2026-06-12 19:05:12] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 调用: session=09827039-1ade-4845-a15b-653ff95b09e3 msg_len=21
+[2026-06-12 19:05:12] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 19:05:15] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 回复: session=09827039-1ade-4845-a15b-653ff95b09e3 status=waiting_user reply_len=45
+[2026-06-12 19:05:15] [INFO ] [http                     ] [5ee93b987132] POST /api/ppt/chat → 200
+[2026-06-12 19:05:15] [INFO ] [http                     ] [4b325e826181] PATCH /chat/sessions/09827039-1ade-4845-a15b-653ff95b09e3 → 200
+[2026-06-12 19:05:34] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 调用: session=09827039-1ade-4845-a15b-653ff95b09e3 msg_len=7
+[2026-06-12 19:05:34] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 19:05:36] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 回复: session=09827039-1ade-4845-a15b-653ff95b09e3 status=waiting_material reply_len=57
+[2026-06-12 19:05:36] [INFO ] [http                     ] [e15bbd5a9bec] POST /api/ppt/chat → 200
+[2026-06-12 19:05:40] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 调用: session=09827039-1ade-4845-a15b-653ff95b09e3 msg_len=2
+[2026-06-12 19:05:40] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 19:05:45] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 回复: session=09827039-1ade-4845-a15b-653ff95b09e3 status=waiting_confirm reply_len=278
+[2026-06-12 19:05:45] [INFO ] [http                     ] [1fd00934def6] POST /api/ppt/chat → 200
+[2026-06-12 19:05:49] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 调用: session=09827039-1ade-4845-a15b-653ff95b09e3 msg_len=2
+[2026-06-12 19:05:49] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 19:06:05] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 19:06:23] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 19:07:07] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 回复: session=09827039-1ade-4845-a15b-653ff95b09e3 status=failed reply_len=12
+[2026-06-12 19:07:07] [INFO ] [http                     ] [77b0a916dbd9] POST /api/ppt/chat → 200
+[2026-06-12 19:07:19] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 调用: session=09827039-1ade-4845-a15b-653ff95b09e3 msg_len=2
+[2026-06-12 19:07:19] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 19:07:20] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 19:07:26] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 回复: session=09827039-1ade-4845-a15b-653ff95b09e3 status=waiting_confirm reply_len=279
+[2026-06-12 19:07:26] [INFO ] [http                     ] [029a2aa4234d] POST /api/ppt/chat → 200
+[2026-06-12 19:07:31] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 调用: session=09827039-1ade-4845-a15b-653ff95b09e3 msg_len=2
+[2026-06-12 19:07:31] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 19:07:50] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 19:08:02] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 19:08:37] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 回复: session=09827039-1ade-4845-a15b-653ff95b09e3 status=failed reply_len=12
+[2026-06-12 19:08:37] [INFO ] [http                     ] [9ccb33e14508] POST /api/ppt/chat → 200
+[2026-06-12 19:11:44] [INFO ] [__main__                 ] [3c5ae4feb95d] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 19:11:44] [INFO ] [http                     ] [b733687d07c6] GET /knowledge_bases/ → 200
+[2026-06-12 19:13:52] [INFO ] [__main__                 ] [825074f80af9] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 19:13:52] [INFO ] [http                     ] [60996e11a5cc] GET /knowledge_bases/ → 200
+[2026-06-12 20:20:24] [WARNING] [api.auth                 ] [0bff10cf9bda] Token 无效或已过期
+[2026-06-12 20:20:24] [INFO ] [http                     ] [2d7bfef0163b] GET /knowledge_bases/ → 401
+[2026-06-12 20:20:24] [WARNING] [api.auth                 ] [dd760f52b6f0] Token 无效或已过期
+[2026-06-12 20:20:24] [INFO ] [http                     ] [098ac5319922] GET /knowledge_bases/ → 401
+[2026-06-12 20:20:24] [INFO ] [api.auth                 ] [34930d37ac95] Token 刷新成功: user_id=e703fa66-3318-45c6-9660-d41818663354
+[2026-06-12 20:20:24] [ERROR] [__main__                 ] [592884eab219] 未捕获异常: 1 validation error for UserInfoResponse
+email
+  Field required [type=missing, input_value={'user_id': 'e703fa66-331...27', 'created_at': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.10/v/missing
+Traceback (most recent call last):
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "F:\photo_to_vedio\BigGraph\core\logging.py", line 148, in __call__
+    await self.app(scope, receive, log_send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\fastapi\routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\fastapi\routing.py", line 214, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\concurrency.py", line 39, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\anyio\_backends\_asyncio.py", line 2518, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\anyio\_backends\_asyncio.py", line 1002, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\api\auth.py", line 286, in refresh
+    user=UserInfoResponse(
+         ^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\pydantic\main.py", line 214, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pydantic_core._pydantic_core.ValidationError: 1 validation error for UserInfoResponse
+email
+  Field required [type=missing, input_value={'user_id': 'e703fa66-331...27', 'created_at': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.10/v/missing
+[2026-06-12 20:20:24] [INFO ] [api.auth                 ] [82f00851eb8f] Token 刷新成功: user_id=e703fa66-3318-45c6-9660-d41818663354
+[2026-06-12 20:20:24] [ERROR] [__main__                 ] [2abc22b1e717] 未捕获异常: 1 validation error for UserInfoResponse
+email
+  Field required [type=missing, input_value={'user_id': 'e703fa66-331...27', 'created_at': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.10/v/missing
+Traceback (most recent call last):
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "F:\photo_to_vedio\BigGraph\core\logging.py", line 148, in __call__
+    await self.app(scope, receive, log_send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\fastapi\routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\fastapi\routing.py", line 214, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\concurrency.py", line 39, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\anyio\_backends\_asyncio.py", line 2518, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\anyio\_backends\_asyncio.py", line 1002, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\api\auth.py", line 286, in refresh
+    user=UserInfoResponse(
+         ^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\pydantic\main.py", line 214, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pydantic_core._pydantic_core.ValidationError: 1 validation error for UserInfoResponse
+email
+  Field required [type=missing, input_value={'user_id': 'e703fa66-331...27', 'created_at': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.10/v/missing
+[2026-06-12 20:53:52] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-12 20:54:14] [INFO ] [api.auth                 ] [ddd5b69e211b] 用户登录成功: username=joeplover user_id=e703fa66-3318-45c6-9660-d41818663354 tenant=tenant_4bb1d927
+[2026-06-12 20:54:14] [INFO ] [http                     ] [15aa6f687341] POST /auth/login → 200
+[2026-06-12 20:54:14] [INFO ] [http                     ] [b40d5b1b06d7] GET /chat/sessions → 200
+[2026-06-12 20:54:14] [INFO ] [http                     ] [11cab5d807ee] GET /chat/history/09827039-1ade-4845-a15b-653ff95b09e3 → 200
+[2026-06-12 20:54:14] [INFO ] [__main__                 ] [051f9940c560] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 20:54:14] [INFO ] [http                     ] [8cce01a994a8] GET /knowledge_bases/ → 200
+[2026-06-12 20:56:30] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-12 20:56:34] [INFO ] [http                     ] [1504e4c7d983] GET /chat/history/09827039-1ade-4845-a15b-653ff95b09e3 → 200
+[2026-06-12 20:56:35] [INFO ] [http                     ] [112c1f16ec2f] GET /chat/history/348a61c9-da35-40f9-a1f8-9ddcc2e69b60 → 200
+[2026-06-12 20:56:36] [INFO ] [http                     ] [8992af5148ac] GET /chat/history/09827039-1ade-4845-a15b-653ff95b09e3 → 200
+[2026-06-12 20:56:42] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=09827039-1ade-4845-a15b-653ff95b09e3 msg_len=21
+[2026-06-12 20:56:42] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 20:56:44] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 20:57:09] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=09827039-1ade-4845-a15b-653ff95b09e3 status=waiting_confirm reply_len=686
+[2026-06-12 20:57:09] [INFO ] [http                     ] [d42b0fc8d34e] POST /api/ppt/chat → 200
+[2026-06-12 20:57:31] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务开始: session=09827039-1ade-4845-a15b-653ff95b09e3
+[2026-06-12 20:57:31] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务已启动: session=09827039-1ade-4845-a15b-653ff95b09e3
+[2026-06-12 20:57:31] [INFO ] [http                     ] [55a96508ef67] POST /api/ppt/chat → 200
+[2026-06-12 20:57:31] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 20:57:33] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 20:57:34] [INFO ] [http                     ] [bd87b60c0303] GET /api/ppt/status/09827039-1ade-4845-a15b-653ff95b09e3 → 200
+[2026-06-12 20:57:37] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务完成: session=09827039-1ade-4845-a15b-653ff95b09e3 status=waiting_confirm reply_len=264
+[2026-06-12 20:57:37] [INFO ] [http                     ] [31fbb6f9dcf4] GET /api/ppt/status/09827039-1ade-4845-a15b-653ff95b09e3 → 200
+[2026-06-12 20:57:45] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务开始: session=09827039-1ade-4845-a15b-653ff95b09e3
+[2026-06-12 20:57:45] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务已启动: session=09827039-1ade-4845-a15b-653ff95b09e3
+[2026-06-12 20:57:45] [INFO ] [http                     ] [a2b96706df95] POST /api/ppt/chat → 200
+[2026-06-12 20:57:46] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 20:57:49] [INFO ] [http                     ] [c095d1ef9d42] GET /api/ppt/status/09827039-1ade-4845-a15b-653ff95b09e3 → 200
+[2026-06-12 20:57:51] [INFO ] [http                     ] [833085d35903] GET /api/ppt/status/09827039-1ade-4845-a15b-653ff95b09e3 → 200
+[2026-06-12 20:57:55] [INFO ] [http                     ] [42bdcfd87d8c] GET /api/ppt/status/09827039-1ade-4845-a15b-653ff95b09e3 → 200
+[2026-06-12 20:57:57] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 20:57:57] [INFO ] [http                     ] [c4a82a9d9a8a] GET /api/ppt/status/09827039-1ade-4845-a15b-653ff95b09e3 → 200
+[2026-06-12 20:58:01] [INFO ] [http                     ] [6bc36c2527c0] GET /api/ppt/status/09827039-1ade-4845-a15b-653ff95b09e3 → 200
+[2026-06-12 20:58:03] [INFO ] [http                     ] [bd2012227029] GET /api/ppt/status/09827039-1ade-4845-a15b-653ff95b09e3 → 200
+[2026-06-12 20:58:05] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 20:58:07] [INFO ] [http                     ] [e809e7b7b78b] GET /api/ppt/status/09827039-1ade-4845-a15b-653ff95b09e3 → 200
+[2026-06-12 20:58:09] [INFO ] [http                     ] [19a710cd11f3] GET /api/ppt/status/09827039-1ade-4845-a15b-653ff95b09e3 → 200
+[2026-06-12 20:58:13] [INFO ] [http                     ] [67574b456745] GET /api/ppt/status/09827039-1ade-4845-a15b-653ff95b09e3 → 200
+[2026-06-12 20:58:15] [INFO ] [http                     ] [95627e23eb40] GET /api/ppt/status/09827039-1ade-4845-a15b-653ff95b09e3 → 200
+[2026-06-12 20:58:19] [INFO ] [http                     ] [e9d7a3bebb52] GET /api/ppt/status/09827039-1ade-4845-a15b-653ff95b09e3 → 200
+[2026-06-12 20:58:21] [INFO ] [http                     ] [f82c0ea28e91] GET /api/ppt/status/09827039-1ade-4845-a15b-653ff95b09e3 → 200
+[2026-06-12 20:58:25] [INFO ] [http                     ] [09358ae92f13] GET /api/ppt/status/09827039-1ade-4845-a15b-653ff95b09e3 → 200
+[2026-06-12 20:58:28] [INFO ] [http                     ] [509edb913130] GET /api/ppt/status/09827039-1ade-4845-a15b-653ff95b09e3 → 200
+[2026-06-12 20:58:31] [INFO ] [http                     ] [449fbfc152d1] GET /api/ppt/status/09827039-1ade-4845-a15b-653ff95b09e3 → 200
+[2026-06-12 20:58:34] [INFO ] [http                     ] [27ed64204110] GET /api/ppt/status/09827039-1ade-4845-a15b-653ff95b09e3 → 200
+[2026-06-12 20:58:37] [INFO ] [http                     ] [5bee5bbd181e] GET /api/ppt/status/09827039-1ade-4845-a15b-653ff95b09e3 → 200
+[2026-06-12 20:58:40] [INFO ] [http                     ] [e4ce93da6f1e] GET /api/ppt/status/09827039-1ade-4845-a15b-653ff95b09e3 → 200
+[2026-06-12 20:58:43] [INFO ] [http                     ] [4384cc0f46ec] GET /api/ppt/status/09827039-1ade-4845-a15b-653ff95b09e3 → 200
+[2026-06-12 20:58:46] [INFO ] [http                     ] [2bbbc9de0da4] GET /api/ppt/status/09827039-1ade-4845-a15b-653ff95b09e3 → 200
+[2026-06-12 20:58:47] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务完成: session=09827039-1ade-4845-a15b-653ff95b09e3 status=failed reply_len=12
+[2026-06-12 20:58:49] [INFO ] [http                     ] [0069102bdbdc] GET /api/ppt/status/09827039-1ade-4845-a15b-653ff95b09e3 → 200
+[2026-06-12 21:18:05] [INFO ] [__main__                 ] [2bc687daeacb] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 21:18:05] [INFO ] [http                     ] [0bc12281153c] GET /knowledge_bases/ → 200
+[2026-06-12 21:25:48] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-12 21:26:01] [INFO ] [http                     ] [dac9507369b8] GET /chat/sessions → 200
+[2026-06-12 21:26:01] [INFO ] [__main__                 ] [408333513a10] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 21:26:01] [INFO ] [http                     ] [c33a9966677b] GET /knowledge_bases/ → 200
+[2026-06-12 21:26:01] [INFO ] [http                     ] [6ed1f2789c8b] GET /chat/history/09827039-1ade-4845-a15b-653ff95b09e3 → 200
+[2026-06-12 21:26:22] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 21:26:22] [INFO ] [__main__                 ] [-] AI 回复成功: len=1479 history=0 request_id=96d4cc300526
+[2026-06-12 21:26:22] [INFO ] [http                     ] [d8f4967931ec] POST /chat → 200
+[2026-06-12 21:26:39] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=09827039-1ade-4845-a15b-653ff95b09e3 msg_len=12
+[2026-06-12 21:26:40] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 21:26:43] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 21:26:47] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=09827039-1ade-4845-a15b-653ff95b09e3 status=waiting_confirm reply_len=273
+[2026-06-12 21:26:47] [INFO ] [http                     ] [ba122b08c93c] POST /api/ppt/chat → 200
+[2026-06-12 21:28:10] [INFO ] [http                     ] [ee01f5fd5f69] GET /chat/history/348a61c9-da35-40f9-a1f8-9ddcc2e69b60 → 200
+[2026-06-12 21:28:14] [INFO ] [http                     ] [66060aed23ab] GET /chat/history/09827039-1ade-4845-a15b-653ff95b09e3 → 200
+[2026-06-12 21:48:51] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-12 21:49:03] [INFO ] [http                     ] [42ccfc7d5cec] GET /chat/sessions → 200
+[2026-06-12 21:49:03] [INFO ] [__main__                 ] [b666d082ab07] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 21:49:03] [INFO ] [http                     ] [673d1756ea00] GET /knowledge_bases/ → 200
+[2026-06-12 21:49:03] [INFO ] [http                     ] [a6e8a1f1afab] GET /chat/history/09827039-1ade-4845-a15b-653ff95b09e3 → 200
+[2026-06-12 21:49:06] [INFO ] [__main__                 ] [-] 会话已删除: session_id=09827039-1ade-4845-a15b-653ff95b09e3
+[2026-06-12 21:49:06] [INFO ] [http                     ] [67b5d7028f65] DELETE /chat/history/09827039-1ade-4845-a15b-653ff95b09e3 → 200
+[2026-06-12 21:49:06] [INFO ] [http                     ] [945d0994f3bf] GET /chat/history/348a61c9-da35-40f9-a1f8-9ddcc2e69b60 → 200
+[2026-06-12 21:49:08] [INFO ] [__main__                 ] [-] 会话已创建: session_id=acabac0a-41a0-42e3-b2e3-b74eafbc0936
+[2026-06-12 21:49:08] [INFO ] [http                     ] [be623b8ab82a] POST /chat/sessions → 200
+[2026-06-12 21:49:17] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=acabac0a-41a0-42e3-b2e3-b74eafbc0936 msg_len=6
+[2026-06-12 21:49:17] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 21:49:19] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=acabac0a-41a0-42e3-b2e3-b74eafbc0936 status=waiting_user reply_len=137
+[2026-06-12 21:49:19] [INFO ] [http                     ] [988a3ff22fc4] POST /api/ppt/chat → 200
+[2026-06-12 21:49:19] [INFO ] [http                     ] [2d4bbe82f97f] PATCH /chat/sessions/acabac0a-41a0-42e3-b2e3-b74eafbc0936 → 200
+[2026-06-12 21:49:35] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=acabac0a-41a0-42e3-b2e3-b74eafbc0936 msg_len=11
+[2026-06-12 21:49:35] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 21:49:37] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=acabac0a-41a0-42e3-b2e3-b74eafbc0936 status=waiting_user reply_len=108
+[2026-06-12 21:49:37] [INFO ] [http                     ] [3b77e5c92280] POST /api/ppt/chat → 200
+[2026-06-12 21:49:53] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=acabac0a-41a0-42e3-b2e3-b74eafbc0936 msg_len=13
+[2026-06-12 21:49:54] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 21:50:01] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=acabac0a-41a0-42e3-b2e3-b74eafbc0936 status=waiting_user reply_len=45
+[2026-06-12 21:50:01] [INFO ] [http                     ] [2d0766d5156d] POST /api/ppt/chat → 200
+[2026-06-12 21:50:07] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=acabac0a-41a0-42e3-b2e3-b74eafbc0936 msg_len=4
+[2026-06-12 21:50:07] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 21:50:10] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=acabac0a-41a0-42e3-b2e3-b74eafbc0936 status=waiting_user reply_len=45
+[2026-06-12 21:50:10] [INFO ] [http                     ] [e9cd3ee25631] POST /api/ppt/chat → 200
+[2026-06-12 21:50:20] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=acabac0a-41a0-42e3-b2e3-b74eafbc0936 msg_len=6
+[2026-06-12 21:50:20] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 21:50:22] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=acabac0a-41a0-42e3-b2e3-b74eafbc0936 status=waiting_material reply_len=57
+[2026-06-12 21:50:22] [INFO ] [http                     ] [077ea36d9367] POST /api/ppt/chat → 200
+[2026-06-12 21:50:28] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=acabac0a-41a0-42e3-b2e3-b74eafbc0936 msg_len=2
+[2026-06-12 21:50:28] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 21:50:31] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=acabac0a-41a0-42e3-b2e3-b74eafbc0936 status=waiting_confirm reply_len=257
+[2026-06-12 21:50:31] [INFO ] [http                     ] [fc25fe51947a] POST /api/ppt/chat → 200
+[2026-06-12 21:50:44] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务开始: session=acabac0a-41a0-42e3-b2e3-b74eafbc0936
+[2026-06-12 21:50:44] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务已启动: session=acabac0a-41a0-42e3-b2e3-b74eafbc0936
+[2026-06-12 21:50:44] [INFO ] [http                     ] [9771b6086588] POST /api/ppt/chat → 200
+[2026-06-12 21:50:44] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 21:50:44] [INFO ] [http                     ] [eb63d9ac87ef] GET /api/ppt/stream/acabac0a-41a0-42e3-b2e3-b74eafbc0936 → 200
+[2026-06-12 21:51:05] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 21:51:14] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 21:52:50] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务完成: session=acabac0a-41a0-42e3-b2e3-b74eafbc0936 status=failed reply_len=12
+[2026-06-12 22:00:15] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-12 22:00:18] [WARNING] [api.auth                 ] [b1fb2846c97a] Token 无效或已过期
+[2026-06-12 22:00:18] [WARNING] [api.auth                 ] [a018d9117034] Token 无效或已过期
+[2026-06-12 22:00:18] [INFO ] [http                     ] [297ccac39a24] GET /chat/sessions → 401
+[2026-06-12 22:00:18] [INFO ] [http                     ] [274958049ef0] GET /knowledge_bases/ → 401
+[2026-06-12 22:00:18] [INFO ] [api.auth                 ] [0fb7981a7cbc] Token 刷新成功: user_id=e703fa66-3318-45c6-9660-d41818663354
+[2026-06-12 22:00:18] [ERROR] [__main__                 ] [b80bd9a83abe] 未捕获异常: 1 validation error for UserInfoResponse
+email
+  Field required [type=missing, input_value={'user_id': 'e703fa66-331...27', 'created_at': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.10/v/missing
+Traceback (most recent call last):
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "F:\photo_to_vedio\BigGraph\core\logging.py", line 148, in __call__
+    await self.app(scope, receive, log_send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\fastapi\routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\fastapi\routing.py", line 214, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\concurrency.py", line 39, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\anyio\_backends\_asyncio.py", line 2518, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\anyio\_backends\_asyncio.py", line 1002, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\api\auth.py", line 286, in refresh
+    user=UserInfoResponse(
+         ^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\pydantic\main.py", line 214, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pydantic_core._pydantic_core.ValidationError: 1 validation error for UserInfoResponse
+email
+  Field required [type=missing, input_value={'user_id': 'e703fa66-331...27', 'created_at': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.10/v/missing
+[2026-06-12 22:00:19] [INFO ] [api.auth                 ] [17d877f57683] Token 刷新成功: user_id=e703fa66-3318-45c6-9660-d41818663354
+[2026-06-12 22:00:19] [ERROR] [__main__                 ] [10901e7d2fa3] 未捕获异常: 1 validation error for UserInfoResponse
+email
+  Field required [type=missing, input_value={'user_id': 'e703fa66-331...27', 'created_at': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.10/v/missing
+Traceback (most recent call last):
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "F:\photo_to_vedio\BigGraph\core\logging.py", line 148, in __call__
+    await self.app(scope, receive, log_send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\fastapi\routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\fastapi\routing.py", line 214, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\concurrency.py", line 39, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\anyio\_backends\_asyncio.py", line 2518, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\anyio\_backends\_asyncio.py", line 1002, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\api\auth.py", line 286, in refresh
+    user=UserInfoResponse(
+         ^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\pydantic\main.py", line 214, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pydantic_core._pydantic_core.ValidationError: 1 validation error for UserInfoResponse
+email
+  Field required [type=missing, input_value={'user_id': 'e703fa66-331...27', 'created_at': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.10/v/missing
+[2026-06-12 22:00:27] [INFO ] [api.auth                 ] [1d355d1d5b54] 用户登录成功: username=joeplover user_id=e703fa66-3318-45c6-9660-d41818663354 tenant=tenant_4bb1d927
+[2026-06-12 22:00:27] [INFO ] [http                     ] [4e251e80f3db] POST /auth/login → 200
+[2026-06-12 22:00:27] [INFO ] [http                     ] [1267e9970068] GET /chat/sessions → 200
+[2026-06-12 22:00:27] [INFO ] [__main__                 ] [3724dac4dc39] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 22:00:27] [INFO ] [http                     ] [a6c7fc97b13c] GET /knowledge_bases/ → 200
+[2026-06-12 22:00:27] [INFO ] [http                     ] [3934bf61d368] GET /chat/history/acabac0a-41a0-42e3-b2e3-b74eafbc0936 → 200
+[2026-06-12 22:00:30] [INFO ] [__main__                 ] [-] 会话已删除: session_id=acabac0a-41a0-42e3-b2e3-b74eafbc0936
+[2026-06-12 22:00:30] [INFO ] [http                     ] [6c8a993f51e3] DELETE /chat/history/acabac0a-41a0-42e3-b2e3-b74eafbc0936 → 200
+[2026-06-12 22:00:30] [INFO ] [http                     ] [a4f07039e6fc] GET /chat/history/348a61c9-da35-40f9-a1f8-9ddcc2e69b60 → 200
+[2026-06-12 22:00:30] [INFO ] [__main__                 ] [-] 会话已创建: session_id=a7569ba4-1601-4327-b516-ce87a081b53c
+[2026-06-12 22:00:30] [INFO ] [http                     ] [4540c8a05b56] POST /chat/sessions → 200
+[2026-06-12 22:00:41] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=a7569ba4-1601-4327-b516-ce87a081b53c msg_len=6
+[2026-06-12 22:00:41] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 22:00:43] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=a7569ba4-1601-4327-b516-ce87a081b53c status=waiting_user reply_len=137
+[2026-06-12 22:00:43] [INFO ] [http                     ] [674dc633ba4a] POST /api/ppt/chat → 200
+[2026-06-12 22:00:43] [INFO ] [http                     ] [411a246dc40c] PATCH /chat/sessions/a7569ba4-1601-4327-b516-ce87a081b53c → 200
+[2026-06-12 22:01:08] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=a7569ba4-1601-4327-b516-ce87a081b53c msg_len=33
+[2026-06-12 22:01:08] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 22:01:13] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=a7569ba4-1601-4327-b516-ce87a081b53c status=waiting_material reply_len=174
+[2026-06-12 22:01:13] [INFO ] [http                     ] [a25ae0cbce5c] POST /api/ppt/chat → 200
+[2026-06-12 22:01:24] [INFO ] [api.ppt_agent_router     ] [fb10f447279c] PPT 素材上传: name=transformer_zh_cn.pdf session=a7569ba4-1601-4327-b516-ce87a081b53c
+[2026-06-12 22:01:24] [ERROR] [api.ppt_agent_router     ] [fb10f447279c] PPT 素材临时文件写入失败: [Errno 13] Permission denied: '\\tmp\\ppt_upload_fb10f447279c.pdf'
+[2026-06-12 22:01:24] [INFO ] [http                     ] [eb16911c9011] POST /api/ppt/upload → 500
+[2026-06-12 22:02:12] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-12 22:02:14] [INFO ] [http                     ] [b11cb12adb45] GET /chat/sessions → 200
+[2026-06-12 22:02:14] [INFO ] [__main__                 ] [07ee8788d80b] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 22:02:14] [INFO ] [http                     ] [2a8f0f645070] GET /knowledge_bases/ → 200
+[2026-06-12 22:02:14] [INFO ] [http                     ] [141bde4b841b] GET /chat/history/348a61c9-da35-40f9-a1f8-9ddcc2e69b60 → 200
+[2026-06-12 22:02:15] [INFO ] [http                     ] [472e612d319b] GET /chat/history/a7569ba4-1601-4327-b516-ce87a081b53c → 200
+[2026-06-12 22:02:28] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 22:02:28] [INFO ] [__main__                 ] [-] AI 回复成功: len=619 history=0 request_id=7260c2b3c17a
+[2026-06-12 22:02:28] [INFO ] [http                     ] [2a0c265ce287] POST /chat → 200
+[2026-06-12 22:02:40] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=a7569ba4-1601-4327-b516-ce87a081b53c msg_len=6
+[2026-06-12 22:02:40] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 22:02:51] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=a7569ba4-1601-4327-b516-ce87a081b53c status=waiting_confirm reply_len=230
+[2026-06-12 22:02:51] [INFO ] [http                     ] [e38df18e799d] POST /api/ppt/chat → 200
+[2026-06-12 22:03:06] [INFO ] [__main__                 ] [-] 会话已删除: session_id=a7569ba4-1601-4327-b516-ce87a081b53c
+[2026-06-12 22:03:06] [INFO ] [http                     ] [1d8970a9a366] DELETE /chat/history/a7569ba4-1601-4327-b516-ce87a081b53c → 200
+[2026-06-12 22:03:07] [INFO ] [http                     ] [848054bc6d49] GET /chat/history/348a61c9-da35-40f9-a1f8-9ddcc2e69b60 → 200
+[2026-06-12 22:03:07] [INFO ] [__main__                 ] [-] 会话已创建: session_id=dea272af-146f-4a65-a0b9-dff8cd4bc9b7
+[2026-06-12 22:03:07] [INFO ] [http                     ] [329552c804f4] POST /chat/sessions → 200
+[2026-06-12 22:03:11] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=dea272af-146f-4a65-a0b9-dff8cd4bc9b7 msg_len=6
+[2026-06-12 22:03:11] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 22:03:13] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=dea272af-146f-4a65-a0b9-dff8cd4bc9b7 status=waiting_user reply_len=137
+[2026-06-12 22:03:13] [INFO ] [http                     ] [be096e6bd8c7] POST /api/ppt/chat → 200
+[2026-06-12 22:03:13] [INFO ] [http                     ] [0e040da64d1e] PATCH /chat/sessions/dea272af-146f-4a65-a0b9-dff8cd4bc9b7 → 200
+[2026-06-12 22:03:17] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=dea272af-146f-4a65-a0b9-dff8cd4bc9b7 msg_len=26
+[2026-06-12 22:03:17] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 22:03:19] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=dea272af-146f-4a65-a0b9-dff8cd4bc9b7 status=waiting_material reply_len=174
+[2026-06-12 22:03:19] [INFO ] [http                     ] [f526dd8be969] POST /api/ppt/chat → 200
+[2026-06-12 22:03:24] [INFO ] [api.ppt_agent_router     ] [9d2253da270b] PPT 素材上传: name=transformer_zh_cn.pdf session=dea272af-146f-4a65-a0b9-dff8cd4bc9b7
+[2026-06-12 22:03:24] [INFO ] [api.ppt_agent_router     ] [9d2253da270b] PPT 素材上传成功: name=transformer_zh_cn.pdf text_len=18799 preview=在提供适当署名的前提下，Google 特此授予仅为新闻或学术作品复制本文 中表格和图形的许可。 Attention Is All You Need Ashish Vaswani∗ Google Bra...
+[2026-06-12 22:03:24] [INFO ] [http                     ] [d89d2d85521c] POST /api/ppt/upload → 200
+[2026-06-12 22:03:44] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=dea272af-146f-4a65-a0b9-dff8cd4bc9b7 msg_len=3
+[2026-06-12 22:03:44] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 22:03:59] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=dea272af-146f-4a65-a0b9-dff8cd4bc9b7 status=waiting_confirm reply_len=440
+[2026-06-12 22:03:59] [INFO ] [http                     ] [151d45431771] POST /api/ppt/chat → 200
+[2026-06-12 22:04:14] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务开始: session=dea272af-146f-4a65-a0b9-dff8cd4bc9b7
+[2026-06-12 22:04:14] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务已启动: session=dea272af-146f-4a65-a0b9-dff8cd4bc9b7
+[2026-06-12 22:04:14] [INFO ] [http                     ] [f4cb1a7fe087] POST /api/ppt/chat → 200
+[2026-06-12 22:04:14] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 22:04:14] [INFO ] [http                     ] [4c4b70b6cc25] GET /api/ppt/stream/dea272af-146f-4a65-a0b9-dff8cd4bc9b7 → 200
+[2026-06-12 22:04:40] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 22:04:55] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 22:06:27] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 22:08:31] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务完成: session=dea272af-146f-4a65-a0b9-dff8cd4bc9b7 status=failed reply_len=512
+[2026-06-12 22:11:43] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=dea272af-146f-4a65-a0b9-dff8cd4bc9b7 msg_len=2
+[2026-06-12 22:11:43] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 22:11:47] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 22:11:51] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=dea272af-146f-4a65-a0b9-dff8cd4bc9b7 status=waiting_confirm reply_len=429
+[2026-06-12 22:11:51] [INFO ] [http                     ] [4352cf589cb7] POST /api/ppt/chat → 200
+[2026-06-12 22:11:56] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务开始: session=dea272af-146f-4a65-a0b9-dff8cd4bc9b7
+[2026-06-12 22:11:56] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务已启动: session=dea272af-146f-4a65-a0b9-dff8cd4bc9b7
+[2026-06-12 22:11:56] [INFO ] [http                     ] [a784dcb3a4ec] POST /api/ppt/chat → 200
+[2026-06-12 22:11:56] [INFO ] [http                     ] [65466f7e0fc9] GET /api/ppt/stream/dea272af-146f-4a65-a0b9-dff8cd4bc9b7 → 200
+[2026-06-12 22:11:56] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 22:12:30] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 22:12:56] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 22:14:37] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 22:15:43] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务完成: session=dea272af-146f-4a65-a0b9-dff8cd4bc9b7 status=ppt_exported reply_len=18
+[2026-06-12 22:15:54] [INFO ] [http                     ] [b1874bc0311d] GET /api/ppt/download/dea272af-146f-4a65-a0b9-dff8cd4bc9b7 → 200
+[2026-06-12 22:17:16] [INFO ] [http                     ] [ad94c3c08473] GET /chat/history/dea272af-146f-4a65-a0b9-dff8cd4bc9b7 → 200
+[2026-06-12 22:17:16] [INFO ] [http                     ] [c069582401d0] GET /chat/history/348a61c9-da35-40f9-a1f8-9ddcc2e69b60 → 200
+[2026-06-12 22:17:17] [INFO ] [http                     ] [6f154d1e0866] GET /chat/history/dea272af-146f-4a65-a0b9-dff8cd4bc9b7 → 200
+[2026-06-12 22:17:17] [INFO ] [http                     ] [d225c4b765b9] GET /chat/history/dea272af-146f-4a65-a0b9-dff8cd4bc9b7 → 200
+[2026-06-12 22:17:18] [INFO ] [http                     ] [25baacabfd34] GET /chat/history/348a61c9-da35-40f9-a1f8-9ddcc2e69b60 → 200
+[2026-06-12 22:17:23] [INFO ] [http                     ] [2c8ea3f13b4f] GET /chat/sessions → 200
+[2026-06-12 22:17:23] [INFO ] [__main__                 ] [8aed61494518] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 22:17:23] [INFO ] [http                     ] [2c1b3148849b] GET /knowledge_bases/ → 200
+[2026-06-12 22:17:23] [INFO ] [http                     ] [8fbd0fdd9556] GET /chat/history/348a61c9-da35-40f9-a1f8-9ddcc2e69b60 → 200
+[2026-06-12 22:17:25] [INFO ] [http                     ] [77ccddebd02c] GET /chat/history/dea272af-146f-4a65-a0b9-dff8cd4bc9b7 → 200
+[2026-06-12 22:17:26] [INFO ] [http                     ] [cc8f879a6af8] GET /chat/history/eb6d6300-d1cc-474f-8a19-86df44fd9366 → 200
+[2026-06-12 22:17:27] [INFO ] [http                     ] [08874d2fc89b] GET /chat/history/348a61c9-da35-40f9-a1f8-9ddcc2e69b60 → 200
+[2026-06-12 22:17:29] [INFO ] [http                     ] [1a6db1b4a459] GET /chat/history/dea272af-146f-4a65-a0b9-dff8cd4bc9b7 → 200
+[2026-06-12 22:19:10] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-12 22:19:17] [INFO ] [http                     ] [d05c08478d55] GET /chat/sessions → 200
+[2026-06-12 22:19:17] [INFO ] [__main__                 ] [977f3c5b2316] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 22:19:17] [INFO ] [http                     ] [9c33991d65a9] GET /knowledge_bases/ → 200
+[2026-06-12 22:19:17] [INFO ] [http                     ] [c42663ce1ba1] GET /chat/history/dea272af-146f-4a65-a0b9-dff8cd4bc9b7 → 200
+[2026-06-12 22:19:18] [INFO ] [http                     ] [cdf7226a403b] GET /chat/history/dea272af-146f-4a65-a0b9-dff8cd4bc9b7 → 200
+[2026-06-12 22:19:19] [INFO ] [__main__                 ] [-] 会话已删除: session_id=dea272af-146f-4a65-a0b9-dff8cd4bc9b7
+[2026-06-12 22:19:19] [INFO ] [http                     ] [12cb40398cd7] DELETE /chat/history/dea272af-146f-4a65-a0b9-dff8cd4bc9b7 → 200
+[2026-06-12 22:19:19] [INFO ] [http                     ] [4ec8bf23ec8b] GET /chat/history/348a61c9-da35-40f9-a1f8-9ddcc2e69b60 → 200
+[2026-06-12 22:19:21] [INFO ] [__main__                 ] [-] 会话已创建: session_id=6d661534-7b0a-4904-80e9-3c3b896f04d3
+[2026-06-12 22:19:21] [INFO ] [http                     ] [fb3a988a3b4b] POST /chat/sessions → 200
+[2026-06-12 22:19:41] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 22:19:41] [INFO ] [__main__                 ] [-] AI 回复成功: len=1863 history=0 request_id=f1cbd6bedb01
+[2026-06-12 22:19:41] [INFO ] [http                     ] [7deeb0631cd8] POST /chat → 200
+[2026-06-12 22:19:41] [INFO ] [http                     ] [fadbe88dd029] PATCH /chat/sessions/6d661534-7b0a-4904-80e9-3c3b896f04d3 → 200
+[2026-06-12 22:19:51] [INFO ] [__main__                 ] [-] 会话已删除: session_id=6d661534-7b0a-4904-80e9-3c3b896f04d3
+[2026-06-12 22:19:51] [INFO ] [http                     ] [2c9c247120f6] DELETE /chat/history/6d661534-7b0a-4904-80e9-3c3b896f04d3 → 200
+[2026-06-12 22:19:51] [INFO ] [http                     ] [ce0b3cab3301] GET /chat/history/348a61c9-da35-40f9-a1f8-9ddcc2e69b60 → 200
+[2026-06-12 22:19:52] [INFO ] [__main__                 ] [-] 会话已创建: session_id=3a29429b-46b4-4ee0-881c-539a7461ee25
+[2026-06-12 22:19:52] [INFO ] [http                     ] [0da66d3158e5] POST /chat/sessions → 200
+[2026-06-12 22:19:56] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=3a29429b-46b4-4ee0-881c-539a7461ee25 msg_len=6
+[2026-06-12 22:19:56] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 22:19:58] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=3a29429b-46b4-4ee0-881c-539a7461ee25 status=waiting_user reply_len=137
+[2026-06-12 22:19:58] [INFO ] [http                     ] [0ed47094ea45] POST /api/ppt/chat → 200
+[2026-06-12 22:19:58] [INFO ] [http                     ] [74c4e40e212d] PATCH /chat/sessions/3a29429b-46b4-4ee0-881c-539a7461ee25 → 200
+[2026-06-12 22:20:26] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=3a29429b-46b4-4ee0-881c-539a7461ee25 msg_len=26
+[2026-06-12 22:20:26] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 22:20:30] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=3a29429b-46b4-4ee0-881c-539a7461ee25 status=waiting_material reply_len=98
+[2026-06-12 22:20:30] [INFO ] [http                     ] [3886407f3d82] POST /api/ppt/chat → 200
+[2026-06-12 22:20:41] [INFO ] [api.ppt_agent_router     ] [7894cdd20741] PPT 素材上传: name=transformer_zh_cn.pdf session=3a29429b-46b4-4ee0-881c-539a7461ee25
+[2026-06-12 22:20:41] [INFO ] [api.ppt_agent_router     ] [7894cdd20741] PPT 素材上传成功: name=transformer_zh_cn.pdf text_len=18799 preview=在提供适当署名的前提下，Google 特此授予仅为新闻或学术作品复制本文 中表格和图形的许可。 Attention Is All You Need Ashish Vaswani∗ Google Bra...
+[2026-06-12 22:20:41] [INFO ] [http                     ] [82e63f36e13e] POST /api/ppt/upload → 200
+[2026-06-12 22:20:48] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=3a29429b-46b4-4ee0-881c-539a7461ee25 msg_len=2
+[2026-06-12 22:20:48] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 22:20:53] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=3a29429b-46b4-4ee0-881c-539a7461ee25 status=waiting_confirm reply_len=341
+[2026-06-12 22:20:53] [INFO ] [http                     ] [9b104036be39] POST /api/ppt/chat → 200
+[2026-06-12 22:20:58] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务开始: session=3a29429b-46b4-4ee0-881c-539a7461ee25
+[2026-06-12 22:20:58] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务已启动: session=3a29429b-46b4-4ee0-881c-539a7461ee25
+[2026-06-12 22:20:58] [INFO ] [http                     ] [11b7fc7e5cb7] POST /api/ppt/chat → 200
+[2026-06-12 22:20:59] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 22:20:59] [INFO ] [http                     ] [3eebd837b0dd] GET /api/ppt/stream/3a29429b-46b4-4ee0-881c-539a7461ee25 → 200
+[2026-06-12 22:21:25] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 22:21:41] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 22:23:28] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务完成: session=3a29429b-46b4-4ee0-881c-539a7461ee25 status=ppt_exported reply_len=18
+[2026-06-12 22:23:58] [INFO ] [http                     ] [aade564ceaa5] GET /api/ppt/download/3a29429b-46b4-4ee0-881c-539a7461ee25 → 200
+[2026-06-12 22:24:47] [INFO ] [http                     ] [5a9473d7c2c8] GET /api/ppt/download/3a29429b-46b4-4ee0-881c-539a7461ee25 → 200
+[2026-06-12 22:24:54] [INFO ] [http                     ] [5fe89c5fb04a] GET /chat/history/348a61c9-da35-40f9-a1f8-9ddcc2e69b60 → 200
+[2026-06-12 22:24:57] [INFO ] [http                     ] [9e3914ca5875] GET /chat/history/eb6d6300-d1cc-474f-8a19-86df44fd9366 → 200
+[2026-06-12 22:24:57] [INFO ] [http                     ] [a0d00d838657] GET /chat/history/348a61c9-da35-40f9-a1f8-9ddcc2e69b60 → 200
+[2026-06-12 22:24:59] [INFO ] [http                     ] [e80f604a3740] GET /chat/history/3a29429b-46b4-4ee0-881c-539a7461ee25 → 200
+[2026-06-12 22:25:00] [INFO ] [http                     ] [4304a97c220b] GET /chat/history/348a61c9-da35-40f9-a1f8-9ddcc2e69b60 → 200
+[2026-06-12 22:25:00] [INFO ] [http                     ] [88db511be9a0] GET /chat/history/eb6d6300-d1cc-474f-8a19-86df44fd9366 → 200
+[2026-06-12 22:26:09] [INFO ] [__main__                 ] [5045e2841e75] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 22:26:09] [INFO ] [http                     ] [e7e316ad5f38] GET /knowledge_bases/ → 200
+[2026-06-12 22:26:46] [INFO ] [http                     ] [7d0cefa55054] GET /chat/history/3a29429b-46b4-4ee0-881c-539a7461ee25 → 200
+[2026-06-12 22:26:52] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=3a29429b-46b4-4ee0-881c-539a7461ee25 msg_len=2
+[2026-06-12 22:26:52] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 22:26:56] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 22:27:08] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=3a29429b-46b4-4ee0-881c-539a7461ee25 status=waiting_confirm reply_len=373
+[2026-06-12 22:27:08] [INFO ] [http                     ] [65d625d8400f] POST /api/ppt/chat → 200
+[2026-06-12 22:28:49] [INFO ] [__main__                 ] [b99ad1f6b52d] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 22:28:49] [INFO ] [http                     ] [3cae5fd2b997] GET /knowledge_bases/ → 200
+[2026-06-12 22:28:49] [INFO ] [http                     ] [2599df23e19a] GET /chat/sessions → 200
+[2026-06-12 22:28:49] [INFO ] [http                     ] [b6af386a0422] GET /chat/history/3a29429b-46b4-4ee0-881c-539a7461ee25 → 200
+[2026-06-12 22:28:50] [INFO ] [http                     ] [4eaa01301da2] GET /chat/history/3a29429b-46b4-4ee0-881c-539a7461ee25 → 200
+[2026-06-12 22:28:50] [INFO ] [http                     ] [37a6ab84e54c] GET /chat/history/348a61c9-da35-40f9-a1f8-9ddcc2e69b60 → 200
+[2026-06-12 22:28:51] [INFO ] [http                     ] [4c59b50d1a4d] GET /chat/history/3a29429b-46b4-4ee0-881c-539a7461ee25 → 200

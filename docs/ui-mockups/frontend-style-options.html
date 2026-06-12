@@ -1,0 +1,590 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Growing Agent UI Style Options</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        background: #eef1f5;
+        color: #17191f;
+        font-family:
+          Inter, "Segoe UI", "PingFang SC", "Microsoft YaHei", Arial, sans-serif;
+      }
+
+      .board {
+        width: 1440px;
+        margin: 0 auto;
+        padding: 34px;
+      }
+
+      .board-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: end;
+        margin-bottom: 24px;
+      }
+
+      .board-header h1 {
+        margin: 0;
+        font-size: 34px;
+        letter-spacing: 0;
+      }
+
+      .board-header p {
+        margin: 8px 0 0;
+        color: #697386;
+      }
+
+      .options {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 22px;
+      }
+
+      .option {
+        min-height: 780px;
+        overflow: hidden;
+        border-radius: 20px;
+        position: relative;
+        box-shadow: 0 26px 70px rgba(25, 34, 52, 0.18);
+      }
+
+      .option::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+      }
+
+      .label {
+        position: absolute;
+        top: 18px;
+        left: 20px;
+        z-index: 3;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 13px;
+        font-weight: 800;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .number {
+        display: grid;
+        width: 30px;
+        height: 30px;
+        place-items: center;
+        border-radius: 50%;
+      }
+
+      .mock-app {
+        position: absolute;
+        inset: 62px 18px 18px;
+        display: grid;
+        grid-template-rows: auto 1fr;
+        gap: 14px;
+      }
+
+      .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .brand h2 {
+        margin: 0;
+        font-size: 26px;
+        letter-spacing: 0;
+      }
+
+      .brand span {
+        display: block;
+        margin-top: 4px;
+        font-size: 12px;
+      }
+
+      .pill {
+        padding: 8px 12px;
+        border-radius: 999px;
+        font-size: 12px;
+        font-weight: 800;
+      }
+
+      .layout {
+        display: grid;
+        grid-template-columns: 1fr 150px;
+        gap: 12px;
+        min-height: 0;
+      }
+
+      .chat,
+      .side-card,
+      .upload,
+      .outline {
+        border-radius: 16px;
+      }
+
+      .chat {
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+        min-width: 0;
+      }
+
+      .section-title {
+        padding: 16px 16px 12px;
+        font-weight: 850;
+        font-size: 15px;
+      }
+
+      .conversation {
+        padding: 8px 14px;
+      }
+
+      .bubble {
+        margin-bottom: 10px;
+        padding: 11px 12px;
+        border-radius: 14px;
+        font-size: 12px;
+        line-height: 1.55;
+      }
+
+      .bubble.user {
+        margin-left: 50px;
+      }
+
+      .composer {
+        margin: 14px;
+        height: 62px;
+        border-radius: 14px;
+      }
+
+      .right {
+        display: grid;
+        gap: 12px;
+        grid-template-rows: 1.1fr 0.9fr 1fr;
+      }
+
+      .side-card {
+        padding: 14px;
+      }
+
+      .side-card h3 {
+        margin: 0 0 10px;
+        font-size: 13px;
+      }
+
+      .line {
+        height: 8px;
+        margin: 8px 0;
+        border-radius: 99px;
+      }
+
+      .download {
+        margin-top: 12px;
+        height: 36px;
+        border-radius: 12px;
+      }
+
+      .curatorial {
+        background:
+          radial-gradient(circle at 12% 18%, rgba(196, 107, 43, 0.16), transparent 30%),
+          radial-gradient(circle at 88% 12%, rgba(23, 107, 135, 0.18), transparent 34%),
+          linear-gradient(135deg, #f7f1e6 0%, #f7f8f5 50%, #e8f2ef 100%);
+      }
+
+      .curatorial::before {
+        background-image:
+          linear-gradient(rgba(36, 31, 27, 0.035) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(36, 31, 27, 0.035) 1px, transparent 1px);
+        background-size: 26px 26px;
+      }
+
+      .curatorial .label {
+        color: #2a241d;
+      }
+
+      .curatorial .number {
+        background: #241f1b;
+        color: #f8f0df;
+      }
+
+      .curatorial .brand h2 {
+        color: #241f1b;
+        font-family: Georgia, "Times New Roman", serif;
+      }
+
+      .curatorial .brand span {
+        color: #6b6257;
+      }
+
+      .curatorial .pill {
+        background: #241f1b;
+        color: #f8f0df;
+      }
+
+      .curatorial .chat,
+      .curatorial .side-card {
+        border: 1px solid rgba(36, 31, 27, 0.14);
+        background: rgba(255, 252, 246, 0.72);
+        backdrop-filter: blur(18px);
+      }
+
+      .curatorial .section-title,
+      .curatorial .side-card h3 {
+        color: #241f1b;
+      }
+
+      .curatorial .bubble {
+        border: 1px solid rgba(36, 31, 27, 0.12);
+        background: #fffaf0;
+        color: #302923;
+      }
+
+      .curatorial .bubble.user {
+        background: #dfeee8;
+        border-color: rgba(23, 107, 135, 0.2);
+      }
+
+      .curatorial .composer {
+        background:
+          linear-gradient(90deg, rgba(36, 31, 27, 0.08), transparent),
+          #fffaf0;
+        border: 1px solid rgba(36, 31, 27, 0.12);
+      }
+
+      .curatorial .line {
+        background: rgba(36, 31, 27, 0.14);
+      }
+
+      .curatorial .line.accent,
+      .curatorial .download {
+        background: #b86a35;
+      }
+
+      .future {
+        background:
+          radial-gradient(circle at 20% 16%, rgba(0, 224, 255, 0.28), transparent 26%),
+          radial-gradient(circle at 90% 8%, rgba(174, 91, 255, 0.24), transparent 30%),
+          linear-gradient(145deg, #07111f 0%, #0c1730 44%, #141025 100%);
+      }
+
+      .future::before {
+        background-image:
+          linear-gradient(rgba(92, 225, 255, 0.08) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(92, 225, 255, 0.08) 1px, transparent 1px);
+        background-size: 22px 22px;
+        mask-image: linear-gradient(to bottom, black, transparent 82%);
+      }
+
+      .future .label,
+      .future .brand h2,
+      .future .section-title,
+      .future .side-card h3 {
+        color: #e9fbff;
+      }
+
+      .future .number {
+        background: #00d8ff;
+        color: #06101d;
+      }
+
+      .future .brand span {
+        color: #8db8ca;
+      }
+
+      .future .pill {
+        background: rgba(0, 216, 255, 0.16);
+        border: 1px solid rgba(0, 216, 255, 0.38);
+        color: #83ecff;
+      }
+
+      .future .chat,
+      .future .side-card {
+        border: 1px solid rgba(126, 232, 255, 0.2);
+        background: rgba(8, 19, 37, 0.72);
+        box-shadow: inset 0 0 36px rgba(0, 216, 255, 0.06);
+      }
+
+      .future .bubble {
+        border: 1px solid rgba(126, 232, 255, 0.2);
+        background: rgba(12, 29, 54, 0.88);
+        color: #dff9ff;
+      }
+
+      .future .bubble.user {
+        background: rgba(112, 70, 255, 0.2);
+      }
+
+      .future .composer {
+        border: 1px solid rgba(126, 232, 255, 0.26);
+        background: rgba(5, 13, 28, 0.92);
+      }
+
+      .future .line {
+        background: rgba(141, 184, 202, 0.18);
+      }
+
+      .future .line.accent,
+      .future .download {
+        background: linear-gradient(90deg, #00d8ff, #9b63ff);
+      }
+
+      .minimal {
+        background:
+          linear-gradient(135deg, #fbfbfc 0%, #eef2f7 100%);
+      }
+
+      .minimal::before {
+        background:
+          linear-gradient(120deg, transparent 0 28%, rgba(15, 23, 42, 0.035) 28% 28.4%, transparent 28.4%),
+          linear-gradient(180deg, rgba(255,255,255,0.8), transparent);
+      }
+
+      .minimal .label,
+      .minimal .brand h2,
+      .minimal .section-title,
+      .minimal .side-card h3 {
+        color: #111827;
+      }
+
+      .minimal .number {
+        background: #111827;
+        color: #fff;
+      }
+
+      .minimal .brand span {
+        color: #6b7280;
+      }
+
+      .minimal .pill {
+        background: #eef2ff;
+        color: #3730a3;
+      }
+
+      .minimal .chat,
+      .minimal .side-card {
+        border: 1px solid rgba(17, 24, 39, 0.08);
+        background: rgba(255, 255, 255, 0.82);
+      }
+
+      .minimal .bubble {
+        border: 1px solid rgba(17, 24, 39, 0.08);
+        background: #f8fafc;
+        color: #1f2937;
+      }
+
+      .minimal .bubble.user {
+        background: #eef2ff;
+      }
+
+      .minimal .composer {
+        background: #f8fafc;
+        border: 1px solid rgba(17, 24, 39, 0.08);
+      }
+
+      .minimal .line {
+        background: rgba(17, 24, 39, 0.11);
+      }
+
+      .minimal .line.accent,
+      .minimal .download {
+        background: #111827;
+      }
+
+      .notes {
+        position: absolute;
+        left: 20px;
+        right: 20px;
+        bottom: 24px;
+        display: grid;
+        gap: 4px;
+        z-index: 3;
+      }
+
+      .notes strong {
+        font-size: 15px;
+      }
+
+      .notes span {
+        font-size: 12px;
+        line-height: 1.45;
+      }
+
+      .curatorial .notes {
+        color: #241f1b;
+      }
+
+      .future .notes {
+        color: #dff9ff;
+      }
+
+      .minimal .notes {
+        color: #111827;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="board">
+      <header class="board-header">
+        <div>
+          <h1>Growing Agent 前端视觉方案</h1>
+          <p>三个方向都保留工作台结构，差异主要在气质、色彩、层次和交互感。</p>
+        </div>
+      </header>
+
+      <section class="options">
+        <article class="option curatorial">
+          <div class="label"><span class="number">1</span> Curatorial</div>
+          <div class="mock-app">
+            <div class="top">
+              <div class="brand">
+                <h2>Growing Agent</h2>
+                <span>Presentation Atelier</span>
+              </div>
+              <div class="pill">制作中</div>
+            </div>
+            <div class="layout">
+              <div class="chat">
+                <div class="section-title">需求对话</div>
+                <div class="conversation">
+                  <div class="bubble">上传参考资料，或描述你要制作的 PPT。</div>
+                  <div class="bubble user">毕业答辩，20 页，科技蓝，重点讲系统架构。</div>
+                  <div class="bubble">我会整理内容结构，并生成可下载的演示文稿。</div>
+                </div>
+                <div class="composer"></div>
+              </div>
+              <div class="right">
+                <div class="side-card">
+                  <h3>资料投递</h3>
+                  <div class="line accent"></div>
+                  <div class="line"></div>
+                  <div class="line"></div>
+                </div>
+                <div class="side-card">
+                  <h3>制作状态</h3>
+                  <div class="line"></div>
+                  <div class="line accent"></div>
+                  <div class="download"></div>
+                </div>
+                <div class="side-card">
+                  <h3>页面大纲</h3>
+                  <div class="line"></div>
+                  <div class="line"></div>
+                  <div class="line"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="notes">
+            <strong>艺术策展式工作台</strong>
+            <span>纸感、展览标签、暖白与铜色点缀。最有艺术气息，适合“创作工具”。</span>
+          </div>
+        </article>
+
+        <article class="option future">
+          <div class="label"><span class="number">2</span> Future Lab</div>
+          <div class="mock-app">
+            <div class="top">
+              <div class="brand">
+                <h2>Growing Agent</h2>
+                <span>Neural Deck System</span>
+              </div>
+              <div class="pill">AI Pipeline</div>
+            </div>
+            <div class="layout">
+              <div class="chat">
+                <div class="section-title">需求对话</div>
+                <div class="conversation">
+                  <div class="bubble">输入任务，系统将解析资料并生成视觉方案。</div>
+                  <div class="bubble user">科技风，攻防检测系统，20 页。</div>
+                  <div class="bubble">正在规划页面节奏与执行规格。</div>
+                </div>
+                <div class="composer"></div>
+              </div>
+              <div class="right">
+                <div class="side-card">
+                  <h3>资料上传</h3>
+                  <div class="line accent"></div>
+                  <div class="line"></div>
+                  <div class="line"></div>
+                </div>
+                <div class="side-card">
+                  <h3>生成状态</h3>
+                  <div class="line"></div>
+                  <div class="line accent"></div>
+                  <div class="download"></div>
+                </div>
+                <div class="side-card">
+                  <h3>大纲</h3>
+                  <div class="line"></div>
+                  <div class="line"></div>
+                  <div class="line"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="notes">
+            <strong>未来科技实验室</strong>
+            <span>深色、霓虹、网格与发光边框。冲击力强，但长时间使用会更刺激。</span>
+          </div>
+        </article>
+
+        <article class="option minimal">
+          <div class="label"><span class="number">3</span> Minimal Studio</div>
+          <div class="mock-app">
+            <div class="top">
+              <div class="brand">
+                <h2>Growing Agent</h2>
+                <span>Focused PPT Workspace</span>
+              </div>
+              <div class="pill">Ready</div>
+            </div>
+            <div class="layout">
+              <div class="chat">
+                <div class="section-title">需求对话</div>
+                <div class="conversation">
+                  <div class="bubble">上传资料或直接描述 PPT 需求。</div>
+                  <div class="bubble user">项目汇报，12 页，商务简洁。</div>
+                  <div class="bubble">我会输出大纲、项目资料和下载入口。</div>
+                </div>
+                <div class="composer"></div>
+              </div>
+              <div class="right">
+                <div class="side-card">
+                  <h3>资料</h3>
+                  <div class="line accent"></div>
+                  <div class="line"></div>
+                  <div class="line"></div>
+                </div>
+                <div class="side-card">
+                  <h3>状态</h3>
+                  <div class="line"></div>
+                  <div class="line accent"></div>
+                  <div class="download"></div>
+                </div>
+                <div class="side-card">
+                  <h3>大纲</h3>
+                  <div class="line"></div>
+                  <div class="line"></div>
+                  <div class="line"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="notes">
+            <strong>极简高级工作室</strong>
+            <span>留白、细线和低饱和层次。耐看专业，但艺术感最克制。</span>
+          </div>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>

@@ -6,7 +6,28 @@
           RAG 模式 {{ chatStore.kbId ? `- ${chatStore.kbId}` : '(未选择知识库)' }}
         </el-tag>
       </div>
+      <div class="mode-indicator" v-if="chatStore.pptMode">
+        <el-tag size="small" type="warning" effect="light" closable @close="chatStore.togglePptMode()">
+          PPT Agent 模式
+        </el-tag>
+      </div>
       <div class="input-area">
+        <!-- PPT 模式上传按钮 -->
+        <el-upload
+          v-if="chatStore.pptMode"
+          :auto-upload="false"
+          :show-file-list="false"
+          :accept="acceptTypes"
+          :on-change="handleFileSelect"
+          ref="uploadRef"
+        >
+          <el-button
+            class="upload-btn"
+            :icon="Paperclip"
+            circle
+            :disabled="chatStore.loading"
+          />
+        </el-upload>
         <el-input
           v-model="text"
           type="textarea"
@@ -34,15 +55,45 @@
 
 <script setup>
 import { ref } from 'vue'
-import { Promotion } from '@element-plus/icons-vue'
+import { Promotion, Paperclip } from '@element-plus/icons-vue'
+import { ElMessage } from 'element-plus'
 import { useChatStore } from '@/stores/chat'
 
 const chatStore = useChatStore()
 const text = ref('')
+const uploadRef = ref(null)
+const uploading = ref(false)
+
+const acceptTypes = '.pdf,.docx,.doc,.txt,.md,.csv,.xlsx,.xls,.html,.htm'
+
+async function handleFileSelect(file) {
+  if (!chatStore.currentSessionId) {
+    ElMessage.warning('请先创建会话再上传文件')
+    return
+  }
+
+  uploading.value = true
+  try {
+    const res = await chatStore.uploadPptMaterial(file.raw || file)
+    ElMessage.success(res.message || '文件上传成功')
+
+    // 在消息列表追加一条系统消息
+    const fileName = file.name || res.filename || '文件'
+    chatStore.messages.push({
+      role: 'user',
+      content: `📎 已上传：${fileName}`,
+      timestamp: new Date().toISOString(),
+    })
+  } catch (e) {
+    ElMessage.error('文件上传失败，请检查格式后重试')
+  } finally {
+    uploading.value = false
+  }
+}
 
 function handleSend(e) {
   if (e && e.shiftKey) return
-  if (!text.value.trim() || chatStore.loading) return
+  if (!text.value.trim() || chatStore.loading || uploading.value) return
 
   chatStore.sendMessage(text.value.trim())
   text.value = ''
@@ -69,6 +120,16 @@ function handleSend(e) {
   display: flex;
   gap: 8px;
   align-items: flex-end;
+}
+
+.upload-btn {
+  flex-shrink: 0;
+  margin-bottom: 2px;
+  color: var(--text-secondary, #6b6b6b);
+}
+
+.upload-btn:hover {
+  color: var(--accent-color, #10a37f);
 }
 
 .chat-input :deep(.el-textarea__inner) {

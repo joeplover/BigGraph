@@ -9,9 +9,11 @@ export const useChatStore = defineStore('chat', () => {
   const currentSessionId = ref(null)
   const messages = ref([])
   const ragMode = ref(false)
+  const pptMode = ref(false)
   const kbId = ref('')
   const kbs = ref([])
   const loading = ref(false)
+  const pptDownloadUrl = ref('')
 
   const currentSession = computed(() =>
     sessions.value.find((s) => s.id === currentSessionId.value)
@@ -150,7 +152,116 @@ export const useChatStore = defineStore('chat', () => {
       let thinking = ''
       let chunksData = []
 
-      if (ragMode.value && kbId.value) {
+      if (pptMode.value) {
+        // PPT Agent 模式
+        pptDownloadUrl.value = '' // 每次新消息重置下载链接
+
+        // 先添加一条占位消息
+        const placeholderIdx = messages.value.length
+        messages.value.push({
+          role: 'assistant',
+          content: '正在思考...',
+          timestamp: new Date().toISOString(),
+        })
+
+        try {
+          const res = await request.post('/api/ppt/chat', {
+            message: text,
+            session_id: currentSessionId.value,
+          }, { timeout: 30000 })
+
+          // 更新 session_id（新会话的 ID 由后端生成）
+          if (res.session_id && res.session_id !== currentSessionId.value) {
+            currentSessionId.value = res.session_id
+            localStorage.setItem('chat_session_id', res.session_id)
+          }
+
+          if (res.status === 'processing') {
+            // 后台任务模式 — SSE 实时推送
+            messages.value[placeholderIdx].content = 'PPT 正在生成中，这可能需要几分钟时间，请耐心等待...'
+
+            const streamUrl = res.stream_url || `/api/ppt/stream/${res.session_id}`
+            const source = new EventSource(streamUrl)
+
+            source.onmessage = (event) => {
+              try {
+                const data = JSON.parse(event.data)
+                if (data.status === 'done') {
+                  source.close()
+                  messages.value[placeholderIdx].content = data.response || 'PPT 已生成完成！'
+                  messages.value[placeholderIdx].pptDownloadUrl = data.pptx_download_url || ''
+                  loading.value = false
+                } else if (data.status === 'failed') {
+                  source.close()
+                  messages.value[placeholderIdx].content = '❌ ' + (data.response || 'PPT 生成失败')
+                  loading.value = false
+                }
+              } catch {
+                // 忽略解析错误
+              }
+            }
+
+            source.onerror = () => {
+              source.close()
+              // EventSource 断连时，fallback 到轮询
+              const fallbackInterval = setInterval(async () => {
+                try {
+                  const statusRes = await request.get(`/api/ppt/status/${res.session_id}`)
+                  if (statusRes.status === 'done') {
+                    clearInterval(fallbackInterval)
+                    messages.value[placeholderIdx].content = statusRes.response || 'PPT 已生成完成！'
+                    messages.value[placeholderIdx].pptDownloadUrl = statusRes.pptx_download_url || ''
+                    loading.value = false
+                  } else if (statusRes.status === 'failed') {
+                    clearInterval(fallbackInterval)
+                    messages.value[placeholderIdx].content = '❌ ' + (statusRes.response || 'PPT 生成失败')
+                    loading.value = false
+                  }
+                } catch {
+                  clearInterval(fallbackInterval)
+                  loading.value = false
+                }
+              }, 5000)
+            }
+
+            return // 由 SSE/fallback 控制 loading=false
+          }
+
+          // 同步返回 — 更新占位消息
+          messages.value[placeholderIdx].content = res.response || '抱歉，PPT Agent 暂时无法回复。'
+          messages.value[placeholderIdx].pptDownloadUrl = res.pptx_download_url || ''
+          responseText = ''
+
+        } catch (e) {
+          // 超时或网络错误 — fallback 轮询
+          messages.value[placeholderIdx].content = '请求超时，正在检查生成状态...'
+          const fallbackInterval = setInterval(async () => {
+            try {
+              const statusRes = await request.get(`/api/ppt/status/${currentSessionId.value}`)
+              if (statusRes.status === 'done') {
+                clearInterval(fallbackInterval)
+                messages.value[placeholderIdx].content = statusRes.response || 'PPT 已生成完成！'
+                messages.value[placeholderIdx].pptDownloadUrl = statusRes.pptx_download_url || ''
+                loading.value = false
+              } else if (statusRes.status === 'failed') {
+                clearInterval(fallbackInterval)
+                messages.value[placeholderIdx].content = '❌ ' + (statusRes.response || 'PPT 生成失败')
+                loading.value = false
+              } else if (statusRes.status === 'idle') {
+                clearInterval(fallbackInterval)
+                messages.value[placeholderIdx].content = '❌ 请求失败，请稍后重试。'
+                loading.value = false
+              }
+            } catch {
+              clearInterval(fallbackInterval)
+              messages.value[placeholderIdx].content = '❌ 查询生成状态失败，请刷新后查看'
+              loading.value = false
+            }
+          }, 5000)
+          return
+        }
+
+      } else if (ragMode.value && kbId.value) {
         // RAG 模式：先搜索知识库
         const searchRes = await searchDocuments(kbId.value, text, 5)
         const chunks = searchRes.results || []
@@ -189,13 +300,16 @@ export const useChatStore = defineStore('chat', () => {
         responseText = res.response || res.message || '抱歉，我暂时无法回答。'
       }
 
-      messages.value.push({
-        role: 'assistant',
-        content: responseText,
-        thinking: thinking || '',
-        chunksData: chunksData,
-        timestamp: new Date().toISOString(),
-      })
+      // PPT 模式已在上面处理了占位消息，不需要再 push
+      if (!pptMode.value) {
+        messages.value.push({
+          role: 'assistant',
+          content: responseText,
+          thinking: thinking || '',
+          chunksData: chunksData,
+          timestamp: new Date().toISOString(),
+        })
+      }
 
       // 更新会话标题（第一条消息，同步到后端）
       const session = sessions.value.find((s) => s.id === currentSessionId.value)
@@ -228,10 +342,29 @@ export const useChatStore = defineStore('chat', () => {
 
   function toggleRagMode() {
     ragMode.value = !ragMode.value
+    if (ragMode.value) pptMode.value = false
   }
 
   function setKbId(id) {
     kbId.value = id
+  }
+
+  function togglePptMode() {
+    pptMode.value = !pptMode.value
+    if (pptMode.value) {
+      ragMode.value = false
+      pptDownloadUrl.value = ''
+    }
+  }
+
+  async function uploadPptMaterial(file) {
+    const formData = new FormData()
+    formData.append('session_id', currentSessionId.value)
+    formData.append('file', file)
+    return await request.post('/api/ppt/upload', formData, {
+      headers: { 'Content-Type': 'multipart/form-data' },
+      timeout: 60000,
+    })
   }
 
   // ================================================================
@@ -244,9 +377,11 @@ export const useChatStore = defineStore('chat', () => {
     currentSessionId,
     messages,
     ragMode,
+    pptMode,
     kbId,
     kbs,
     loading,
+    pptDownloadUrl,
     currentSession,
     newSession,
     deleteSession,
@@ -254,6 +389,8 @@ export const useChatStore = defineStore('chat', () => {
     sendMessage,
     fetchMyKbs,
     toggleRagMode,
+    togglePptMode,
     setKbId,
+    uploadPptMaterial,
   }
 })

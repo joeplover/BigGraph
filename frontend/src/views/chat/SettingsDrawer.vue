@@ -38,6 +38,28 @@
             @change="chatStore.toggleRagMode"
           />
         </div>
+
+        <!-- PPT Agent 模式 -->
+        <div class="mode-switch" style="margin-top: 12px;">
+          <div class="mode-info">
+            <span class="mode-label">PPT Agent 模式</span>
+            <span class="mode-desc">开启后将进入专业的 PPT 制作助手模式</span>
+          </div>
+          <el-switch
+            :model-value="chatStore.pptMode"
+            @change="chatStore.togglePptMode"
+          />
+        </div>
+
+        <!-- PPT Agent 提示 -->
+        <div v-if="chatStore.pptMode" class="ppt-mode-hint">
+          <el-alert
+            type="warning"
+            :closable="false"
+            show-icon
+            title="PPT Agent 模式下对话将用于制作 PPT，而非普通问答"
+          />
+        </div>
       </div>
 
       <!-- 选择知识库 -->
@@ -510,6 +532,10 @@ async function handleLogout() {
 .upload-status-text {
   font-size: 14px;
   color: var(--text-secondary, #6b6b6b);
+  margin-top: 12px;
+}
+
+.ppt-mode-hint {
   margin-top: 12px;
 }
 </style>

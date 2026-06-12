@@ -3,7 +3,7 @@
     <div v-if="chatStore.messages.length === 0" class="empty-state">
       <div class="empty-logo">BigGraph</div>
       <p class="empty-subtitle">智能知识库问答平台</p>
-      <div class="suggestions">
+      <div v-if="!chatStore.pptMode" class="suggestions">
         <div class="suggestion-item" @click="askSuggestion('你好，介绍一下你自己')">
           <el-icon><ChatLineRound /></el-icon>
           <span>你好，介绍一下你自己</span>
@@ -11,6 +11,16 @@
         <div class="suggestion-item" @click="askSuggestion('给我讲讲知识库的功能')">
           <el-icon><Document /></el-icon>
           <span>给我讲讲知识库的功能</span>
+        </div>
+      </div>
+      <div v-else class="suggestions">
+        <div class="suggestion-item" @click="askSuggestion('帮我做一个关于毕业答辩的 10 页 PPT')">
+          <el-icon><ChatLineRound /></el-icon>
+          <span>帮我做一个毕业答辩 PPT</span>
+        </div>
+        <div class="suggestion-item" @click="askSuggestion('帮我做一个项目汇报的 PPT，风格简洁商务')">
+          <el-icon><Document /></el-icon>
+          <span>帮我做项目汇报 PPT</span>
         </div>
       </div>
     </div>
@@ -45,6 +55,12 @@
           </div>
           <!-- 实际回答 -->
           <div class="message-text">{{ msg.content }}</div>
+          <!-- PPT 下载按钮（只在该消息有下载链接时显示） -->
+          <div v-if="msg.pptDownloadUrl" class="ppt-download-area">
+            <el-button type="primary" size="small" :icon="Download" @click="downloadPpt(msg.pptDownloadUrl)">
+              下载 PPT
+            </el-button>
+          </div>
         </div>
       </div>
     </div>
@@ -72,7 +88,7 @@
 
 <script setup>
 import { ref, computed, nextTick, watch } from 'vue'
-import { ChatLineRound, Document, Monitor } from '@element-plus/icons-vue'
+import { ChatLineRound, Document, Monitor, Download } from '@element-plus/icons-vue'
 import { useChatStore } from '@/stores/chat'
 import { useAuthStore } from '@/stores/auth'
 
@@ -90,6 +106,12 @@ function askSuggestion(text) {
 
 function toggleThinking(idx) {
   expandedThinking.value[idx] = !expandedThinking.value[idx]
+}
+
+function downloadPpt(url) {
+  if (url) {
+    window.open(url, '_blank')
+  }
 }
 
 // 自动滚动到底部
@@ -275,5 +297,9 @@ watch(
 @keyframes bounce {
   0%, 80%, 100% { transform: scale(0); }
   40% { transform: scale(1); }
+}
+
+.ppt-download-area {
+  margin-top: 12px;
 }
 </style>

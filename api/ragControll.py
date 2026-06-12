@@ -845,6 +845,10 @@ if __name__ == "__main__":
     # 注册认证路由
     app.include_router(auth_router)
 
+    # 注册 PPT Agent 路由（低耦合集成）
+    from api.ppt_agent_router import router as ppt_agent_router
+    app.include_router(ppt_agent_router)
+
     import uvicorn
 
     uvicorn.run(app, host="0.0.0.0", port=8000)

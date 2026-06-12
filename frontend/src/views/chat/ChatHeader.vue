@@ -12,6 +12,14 @@
       >
         RAG 模式
       </el-tag>
+      <el-tag
+        v-if="chatStore.pptMode"
+        type="warning"
+        effect="light"
+        size="small"
+      >
+        PPT 模式
+      </el-tag>
       <el-button text @click="emit('openSettings')">
         <el-icon><Setting /></el-icon>
       </el-button>
