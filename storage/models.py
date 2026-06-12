@@ -25,32 +25,45 @@ class Base(DeclarativeBase):
 # ========================================================================
 class DocumentStatus(str, enum.Enum):
     """文档生命周期状态"""
-    pending = "pending"   # 初始状态，文档刚创建但还没处理完
-    active = "active"     # 文档已全部处理完成（含向量索引），可被检索
-    archived = "archived" # 已归档，不再参与检索但保留数据
-    deleted = "deleted"   # 软删除标记
-    failed = "failed"     # 解析/处理流程中出错
+    pending = "pending"
+    active = "active"
+    archived = "archived"
+    deleted = "deleted"
+    failed = "failed"
 
 
 class IngestionJobStatus(str, enum.Enum):
     """文档导入任务的各个阶段"""
-    pending = "pending"     # 任务刚创建，等待处理
-    parsing = "parsing"     # 正在解析文件（PDF/DOCX/TXT 等）
-    cleaning = "cleaning"   # 正在文本清洗（去除零宽字符、合并断行等）
-    chunking = "chunking"   # 正在将清洗后文本切片成 chunk
-    embedding = "embedding" # 正在调用 embedding 模型生成向量
-    indexing = "indexing"   # 正在写入 Qdrant + ES
-    completed = "completed" # 全部处理完成，文档可被检索
-    failed = "failed"       # 处理过程中出现不可恢复的错误
-    cancelled = "cancelled" # 被用户手动取消
+    pending = "pending"
+    parsing = "parsing"
+    cleaning = "cleaning"
+    chunking = "chunking"
+    embedding = "embedding"
+    indexing = "indexing"
+    completed = "completed"
+    failed = "failed"
+    cancelled = "cancelled"
 
 
 class VectorSyncStatus(str, enum.Enum):
     """单一路径（Qdrant 或 ES）的同步状态"""
-    pending = "pending"   # 等待写入，还没开始处理
-    indexed = "indexed"   # 写入成功，数据已可用
-    partial = "partial"   # 写入部分成功（如批量写入时部分失败），需重试
-    failed = "failed"     # 写入彻底失败（如连接异常），需人工介入
+    pending = "pending"
+    indexed = "indexed"
+    partial = "partial"
+    failed = "failed"
+
+
+class KbMemberRole(str, enum.Enum):
+    """知识库成员角色"""
+    viewer = "viewer"
+    editor = "editor"
+
+
+class KbMemberStatus(str, enum.Enum):
+    """知识库成员加入状态"""
+    pending = "pending"
+    approved = "approved"
+    rejected = "rejected"
 
 
 # ========================================================================
@@ -72,6 +85,20 @@ class TenantMixin:
 # ========================================================================
 # PG 表模型
 # ========================================================================
+class User(Base, TimestampMixin):
+    """系统用户"""
+    __tablename__ = "users"
+
+    id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    username: Mapped[str] = mapped_column(String(50), unique=True, index=True, nullable=False)
+    password_hash: Mapped[str] = mapped_column(String(255), nullable=False)
+    display_name: Mapped[Optional[str]] = mapped_column(String(100), nullable=True)
+    email: Mapped[Optional[str]] = mapped_column(String(100), unique=True, nullable=True)
+    is_verified: Mapped[bool] = mapped_column(default=False)
+    tenant_id: Mapped[str] = mapped_column(String(64), index=True, nullable=False)
+    is_active: Mapped[bool] = mapped_column(default=True)
+
+
 class KnowledgeBase(Base, TimestampMixin):
     __tablename__ = "knowledge_bases"
 
@@ -79,7 +106,24 @@ class KnowledgeBase(Base, TimestampMixin):
     tenant_id: Mapped[str] = mapped_column(String(64), index=True, nullable=False)
     name: Mapped[str] = mapped_column(String(255), nullable=False)
     description: Mapped[Optional[str]] = mapped_column(Text, nullable=True)
+    owner_id: Mapped[Optional[uuid.UUID]] = mapped_column(UUID(as_uuid=True), ForeignKey("users.id"), nullable=True)
+    share_code: Mapped[Optional[str]] = mapped_column(String(64), unique=True, nullable=True)
     metadata_: Mapped[dict] = mapped_column("metadata", JSONB, default=dict)
+
+
+class KbMember(Base, TimestampMixin):
+    """知识库成员"""
+    __tablename__ = "kb_members"
+
+    id: Mapped[uuid.UUID] = mapped_column(UUID(as_uuid=True), primary_key=True, default=uuid.uuid4)
+    knowledge_base_id: Mapped[uuid.UUID] = mapped_column(
+        UUID(as_uuid=True), ForeignKey("knowledge_bases.id"), index=True, nullable=False,
+    )
+    user_id: Mapped[uuid.UUID] = mapped_column(
+        UUID(as_uuid=True), ForeignKey("users.id"), index=True, nullable=False,
+    )
+    role: Mapped[KbMemberRole] = mapped_column(Enum(KbMemberRole), default=KbMemberRole.viewer)
+    status: Mapped[KbMemberStatus] = mapped_column(Enum(KbMemberStatus), default=KbMemberStatus.pending)
 
 
 class UploadedFile(Base, TimestampMixin):

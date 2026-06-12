@@ -1,0 +1,7 @@
+[2026-06-11 16:27:08] [INFO ] [__main__                 ] [9e1b4a98c286] 搜索请求: query=解码器由多少个相同层堆叠 kb=1151cde3-a47a-4e7c-81ec-9793195e7f36 tenant=joe
+[2026-06-11 16:27:09] [INFO ] [http                     ] [a23d378e7c86] GET /search/1151cde3-a47a-4e7c-81ec-9793195e7f36 → 404
+[2026-06-11 16:27:25] [INFO ] [__main__                 ] [2bad4faad4b1] 搜索请求: query=解码器由多少个相同层堆叠 kb=0f7b260b-2612-4cb2-b2b1-a5f984a3ff01 tenant=joe
+[2026-06-11 16:27:27] [INFO ] [httpx                    ] [-] HTTP Request: POST http://localhost:6333/collections/enterprise_knowledge_chunks/points/search "HTTP/1.1 200 OK"
+[2026-06-11 16:27:27] [INFO ] [elastic_transport.transport] [-] POST http://localhost:9200/enterprise_knowledge_chunks/_search [status:200 duration:0.140s]
+[2026-06-11 16:27:27] [INFO ] [__main__                 ] [2bad4faad4b1] 搜索完成: results=3
+[2026-06-11 16:27:27] [INFO ] [http                     ] [d71bb8df70e9] GET /search/0f7b260b-2612-4cb2-b2b1-a5f984a3ff01 → 200

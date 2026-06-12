@@ -1,0 +1,175 @@
+[2026-06-12 17:15:24] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-12 17:18:26] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-12 17:40:03] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-12 17:52:53] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-12 17:55:11] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-12 17:55:32] [INFO ] [__main__                 ] [cfacff79bdbc] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 17:55:32] [INFO ] [http                     ] [c955e11bc6c3] GET /knowledge_bases/ → 200
+[2026-06-12 17:55:33] [INFO ] [http                     ] [89c5dbc8af91] GET /chat/history/1781258132438 → 200
+[2026-06-12 17:55:34] [INFO ] [http                     ] [2fe38bc8228a] GET /chat/history/1781258132438 → 200
+[2026-06-12 17:55:34] [INFO ] [http                     ] [344474c94af6] GET /chat/history/1781258132438 → 200
+[2026-06-12 17:55:35] [INFO ] [http                     ] [20ad38270518] GET /chat/history/1781258132438 → 200
+[2026-06-12 17:55:35] [INFO ] [__main__                 ] [dd2670589cc0] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 17:55:35] [INFO ] [http                     ] [d2560c67045b] GET /knowledge_bases/ → 200
+[2026-06-12 17:55:36] [INFO ] [http                     ] [edf078eb64f7] GET /chat/history/1781258135652 → 200
+[2026-06-12 17:55:36] [INFO ] [__main__                 ] [a2fd612aa1e9] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 17:55:36] [INFO ] [http                     ] [537d90f50132] GET /knowledge_bases/ → 200
+[2026-06-12 17:55:36] [INFO ] [__main__                 ] [c0d707d7e87c] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 17:55:36] [INFO ] [http                     ] [454bad8f972f] GET /knowledge_bases/ → 200
+[2026-06-12 17:55:36] [INFO ] [http                     ] [e13a2eba56eb] GET /chat/history/1781258136060 → 200
+[2026-06-12 17:55:38] [INFO ] [http                     ] [de5a7a35cf26] GET /chat/history/1781258136060 → 200
+[2026-06-12 17:55:39] [INFO ] [http                     ] [83fda5a0f9be] GET /chat/history/1781258136285 → 200
+[2026-06-12 17:55:39] [INFO ] [http                     ] [9df594d91f79] GET /chat/history/1781258136060 → 200
+[2026-06-12 17:56:19] [INFO ] [__main__                 ] [dfb12d198586] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 17:56:19] [INFO ] [http                     ] [c72734cf64de] GET /knowledge_bases/ → 200
+[2026-06-12 17:57:01] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-12 17:57:11] [WARNING] [api.auth                 ] [2d658b65d8f3] 登录失败，密码错误: joeplover
+[2026-06-12 17:57:11] [INFO ] [http                     ] [05c2149db961] POST /auth/login → 401
+[2026-06-12 17:57:11] [INFO ] [http                     ] [c498e204441d] POST /chat/sessions → 404
+[2026-06-12 17:57:11] [INFO ] [http                     ] [5ac1410c9138] GET /chat/sessions → 404
+[2026-06-12 17:57:15] [INFO ] [http                     ] [4084b2fe907c] GET /openapi.json → 200
+[2026-06-12 17:58:33] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-12 17:58:33] [INFO ] [http                     ] [7bf487668652] GET /openapi.json → 200
+[2026-06-12 17:59:03] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-12 17:59:03] [INFO ] [http                     ] [4f176d3cf894] GET /openapi.json → 200
+[2026-06-12 17:59:19] [WARNING] [api.auth                 ] [4bc8c8f2fa1a] 登录失败，密码错误: joeplover
+[2026-06-12 17:59:19] [INFO ] [http                     ] [42d026b31b93] POST /auth/login → 401
+[2026-06-12 17:59:24] [INFO ] [http                     ] [4555d73a7de5] GET /openapi.json → 200
+[2026-06-12 17:59:28] [INFO ] [http                     ] [a532ce14b430] GET /openapi.json → 200
+[2026-06-12 18:00:21] [INFO ] [__main__                 ] [-] 会话已创建: session_id=7600eb5b-722e-476b-a37c-6161a9387588
+[2026-06-12 18:00:21] [INFO ] [http                     ] [007238a55317] POST /chat/sessions → 200
+[2026-06-12 18:00:21] [INFO ] [http                     ] [45447b5ec3ed] GET /chat/sessions → 200
+[2026-06-12 18:00:21] [INFO ] [__main__                 ] [06b507d9610e] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 18:00:21] [INFO ] [http                     ] [75b147e5d9b3] GET /knowledge_bases/ → 200
+[2026-06-12 18:00:21] [INFO ] [http                     ] [1c0044353f97] GET /chat/history/7600eb5b-722e-476b-a37c-6161a9387588 → 200
+[2026-06-12 18:00:22] [INFO ] [http                     ] [62f1d9f4bcd5] GET /chat/history/7600eb5b-722e-476b-a37c-6161a9387588 → 200
+[2026-06-12 18:00:23] [INFO ] [http                     ] [f8f11df54a7e] GET /chat/history/7600eb5b-722e-476b-a37c-6161a9387588 → 200
+[2026-06-12 18:00:23] [INFO ] [http                     ] [9f3c6eac5c7c] GET /chat/history/7600eb5b-722e-476b-a37c-6161a9387588 → 200
+[2026-06-12 18:00:24] [INFO ] [http                     ] [85b8207bfc3e] GET /chat/history/7600eb5b-722e-476b-a37c-6161a9387588 → 200
+[2026-06-12 18:00:27] [INFO ] [__main__                 ] [-] 会话已删除: session_id=7600eb5b-722e-476b-a37c-6161a9387588
+[2026-06-12 18:00:27] [INFO ] [http                     ] [a1008ee3825d] DELETE /chat/history/7600eb5b-722e-476b-a37c-6161a9387588 → 200
+[2026-06-12 18:00:29] [INFO ] [__main__                 ] [-] 会话已创建: session_id=14032dbc-3815-4e13-bcb7-a275ba7827fd
+[2026-06-12 18:00:29] [INFO ] [http                     ] [e6ef6f573a37] POST /chat/sessions → 200
+[2026-06-12 18:00:29] [INFO ] [http                     ] [d18af64198a4] GET /chat/sessions → 200
+[2026-06-12 18:00:29] [INFO ] [__main__                 ] [5c2688e28931] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 18:00:29] [INFO ] [http                     ] [38b6ba9b760b] GET /knowledge_bases/ → 200
+[2026-06-12 18:00:29] [INFO ] [http                     ] [7f77d53c8044] GET /chat/history/14032dbc-3815-4e13-bcb7-a275ba7827fd → 200
+[2026-06-12 18:00:31] [INFO ] [http                     ] [75e1667f886e] GET /chat/history/14032dbc-3815-4e13-bcb7-a275ba7827fd → 200
+[2026-06-12 18:00:34] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 18:00:38] [INFO ] [__main__                 ] [-] AI 回复成功: len=146 history=0 request_id=99624fcdd9a5
+[2026-06-12 18:00:38] [INFO ] [http                     ] [fe08f3ee36b3] POST /chat → 200
+[2026-06-12 18:00:43] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 18:00:47] [INFO ] [__main__                 ] [-] AI 回复成功: len=100 history=2 request_id=f5dd7cdf67d5
+[2026-06-12 18:00:47] [INFO ] [http                     ] [f91d3b847daf] POST /chat → 200
+[2026-06-12 18:00:52] [INFO ] [http                     ] [f3f04408d1fb] GET /chat/sessions → 200
+[2026-06-12 18:00:52] [INFO ] [__main__                 ] [-] 会话已创建: session_id=c8e1149e-a9f2-4de7-8e32-d8ed6c842595
+[2026-06-12 18:00:52] [INFO ] [http                     ] [46ee7ef7edb6] POST /chat/sessions → 200
+[2026-06-12 18:00:52] [INFO ] [__main__                 ] [cc677a2e16ed] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 18:00:52] [INFO ] [http                     ] [42a2b40264f4] GET /knowledge_bases/ → 200
+[2026-06-12 18:00:52] [INFO ] [http                     ] [4ba606f26779] GET /chat/history/14032dbc-3815-4e13-bcb7-a275ba7827fd → 200
+[2026-06-12 18:00:54] [INFO ] [http                     ] [83ba1d7b76bb] GET /chat/history/14032dbc-3815-4e13-bcb7-a275ba7827fd → 200
+[2026-06-12 18:00:55] [INFO ] [http                     ] [088f5ebfcc4c] GET /chat/history/c8e1149e-a9f2-4de7-8e32-d8ed6c842595 → 200
+[2026-06-12 18:00:55] [INFO ] [http                     ] [b4718915ffad] GET /chat/history/14032dbc-3815-4e13-bcb7-a275ba7827fd → 200
+[2026-06-12 18:00:56] [INFO ] [http                     ] [5fb35755db79] GET /chat/history/c8e1149e-a9f2-4de7-8e32-d8ed6c842595 → 200
+[2026-06-12 18:00:57] [INFO ] [http                     ] [0e72131e159c] GET /chat/history/14032dbc-3815-4e13-bcb7-a275ba7827fd → 200
+[2026-06-12 18:00:57] [INFO ] [http                     ] [966dc59be9b2] GET /chat/history/c8e1149e-a9f2-4de7-8e32-d8ed6c842595 → 200
+[2026-06-12 18:00:58] [INFO ] [http                     ] [fe381e77f517] GET /chat/history/14032dbc-3815-4e13-bcb7-a275ba7827fd → 200
+[2026-06-12 18:00:58] [INFO ] [http                     ] [634cf7c49aa9] GET /chat/history/14032dbc-3815-4e13-bcb7-a275ba7827fd → 200
+[2026-06-12 18:00:58] [INFO ] [http                     ] [c0553f7199c3] GET /chat/history/14032dbc-3815-4e13-bcb7-a275ba7827fd → 200
+[2026-06-12 18:00:59] [INFO ] [http                     ] [7d9c460f8c9b] GET /chat/history/c8e1149e-a9f2-4de7-8e32-d8ed6c842595 → 200
+[2026-06-12 18:01:00] [INFO ] [http                     ] [f0e04d3313dc] GET /chat/history/14032dbc-3815-4e13-bcb7-a275ba7827fd → 200
+[2026-06-12 18:01:00] [INFO ] [http                     ] [f0c4ac6e48bc] GET /chat/history/14032dbc-3815-4e13-bcb7-a275ba7827fd → 200
+[2026-06-12 18:01:01] [INFO ] [http                     ] [fab26e93bc25] GET /chat/sessions → 200
+[2026-06-12 18:01:01] [INFO ] [__main__                 ] [-] 会话已创建: session_id=40f08846-49e7-4078-9ba1-01f86621711f
+[2026-06-12 18:01:01] [INFO ] [http                     ] [bf2fc99fc161] POST /chat/sessions → 200
+[2026-06-12 18:01:01] [INFO ] [http                     ] [a18903747a94] GET /chat/history/14032dbc-3815-4e13-bcb7-a275ba7827fd → 200
+[2026-06-12 18:01:01] [INFO ] [__main__                 ] [ed88fbae796f] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 18:01:01] [INFO ] [http                     ] [4332f925c39d] GET /knowledge_bases/ → 200
+[2026-06-12 18:01:02] [INFO ] [http                     ] [bfdadf60bb5c] GET /chat/history/c8e1149e-a9f2-4de7-8e32-d8ed6c842595 → 200
+[2026-06-12 18:01:03] [INFO ] [http                     ] [e678f2e61c1a] GET /chat/history/40f08846-49e7-4078-9ba1-01f86621711f → 200
+[2026-06-12 18:01:03] [INFO ] [http                     ] [cf1af9d8a383] GET /chat/history/14032dbc-3815-4e13-bcb7-a275ba7827fd → 200
+[2026-06-12 18:01:07] [INFO ] [__main__                 ] [-] 会话已创建: session_id=96578dd3-aaf2-4094-b8a5-ca18320c1dd0
+[2026-06-12 18:01:07] [INFO ] [http                     ] [3cb2dc32f6e0] POST /chat/sessions → 200
+[2026-06-12 18:01:07] [INFO ] [http                     ] [91ad074acd5f] GET /chat/sessions → 200
+[2026-06-12 18:01:07] [INFO ] [__main__                 ] [9bdaca7f3891] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 18:01:07] [INFO ] [http                     ] [963b5c1affb7] GET /knowledge_bases/ → 200
+[2026-06-12 18:01:07] [INFO ] [http                     ] [a1d94fa72d39] GET /chat/history/96578dd3-aaf2-4094-b8a5-ca18320c1dd0 → 200
+[2026-06-12 18:01:08] [INFO ] [__main__                 ] [da834601c1d2] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 18:01:08] [INFO ] [http                     ] [db5e749a6e62] GET /knowledge_bases/ → 200
+[2026-06-12 18:01:08] [INFO ] [__main__                 ] [-] 会话已创建: session_id=10fccbb4-77e7-4fd0-bea7-28c559c7c712
+[2026-06-12 18:01:08] [INFO ] [http                     ] [56dc75f97b19] POST /chat/sessions → 200
+[2026-06-12 18:01:08] [INFO ] [http                     ] [8974eb94e9c2] GET /chat/sessions → 200
+[2026-06-12 18:01:08] [INFO ] [http                     ] [e1c365e7fa7e] GET /chat/history/10fccbb4-77e7-4fd0-bea7-28c559c7c712 → 200
+[2026-06-12 18:01:08] [INFO ] [__main__                 ] [-] 会话已创建: session_id=579e9940-9878-4852-a111-d0321c28af8b
+[2026-06-12 18:01:08] [INFO ] [http                     ] [ad0b0677a1f1] POST /chat/sessions → 200
+[2026-06-12 18:01:08] [INFO ] [http                     ] [9bc851ed11b3] GET /chat/sessions → 200
+[2026-06-12 18:01:08] [INFO ] [__main__                 ] [5352f121a9dd] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 18:01:08] [INFO ] [http                     ] [4fb1be15461e] GET /knowledge_bases/ → 200
+[2026-06-12 18:01:08] [INFO ] [http                     ] [10db19e23d9c] GET /chat/history/579e9940-9878-4852-a111-d0321c28af8b → 200
+[2026-06-12 18:01:09] [INFO ] [http                     ] [d19b97097471] GET /chat/history/96578dd3-aaf2-4094-b8a5-ca18320c1dd0 → 200
+[2026-06-12 18:01:09] [INFO ] [http                     ] [df20db9bf701] GET /chat/history/10fccbb4-77e7-4fd0-bea7-28c559c7c712 → 200
+[2026-06-12 18:01:10] [INFO ] [http                     ] [1cf5e5b7046c] GET /chat/history/40f08846-49e7-4078-9ba1-01f86621711f → 200
+[2026-06-12 18:01:10] [INFO ] [http                     ] [7854f6675a64] GET /chat/history/c8e1149e-a9f2-4de7-8e32-d8ed6c842595 → 200
+[2026-06-12 18:01:10] [INFO ] [http                     ] [811247e2815d] GET /chat/history/14032dbc-3815-4e13-bcb7-a275ba7827fd → 200
+[2026-06-12 18:01:57] [INFO ] [api.auth                 ] [b01072e6de65] 用户登出成功
+[2026-06-12 18:01:57] [INFO ] [http                     ] [8bae21e81532] POST /auth/logout → 200
+[2026-06-12 18:02:08] [INFO ] [api.auth                 ] [efcb0b01c879] 用户登录成功: username=joeplover user_id=e703fa66-3318-45c6-9660-d41818663354 tenant=tenant_4bb1d927
+[2026-06-12 18:02:08] [INFO ] [http                     ] [be042a4c5ef9] POST /auth/login → 200
+[2026-06-12 18:02:08] [INFO ] [__main__                 ] [71d7ea0057e5] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 18:02:08] [INFO ] [http                     ] [59ad869cde12] GET /knowledge_bases/ → 200
+[2026-06-12 18:02:08] [INFO ] [__main__                 ] [-] 会话已创建: session_id=a3ea84a5-8ec5-49a0-83ab-a84d9a1f3388
+[2026-06-12 18:02:08] [INFO ] [http                     ] [01823fac4286] POST /chat/sessions → 200
+[2026-06-12 18:02:10] [INFO ] [http                     ] [d8140cc65342] GET /chat/history/14032dbc-3815-4e13-bcb7-a275ba7827fd → 200
+[2026-06-12 18:02:14] [INFO ] [__main__                 ] [64789059349f] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 18:02:14] [INFO ] [http                     ] [a329040049de] GET /knowledge_bases/ → 200
+[2026-06-12 18:02:35] [INFO ] [__main__                 ] [d174dd974117] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 18:02:35] [INFO ] [http                     ] [c74b0affb8ee] GET /knowledge_bases/ → 200
+[2026-06-12 18:03:19] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-12 18:03:20] [INFO ] [http                     ] [8f84a11bc96c] GET /openapi.json → 200
+[2026-06-12 18:04:03] [INFO ] [__main__                 ] [db87292d87e0] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 18:04:03] [INFO ] [http                     ] [15c9424f47e9] GET /knowledge_bases/ → 200
+[2026-06-12 18:04:03] [INFO ] [http                     ] [5620fc698dea] GET /chat/sessions → 200
+[2026-06-12 18:04:04] [INFO ] [http                     ] [26df75f0ca10] GET /chat/history/14032dbc-3815-4e13-bcb7-a275ba7827fd → 200
+[2026-06-12 18:04:05] [INFO ] [http                     ] [abedfb0d1fd3] GET /chat/history/14032dbc-3815-4e13-bcb7-a275ba7827fd → 200
+[2026-06-12 18:04:08] [INFO ] [__main__                 ] [-] 会话已删除: session_id=14032dbc-3815-4e13-bcb7-a275ba7827fd
+[2026-06-12 18:04:08] [INFO ] [http                     ] [e191ed7b679c] DELETE /chat/history/14032dbc-3815-4e13-bcb7-a275ba7827fd → 200
+[2026-06-12 18:04:08] [INFO ] [http                     ] [6182b79d205d] GET /chat/history/a3ea84a5-8ec5-49a0-83ab-a84d9a1f3388 → 200
+[2026-06-12 18:04:10] [INFO ] [__main__                 ] [-] 会话已删除: session_id=a3ea84a5-8ec5-49a0-83ab-a84d9a1f3388
+[2026-06-12 18:04:10] [INFO ] [http                     ] [880e536dc11c] DELETE /chat/history/a3ea84a5-8ec5-49a0-83ab-a84d9a1f3388 → 200
+[2026-06-12 18:04:10] [INFO ] [http                     ] [cde32b9e6ccc] GET /chat/history/579e9940-9878-4852-a111-d0321c28af8b → 200
+[2026-06-12 18:04:11] [INFO ] [__main__                 ] [-] 会话已删除: session_id=579e9940-9878-4852-a111-d0321c28af8b
+[2026-06-12 18:04:11] [INFO ] [http                     ] [d0838f39aac4] DELETE /chat/history/579e9940-9878-4852-a111-d0321c28af8b → 200
+[2026-06-12 18:04:11] [INFO ] [http                     ] [c447f31c6efd] GET /chat/history/10fccbb4-77e7-4fd0-bea7-28c559c7c712 → 200
+[2026-06-12 18:04:12] [INFO ] [__main__                 ] [-] 会话已删除: session_id=10fccbb4-77e7-4fd0-bea7-28c559c7c712
+[2026-06-12 18:04:12] [INFO ] [http                     ] [19b1d28fd192] DELETE /chat/history/10fccbb4-77e7-4fd0-bea7-28c559c7c712 → 200
+[2026-06-12 18:04:13] [INFO ] [http                     ] [1bb7ecd44049] GET /chat/history/96578dd3-aaf2-4094-b8a5-ca18320c1dd0 → 200
+[2026-06-12 18:04:14] [INFO ] [__main__                 ] [-] 会话已删除: session_id=96578dd3-aaf2-4094-b8a5-ca18320c1dd0
+[2026-06-12 18:04:14] [INFO ] [http                     ] [936e32c2c759] DELETE /chat/history/96578dd3-aaf2-4094-b8a5-ca18320c1dd0 → 200
+[2026-06-12 18:04:14] [INFO ] [http                     ] [505463aa3fed] GET /chat/history/40f08846-49e7-4078-9ba1-01f86621711f → 200
+[2026-06-12 18:04:15] [INFO ] [__main__                 ] [-] 会话已删除: session_id=40f08846-49e7-4078-9ba1-01f86621711f
+[2026-06-12 18:04:15] [INFO ] [http                     ] [804d78116b31] DELETE /chat/history/40f08846-49e7-4078-9ba1-01f86621711f → 200
+[2026-06-12 18:04:16] [INFO ] [http                     ] [3775d2e9ef8c] GET /chat/history/c8e1149e-a9f2-4de7-8e32-d8ed6c842595 → 200
+[2026-06-12 18:04:17] [INFO ] [__main__                 ] [-] 会话已删除: session_id=c8e1149e-a9f2-4de7-8e32-d8ed6c842595
+[2026-06-12 18:04:17] [INFO ] [http                     ] [66c1d0dc08fe] DELETE /chat/history/c8e1149e-a9f2-4de7-8e32-d8ed6c842595 → 200
+[2026-06-12 18:04:18] [INFO ] [__main__                 ] [0a3687cb81f5] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 18:04:18] [INFO ] [http                     ] [51ccd6415602] GET /knowledge_bases/ → 200
+[2026-06-12 18:04:18] [INFO ] [http                     ] [8bf661fe1792] GET /chat/sessions → 200
+[2026-06-12 18:04:20] [INFO ] [__main__                 ] [-] 会话已创建: session_id=eb6d6300-d1cc-474f-8a19-86df44fd9366
+[2026-06-12 18:04:20] [INFO ] [http                     ] [d2e34c171f79] POST /chat/sessions → 200
+[2026-06-12 18:04:25] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 18:04:29] [INFO ] [__main__                 ] [-] AI 回复成功: len=147 history=0 request_id=792d06961e1c
+[2026-06-12 18:04:29] [INFO ] [http                     ] [4b6e30b604c6] POST /chat → 200
+[2026-06-12 18:04:29] [INFO ] [http                     ] [2f8d4fd95c42] PATCH /chat/sessions/eb6d6300-d1cc-474f-8a19-86df44fd9366 → 200
+[2026-06-12 18:04:33] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 18:04:36] [INFO ] [__main__                 ] [-] AI 回复成功: len=63 history=2 request_id=efda174d085a
+[2026-06-12 18:04:36] [INFO ] [http                     ] [4839e2ba74be] POST /chat → 200
+[2026-06-12 18:04:39] [INFO ] [__main__                 ] [-] 会话已创建: session_id=348a61c9-da35-40f9-a1f8-9ddcc2e69b60
+[2026-06-12 18:04:39] [INFO ] [http                     ] [910440f934e2] POST /chat/sessions → 200
+[2026-06-12 18:04:44] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 18:04:51] [INFO ] [__main__                 ] [-] AI 回复成功: len=460 history=0 request_id=f327fb8d06fa
+[2026-06-12 18:04:51] [INFO ] [http                     ] [6a29a6bbc9a4] POST /chat → 200
+[2026-06-12 18:04:51] [INFO ] [http                     ] [7df706d20d43] PATCH /chat/sessions/348a61c9-da35-40f9-a1f8-9ddcc2e69b60 → 200
+[2026-06-12 18:04:56] [INFO ] [http                     ] [1ef21ed8094b] GET /chat/history/eb6d6300-d1cc-474f-8a19-86df44fd9366 → 200
+[2026-06-12 18:05:01] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 18:05:06] [INFO ] [__main__                 ] [-] AI 回复成功: len=142 history=4 request_id=b2bbf42b51db
+[2026-06-12 18:05:06] [INFO ] [http                     ] [3919ec4ae6be] POST /chat → 200

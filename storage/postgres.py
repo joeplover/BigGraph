@@ -15,8 +15,12 @@ from storage.models import (
     DocumentStatus,
     IngestionJob,
     IngestionJobStatus,
+    KbMember,
+    KbMemberRole,
+    KbMemberStatus,
     KnowledgeBase,
     UploadedFile,
+    User,
     VectorSyncStatus,
 )
 
@@ -53,12 +57,63 @@ def get_session() -> Generator[Session, None, None]:
 
 
 # ========================================================================
+# User CRUD
+# ========================================================================
+class UserStore:
+    @staticmethod
+    def create(db: Session, username: str, password_hash: str, display_name: str | None = None,
+               email: str | None = None) -> User:
+        user = User(
+            id=uuid.uuid4(),
+            username=username,
+            password_hash=password_hash,
+            display_name=display_name or username,
+            email=email,
+            is_verified=bool(email),
+            tenant_id=f"tenant_{uuid.uuid4().hex[:8]}",
+            is_active=True,
+        )
+        db.add(user)
+        db.flush()
+        return user
+
+    @staticmethod
+    def get(db: Session, user_id: str) -> User | None:
+        return db.get(User, user_id)
+
+    @staticmethod
+    def get_by_username(db: Session, username: str) -> User | None:
+        return db.query(User).filter(User.username == username).first()
+
+    @staticmethod
+    def get_by_email(db: Session, email: str) -> User | None:
+        return db.query(User).filter(User.email == email).first()
+
+    @staticmethod
+    def get_by_username_or_email(db: Session, account: str) -> User | None:
+        """支持用户名或邮箱登录"""
+        user = db.query(User).filter(User.username == account).first()
+        if user:
+            return user
+        return db.query(User).filter(User.email == account).first()
+
+    @staticmethod
+    def update_verified(db: Session, user_id: str) -> None:
+        user = db.get(User, user_id)
+        if user:
+            user.is_verified = True
+            db.flush()
+
+
+# ========================================================================
 # KnowledgeBase CRUD
 # ========================================================================
 class KnowledgeBaseStore:
     @staticmethod
-    def create(db: Session, tenant_id: str, name: str, description: str | None = None) -> KnowledgeBase:
-        kb = KnowledgeBase(id=uuid.uuid4(), tenant_id=tenant_id, name=name, description=description)
+    def create(db: Session, tenant_id: str, name: str, description: str | None = None,
+               owner_id: str | None = None) -> KnowledgeBase:
+        kb = KnowledgeBase(id=uuid.uuid4(), tenant_id=tenant_id, name=name,
+                           description=description, owner_id=owner_id)
         db.add(kb)
         db.flush()
         return kb
@@ -70,6 +125,86 @@ class KnowledgeBaseStore:
     @staticmethod
     def list_by_tenant(db: Session, tenant_id: str) -> list[KnowledgeBase]:
         return db.query(KnowledgeBase).filter(KnowledgeBase.tenant_id == tenant_id).all()
+
+    @staticmethod
+    def list_by_owner(db: Session, owner_id: str) -> list[KnowledgeBase]:
+        return db.query(KnowledgeBase).filter(KnowledgeBase.owner_id == owner_id).all()
+
+    @staticmethod
+    def update_share_code(db: Session, kb_id: str, share_code: str | None) -> KnowledgeBase | None:
+        kb = db.get(KnowledgeBase, kb_id)
+        if kb:
+            kb.share_code = share_code
+            db.flush()
+        return kb
+
+    @staticmethod
+    def get_by_share_code(db: Session, share_code: str) -> KnowledgeBase | None:
+        return db.query(KnowledgeBase).filter(KnowledgeBase.share_code == share_code).first()
+
+
+# ========================================================================
+# KbMember CRUD
+# ========================================================================
+class KbMemberStore:
+    @staticmethod
+    def create(db: Session, knowledge_base_id: str, user_id: str,
+               role: KbMemberRole = KbMemberRole.viewer) -> KbMember:
+        member = KbMember(
+            id=uuid.uuid4(),
+            knowledge_base_id=knowledge_base_id,
+            user_id=user_id,
+            role=role,
+            status=KbMemberStatus.pending,
+        )
+        db.add(member)
+        db.flush()
+        return member
+
+    @staticmethod
+    def get(db: Session, member_id: str) -> KbMember | None:
+        return db.get(KbMember, member_id)
+
+    @staticmethod
+    def get_by_user_and_kb(db: Session, user_id: str, kb_id: str) -> KbMember | None:
+        return db.query(KbMember).filter(
+            KbMember.user_id == user_id,
+            KbMember.knowledge_base_id == kb_id,
+        ).first()
+
+    @staticmethod
+    def list_by_kb(db: Session, kb_id: str) -> list[KbMember]:
+        return db.query(KbMember).filter(KbMember.knowledge_base_id == kb_id).all()
+
+    @staticmethod
+    def list_approved_by_user(db: Session, user_id: str) -> list[KbMember]:
+        return db.query(KbMember).filter(
+            KbMember.user_id == user_id,
+            KbMember.status == KbMemberStatus.approved,
+        ).all()
+
+    @staticmethod
+    def update_status(db: Session, member_id: str, status: KbMemberStatus) -> KbMember | None:
+        member = db.get(KbMember, member_id)
+        if member:
+            member.status = status
+            db.flush()
+        return member
+
+    @staticmethod
+    def user_can_access(db: Session, user_id: str, kb_id: str) -> bool:
+        """检查用户是否有权限访问该知识库"""
+        # 是 owner 吗？
+        kb = db.get(KnowledgeBase, kb_id)
+        if kb and str(kb.owner_id) == user_id:
+            return True
+        # 是已批准的成员吗？
+        member = db.query(KbMember).filter(
+            KbMember.user_id == user_id,
+            KbMember.knowledge_base_id == kb_id,
+            KbMember.status == KbMemberStatus.approved,
+        ).first()
+        return member is not None
 
 
 # ========================================================================

@@ -1,0 +1,586 @@
+[2026-06-12 16:54:02] [ERROR] [__main__                 ] [32a2473e2d89] 未捕获异常: (psycopg.errors.UndefinedTable) relation "users" does not exist
+LINE 2: FROM users 
+             ^
+[SQL: SELECT users.id AS users_id, users.username AS users_username, users.password_hash AS users_password_hash, users.display_name AS users_display_name, users.email AS users_email, users.is_verified AS users_is_verified, users.tenant_id AS users_tenant_id, users.is_active AS users_is_active, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.email = %(email_1)s::VARCHAR 
+ LIMIT %(param_1)s::INTEGER]
+[parameters: {'email_1': '1665637752@qq.com', 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+Traceback (most recent call last):
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\engine\default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\psycopg\cursor.py", line 97, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.UndefinedTable: relation "users" does not exist
+LINE 2: FROM users 
+             ^
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "F:\photo_to_vedio\BigGraph\core\logging.py", line 148, in __call__
+    await self.app(scope, receive, log_send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\fastapi\routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\fastapi\routing.py", line 214, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\concurrency.py", line 39, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\anyio\_backends\_asyncio.py", line 2518, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\anyio\_backends\_asyncio.py", line 1002, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\api\auth.py", line 117, in send_code
+    existing = UserStore.get_by_email(db, req.email)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\storage\postgres.py", line 90, in get_by_email
+    return db.query(User).filter(User.email == email).first()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\orm\query.py", line 2728, in first
+    return self.limit(1)._iter().first()  # type: ignore
+           ^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\orm\query.py", line 2827, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+                                                  ^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\orm\session.py", line 2362, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\orm\session.py", line 2247, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\orm\context.py", line 305, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\engine\base.py", line 1418, in execute
+    return meth(
+           ^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\sql\elements.py", line 515, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\engine\base.py", line 1640, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\engine\base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\engine\default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\psycopg\cursor.py", line 97, in execute
+    raise ex.with_traceback(None)
+sqlalchemy.exc.ProgrammingError: (psycopg.errors.UndefinedTable) relation "users" does not exist
+LINE 2: FROM users 
+             ^
+[SQL: SELECT users.id AS users_id, users.username AS users_username, users.password_hash AS users_password_hash, users.display_name AS users_display_name, users.email AS users_email, users.is_verified AS users_is_verified, users.tenant_id AS users_tenant_id, users.is_active AS users_is_active, users.created_at AS users_created_at, users.updated_at AS users_updated_at 
+FROM users 
+WHERE users.email = %(email_1)s::VARCHAR 
+ LIMIT %(param_1)s::INTEGER]
+[parameters: {'email_1': '1665637752@qq.com', 'param_1': 1}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+[2026-06-12 16:55:12] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-12 16:55:57] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-12 16:56:03] [ERROR] [api.mail_service         ] [-] SMTP 发送失败: Connection unexpectedly closed
+[2026-06-12 16:56:03] [INFO ] [http                     ] [8da1e654e9b9] POST /auth/send-code → 500
+[2026-06-12 16:59:45] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-12 16:59:55] [INFO ] [api.mail_service         ] [-] 验证码已发送: email=1665637752@qq.com
+[2026-06-12 16:59:55] [INFO ] [api.auth                 ] [da74248d03fb] 验证码已发送: email=1665637752@qq.com
+[2026-06-12 16:59:55] [INFO ] [http                     ] [8de5fd75f622] POST /auth/send-code → 200
+[2026-06-12 17:00:29] [INFO ] [api.auth                 ] [d27bb0d1f0d1] 用户注册成功: username=joeplover email=1665637752@qq.com user_id=bcb24cb4-26f3-4a70-bc76-9870d97423a9 tenant=tenant_7389eb98
+[2026-06-12 17:00:29] [ERROR] [__main__                 ] [d1e7d13b363b] 未捕获异常: Instance <User at 0x12efbd69310> is not bound to a Session; attribute refresh operation cannot proceed (Background on this error at: https://sqlalche.me/e/20/bhk3)
+Traceback (most recent call last):
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "F:\photo_to_vedio\BigGraph\core\logging.py", line 148, in __call__
+    await self.app(scope, receive, log_send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\fastapi\routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\fastapi\routing.py", line 214, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\concurrency.py", line 39, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\anyio\_backends\_asyncio.py", line 2518, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\anyio\_backends\_asyncio.py", line 1002, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\api\auth.py", line 198, in register
+    created_at=user.created_at.isoformat() if user.created_at else None,
+                                              ^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\orm\attributes.py", line 566, in __get__
+    return self.impl.get(state, dict_)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\orm\attributes.py", line 1086, in get
+    value = self._fire_loader_callables(state, key, passive)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\orm\attributes.py", line 1116, in _fire_loader_callables
+    return state._load_expired(state, passive)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\orm\state.py", line 803, in _load_expired
+    self.manager.expired_attribute_loader(self, toload, passive)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\orm\loading.py", line 1603, in load_scalar_attributes
+    raise orm_exc.DetachedInstanceError(
+sqlalchemy.orm.exc.DetachedInstanceError: Instance <User at 0x12efbd69310> is not bound to a Session; attribute refresh operation cannot proceed (Background on this error at: https://sqlalche.me/e/20/bhk3)
+[2026-06-12 17:01:30] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-12 17:01:32] [WARNING] [api.auth                 ] [4da40323295a] 注册失败，验证码已过期: email=1665637752@qq.com
+[2026-06-12 17:01:32] [INFO ] [http                     ] [e3067d368372] POST /auth/register → 400
+[2026-06-12 17:01:34] [WARNING] [api.auth                 ] [e7b94d447c4f] 邮箱已注册: 1665637752@qq.com
+[2026-06-12 17:01:34] [INFO ] [http                     ] [28b1f1e22005] POST /auth/send-code → 409
+[2026-06-12 17:01:54] [WARNING] [api.auth                 ] [413e372da145] 登录失败，用户不存在: 166563752@qq.com
+[2026-06-12 17:01:54] [INFO ] [http                     ] [0d81fc9fd6ec] POST /auth/login → 401
+[2026-06-12 17:03:02] [INFO ] [api.mail_service         ] [-] 验证码已发送: email=1665637752@qq.com
+[2026-06-12 17:03:02] [INFO ] [api.auth                 ] [dd8fad3046dc] 验证码已发送: email=1665637752@qq.com
+[2026-06-12 17:03:02] [INFO ] [http                     ] [5844a4af4cec] POST /auth/send-code → 200
+[2026-06-12 17:03:20] [INFO ] [api.auth                 ] [c53e4dab07f2] 用户注册成功: username=joeplover email=1665637752@qq.com user_id=e703fa66-3318-45c6-9660-d41818663354 tenant=tenant_4bb1d927
+[2026-06-12 17:03:20] [INFO ] [http                     ] [65fac292e39c] POST /auth/register → 200
+[2026-06-12 17:03:21] [ERROR] [__main__                 ] [48ce11952c1c] 未捕获异常: (psycopg.errors.UndefinedColumn) column knowledge_bases.owner_id does not exist
+LINE 1: ...bases.description AS knowledge_bases_description, knowledge_...
+                                                             ^
+[SQL: SELECT knowledge_bases.id AS knowledge_bases_id, knowledge_bases.tenant_id AS knowledge_bases_tenant_id, knowledge_bases.name AS knowledge_bases_name, knowledge_bases.description AS knowledge_bases_description, knowledge_bases.owner_id AS knowledge_bases_owner_id, knowledge_bases.share_code AS knowledge_bases_share_code, knowledge_bases.metadata AS knowledge_bases_metadata, knowledge_bases.created_at AS knowledge_bases_created_at, knowledge_bases.updated_at AS knowledge_bases_updated_at 
+FROM knowledge_bases 
+WHERE knowledge_bases.owner_id = %(owner_id_1)s::UUID]
+[parameters: {'owner_id_1': 'e703fa66-3318-45c6-9660-d41818663354'}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+Traceback (most recent call last):
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\engine\default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\psycopg\cursor.py", line 97, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.UndefinedColumn: column knowledge_bases.owner_id does not exist
+LINE 1: ...bases.description AS knowledge_bases_description, knowledge_...
+                                                             ^
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "F:\photo_to_vedio\BigGraph\core\logging.py", line 148, in __call__
+    await self.app(scope, receive, log_send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\fastapi\routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\fastapi\routing.py", line 212, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\api\ragControll.py", line 140, in list_my_knowledge_bases
+    owned = KnowledgeBaseStore.list_by_owner(db, user_id)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\storage\postgres.py", line 131, in list_by_owner
+    return db.query(KnowledgeBase).filter(KnowledgeBase.owner_id == owner_id).all()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\orm\query.py", line 2673, in all
+    return self._iter().all()  # type: ignore
+           ^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\orm\query.py", line 2827, in _iter
+    result: Union[ScalarResult[_T], Result[_T]] = self.session.execute(
+                                                  ^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\orm\session.py", line 2362, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\orm\session.py", line 2247, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\orm\context.py", line 305, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\engine\base.py", line 1418, in execute
+    return meth(
+           ^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\sql\elements.py", line 515, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\engine\base.py", line 1640, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\engine\base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\engine\default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\psycopg\cursor.py", line 97, in execute
+    raise ex.with_traceback(None)
+sqlalchemy.exc.ProgrammingError: (psycopg.errors.UndefinedColumn) column knowledge_bases.owner_id does not exist
+LINE 1: ...bases.description AS knowledge_bases_description, knowledge_...
+                                                             ^
+[SQL: SELECT knowledge_bases.id AS knowledge_bases_id, knowledge_bases.tenant_id AS knowledge_bases_tenant_id, knowledge_bases.name AS knowledge_bases_name, knowledge_bases.description AS knowledge_bases_description, knowledge_bases.owner_id AS knowledge_bases_owner_id, knowledge_bases.share_code AS knowledge_bases_share_code, knowledge_bases.metadata AS knowledge_bases_metadata, knowledge_bases.created_at AS knowledge_bases_created_at, knowledge_bases.updated_at AS knowledge_bases_updated_at 
+FROM knowledge_bases 
+WHERE knowledge_bases.owner_id = %(owner_id_1)s::UUID]
+[parameters: {'owner_id_1': 'e703fa66-3318-45c6-9660-d41818663354'}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+[2026-06-12 17:04:06] [ERROR] [__main__                 ] [51c8d64172e4] 未捕获异常: (psycopg.errors.UndefinedColumn) column "owner_id" of relation "knowledge_bases" does not exist
+LINE 1: ...nowledge_bases (id, tenant_id, name, description, owner_id, ...
+                                                             ^
+[SQL: INSERT INTO knowledge_bases (id, tenant_id, name, description, owner_id, share_code, metadata, created_at, updated_at) VALUES (%(id)s::UUID, %(tenant_id)s::VARCHAR, %(name)s::VARCHAR, %(description)s::VARCHAR, %(owner_id)s::UUID, %(share_code)s::VARCHAR, %(metadata)s::JSONB, %(created_at)s::TIMESTAMP WITHOUT TIME ZONE, %(updated_at)s::TIMESTAMP WITHOUT TIME ZONE)]
+[parameters: {'id': UUID('411b9807-8561-4507-b991-a6f47012b5c6'), 'tenant_id': 'tenant_4bb1d927', 'name': 'joejoe', 'description': '', 'owner_id': 'e703fa66-3318-45c6-9660-d41818663354', 'share_code': None, 'metadata': Jsonb({}), 'created_at': datetime.datetime(2026, 6, 12, 17, 4, 6, 258860), 'updated_at': datetime.datetime(2026, 6, 12, 17, 4, 6, 258860)}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+Traceback (most recent call last):
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\engine\default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\psycopg\cursor.py", line 97, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.UndefinedColumn: column "owner_id" of relation "knowledge_bases" does not exist
+LINE 1: ...nowledge_bases (id, tenant_id, name, description, owner_id, ...
+                                                             ^
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "F:\photo_to_vedio\BigGraph\core\logging.py", line 148, in __call__
+    await self.app(scope, receive, log_send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\fastapi\routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\fastapi\routing.py", line 212, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\api\ragControll.py", line 174, in create_knowledge_base
+    kb = KnowledgeBaseStore.create(db, tenant_id=tenant_id, name=name,
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\storage\postgres.py", line 118, in create
+    db.flush()
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\orm\session.py", line 4352, in flush
+    self._flush(objects)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\orm\session.py", line 4487, in _flush
+    with util.safe_reraise():
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\util\langhelpers.py", line 146, in __exit__
+    raise exc_value.with_traceback(exc_tb)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\orm\session.py", line 4448, in _flush
+    flush_context.execute()
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 466, in execute
+    rec.execute(self)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\orm\unitofwork.py", line 642, in execute
+    util.preloaded.orm_persistence.save_obj(
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\orm\persistence.py", line 93, in save_obj
+    _emit_insert_statements(
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\orm\persistence.py", line 1048, in _emit_insert_statements
+    result = connection.execute(
+             ^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\engine\base.py", line 1418, in execute
+    return meth(
+           ^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\sql\elements.py", line 515, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\engine\base.py", line 1640, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\engine\base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\engine\default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\psycopg\cursor.py", line 97, in execute
+    raise ex.with_traceback(None)
+sqlalchemy.exc.ProgrammingError: (psycopg.errors.UndefinedColumn) column "owner_id" of relation "knowledge_bases" does not exist
+LINE 1: ...nowledge_bases (id, tenant_id, name, description, owner_id, ...
+                                                             ^
+[SQL: INSERT INTO knowledge_bases (id, tenant_id, name, description, owner_id, share_code, metadata, created_at, updated_at) VALUES (%(id)s::UUID, %(tenant_id)s::VARCHAR, %(name)s::VARCHAR, %(description)s::VARCHAR, %(owner_id)s::UUID, %(share_code)s::VARCHAR, %(metadata)s::JSONB, %(created_at)s::TIMESTAMP WITHOUT TIME ZONE, %(updated_at)s::TIMESTAMP WITHOUT TIME ZONE)]
+[parameters: {'id': UUID('411b9807-8561-4507-b991-a6f47012b5c6'), 'tenant_id': 'tenant_4bb1d927', 'name': 'joejoe', 'description': '', 'owner_id': 'e703fa66-3318-45c6-9660-d41818663354', 'share_code': None, 'metadata': Jsonb({}), 'created_at': datetime.datetime(2026, 6, 12, 17, 4, 6, 258860), 'updated_at': datetime.datetime(2026, 6, 12, 17, 4, 6, 258860)}]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+[2026-06-12 17:10:43] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-12 17:10:47] [INFO ] [__main__                 ] [4c9eff8dc35f] 创建知识库: name=joejoe tenant=tenant_4bb1d927 owner=e703fa66-3318-45c6-9660-d41818663354
+[2026-06-12 17:10:47] [INFO ] [http                     ] [5bc615ebd127] POST /knowledge_bases/ → 200
+[2026-06-12 17:10:47] [INFO ] [__main__                 ] [86f976acc205] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 17:10:47] [INFO ] [http                     ] [f0007e61c166] GET /knowledge_bases/ → 200
+[2026-06-12 17:11:03] [INFO ] [__main__                 ] [5c2608419c75] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 17:11:03] [INFO ] [http                     ] [e506e673a1aa] GET /knowledge_bases/ → 200
+[2026-06-12 17:13:19] [INFO ] [http                     ] [5054257fe8ba] GET /docs → 200
+[2026-06-12 17:15:22] [INFO ] [http                     ] [814917757d7c] GET /docs → 200
+[2026-06-12 17:17:39] [INFO ] [http                     ] [230b707720dc] POST /chat → 404
+[2026-06-12 17:17:59] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-12 17:17:59] [INFO ] [http                     ] [ab8c19a123a2] GET /openapi.json → 200
+[2026-06-12 17:18:25] [WARNING] [api.auth                 ] [52087a22811b] Token 无效或已过期
+[2026-06-12 17:18:25] [INFO ] [http                     ] [a9d62f1e2c4d] POST /chat → 401
+[2026-06-12 17:18:34] [WARNING] [api.auth                 ] [a7d5f7687b5d] 登录失败，密码错误: joeplover
+[2026-06-12 17:18:34] [INFO ] [http                     ] [b311a688520d] POST /auth/login → 401
+[2026-06-12 17:18:34] [WARNING] [api.auth                 ] [435f291a0351] Token 无效或已过期
+[2026-06-12 17:18:34] [INFO ] [http                     ] [e96b8c122d94] POST /chat → 401
+[2026-06-12 17:19:50] [INFO ] [api.mail_service         ] [-] 验证码已发送: email=test123@qq.com
+[2026-06-12 17:19:50] [INFO ] [api.auth                 ] [ac1861907bd5] 验证码已发送: email=test123@qq.com
+[2026-06-12 17:19:50] [INFO ] [http                     ] [cd3a5ac28913] POST /auth/send-code → 200
+[2026-06-12 17:19:51] [WARNING] [api.auth                 ] [12f381f8f4c5] 登录失败，密码错误: joeplover
+[2026-06-12 17:19:51] [INFO ] [http                     ] [4522f2329db4] POST /auth/login → 401
+[2026-06-12 17:20:15] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-12 17:20:22] [INFO ] [__main__                 ] [9ed72cffd098] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 17:20:22] [INFO ] [http                     ] [512392392b90] GET /knowledge_bases/ → 200
+[2026-06-12 17:21:03] [INFO ] [http                     ] [f0eb71643a06] GET /chat → 405
+[2026-06-12 17:21:17] [INFO ] [http                     ] [ec78a51e2262] GET /chat → 405
+[2026-06-12 17:25:13] [INFO ] [http                     ] [8a67bfc02a14] GET /chat → 405
+[2026-06-12 17:25:19] [INFO ] [http                     ] [539d17c3a0b2] GET /chat → 405
+[2026-06-12 17:25:25] [INFO ] [__main__                 ] [f22a2d83aaa7] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 17:25:25] [INFO ] [http                     ] [280f24df5338] GET /knowledge_bases/ → 200
+[2026-06-12 17:26:28] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 17:26:28] [INFO ] [__main__                 ] [-] AI 回复成功: len=60 request_id=642dc77940d8
+[2026-06-12 17:26:28] [INFO ] [http                     ] [263dcb742036] POST /chat → 200
+[2026-06-12 17:26:48] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-12 17:26:51] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 400 Bad Request"
+[2026-06-12 17:26:51] [ERROR] [__main__                 ] [-] AI 调用失败: Error code: 400 - {'error': {'message': 'The supported API model names are deepseek-v4-pro or deepseek-v4-flash, but you passed DeepSeek-V4-Flash[free].', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_request_error'}} request_id=b847fb2eebee
+[2026-06-12 17:26:51] [INFO ] [http                     ] [6843fe854def] POST /chat → 500
+[2026-06-12 17:26:56] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 400 Bad Request"
+[2026-06-12 17:26:56] [ERROR] [__main__                 ] [-] AI 调用失败: Error code: 400 - {'error': {'message': 'The supported API model names are deepseek-v4-pro or deepseek-v4-flash, but you passed DeepSeek-V4-Flash[free].', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_request_error'}} request_id=a8b884d40ff4
+[2026-06-12 17:26:56] [INFO ] [http                     ] [0801fb92633a] POST /chat → 500
+[2026-06-12 17:27:24] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-12 17:27:27] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/chat/completions "HTTP/1.1 400 Bad Request"
+[2026-06-12 17:27:27] [ERROR] [__main__                 ] [-] AI 调用失败: Error code: 400 - {'error': {'message': 'The supported API model names are deepseek-v4-pro or deepseek-v4-flash, but you passed deepSeek-v4-flash.', 'type': 'invalid_request_error', 'param': None, 'code': 'invalid_request_error'}} request_id=d704147c26f3
+[2026-06-12 17:27:27] [INFO ] [http                     ] [adb1192976a0] POST /chat → 500
+[2026-06-12 17:28:25] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-12 17:28:32] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 17:28:34] [INFO ] [__main__                 ] [-] AI 回复成功: len=25 request_id=0463b70db7a5
+[2026-06-12 17:28:34] [INFO ] [http                     ] [33e555a7fcfc] POST /chat → 200
+[2026-06-12 17:31:11] [INFO ] [http                     ] [39e4652f78f6] POST /knowledge_bases/06d1a48e-2533-4a72-88fc-3853575f011b/share → 200
+[2026-06-12 17:32:09] [INFO ] [__main__                 ] [e6119d0bcb45] 收到上传请求: name=transformer_zh_cn.pdf kb=06d1a48e-2533-4a72-88fc-3853575f011b tenant=tenant_4bb1d927 user=e703fa66-3318-45c6-9660-d41818663354
+[2026-06-12 17:32:10] [INFO ] [__main__                 ] [e6119d0bcb45] 上传完成: job_id=fbe29721-0179-4574-b877-7a18b77a1012 file_id=45d7de8b-99a3-43b0-adea-77482b02d9c5 size=1437032
+[2026-06-12 17:32:10] [INFO ] [http                     ] [512a4a4071c8] POST /upload/06d1a48e-2533-4a72-88fc-3853575f011b → 200
+[2026-06-12 17:32:10] [INFO ] [__main__                 ] [e6119d0bcb45/d2080d9450f8] 后台任务开始: job_id=fbe29721-0179-4574-b877-7a18b77a1012 file_id=45d7de8b-99a3-43b0-adea-77482b02d9c5
+[2026-06-12 17:32:10] [DEBUG] [jieba                    ] [-] Building prefix dict from the default dictionary ...
+[2026-06-12 17:32:10] [DEBUG] [jieba                    ] [-] Loading model from cache C:\Users\16656\AppData\Local\Temp\jieba.cache
+[2026-06-12 17:32:10] [DEBUG] [jieba                    ] [-] Loading model cost 0.563 seconds.
+[2026-06-12 17:32:10] [DEBUG] [jieba                    ] [-] Prefix dict has been built successfully.
+[2026-06-12 17:32:10] [INFO ] [__main__                 ] [e6119d0bcb45/d2080d9450f8] 解析完成: chunks=29
+[2026-06-12 17:32:13] [INFO ] [http                     ] [ac5035d55006] GET /jobs/fbe29721-0179-4574-b877-7a18b77a1012 → 200
+[2026-06-12 17:32:14] [ERROR] [__main__                 ] [e6119d0bcb45/d2080d9450f8] 后台任务失败: job_id=fbe29721-0179-4574-b877-7a18b77a1012 error=502: 无法连接到向量模型服务 (http://localhost:1233/v1)，请检查服务是否已启动
+Traceback (most recent call last):
+  File "F:\photo_to_vedio\BigGraph\api\ragControll.py", line 490, in process_uploaded_document
+    vectors = await loop.run_in_executor(None, _batch_embed, [m.content for m in qdrant_models])
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\python\Python311\Lib\concurrent\futures\thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\api\ragControll.py", line 550, in _batch_embed
+    raise ErrorCode.EMBEDDING_API_ERROR.exception(
+fastapi.exceptions.HTTPException: 502: 无法连接到向量模型服务 (http://localhost:1233/v1)，请检查服务是否已启动
+[2026-06-12 17:32:15] [INFO ] [http                     ] [0e122d92d50e] GET /jobs/fbe29721-0179-4574-b877-7a18b77a1012 → 200
+[2026-06-12 17:32:55] [INFO ] [http                     ] [e5f00f2aa65c] GET /chat → 405
+[2026-06-12 17:33:02] [INFO ] [__main__                 ] [2857a4c5ac57] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 17:33:02] [INFO ] [http                     ] [d526421310a0] GET /knowledge_bases/ → 200
+[2026-06-12 17:33:08] [INFO ] [__main__                 ] [8127a5b0e37f] 收到上传请求: name=transformer_zh_cn.pdf kb=06d1a48e-2533-4a72-88fc-3853575f011b tenant=tenant_4bb1d927 user=e703fa66-3318-45c6-9660-d41818663354
+[2026-06-12 17:33:08] [INFO ] [__main__                 ] [8127a5b0e37f] 上传完成: job_id=0babe4e3-55d9-4ae2-9012-bb623c9c8fc1 file_id=2a6e693b-32db-4ad2-8930-7126a34e1494 size=1437032
+[2026-06-12 17:33:08] [INFO ] [http                     ] [7029ab32a094] POST /upload/06d1a48e-2533-4a72-88fc-3853575f011b → 200
+[2026-06-12 17:33:08] [INFO ] [__main__                 ] [8127a5b0e37f/fa7743bcd596] 后台任务开始: job_id=0babe4e3-55d9-4ae2-9012-bb623c9c8fc1 file_id=2a6e693b-32db-4ad2-8930-7126a34e1494
+[2026-06-12 17:33:08] [INFO ] [__main__                 ] [8127a5b0e37f/fa7743bcd596] 解析完成: chunks=29
+[2026-06-12 17:33:10] [INFO ] [http                     ] [6a257a805319] GET /jobs/0babe4e3-55d9-4ae2-9012-bb623c9c8fc1 → 200
+[2026-06-12 17:33:12] [INFO ] [httpx                    ] [-] HTTP Request: PUT http://localhost:6333/collections/enterprise_knowledge_chunks/points?wait=true "HTTP/1.1 200 OK"
+[2026-06-12 17:33:13] [INFO ] [elastic_transport.transport] [-] PUT http://localhost:9200/_bulk?refresh=wait_for [status:200 duration:1.286s]
+[2026-06-12 17:33:13] [INFO ] [__main__                 ] [8127a5b0e37f/fa7743bcd596] 后台任务完成: job_id=0babe4e3-55d9-4ae2-9012-bb623c9c8fc1 chunks=29 qdrant=True es=True
+[2026-06-12 17:33:13] [INFO ] [http                     ] [fcddab161ba6] GET /jobs/0babe4e3-55d9-4ae2-9012-bb623c9c8fc1 → 200
+[2026-06-12 17:35:57] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 17:36:02] [INFO ] [__main__                 ] [-] AI 回复成功: len=70 request_id=88ab17e24136
+[2026-06-12 17:36:02] [INFO ] [http                     ] [4bba3716507d] POST /chat → 200
+[2026-06-12 17:36:14] [INFO ] [__main__                 ] [670238a46478] 搜索请求: query=解码器由多少个相同层堆叠 kb=06d1a48e-2533-4a72-88fc-3853575f011b tenant=tenant_4bb1d927 user=e703fa66-3318-45c6-9660-d41818663354
+[2026-06-12 17:36:16] [INFO ] [httpx                    ] [-] HTTP Request: POST http://localhost:6333/collections/enterprise_knowledge_chunks/points/search "HTTP/1.1 200 OK"
+[2026-06-12 17:36:16] [INFO ] [elastic_transport.transport] [-] POST http://localhost:9200/enterprise_knowledge_chunks/_search [status:200 duration:0.340s]
+[2026-06-12 17:36:16] [INFO ] [__main__                 ] [670238a46478] 搜索完成: results=5
+[2026-06-12 17:36:16] [INFO ] [http                     ] [679389269543] GET /search/06d1a48e-2533-4a72-88fc-3853575f011b → 200
+[2026-06-12 17:39:16] [INFO ] [__main__                 ] [eead1a2e75dc] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 17:39:16] [INFO ] [http                     ] [a3558e742f7e] GET /knowledge_bases/ → 200
+[2026-06-12 17:39:24] [INFO ] [__main__                 ] [ac26bd812c00] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 17:39:24] [INFO ] [http                     ] [75c13ac84aa3] GET /knowledge_bases/ → 200
+[2026-06-12 17:39:27] [INFO ] [__main__                 ] [0b9d09d1651e] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 17:39:27] [INFO ] [http                     ] [0a0ac86cc286] GET /knowledge_bases/ → 200
+[2026-06-12 17:40:01] [INFO ] [http                     ] [699d4677a953] GET /chat → 405
+[2026-06-12 17:40:04] [WARNING] [api.auth                 ] [c8eb9631065e] Token 无效或已过期
+[2026-06-12 17:40:04] [INFO ] [http                     ] [d0eecfdd5198] POST /chat → 401
+[2026-06-12 17:40:33] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-12 17:40:38] [INFO ] [http                     ] [fe1cc683dd19] GET /chat → 405
+[2026-06-12 17:42:39] [INFO ] [__main__                 ] [32a61d93baf8] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 17:42:39] [INFO ] [http                     ] [2e2f7fdeead4] GET /knowledge_bases/ → 200
+[2026-06-12 17:43:15] [INFO ] [__main__                 ] [3c347ce4e08d] 搜索请求: query=解码器由多少个相同层堆叠 kb=06d1a48e-2533-4a72-88fc-3853575f011b tenant=tenant_4bb1d927 user=e703fa66-3318-45c6-9660-d41818663354
+[2026-06-12 17:43:17] [INFO ] [httpx                    ] [-] HTTP Request: POST http://localhost:6333/collections/enterprise_knowledge_chunks/points/search "HTTP/1.1 200 OK"
+[2026-06-12 17:43:17] [INFO ] [elastic_transport.transport] [-] POST http://localhost:9200/enterprise_knowledge_chunks/_search [status:200 duration:0.028s]
+[2026-06-12 17:43:17] [INFO ] [__main__                 ] [3c347ce4e08d] 搜索完成: results=5
+[2026-06-12 17:43:17] [INFO ] [http                     ] [fec21d316613] GET /search/06d1a48e-2533-4a72-88fc-3853575f011b → 200
+[2026-06-12 17:43:18] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 17:43:19] [INFO ] [__main__                 ] [-] AI 回复成功: len=14 request_id=a8a3c0c8bbce
+[2026-06-12 17:43:19] [INFO ] [http                     ] [4ccbcaaa5bed] POST /chat → 200
+[2026-06-12 17:44:07] [INFO ] [__main__                 ] [998236019d7b] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 17:44:07] [INFO ] [http                     ] [1caf055cf4b9] GET /knowledge_bases/ → 200
+[2026-06-12 17:44:10] [INFO ] [__main__                 ] [4df7345753ec] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 17:44:10] [INFO ] [http                     ] [f528bcb2825f] GET /knowledge_bases/ → 200
+[2026-06-12 17:44:46] [INFO ] [__main__                 ] [53c68aa6088d] 搜索请求: query=解码器由多少个相同层堆叠 kb=06d1a48e-2533-4a72-88fc-3853575f011b tenant=tenant_4bb1d927 user=e703fa66-3318-45c6-9660-d41818663354
+[2026-06-12 17:44:48] [INFO ] [httpx                    ] [-] HTTP Request: POST http://localhost:6333/collections/enterprise_knowledge_chunks/points/search "HTTP/1.1 200 OK"
+[2026-06-12 17:44:48] [INFO ] [elastic_transport.transport] [-] POST http://localhost:9200/enterprise_knowledge_chunks/_search [status:200 duration:0.058s]
+[2026-06-12 17:44:48] [INFO ] [__main__                 ] [53c68aa6088d] 搜索完成: results=5
+[2026-06-12 17:44:48] [INFO ] [http                     ] [65c0c55dfba8] GET /search/06d1a48e-2533-4a72-88fc-3853575f011b → 200
+[2026-06-12 17:44:48] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 17:44:50] [INFO ] [__main__                 ] [-] AI 回复成功: len=14 request_id=5a9524202576
+[2026-06-12 17:44:50] [INFO ] [http                     ] [f08a62727441] POST /chat → 200
+[2026-06-12 17:46:03] [INFO ] [__main__                 ] [95a7fd658b0e] 搜索请求: query=解码器由多少个相同层堆叠 kb=06d1a48e-2533-4a72-88fc-3853575f011b tenant=tenant_4bb1d927 user=e703fa66-3318-45c6-9660-d41818663354
+[2026-06-12 17:46:05] [INFO ] [httpx                    ] [-] HTTP Request: POST http://localhost:6333/collections/enterprise_knowledge_chunks/points/search "HTTP/1.1 200 OK"
+[2026-06-12 17:46:05] [INFO ] [elastic_transport.transport] [-] POST http://localhost:9200/enterprise_knowledge_chunks/_search [status:200 duration:0.053s]
+[2026-06-12 17:46:05] [INFO ] [__main__                 ] [95a7fd658b0e] 搜索完成: results=5
+[2026-06-12 17:46:05] [INFO ] [http                     ] [5173fc7acc10] GET /search/06d1a48e-2533-4a72-88fc-3853575f011b → 200
+[2026-06-12 17:46:05] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 17:46:07] [INFO ] [__main__                 ] [-] AI 回复成功: len=14 request_id=53d01170cc79
+[2026-06-12 17:46:07] [INFO ] [http                     ] [b7a43f7f23b6] POST /chat → 200
+[2026-06-12 17:47:16] [INFO ] [__main__                 ] [f2ada5370b71] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 17:47:16] [INFO ] [http                     ] [2d3cfd6acb32] GET /knowledge_bases/ → 200
+[2026-06-12 17:47:46] [INFO ] [__main__                 ] [888c021d2542] 搜索请求: query=解码器由多少个相同层堆叠 kb=06d1a48e-2533-4a72-88fc-3853575f011b tenant=tenant_4bb1d927 user=e703fa66-3318-45c6-9660-d41818663354
+[2026-06-12 17:47:48] [INFO ] [httpx                    ] [-] HTTP Request: POST http://localhost:6333/collections/enterprise_knowledge_chunks/points/search "HTTP/1.1 200 OK"
+[2026-06-12 17:47:48] [INFO ] [elastic_transport.transport] [-] POST http://localhost:9200/enterprise_knowledge_chunks/_search [status:200 duration:0.053s]
+[2026-06-12 17:47:48] [INFO ] [__main__                 ] [888c021d2542] 搜索完成: results=5
+[2026-06-12 17:47:48] [INFO ] [http                     ] [bcf64919ca84] GET /search/06d1a48e-2533-4a72-88fc-3853575f011b → 200
+[2026-06-12 17:47:49] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 17:47:50] [INFO ] [__main__                 ] [-] AI 回复成功: len=14 request_id=c50ae31dc40b
+[2026-06-12 17:47:50] [INFO ] [http                     ] [139b2ace484f] POST /chat → 200
+[2026-06-12 17:48:03] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-12 17:48:06] [INFO ] [__main__                 ] [f5e261973299] 搜索请求: query=解码器由多少个相同层堆叠 kb=06d1a48e-2533-4a72-88fc-3853575f011b tenant=tenant_4bb1d927 user=e703fa66-3318-45c6-9660-d41818663354
+[2026-06-12 17:48:08] [INFO ] [httpx                    ] [-] HTTP Request: POST http://localhost:6333/collections/enterprise_knowledge_chunks/points/search "HTTP/1.1 200 OK"
+[2026-06-12 17:48:08] [INFO ] [elastic_transport.transport] [-] POST http://localhost:9200/enterprise_knowledge_chunks/_search [status:200 duration:0.016s]
+[2026-06-12 17:48:08] [INFO ] [__main__                 ] [f5e261973299] 搜索完成: results=5
+[2026-06-12 17:48:08] [INFO ] [http                     ] [6766a46d9548] GET /search/06d1a48e-2533-4a72-88fc-3853575f011b → 200
+[2026-06-12 17:48:09] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 17:48:10] [INFO ] [__main__                 ] [-] AI 回复成功: len=16 request_id=65be235cbd09
+[2026-06-12 17:48:10] [INFO ] [http                     ] [1f5656828cc1] POST /chat → 200
+[2026-06-12 17:48:51] [INFO ] [__main__                 ] [816790251617] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 17:48:51] [INFO ] [http                     ] [89caec11e82b] GET /knowledge_bases/ → 200
+[2026-06-12 17:48:58] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 17:49:02] [INFO ] [__main__                 ] [-] AI 回复成功: len=42 request_id=7fa4cfd6ed57
+[2026-06-12 17:49:02] [INFO ] [http                     ] [c1f1984effba] POST /chat → 200
+[2026-06-12 17:49:15] [INFO ] [__main__                 ] [b1e9d9c86fe2] 搜索请求: query=解码器由多少个相同层堆叠 kb=06d1a48e-2533-4a72-88fc-3853575f011b tenant=tenant_4bb1d927 user=e703fa66-3318-45c6-9660-d41818663354
+[2026-06-12 17:49:17] [INFO ] [httpx                    ] [-] HTTP Request: POST http://localhost:6333/collections/enterprise_knowledge_chunks/points/search "HTTP/1.1 200 OK"
+[2026-06-12 17:49:18] [INFO ] [elastic_transport.transport] [-] POST http://localhost:9200/enterprise_knowledge_chunks/_search [status:200 duration:0.053s]
+[2026-06-12 17:49:18] [INFO ] [__main__                 ] [b1e9d9c86fe2] 搜索完成: results=5
+[2026-06-12 17:49:18] [INFO ] [http                     ] [f15220afd350] GET /search/06d1a48e-2533-4a72-88fc-3853575f011b → 200
+[2026-06-12 17:49:18] [INFO ] [httpx                    ] [-] HTTP Request: POST https://api.deepseek.com/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-12 17:49:19] [INFO ] [__main__                 ] [-] AI 回复成功: len=14 request_id=fa7541634d5c
+[2026-06-12 17:49:19] [INFO ] [http                     ] [877348c92de1] POST /chat → 200
+[2026-06-12 17:52:13] [INFO ] [__main__                 ] [691feb796795] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 17:52:13] [INFO ] [http                     ] [792fd18bc704] GET /knowledge_bases/ → 200
+[2026-06-12 17:52:17] [INFO ] [__main__                 ] [e136d841df08] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 17:52:17] [INFO ] [http                     ] [e05fd04b2541] GET /knowledge_bases/ → 200
+[2026-06-12 17:52:26] [INFO ] [__main__                 ] [b6ae04fa1e9b] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 17:52:26] [INFO ] [http                     ] [01cbbb608b41] GET /knowledge_bases/ → 200
+[2026-06-12 17:52:31] [INFO ] [__main__                 ] [5cd8409f2c39] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 17:52:31] [INFO ] [http                     ] [2881378c9752] GET /knowledge_bases/ → 200
+[2026-06-12 17:53:50] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-12 17:54:51] [INFO ] [__main__                 ] [4b04c5fc26d5] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-12 17:54:51] [INFO ] [http                     ] [e5d73e2cc45e] GET /knowledge_bases/ → 200
+[2026-06-12 17:55:16] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-12 18:00:15] [INFO ] [__main__                 ] [-] 数据库表已就绪

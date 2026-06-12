@@ -1,5 +1,11 @@
 """全局配置 — 统一从环境变量读取，提供默认值"""
 import os
+from pathlib import Path
+
+from dotenv import load_dotenv
+
+# 加载 .env 文件（项目根目录）
+load_dotenv(Path(__file__).resolve().parent.parent / ".env")
 
 
 class Settings:
@@ -53,6 +59,19 @@ class Settings:
     # --- Logging ---
     LOG_LEVEL: str = os.getenv("LOG_LEVEL", "INFO")
     LOG_DIR: str = os.getenv("LOG_DIR", "logs")
+
+    # --- Redis ---
+    REDIS_HOST: str = os.getenv("REDIS_HOST", "localhost")
+    REDIS_PORT: int = int(os.getenv("REDIS_PORT", "6379"))
+    REDIS_PASSWORD: str | None = os.getenv("REDIS_PASSWORD") or None
+    REDIS_DB: int = int(os.getenv("REDIS_DB", "0"))
+
+    # --- SMTP ---
+    SMTP_HOST: str = os.getenv("SMTP_HOST", "smtp.qq.com")
+    SMTP_PORT: int = int(os.getenv("SMTP_PORT", "465"))
+    SMTP_USER: str = os.getenv("SMTP_USER", "")
+    SMTP_PASSWORD: str = os.getenv("SMTP_PASSWORD", "")
+    SMTP_USE_SSL: bool = os.getenv("SMTP_USE_SSL", "true").lower() == "true"
 
 
 settings = Settings()

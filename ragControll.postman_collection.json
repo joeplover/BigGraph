@@ -1,7 +1,7 @@
 {
 	"info": {
 		"name": "文档知识库管理系统",
-		"description": "RAG 文档知识库管理系统 API — 支持知识库 CRUD、文件上传处理、向量检索、文档删除",
+		"description": "RAG 文档知识库管理系统 API — 支持用户认证、知识库 CRUD、分享与成员管理、文件上传处理、向量检索、文档删除",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "ragControll"
 	},
@@ -12,15 +12,129 @@
 			"type": "string"
 		},
 		{
-			"key": "tenant_id",
-			"value": "default",
+			"key": "access_token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "refresh_token",
+			"value": "",
 			"type": "string"
 		}
 	],
 	"item": [
 		{
-			"name": "知识库管理",
-			"description": "知识库的创建与查询",
+			"name": "🔐 用户认证",
+			"description": "注册 / 登录 / Token 刷新 / 获取用户信息",
+			"item": [
+				{
+					"name": "用户注册",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"testuser\",\n    \"password\": \"123456\",\n    \"display_name\": \"测试用户\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/register",
+							"host": ["{{base_url}}"],
+							"path": ["auth", "register"]
+						},
+						"description": "注册新用户，自动登录返回双 Token。\n\n响应中的 access_token 和 refresh_token 建议通过 Postman Tests 脚本自动写入集合变量。\n\nTests 脚本：\n```\nvar jsonData = pm.response.json();\npm.collectionVariables.set(\"access_token\", jsonData.access_token);\npm.collectionVariables.set(\"refresh_token\", jsonData.refresh_token);\n```"
+					}
+				},
+				{
+					"name": "用户登录",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"username\": \"testuser\",\n    \"password\": \"123456\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/auth/login",
+							"host": ["{{base_url}}"],
+							"path": ["auth", "login"]
+						},
+						"description": "用户登录，返回双 Token。\n\nTests 脚本：\n```\nvar jsonData = pm.response.json();\npm.collectionVariables.set(\"access_token\", jsonData.access_token);\npm.collectionVariables.set(\"refresh_token\", jsonData.refresh_token);\n```"
+					}
+				},
+				{
+					"name": "刷新 Token",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "X-Refresh-Token",
+								"value": "{{refresh_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/auth/refresh",
+							"host": ["{{base_url}}"],
+							"path": ["auth", "refresh"]
+						},
+						"description": "使用 refresh_token 换取新的双 Token。\n\n请求头：\n- X-Refresh-Token: refresh_token 的值\n\nTests 脚本：\n```\nvar jsonData = pm.response.json();\npm.collectionVariables.set(\"access_token\", jsonData.access_token);\npm.collectionVariables.set(\"refresh_token\", jsonData.refresh_token);\n```"
+					}
+				},
+				{
+					"name": "获取当前用户信息",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/auth/me",
+							"host": ["{{base_url}}"],
+							"path": ["auth", "me"]
+						},
+						"description": "获取当前登录用户的详细信息。\n\n需携带 Bearer Token。"
+					}
+				},
+				{
+					"name": "退出登录",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/auth/logout",
+							"host": ["{{base_url}}"],
+							"path": ["auth", "logout"]
+						},
+						"description": "登出，清除 Redis 中的会话信息。"
+					}
+				}
+			]
+		},
+		{
+			"name": "📚 知识库管理",
+			"description": "知识库的创建、查询、分享与成员管理",
 			"item": [
 				{
 					"name": "创建知识库",
@@ -28,21 +142,21 @@
 						"method": "POST",
 						"header": [
 							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							},
+							{
 								"key": "Content-Type",
 								"value": "application/x-www-form-urlencoded",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}/knowledge_bases/?tenant_id={{tenant_id}}&name=我的知识库&description=这是一个示例知识库",
+							"raw": "{{base_url}}/knowledge_bases/?name=我的知识库&description=这是一个示例知识库",
 							"host": ["{{base_url}}"],
 							"path": ["knowledge_bases", ""],
 							"query": [
-								{
-									"key": "tenant_id",
-									"value": "{{tenant_id}}",
-									"description": "租户 ID"
-								},
 								{
 									"key": "name",
 									"value": "我的知识库",
@@ -55,33 +169,121 @@
 								}
 							]
 						},
-						"description": "创建一个新的知识库。\n\n请求参数（Query）：\n- tenant_id: string (必填) — 租户 ID\n- name: string (必填) — 知识库名称\n- description: string (可选) — 知识库描述"
+						"description": "创建一个新的知识库（需认证）。\n\ntenant_id 从 JWT Token 自动获取。\n\n请求参数（Query）：\n- name: string (必填) — 知识库名称\n- description: string (可选) — 知识库描述"
 					}
 				},
 				{
 					"name": "获取知识库详情",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "{{base_url}}/knowledge_bases/{{kb_id}}",
 							"host": ["{{base_url}}"],
 							"path": ["knowledge_bases", "{{kb_id}}"]
 						},
-						"description": "根据知识库 ID 获取知识库详情。\n\n路径参数：\n- kb_id: string — 知识库 ID"
+						"description": "根据知识库 ID 获取详情（需认证）。\n\n路径参数：\n- kb_id: string — 知识库 ID\n\n返回包括 owner_id、share_code、description 等完整信息。"
+					}
+				},
+				{
+					"name": "生成分享码",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/knowledge_bases/{{kb_id}}/share",
+							"host": ["{{base_url}}"],
+							"path": ["knowledge_bases", "{{kb_id}}", "share"]
+						},
+						"description": "生成或获取知识库的分享码（仅 owner 可操作）。\n\n路径参数：\n- kb_id: string — 知识库 ID\n\n返回值中的 share_code 可用于他人加入此知识库。"
+					}
+				},
+				{
+					"name": "通过分享码加入知识库",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/knowledge_bases/join/{{share_code}}",
+							"host": ["{{base_url}}"],
+							"path": ["knowledge_bases", "join", "{{share_code}}"]
+						},
+						"description": "通过分享码申请加入知识库。\n\n路径参数：\n- share_code: string — 分享码（如 KB-xxxxxxxx）\n\n状态为 pending 时表示等待创建者审批。"
+					}
+				},
+				{
+					"name": "批准成员加入",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/knowledge_bases/{{kb_id}}/members/{{member_id}}/approve",
+							"host": ["{{base_url}}"],
+							"path": ["knowledge_bases", "{{kb_id}}", "members", "{{member_id}}", "approve"]
+						},
+						"description": "批准成员加入知识库（仅 owner 可操作）。\n\n路径参数：\n- kb_id: string — 知识库 ID\n- member_id: string — 成员记录 ID\n\n审批后成员即可访问该知识库的文档。"
+					}
+				},
+				{
+					"name": "查看成员列表",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/knowledge_bases/{{kb_id}}/members",
+							"host": ["{{base_url}}"],
+							"path": ["knowledge_bases", "{{kb_id}}", "members"]
+						},
+						"description": "查看知识库的成员列表及状态（仅 owner 可操作）。"
 					}
 				}
 			]
 		},
 		{
-			"name": "文件上传与处理",
+			"name": "📎 文件上传与处理",
 			"description": "文件上传、后台处理流水线",
 			"item": [
 				{
 					"name": "上传文件",
 					"request": {
 						"method": "POST",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
 						"body": {
 							"mode": "formdata",
 							"formdata": [
@@ -90,12 +292,6 @@
 									"type": "file",
 									"src": "",
 									"description": "要上传的文件（支持 PDF / Word / Markdown / 文本等格式）"
-								},
-								{
-									"key": "tenant_id",
-									"type": "text",
-									"value": "{{tenant_id}}",
-									"description": "租户 ID"
 								}
 							]
 						},
@@ -104,48 +300,66 @@
 							"host": ["{{base_url}}"],
 							"path": ["upload", "{{kb_id}}"]
 						},
-						"description": "上传文件并启动后台处理流水线（解析 → 清洗 → 切片 → 向量索引）。\n\n路径参数：\n- knowledge_base_id: string — 知识库 ID\n\n请求体（multipart/form-data）：\n- file: File (必填) — 上传的文件\n- tenant_id: string (必填) — 租户 ID\n\n返回 job_id 可用于轮询处理进度。"
+						"description": "上传文件并启动后台处理流水线（解析 → 清洗 → 切片 → 向量索引）。需认证。\n\n路径参数：\n- kb_id: string — 知识库 ID\n\n请求体（multipart/form-data）：\n- file: File (必填) — 上传的文件\n\ntenant_id 从 JWT Token 自动获取。返回 job_id 可用于轮询处理进度。"
 					}
 				},
 				{
 					"name": "查询导入任务状态",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "{{base_url}}/jobs/{{job_id}}",
 							"host": ["{{base_url}}"],
 							"path": ["jobs", "{{job_id}}"]
 						},
-						"description": "查询文件导入任务的当前状态。\n\n路径参数：\n- job_id: string — 导入任务 ID（上传文件时返回）\n\n返回状态：pending → parsing → cleaning → chunking → embedding → completed / failed"
+						"description": "查询文件导入任务的当前状态（需认证）。\n\n路径参数：\n- job_id: string — 导入任务 ID（上传文件时返回）\n\n状态流转：pending → parsing → cleaning → chunking → embedding → completed / failed"
 					}
 				}
 			]
 		},
 		{
-			"name": "文档查询与管理",
+			"name": "📄 文档查询与管理",
 			"description": "文档详情查询、语义搜索、删除",
 			"item": [
 				{
 					"name": "获取文档详情",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "{{base_url}}/documents/{{doc_id}}",
 							"host": ["{{base_url}}"],
 							"path": ["documents", "{{doc_id}}"]
 						},
-						"description": "根据文档 ID 获取文档详细信息和元数据。\n\n路径参数：\n- doc_id: string — 文档 ID"
+						"description": "根据文档 ID 获取文档详细信息和元数据（需认证）。\n\n路径参数：\n- doc_id: string — 文档 ID"
 					}
 				},
 				{
 					"name": "搜索文档（向量语义检索）",
 					"request": {
 						"method": "GET",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
 						"url": {
-							"raw": "{{base_url}}/search/{{kb_id}}?query=搜索关键词&limit=10&tenant_id={{tenant_id}}",
+							"raw": "{{base_url}}/search/{{kb_id}}?query=搜索关键词&limit=10",
 							"host": ["{{base_url}}"],
 							"path": ["search", "{{kb_id}}"],
 							"query": [
@@ -158,28 +372,29 @@
 									"key": "limit",
 									"value": "10",
 									"description": "返回结果数量上限（默认 10）"
-								},
-								{
-									"key": "tenant_id",
-									"value": "{{tenant_id}}",
-									"description": "租户 ID（默认 default）"
 								}
 							]
 						},
-						"description": "在指定知识库中执行向量语义搜索（Qdrant 向量检索 + Elasticsearch 全文补充）。\n\n路径参数：\n- knowledge_base_id: string — 知识库 ID\n\n查询参数：\n- query: string (必填) — 搜索文本\n- limit: int (可选，默认 10) — 返回条数\n- tenant_id: string (可选，默认 \"default\") — 租户 ID"
+						"description": "在指定知识库中执行向量语义搜索（Qdrant 向量检索 + Elasticsearch 全文补充）。需认证。\n\n路径参数：\n- kb_id: string — 知识库 ID\n\n查询参数：\n- query: string (必填) — 搜索文本\n- limit: int (可选，默认 10) — 返回条数\n\ntenant_id 从 JWT Token 自动获取。"
 					}
 				},
 				{
 					"name": "删除文档",
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{access_token}}",
+								"type": "text"
+							}
+						],
 						"url": {
 							"raw": "{{base_url}}/documents/{{doc_id}}",
 							"host": ["{{base_url}}"],
 							"path": ["documents", "{{doc_id}}"]
 						},
-						"description": "删除文档及其关联的所有数据（PostgreSQL 软删除 + Qdrant 向量删除 + Elasticsearch 删除）。\n\n路径参数：\n- doc_id: string — 文档 ID"
+						"description": "删除文档及其关联的所有数据（PostgreSQL 软删除 + Qdrant 向量删除 + Elasticsearch 删除）。需认证。\n\n路径参数：\n- doc_id: string — 文档 ID"
 					}
 				}
 			]

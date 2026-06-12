@@ -60,9 +60,42 @@ DO $$ BEGIN
 EXCEPTION WHEN duplicate_object THEN NULL;
 END $$;
 
+-- 知识库成员角色
+DO $$ BEGIN
+    CREATE TYPE kb_member_role AS ENUM ('viewer', 'editor');
+EXCEPTION WHEN duplicate_object THEN NULL;
+END $$;
+
+-- 知识库成员状态
+DO $$ BEGIN
+    CREATE TYPE kb_member_status AS ENUM ('pending', 'approved', 'rejected');
+EXCEPTION WHEN duplicate_object THEN NULL;
+END $$;
+
 
 -- ============================================================================
--- 2. 知识库表
+-- 1.5 用户表
+-- ============================================================================
+CREATE TABLE IF NOT EXISTS users (
+    id              UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    username        VARCHAR(50) NOT NULL,               -- 登录用户名
+    password_hash   VARCHAR(255) NOT NULL,              -- bcrypt 哈希
+    display_name    VARCHAR(100),                       -- 显示名称
+    email           VARCHAR(100),                       -- 邮箱
+    is_verified     BOOLEAN DEFAULT false,              -- 邮箱是否已验证
+    tenant_id       VARCHAR(64) NOT NULL,               -- 绑定的默认租户
+    is_active       BOOLEAN DEFAULT true,               -- 账户是否激活
+    created_at      TIMESTAMPTZ NOT NULL DEFAULT now(),
+    updated_at      TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS idx_users_username ON users(username);
+CREATE UNIQUE INDEX IF NOT EXISTS idx_users_email ON users(email);
+CREATE INDEX IF NOT EXISTS idx_users_tenant ON users(tenant_id);
+
+
+-- ============================================================================
+-- 2. 知识库表（修改版 — 增加 owner_id 和 share_code）
 -- ============================================================================
 -- 用途: 租户下的知识库分组，一个知识库包含多篇文档
 CREATE TABLE IF NOT EXISTS knowledge_bases (
@@ -70,6 +103,8 @@ CREATE TABLE IF NOT EXISTS knowledge_bases (
     tenant_id   VARCHAR(64) NOT NULL,          -- 租户 ID（隔离键）
     name        VARCHAR(255) NOT NULL,          -- 知识库名称
     description TEXT,                           -- 知识库描述
+    owner_id    UUID REFERENCES users(id),      -- 知识库创建者
+    share_code  VARCHAR(64) UNIQUE,             -- 分享码，用于通过链接加入
     metadata    JSONB DEFAULT '{}'::jsonb,      -- 扩展元数据
     created_at  TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at  TIMESTAMPTZ NOT NULL DEFAULT now()
@@ -77,6 +112,7 @@ CREATE TABLE IF NOT EXISTS knowledge_bases (
 
 -- 索引: 按租户查询知识库列表
 CREATE INDEX IF NOT EXISTS idx_knowledge_bases_tenant ON knowledge_bases(tenant_id);
+CREATE INDEX IF NOT EXISTS idx_knowledge_bases_owner ON knowledge_bases(owner_id);
 
 
 -- ============================================================================
@@ -204,7 +240,26 @@ CREATE INDEX IF NOT EXISTS idx_jobs_kb ON ingestion_jobs(knowledge_base_id);
 
 
 -- ============================================================================
--- 7. 更新时间触发器（自动更新 updated_at）
+-- 7. 知识库成员表
+-- ============================================================================
+-- 用途: 记录知识库的成员和加入状态
+CREATE TABLE IF NOT EXISTS kb_members (
+    id                UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    knowledge_base_id UUID NOT NULL REFERENCES knowledge_bases(id),
+    user_id           UUID NOT NULL REFERENCES users(id),
+    role              kb_member_role DEFAULT 'viewer',
+    status            kb_member_status DEFAULT 'pending',
+    created_at        TIMESTAMPTZ NOT NULL DEFAULT now(),
+    updated_at        TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+CREATE INDEX IF NOT EXISTS idx_kb_members_kb ON kb_members(knowledge_base_id);
+CREATE INDEX IF NOT EXISTS idx_kb_members_user ON kb_members(user_id);
+CREATE UNIQUE INDEX IF NOT EXISTS uq_kb_members ON kb_members(knowledge_base_id, user_id);
+
+
+-- ============================================================================
+-- 8. 更新时间触发器（自动更新 updated_at）
 -- ============================================================================
 -- 作用: 在 UPDATE 时自动将 updated_at 设为当前时间，不需要应用层手动维护
 CREATE OR REPLACE FUNCTION update_updated_at_column()
@@ -223,7 +278,7 @@ BEGIN
     FOR tbl IN
         SELECT unnest(ARRAY[
             'knowledge_bases', 'uploaded_files', 'documents',
-            'document_chunks', 'ingestion_jobs'
+            'document_chunks', 'ingestion_jobs', 'users', 'kb_members'
         ])
     LOOP
         EXECUTE format(

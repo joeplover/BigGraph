@@ -1,0 +1,19 @@
+/* 全局样式 */
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f7f7f8;
+  --bg-sidebar: #f0f0f0;
+  --bg-hover: #e5e5e5;
+  --bg-user-msg: #f4f4f5;
+  --bg-ai-msg: #ffffff;
+  --text-primary: #1f1f1f;
+  --text-secondary: #6b6b6b;
+  --text-muted: #a0a0a0;
+  --border-color: #e5e5e5;
+  --accent-color: #10a37f;
+  --accent-hover: #0e8c6b;
+  --sidebar-width: 260px;
+  --header-height: 48px;
+  --danger-color: #f56c6c;
+  --warning-color: #e6a23c;
+}

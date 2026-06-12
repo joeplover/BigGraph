@@ -1,22 +1,37 @@
 """文档知识库管理系统 — FastAPI 控制器
 
 负责:
-  - 知识库 CRUD（创建 / 查询）
+  - 知识库 CRUD（创建 / 查询 / 分享 / 成员管理）
   - 文件上传 & 后台处理流水线
   - 向量索引（Qdrant）+ 全文索引（Elasticsearch）
   - 混合检索
   - 文档删除（PG + 向量库联动）
+  - JWT 认证保护
 """
 from __future__ import annotations
 
-import asyncio
-import hashlib
-import uuid
-from datetime import datetime
+import sys
 from pathlib import Path
 
-from fastapi import BackgroundTasks, FastAPI, File, Form, HTTPException, UploadFile
+# 确保项目根目录在 sys.path 中（支持 python xxx.py 直接运行）
+_bg_root = Path(__file__).resolve().parent.parent
+if str(_bg_root) not in sys.path:
+    sys.path.insert(0, str(_bg_root))
 
+import asyncio
+import hashlib
+import secrets
+import uuid
+from collections.abc import AsyncIterator
+from contextlib import asynccontextmanager
+from datetime import datetime
+
+from fastapi import BackgroundTasks, FastAPI, File, Form, HTTPException, UploadFile, Depends
+from pydantic import BaseModel, Field
+
+from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
+
+from api.auth import get_current_user, router as auth_router
 from config.settings import settings
 from core.ingestion.chunker import StructureAwareChunker
 from core.ingestion.parser_base import Chunk
@@ -28,6 +43,8 @@ from storage.models import (
     DocumentChunk,
     DocumentStatus,
     IngestionJobStatus,
+    KbMemberRole,
+    KbMemberStatus,
     QdrantChunkModel,
     VectorSyncStatus,
 )
@@ -35,20 +52,40 @@ from storage.postgres import (
     DocumentChunkStore,
     DocumentStore,
     IngestionJobStore,
+    KbMemberStore,
     KnowledgeBaseStore,
     UploadedFileStore,
     get_session,
+    init_db,
 )
+from graphs.RAG_Chat_Graph.LLM import llm as chat_llm
 from storage.qdrant import QdrantService
+from storage.redis_client import (
+    create_chat_session,
+    delete_chat_session,
+    get_chat_history,
+    list_chat_sessions,
+    rename_chat_session,
+    save_chat_message,
+)
 
 # ---------------------------------------------------------------------------
 # FastAPI 应用
 # ---------------------------------------------------------------------------
 
-app = FastAPI(title="文档知识库管理系统", version="1.0.0")
-app.add_middleware(RequestIDMiddleware)
-
 logger = get_logger(__name__)
+
+
+@asynccontextmanager
+async def lifespan(_app: FastAPI) -> AsyncIterator[None]:
+    """应用生命周期 — 启动时建表"""
+    init_db()
+    logger.info("数据库表已就绪")
+    yield
+
+
+app = FastAPI(title="文档知识库管理系统", version="1.0.0", lifespan=lifespan)
+app.add_middleware(RequestIDMiddleware)
 
 
 # ---------------------------------------------------------------------------
@@ -110,19 +147,60 @@ _es = ElasticsearchService()
 #  知识库
 # ===================================================================
 
-@app.post("/knowledge_bases/")
-async def create_knowledge_base(tenant_id: str, name: str, description: str = ""):
-    """创建知识库"""
+@app.get("/knowledge_bases/")
+async def list_my_knowledge_bases(user: dict = Depends(get_current_user)):
+    """获取当前用户有权限访问的知识库列表（自己的 + 已加入的）"""
     rid = make_request_id()
+    user_id = user["user_id"]
+    tenant_id = user["tenant_id"]
+
     with get_session() as db:
-        kb = KnowledgeBaseStore.create(db, tenant_id=tenant_id, name=name, description=description)
-        logger.info("创建知识库: name=%s tenant=%s", name, tenant_id, extra={"request_id": rid})
-        return {"id": str(kb.id), "name": kb.name, "tenant_id": kb.tenant_id}
+        # 1. 自己创建的知识库
+        owned = KnowledgeBaseStore.list_by_owner(db, user_id)
+        # 2. 已加入的知识库
+        approved_members = KbMemberStore.list_approved_by_user(db, user_id)
+        joined_ids = [str(m.knowledge_base_id) for m in approved_members]
+        joined = [KnowledgeBaseStore.get(db, jid) for jid in joined_ids]
+        joined = [kb for kb in joined if kb and str(kb.owner_id) != user_id]
+
+        result = []
+        seen = set()
+        for kb in owned + joined:
+            if kb and kb.id not in seen:
+                seen.add(kb.id)
+                result.append({
+                    "id": str(kb.id),
+                    "name": kb.name,
+                    "description": kb.description,
+                    "tenant_id": kb.tenant_id,
+                    "owner_id": str(kb.owner_id) if kb.owner_id else None,
+                    "is_owner": str(kb.owner_id) == user_id,
+                    "created_at": _local_iso(kb.created_at),
+                })
+
+        logger.info("知识库列表: user=%s count=%d", user_id, len(result), extra={"request_id": rid})
+        return result
+
+
+@app.post("/knowledge_bases/")
+async def create_knowledge_base(name: str, description: str = "",
+                                user: dict = Depends(get_current_user)):
+    """创建知识库（需认证）"""
+    rid = make_request_id()
+    tenant_id = user["tenant_id"]
+    user_id = user["user_id"]
+    with get_session() as db:
+        kb = KnowledgeBaseStore.create(db, tenant_id=tenant_id, name=name,
+                                        description=description, owner_id=user_id)
+        logger.info("创建知识库: name=%s tenant=%s owner=%s", name, tenant_id, user_id,
+                     extra={"request_id": rid})
+        return {"id": str(kb.id), "name": kb.name, "tenant_id": kb.tenant_id,
+                "owner_id": str(kb.owner_id) if kb.owner_id else None}
 
 
 @app.get("/knowledge_bases/{kb_id}")
-async def get_knowledge_base(kb_id: str):
-    """获取知识库详情"""
+async def get_knowledge_base(kb_id: str, user: dict = Depends(get_current_user)):
+    """获取知识库详情（需认证）"""
     rid = make_request_id()
     with get_session() as db:
         kb = KnowledgeBaseStore.get(db, kb_id)
@@ -133,10 +211,111 @@ async def get_knowledge_base(kb_id: str):
             "id": str(kb.id),
             "name": kb.name,
             "tenant_id": kb.tenant_id,
+            "owner_id": str(kb.owner_id) if kb.owner_id else None,
+            "share_code": kb.share_code,
             "description": kb.description,
             "created_at": _local_iso(kb.created_at),
             "updated_at": _local_iso(kb.updated_at),
         }
+
+
+# ===================================================================
+#  知识库分享与成员管理
+# ===================================================================
+
+@app.post("/knowledge_bases/{kb_id}/share")
+async def share_knowledge_base(kb_id: str, user: dict = Depends(get_current_user)):
+    """生成或获取知识库的分享码（仅 owner 可操作）"""
+    user_id = user["user_id"]
+    with get_session() as db:
+        kb = KnowledgeBaseStore.get(db, kb_id)
+        if not kb:
+            raise ErrorCode.KB_NOT_FOUND.exception()
+        if str(kb.owner_id) != user_id:
+            raise ErrorCode.FORBIDDEN.exception(detail="只有知识库创建者可以生成分享链接")
+
+        if not kb.share_code:
+            share_code = f"KB-{secrets.token_urlsafe(16)}"
+            KnowledgeBaseStore.update_share_code(db, kb_id, share_code)
+        else:
+            share_code = kb.share_code
+
+        return {"share_code": share_code, "kb_id": kb_id}
+
+
+@app.post("/knowledge_bases/join/{share_code}")
+async def join_knowledge_base(share_code: str, user: dict = Depends(get_current_user)):
+    """通过分享码申请加入知识库"""
+    user_id = user["user_id"]
+    with get_session() as db:
+        kb = KnowledgeBaseStore.get_by_share_code(db, share_code)
+        if not kb:
+            raise ErrorCode.KB_NOT_FOUND.exception(detail="分享码无效或知识库不存在")
+
+        # 不能加入自己的知识库
+        if str(kb.owner_id) == user_id:
+            raise ErrorCode.CONFLICT.exception(detail="你是该知识库的创建者，无需加入")
+
+        # 检查是否已申请过
+        existing = KbMemberStore.get_by_user_and_kb(db, user_id, str(kb.id))
+        if existing:
+            if existing.status == KbMemberStatus.approved:
+                return {"message": "你已是该知识库的成员", "kb_id": str(kb.id), "status": "approved"}
+            elif existing.status == KbMemberStatus.pending:
+                return {"message": "已提交加入申请，等待创建者批准", "kb_id": str(kb.id), "status": "pending"}
+            else:
+                raise ErrorCode.CONFLICT.exception(detail="你的加入申请已被拒绝")
+
+        # 创建待批准的成员记录
+        KbMemberStore.create(db, knowledge_base_id=str(kb.id), user_id=user_id)
+
+        return {"message": "加入申请已提交，等待创建者批准", "kb_id": str(kb.id), "status": "pending"}
+
+
+@app.post("/knowledge_bases/{kb_id}/members/{member_id}/approve")
+async def approve_kb_member(kb_id: str, member_id: str, user: dict = Depends(get_current_user)):
+    """批准成员加入知识库（仅 owner）"""
+    user_id = user["user_id"]
+    with get_session() as db:
+        kb = KnowledgeBaseStore.get(db, kb_id)
+        if not kb:
+            raise ErrorCode.KB_NOT_FOUND.exception()
+        if str(kb.owner_id) != user_id:
+            raise ErrorCode.FORBIDDEN.exception(detail="只有知识库创建者可以审批成员")
+
+        member = KbMemberStore.get(db, member_id)
+        if not member or str(member.knowledge_base_id) != kb_id:
+            raise ErrorCode.NOT_FOUND.exception(detail="成员申请不存在")
+
+        if member.status != KbMemberStatus.pending:
+            raise ErrorCode.CONFLICT.exception(detail=f"该申请已被{member.status.value}")
+
+        KbMemberStore.update_status(db, member_id, KbMemberStatus.approved)
+        return {"message": "已批准加入", "member_id": member_id, "status": "approved"}
+
+
+@app.get("/knowledge_bases/{kb_id}/members")
+async def list_kb_members(kb_id: str, user: dict = Depends(get_current_user)):
+    """查看知识库成员列表（仅 owner）"""
+    user_id = user["user_id"]
+    with get_session() as db:
+        kb = KnowledgeBaseStore.get(db, kb_id)
+        if not kb:
+            raise ErrorCode.KB_NOT_FOUND.exception()
+        if str(kb.owner_id) != user_id:
+            raise ErrorCode.FORBIDDEN.exception(detail="只有知识库创建者可以查看成员列表")
+
+        members = KbMemberStore.list_by_kb(db, kb_id)
+        result = []
+        for m in members:
+            result.append({
+                "id": str(m.id),
+                "user_id": str(m.user_id),
+                "role": m.role.value,
+                "status": m.status.value,
+                "created_at": _local_iso(m.created_at),
+            })
+        return {"members": result, "kb_id": kb_id}
 
 
 # ===================================================================
@@ -147,14 +326,15 @@ async def get_knowledge_base(kb_id: str):
 async def upload_file(
     knowledge_base_id: str,
     file: UploadFile = File(...),
-    tenant_id: str = Form(...),
     background_tasks: BackgroundTasks = BackgroundTasks(),
+    user: dict = Depends(get_current_user),
 ):
-    """上传文件并启动后台处理流水线。"""
+    """上传文件并启动后台处理流水线（需认证）。"""
     rid = make_request_id()
+    tenant_id = user["tenant_id"]
     logger.info(
-        "收到上传请求: name=%s kb=%s tenant=%s",
-        file.filename, knowledge_base_id, tenant_id,
+        "收到上传请求: name=%s kb=%s tenant=%s user=%s",
+        file.filename, knowledge_base_id, tenant_id, user["user_id"],
         extra={"request_id": rid},
     )
     # 先保存文件到磁盘（不涉及DB，出错也没脏数据）
@@ -397,8 +577,8 @@ def _batch_embed(texts: list[str]) -> list[list[float]]:
 # ===================================================================
 
 @app.get("/jobs/{job_id}")
-async def get_job_status(job_id: str):
-    """查询导入任务状态。"""
+async def get_job_status(job_id: str, user: dict = Depends(get_current_user)):
+    """查询导入任务状态（需认证）。"""
     with get_session() as db:
         job = IngestionJobStore.get(db, job_id)
         if not job:
@@ -414,8 +594,8 @@ async def get_job_status(job_id: str):
 
 
 @app.get("/documents/{doc_id}")
-async def get_document(doc_id: str):
-    """获取文档详情。"""
+async def get_document(doc_id: str, user: dict = Depends(get_current_user)):
+    """获取文档详情（需认证）。"""
     with get_session() as db:
         doc = DocumentStore.get(db, doc_id)
         if not doc:
@@ -438,12 +618,13 @@ async def search_documents(
     knowledge_base_id: str,
     query: str,
     limit: int = 10,
-    tenant_id: str = "default",
+    user: dict = Depends(get_current_user),
 ):
-    """在知识库中执行向量语义搜索。"""
+    """在知识库中执行向量语义搜索（需认证）。"""
     rid = make_request_id()
-    logger.info("搜索请求: query=%s kb=%s tenant=%s",
-                 query, knowledge_base_id, tenant_id, extra={"request_id": rid})
+    tenant_id = user["tenant_id"]
+    logger.info("搜索请求: query=%s kb=%s tenant=%s user=%s",
+                 query, knowledge_base_id, tenant_id, user["user_id"], extra={"request_id": rid})
     # 校验知识库存在且属于该租户
     with get_session() as db:
         kb = KnowledgeBaseStore.get(db, knowledge_base_id)
@@ -504,8 +685,8 @@ async def search_documents(
 # ===================================================================
 
 @app.delete("/documents/{doc_id}")
-async def delete_document(doc_id: str):
-    """删除文档及其关联的所有数据（PG + Qdrant + ES）。"""
+async def delete_document(doc_id: str, user: dict = Depends(get_current_user)):
+    """删除文档及其关联的所有数据（PG + Qdrant + ES）。需认证。"""
     with get_session() as db:
         doc = DocumentStore.get(db, doc_id)
         if not doc:
@@ -534,6 +715,119 @@ async def delete_document(doc_id: str):
     }
 
 
+class ChatRequest(BaseModel):
+    """聊天请求"""
+    message: str = Field(..., description="用户输入")
+    session_id: str = Field("", description="会话 ID")
+    context: str | None = Field(None, description="RAG 检索上下文")
+
+
+# ===================================================================
+#  聊天
+# ===================================================================
+
+@app.post("/chat")
+async def chat(req: ChatRequest, user: dict = Depends(get_current_user)):
+    """AI 聊天 — 调用 LLM 返回回复，自动保存聊天历史"""
+    rid = make_request_id()
+
+    try:
+        # ---------- 构造 LLM 消息列表 ----------
+        llm_messages = []
+
+        # 1. RAG 系统提示词（如果有 context）
+        if req.context:
+            llm_messages.append(SystemMessage(
+                content=f"""你是一个基于知识库回答的 AI 助手。
+
+【核心规则】
+1. 严格依据以下"参考内容"来回答问题。
+2. 参考内容足够时给出详细准确的答案。
+3. 参考内容不完整时，只回答相关内容，并说明"知识库中暂无更详细信息"。
+4. 严禁编造参考内容中不存在的信息。
+5. 回答要自然、简洁，不要提及"根据参考内容"之类的内部说明。
+
+【参考内容】
+{req.context}"""
+            ))
+
+        # 2. 加载聊天历史（如果有 session_id）
+        if req.session_id:
+            history = get_chat_history(req.session_id)
+            for msg in history:
+                if msg["role"] == "user":
+                    llm_messages.append(HumanMessage(content=msg["content"]))
+                elif msg["role"] == "assistant":
+                    llm_messages.append(AIMessage(content=msg["content"]))
+
+        # 3. 当前用户消息
+        llm_messages.append(HumanMessage(content=req.message))
+
+        # ---------- 保存用户消息到历史 ----------
+        if req.session_id:
+            save_chat_message(req.session_id, "user", req.message)
+
+        # ---------- 调用 LLM ----------
+        response = chat_llm.invoke(llm_messages)
+        content = response.content if hasattr(response, "content") else str(response)
+
+        # ---------- 保存助手回复到历史 ----------
+        if req.session_id:
+            save_chat_message(req.session_id, "assistant", content)
+
+        logger.info("AI 回复成功: len=%d history=%d request_id=%s",
+                     len(content), len(llm_messages) - 1, rid)
+        return {"response": content, "session_id": req.session_id}
+
+    except Exception as e:
+        logger.error("AI 调用失败: %s request_id=%s", str(e), rid)
+        raise ErrorCode.INTERNAL_ERROR.exception(detail="AI 服务暂时不可用，请稍后重试")
+
+
+class RenameRequest(BaseModel):
+    """重命名请求"""
+    title: str = Field(..., min_length=1, max_length=100, description="新标题")
+
+
+@app.post("/chat/sessions")
+async def create_session(user: dict = Depends(get_current_user)):
+    """创建新会话"""
+    import uuid
+    session_id = str(uuid.uuid4())
+    session = create_chat_session(session_id, user["user_id"])
+    logger.info("会话已创建: session_id=%s", session_id)
+    return session
+
+
+@app.get("/chat/sessions")
+async def list_sessions(user: dict = Depends(get_current_user)):
+    """列出当前用户的所有会话"""
+    sessions = list_chat_sessions(user["user_id"])
+    return {"sessions": sessions}
+
+
+@app.patch("/chat/sessions/{session_id}")
+async def rename_session(session_id: str, req: RenameRequest, user: dict = Depends(get_current_user)):
+    """重命名会话"""
+    rename_chat_session(session_id, req.title)
+    return {"message": "ok", "title": req.title}
+
+
+@app.get("/chat/history/{session_id}")
+async def chat_history(session_id: str, user: dict = Depends(get_current_user)):
+    """获取指定会话的聊天历史"""
+    history = get_chat_history(session_id)
+    return {"messages": history, "session_id": session_id}
+
+
+@app.delete("/chat/history/{session_id}")
+async def delete_chat_history(session_id: str, user: dict = Depends(get_current_user)):
+    """彻底删除指定会话（元数据 + 聊天记录）"""
+    delete_chat_session(session_id, user["user_id"])
+    logger.info("会话已删除: session_id=%s", session_id)
+    return {"message": "会话已删除"}
+
+
 # ===================================================================
 #  Embedding 辅助
 # ===================================================================
@@ -548,6 +842,9 @@ def _single_embed(text: str) -> list[float]:
 # ===================================================================
 
 if __name__ == "__main__":
+    # 注册认证路由
+    app.include_router(auth_router)
+
     import uvicorn
 
     uvicorn.run(app, host="0.0.0.0", port=8000)
