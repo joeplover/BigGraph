@@ -1634,3 +1634,20 @@ email
 [2026-06-14 11:31:37] [INFO ] [http                     ] [3b7bdcd61a43] GET /knowledge_bases/ → 200
 [2026-06-14 11:31:37] [INFO ] [http                     ] [6e0f81434ad4] GET /chat/sessions → 200
 [2026-06-14 11:31:37] [INFO ] [http                     ] [b568fc4c181b] GET /chat/history/d19a3b4e-ad0d-4949-9718-2f7dff2d7376 → 200
+[2026-06-14 11:31:48] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-14 11:31:54] [INFO ] [httpx                    ] [-] HTTP Request: POST http://localhost:6333/collections/enterprise_knowledge_chunks/points/delete?wait=true "HTTP/1.1 200 OK"
+[2026-06-14 11:31:55] [INFO ] [elastic_transport.transport] [-] POST http://localhost:9200/enterprise_knowledge_chunks/_delete_by_query?refresh=true [status:200 duration:0.291s]
+[2026-06-14 11:31:55] [INFO ] [__main__                 ] [955142a68d39] 知识库已删除: kb_id=7808cd48-3a61-44ee-a7a7-70f5e4311e40 user=e703fa66-3318-45c6-9660-d41818663354 chunks=0 docs=0 files=0 jobs=0 members=0
+[2026-06-14 11:31:55] [INFO ] [http                     ] [293f547e3c4f] DELETE /knowledge_bases/7808cd48-3a61-44ee-a7a7-70f5e4311e40 → 200
+[2026-06-14 11:31:55] [INFO ] [__main__                 ] [de2092508842] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-14 11:31:55] [INFO ] [http                     ] [b346c44779a4] GET /knowledge_bases/ → 200
+[2026-06-14 11:32:05] [INFO ] [__main__                 ] [16047168f93b] 创建知识库: name=123 tenant=tenant_4bb1d927 owner=e703fa66-3318-45c6-9660-d41818663354
+[2026-06-14 11:32:05] [INFO ] [http                     ] [9094641b90b4] POST /knowledge_bases/ → 200
+[2026-06-14 11:32:05] [INFO ] [__main__                 ] [aa89d6e13835] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=2
+[2026-06-14 11:32:05] [INFO ] [http                     ] [105ea9189e36] GET /knowledge_bases/ → 200
+[2026-06-14 11:32:15] [INFO ] [httpx                    ] [-] HTTP Request: POST http://localhost:6333/collections/enterprise_knowledge_chunks/points/delete?wait=true "HTTP/1.1 200 OK"
+[2026-06-14 11:32:15] [INFO ] [elastic_transport.transport] [-] POST http://localhost:9200/enterprise_knowledge_chunks/_delete_by_query?refresh=true [status:200 duration:0.009s]
+[2026-06-14 11:32:15] [INFO ] [__main__                 ] [497b82194ac4] 知识库已删除: kb_id=3aeb8037-ad41-4cb9-a734-1d1b7786015e user=e703fa66-3318-45c6-9660-d41818663354 chunks=0 docs=0 files=0 jobs=0 members=0
+[2026-06-14 11:32:15] [INFO ] [http                     ] [bf2ded66f81b] DELETE /knowledge_bases/3aeb8037-ad41-4cb9-a734-1d1b7786015e → 200
+[2026-06-14 11:32:15] [INFO ] [__main__                 ] [f03563e4aca4] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-14 11:32:15] [INFO ] [http                     ] [6386504f348e] GET /knowledge_bases/ → 200
