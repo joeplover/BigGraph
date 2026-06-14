@@ -744,12 +744,18 @@ async def delete_knowledge_base(kb_id: str, user: dict = Depends(get_current_use
         if str(kb.owner_id) != user_id:
             raise ErrorCode.FORBIDDEN.exception(detail="只有知识库创建者可以删除")
 
-        # 级联删除关联数据
+        # 级联删除关联数据（注意外键依赖顺序）
+        # 先删 ingestion_jobs（FK → uploaded_files）
+        # 再删 document_chunks（FK → documents）
+        # 再删 documents（FK → uploaded_files）
+        # 再删 uploaded_files（FK → knowledge_base）
+        # 再删 kb_members（FK → knowledge_base）
+        # 最后删 knowledge_base
         tenant_id = kb.tenant_id
+        job_count = IngestionJobStore.delete_by_kb(db, kb_id)
         chunk_count = DocumentChunkStore.delete_by_kb(db, kb_id)
         doc_count = DocumentStore.delete_by_kb(db, kb_id)
         file_count = UploadedFileStore.delete_by_kb(db, kb_id)
-        job_count = IngestionJobStore.delete_by_kb(db, kb_id)
         member_count = KbMemberStore.delete_by_kb(db, kb_id)
         KnowledgeBaseStore.delete(db, kb_id)
 
