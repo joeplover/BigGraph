@@ -1228,3 +1228,55 @@ elasticsearch.ApiError: ApiError(503, 'search_phase_execution_exception', None)
 [2026-06-14 16:45:26] [INFO ] [httpx                    ] [-] HTTP Request: PUT http://qdrant:6333/collections/enterprise_knowledge_chunks/index?wait=true "HTTP/1.1 200 OK"
 [2026-06-14 16:45:26] [INFO ] [httpx                    ] [-] HTTP Request: PUT http://qdrant:6333/collections/enterprise_knowledge_chunks/index?wait=true "HTTP/1.1 200 OK"
 [2026-06-14 16:45:26] [INFO ] [api.ragControll          ] [-] 数据库表已就绪
+[2026-06-14 17:05:37] [WARNING] [api.auth                 ] [81a24bde6ffc] 登录失败，用户不存在: test
+[2026-06-14 17:05:37] [INFO ] [http                     ] [a20879aeeabc] POST /auth/login → 401
+[2026-06-14 17:05:47] [INFO ] [api.ragControll          ] [63ff03418154] 搜索请求: query=编码器由几层结构 kb=fab0afdd-9093-487b-983b-a8f11f60da94 user=348fc577-af5a-4929-ab7b-6b3148359e69
+[2026-06-14 17:05:48] [INFO ] [httpx                    ] [-] HTTP Request: POST http://qdrant:6333/collections/enterprise_knowledge_chunks/points/search "HTTP/1.1 200 OK"
+[2026-06-14 17:05:48] [INFO ] [api.ragControll          ] [63ff03418154] 搜索无结果: query=编码器由几层结构
+[2026-06-14 17:05:48] [INFO ] [http                     ] [0c67f487edaf] GET /search/fab0afdd-9093-487b-983b-a8f11f60da94 → 200
+[2026-06-14 17:05:55] [INFO ] [httpx                    ] [-] HTTP Request: POST http://qdrant:6333/collections/enterprise_knowledge_chunks/points/delete?wait=true "HTTP/1.1 200 OK"
+[2026-06-14 17:05:55] [INFO ] [elastic_transport.transport] [-] POST http://elasticsearch:9200/enterprise_knowledge_chunks/_delete_by_query?refresh=true [status:200 duration:0.099s]
+[2026-06-14 17:05:55] [INFO ] [api.ragControll          ] [1c17a65388f4] 知识库已删除: kb_id=fab0afdd-9093-487b-983b-a8f11f60da94 user=348fc577-af5a-4929-ab7b-6b3148359e69 chunks=29 docs=1 files=1 jobs=1 members=0
+[2026-06-14 17:05:55] [INFO ] [http                     ] [d51eae041043] DELETE /knowledge_bases/fab0afdd-9093-487b-983b-a8f11f60da94 → 200
+[2026-06-14 17:05:55] [INFO ] [api.ragControll          ] [8b32414c61be] 知识库列表: user=348fc577-af5a-4929-ab7b-6b3148359e69 count=0
+[2026-06-14 17:05:55] [INFO ] [http                     ] [d64d9b84ff65] GET /knowledge_bases/ → 200
+[2026-06-14 17:06:08] [INFO ] [api.ragControll          ] [6588c09158a7] 创建知识库: name=123 tenant=tenant_5a0d4402 owner=348fc577-af5a-4929-ab7b-6b3148359e69
+[2026-06-14 17:06:08] [INFO ] [http                     ] [477ab4126013] POST /knowledge_bases/ → 200
+[2026-06-14 17:06:08] [INFO ] [api.ragControll          ] [802b0c3ea6d0] 知识库列表: user=348fc577-af5a-4929-ab7b-6b3148359e69 count=1
+[2026-06-14 17:06:08] [INFO ] [http                     ] [4d5f63be996f] GET /knowledge_bases/ → 200
+[2026-06-14 17:06:14] [INFO ] [api.ragControll          ] [2badd1daeb04] 收到上传请求: name=transformer_zh_cn.pdf kb=572b4c11-1942-44c3-9a53-c49dfbf51233 tenant=tenant_5a0d4402 user=348fc577-af5a-4929-ab7b-6b3148359e69
+[2026-06-14 17:06:14] [INFO ] [api.ragControll          ] [2badd1daeb04] 上传完成: job_id=3d28d866-d893-4fcd-aecb-e8a7a2b31bfb file_id=90f738e2-a1a2-4e11-bd28-4c61573688e5 size=1437032
+[2026-06-14 17:06:14] [INFO ] [http                     ] [231f78c6f181] POST /upload/572b4c11-1942-44c3-9a53-c49dfbf51233 → 200
+[2026-06-14 17:06:14] [INFO ] [api.ragControll          ] [2badd1daeb04/2fcaf7028d1f] 后台任务开始: job_id=3d28d866-d893-4fcd-aecb-e8a7a2b31bfb file_id=90f738e2-a1a2-4e11-bd28-4c61573688e5
+[2026-06-14 17:06:17] [DEBUG] [jieba                    ] [-] Building prefix dict from the default dictionary ...
+[2026-06-14 17:06:18] [DEBUG] [jieba                    ] [-] Dumping model to file cache /tmp/jieba.cache
+[2026-06-14 17:06:18] [DEBUG] [jieba                    ] [-] Loading model cost 0.777 seconds.
+[2026-06-14 17:06:18] [DEBUG] [jieba                    ] [-] Prefix dict has been built successfully.
+[2026-06-14 17:06:18] [INFO ] [api.ragControll          ] [2badd1daeb04/2fcaf7028d1f] 解析完成: chunks=29
+[2026-06-14 17:06:18] [INFO ] [http                     ] [c401baf0ea5f] GET /jobs/3d28d866-d893-4fcd-aecb-e8a7a2b31bfb → 200
+[2026-06-14 17:06:20] [INFO ] [http                     ] [73898aa6c8e5] GET /jobs/3d28d866-d893-4fcd-aecb-e8a7a2b31bfb → 200
+[2026-06-14 17:06:22] [INFO ] [http                     ] [be7580f8847e] GET /jobs/3d28d866-d893-4fcd-aecb-e8a7a2b31bfb → 200
+[2026-06-14 17:06:24] [INFO ] [http                     ] [6ae0d6bdac30] GET /jobs/3d28d866-d893-4fcd-aecb-e8a7a2b31bfb → 200
+[2026-06-14 17:06:26] [INFO ] [http                     ] [9d715c0b2e10] GET /jobs/3d28d866-d893-4fcd-aecb-e8a7a2b31bfb → 200
+[2026-06-14 17:06:28] [INFO ] [http                     ] [6f6e4f91b8d3] GET /jobs/3d28d866-d893-4fcd-aecb-e8a7a2b31bfb → 200
+[2026-06-14 17:06:30] [INFO ] [http                     ] [57c1900b8a03] GET /jobs/3d28d866-d893-4fcd-aecb-e8a7a2b31bfb → 200
+[2026-06-14 17:06:32] [INFO ] [http                     ] [4723d4ed89d1] GET /jobs/3d28d866-d893-4fcd-aecb-e8a7a2b31bfb → 200
+[2026-06-14 17:06:34] [INFO ] [http                     ] [fb4e9a35646b] GET /jobs/3d28d866-d893-4fcd-aecb-e8a7a2b31bfb → 200
+[2026-06-14 17:06:36] [INFO ] [http                     ] [99fb686d4aae] GET /jobs/3d28d866-d893-4fcd-aecb-e8a7a2b31bfb → 200
+[2026-06-14 17:06:38] [INFO ] [http                     ] [f129c7a2fc01] GET /jobs/3d28d866-d893-4fcd-aecb-e8a7a2b31bfb → 200
+[2026-06-14 17:06:40] [INFO ] [http                     ] [915d430b1486] GET /jobs/3d28d866-d893-4fcd-aecb-e8a7a2b31bfb → 200
+[2026-06-14 17:06:42] [INFO ] [http                     ] [1c633ecd65cc] GET /jobs/3d28d866-d893-4fcd-aecb-e8a7a2b31bfb → 200
+[2026-06-14 17:06:44] [INFO ] [http                     ] [f1f1b17155c7] GET /jobs/3d28d866-d893-4fcd-aecb-e8a7a2b31bfb → 200
+[2026-06-14 17:06:46] [INFO ] [http                     ] [0b74ff74cfae] GET /jobs/3d28d866-d893-4fcd-aecb-e8a7a2b31bfb → 200
+[2026-06-14 17:06:47] [INFO ] [httpx                    ] [-] HTTP Request: PUT http://qdrant:6333/collections/enterprise_knowledge_chunks/points?wait=true "HTTP/1.1 200 OK"
+[2026-06-14 17:06:48] [INFO ] [elastic_transport.transport] [-] PUT http://elasticsearch:9200/_bulk?refresh=wait_for [status:200 duration:0.643s]
+[2026-06-14 17:06:48] [INFO ] [api.ragControll          ] [2badd1daeb04/2fcaf7028d1f] 后台任务完成: job_id=3d28d866-d893-4fcd-aecb-e8a7a2b31bfb chunks=29 qdrant=True es=True
+[2026-06-14 17:06:48] [INFO ] [http                     ] [0ea32bfea113] GET /jobs/3d28d866-d893-4fcd-aecb-e8a7a2b31bfb → 200
+[2026-06-14 17:07:12] [INFO ] [api.ragControll          ] [5816844250c4] 搜索请求: query=编码器由几层结构 kb=572b4c11-1942-44c3-9a53-c49dfbf51233 user=348fc577-af5a-4929-ab7b-6b3148359e69
+[2026-06-14 17:07:12] [INFO ] [httpx                    ] [-] HTTP Request: POST http://qdrant:6333/collections/enterprise_knowledge_chunks/points/search "HTTP/1.1 200 OK"
+[2026-06-14 17:07:12] [INFO ] [elastic_transport.transport] [-] POST http://elasticsearch:9200/enterprise_knowledge_chunks/_search [status:200 duration:0.087s]
+[2026-06-14 17:07:12] [INFO ] [api.ragControll          ] [5816844250c4] 搜索完成: results=5
+[2026-06-14 17:07:12] [INFO ] [http                     ] [aae726684acb] GET /search/572b4c11-1942-44c3-9a53-c49dfbf51233 → 200
+[2026-06-14 17:07:14] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 17:07:15] [INFO ] [api.ragControll          ] [-] AI 回复成功: len=29 history=3 request_id=efc24dc49e42
+[2026-06-14 17:07:15] [INFO ] [http                     ] [3ab8e3d97f67] POST /chat → 200
