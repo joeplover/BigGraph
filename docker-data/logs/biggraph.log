@@ -1280,3 +1280,11 @@ elasticsearch.ApiError: ApiError(503, 'search_phase_execution_exception', None)
 [2026-06-14 17:07:14] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
 [2026-06-14 17:07:15] [INFO ] [api.ragControll          ] [-] AI 回复成功: len=29 history=3 request_id=efc24dc49e42
 [2026-06-14 17:07:15] [INFO ] [http                     ] [3ab8e3d97f67] POST /chat → 200
+[2026-06-14 18:28:38] [INFO ] [elastic_transport.transport] [-] HEAD http://elasticsearch:9200/enterprise_knowledge_chunks [status:200 duration:0.011s]
+[2026-06-14 18:28:38] [INFO ] [httpx                    ] [-] HTTP Request: GET http://qdrant:6333/collections "HTTP/1.1 200 OK"
+[2026-06-14 18:28:38] [INFO ] [httpx                    ] [-] HTTP Request: PUT http://qdrant:6333/collections/enterprise_knowledge_chunks/index?wait=true "HTTP/1.1 200 OK"
+[2026-06-14 18:28:38] [INFO ] [httpx                    ] [-] HTTP Request: PUT http://qdrant:6333/collections/enterprise_knowledge_chunks/index?wait=true "HTTP/1.1 200 OK"
+[2026-06-14 18:28:38] [INFO ] [httpx                    ] [-] HTTP Request: PUT http://qdrant:6333/collections/enterprise_knowledge_chunks/index?wait=true "HTTP/1.1 200 OK"
+[2026-06-14 18:28:38] [INFO ] [httpx                    ] [-] HTTP Request: PUT http://qdrant:6333/collections/enterprise_knowledge_chunks/index?wait=true "HTTP/1.1 200 OK"
+[2026-06-14 18:28:38] [INFO ] [httpx                    ] [-] HTTP Request: PUT http://qdrant:6333/collections/enterprise_knowledge_chunks/index?wait=true "HTTP/1.1 200 OK"
+[2026-06-14 18:28:38] [INFO ] [api.ragControll          ] [-] 数据库表已就绪
