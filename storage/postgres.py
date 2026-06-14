@@ -202,6 +202,16 @@ class KbMemberStore:
         return member
 
     @staticmethod
+    def delete_member(db: Session, member_id: str) -> bool:
+        """删除成员记录"""
+        member = db.get(KbMember, member_id)
+        if not member:
+            return False
+        db.delete(member)
+        db.flush()
+        return True
+
+    @staticmethod
     def delete_by_kb(db: Session, kb_id: str) -> int:
         """删除知识库的所有成员记录"""
         count = db.query(KbMember).filter(KbMember.knowledge_base_id == kb_id).delete(synchronize_session="fetch")

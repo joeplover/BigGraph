@@ -317,6 +317,25 @@ async def reject_kb_member(kb_id: str, member_id: str, user: dict = Depends(get_
         return {"message": "已拒绝加入", "member_id": member_id, "status": "rejected"}
 
 
+@app.delete("/knowledge_bases/{kb_id}/members/{member_id}")
+async def remove_kb_member(kb_id: str, member_id: str, user: dict = Depends(get_current_user)):
+    """移除知识库成员（仅 owner，可移除已通过或已拒绝的成员）"""
+    user_id = user["user_id"]
+    with get_session() as db:
+        kb = KnowledgeBaseStore.get(db, kb_id)
+        if not kb:
+            raise ErrorCode.KB_NOT_FOUND.exception()
+        if str(kb.owner_id) != user_id:
+            raise ErrorCode.FORBIDDEN.exception(detail="只有知识库创建者可以移除成员")
+
+        member = KbMemberStore.get(db, member_id)
+        if not member or str(member.knowledge_base_id) != kb_id:
+            raise ErrorCode.NOT_FOUND.exception(detail="成员记录不存在")
+
+        KbMemberStore.delete_member(db, member_id)
+        return {"message": "已移除成员", "member_id": member_id}
+
+
 @app.get("/knowledge_bases/{kb_id}/members")
 async def list_kb_members(kb_id: str, user: dict = Depends(get_current_user)):
     """查看知识库成员列表（仅 owner）"""

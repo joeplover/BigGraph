@@ -38,6 +38,11 @@ export function rejectMember(kbId, memberId) {
   return request.post(`/knowledge_bases/${kbId}/members/${memberId}/reject`)
 }
 
+// 移除成员
+export function removeMember(kbId, memberId) {
+  return request.delete(`/knowledge_bases/${kbId}/members/${memberId}`)
+}
+
 // 获取成员列表
 export function getMembers(kbId) {
   return request.get(`/knowledge_bases/${kbId}/members`)

@@ -59,6 +59,9 @@
                   拒绝
                 </el-button>
               </div>
+              <el-button v-if="m.status !== 'pending'" text size="small" type="danger" :loading="removing[m.id]" @click="handleRemove(kb.id, m.id, m.display_name)">
+                移除
+              </el-button>
             </div>
           </div>
         </div>
@@ -71,9 +74,9 @@
 import { ref, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { ArrowLeft, ArrowDown } from '@element-plus/icons-vue'
-import { ElMessage } from 'element-plus'
+import { ElMessage, ElMessageBox } from 'element-plus'
 import { useChatStore } from '@/stores/chat'
-import { getMembers, approveMember, rejectMember } from '@/api/knowledgeBase'
+import { getMembers, approveMember, rejectMember, removeMember } from '@/api/knowledgeBase'
 
 const router = useRouter()
 const chatStore = useChatStore()
@@ -82,6 +85,7 @@ const loading = ref(true)
 const expandedKb = ref(null)
 const approving = ref({})
 const rejecting = ref({})
+const removing = ref({})
 const memberMap = ref({})       // { kbId: [member, ...] }
 const memberLoading = ref({})   // { kbId: true/false }
 
@@ -152,6 +156,33 @@ function handleApprove(kbId, memberId) {
 
 function handleReject(kbId, memberId) {
   doAction('reject', kbId, memberId)
+}
+
+async function handleRemove(kbId, memberId, displayName) {
+  try {
+    await ElMessageBox.confirm(
+      `确定要移除成员「${displayName}」吗？`,
+      '移除确认',
+      { confirmButtonText: '移除', cancelButtonText: '取消', type: 'warning', confirmButtonClass: 'el-button--danger' }
+    )
+  } catch {
+    return
+  }
+  removing.value[memberId] = true
+  try {
+    await removeMember(kbId, memberId)
+    ElMessage.success('已移除')
+    // 刷新成员列表
+    const res = await getMembers(kbId)
+    memberMap.value[kbId] = (res.members || []).map(m => ({
+      ...m,
+      display_name: m.display_name || m.user_id.slice(0, 8),
+    }))
+  } catch {
+    // handled in interceptor
+  } finally {
+    removing.value[memberId] = false
+  }
 }
 
 onMounted(() => {

@@ -2002,3 +2002,27 @@ NameError: name 'UserStore' is not defined
 [2026-06-14 13:18:19] [INFO ] [http                     ] [04ccf25945fc] GET /chat/history/175e388b-3bc1-4bb3-acff-a6cff096615a → 200
 [2026-06-14 13:18:25] [INFO ] [http                     ] [f69f04557a8c] GET /knowledge_bases/06d1a48e-2533-4a72-88fc-3853575f011b/members → 200
 [2026-06-14 13:18:27] [INFO ] [http                     ] [80c6c11242d4] GET /knowledge_bases/c72c9e5a-1595-4856-aa1d-e834b9694077/members → 200
+[2026-06-14 13:27:31] [INFO ] [http                     ] [7859711a034d] GET /chat/sessions → 200
+[2026-06-14 13:27:31] [INFO ] [__main__                 ] [de4ac9477a64] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=2
+[2026-06-14 13:27:31] [INFO ] [http                     ] [2059ab92e96d] GET /knowledge_bases/ → 200
+[2026-06-14 13:27:31] [INFO ] [http                     ] [b0a8d77c3786] GET /chat/history/175e388b-3bc1-4bb3-acff-a6cff096615a → 200
+[2026-06-14 13:27:32] [INFO ] [http                     ] [c00492216590] GET /knowledge_bases/06d1a48e-2533-4a72-88fc-3853575f011b/members → 200
+[2026-06-14 13:27:36] [INFO ] [http                     ] [2f00ba9c70f3] DELETE /knowledge_bases/06d1a48e-2533-4a72-88fc-3853575f011b/members/e1e25704-0b54-4967-8205-3d905e100c20 → 404
+[2026-06-14 13:27:47] [INFO ] [langchain_openai.chat_models._client_utils] [-] langchain-openai detected system proxy configuration and no explicit `http_socket_options` / `http_client` / `http_async_client` / `openai_proxy`; skipping the custom `httpx` transport so httpx's env-proxy auto-detection applies. Pass `http_socket_options=[...]` to opt back into kernel-level TCP keepalive tuning on top of the env proxy.
+[2026-06-14 13:27:51] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-14 13:27:54] [INFO ] [http                     ] [e152e14add2b] DELETE /knowledge_bases/06d1a48e-2533-4a72-88fc-3853575f011b/members/e1e25704-0b54-4967-8205-3d905e100c20 → 200
+[2026-06-14 13:27:54] [INFO ] [http                     ] [3d3c10bd0242] GET /knowledge_bases/06d1a48e-2533-4a72-88fc-3853575f011b/members → 200
+[2026-06-14 13:27:56] [INFO ] [__main__                 ] [6cd10063f5f6] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=2
+[2026-06-14 13:27:56] [INFO ] [http                     ] [d22e1eac6039] GET /knowledge_bases/ → 200
+[2026-06-14 13:27:56] [INFO ] [http                     ] [3d7384e86a8f] GET /chat/sessions → 200
+[2026-06-14 13:27:56] [INFO ] [http                     ] [4fc55217f178] GET /chat/history/175e388b-3bc1-4bb3-acff-a6cff096615a → 200
+[2026-06-14 13:28:01] [INFO ] [api.auth                 ] [143e627272a1] 用户登出成功
+[2026-06-14 13:28:01] [INFO ] [http                     ] [98034b55879f] POST /auth/logout → 200
+[2026-06-14 13:28:18] [INFO ] [api.auth                 ] [6188f648fa8f] 用户登录成功: username=minijoe user_id=b492582f-780a-48e9-a24c-cb0cc1b7fb07 tenant=tenant_7288e148
+[2026-06-14 13:28:18] [INFO ] [http                     ] [ed4a5fb16dad] POST /auth/login → 200
+[2026-06-14 13:28:19] [INFO ] [__main__                 ] [d41ae3f79c7f] 知识库列表: user=b492582f-780a-48e9-a24c-cb0cc1b7fb07 count=0
+[2026-06-14 13:28:19] [INFO ] [http                     ] [db705bbac355] GET /knowledge_bases/ → 200
+[2026-06-14 13:28:19] [INFO ] [http                     ] [9ea37a456539] GET /chat/sessions → 200
+[2026-06-14 13:28:19] [INFO ] [http                     ] [0c4b38c2ac19] GET /chat/history/deb1129d-7d59-4743-b7b0-85009d551bdb → 200
+[2026-06-14 13:28:35] [INFO ] [__main__                 ] [-] 会话已创建: session_id=ebedf27f-ea95-4a5e-b79d-caf6fd520b6f
+[2026-06-14 13:28:35] [INFO ] [http                     ] [c9c706f733e7] POST /chat/sessions → 200
