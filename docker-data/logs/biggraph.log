@@ -1329,3 +1329,60 @@ elasticsearch.ApiError: ApiError(503, 'search_phase_execution_exception', None)
 [2026-06-14 18:59:29] [INFO ] [api.ragControll          ] [908e161cf11b] 知识库列表: user=348fc577-af5a-4929-ab7b-6b3148359e69 count=1
 [2026-06-14 18:59:29] [INFO ] [http                     ] [6484ff102c1c] GET /knowledge_bases/ → 200
 [2026-06-14 18:59:29] [INFO ] [http                     ] [55773c1785d1] GET /chat/history/7f2f5a80-83a8-4d5e-acc8-f82b86cab7b2 → 200
+[2026-06-14 19:20:26] [INFO ] [elastic_transport.transport] [-] HEAD http://elasticsearch:9200/enterprise_knowledge_chunks [status:200 duration:0.021s]
+[2026-06-14 19:20:26] [INFO ] [httpx                    ] [-] HTTP Request: GET http://qdrant:6333/collections "HTTP/1.1 200 OK"
+[2026-06-14 19:20:26] [INFO ] [httpx                    ] [-] HTTP Request: PUT http://qdrant:6333/collections/enterprise_knowledge_chunks/index?wait=true "HTTP/1.1 200 OK"
+[2026-06-14 19:20:26] [INFO ] [httpx                    ] [-] HTTP Request: PUT http://qdrant:6333/collections/enterprise_knowledge_chunks/index?wait=true "HTTP/1.1 200 OK"
+[2026-06-14 19:20:26] [INFO ] [httpx                    ] [-] HTTP Request: PUT http://qdrant:6333/collections/enterprise_knowledge_chunks/index?wait=true "HTTP/1.1 200 OK"
+[2026-06-14 19:20:26] [INFO ] [httpx                    ] [-] HTTP Request: PUT http://qdrant:6333/collections/enterprise_knowledge_chunks/index?wait=true "HTTP/1.1 200 OK"
+[2026-06-14 19:20:26] [INFO ] [httpx                    ] [-] HTTP Request: PUT http://qdrant:6333/collections/enterprise_knowledge_chunks/index?wait=true "HTTP/1.1 200 OK"
+[2026-06-14 19:20:26] [INFO ] [api.ragControll          ] [-] 数据库表已就绪
+[2026-06-14 19:20:36] [INFO ] [api.ragControll          ] [8a727adf0c26] 知识库列表: user=348fc577-af5a-4929-ab7b-6b3148359e69 count=1
+[2026-06-14 19:20:36] [INFO ] [http                     ] [37808bfa3a88] GET /knowledge_bases/ → 200
+[2026-06-14 19:20:36] [INFO ] [http                     ] [6c553bb6f06e] GET /chat/sessions → 200
+[2026-06-14 19:20:36] [INFO ] [http                     ] [d2da71c2437d] GET /chat/history/7f2f5a80-83a8-4d5e-acc8-f82b86cab7b2 → 200
+[2026-06-14 19:20:38] [INFO ] [api.ragControll          ] [-] 会话已创建: session_id=aad3a939-7ece-45fa-af27-6c8337f19ca7
+[2026-06-14 19:20:38] [INFO ] [http                     ] [0d8703143d63] POST /chat/sessions → 200
+[2026-06-14 19:20:46] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=aad3a939-7ece-45fa-af27-6c8337f19ca7 msg_len=6
+[2026-06-14 19:20:49] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 19:20:49] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=aad3a939-7ece-45fa-af27-6c8337f19ca7 status=waiting_user reply_len=137
+[2026-06-14 19:20:49] [INFO ] [http                     ] [43c9a0bbe3c6] POST /api/ppt/chat → 200
+[2026-06-14 19:20:49] [INFO ] [http                     ] [3c1f81037747] PATCH /chat/sessions/aad3a939-7ece-45fa-af27-6c8337f19ca7 → 200
+[2026-06-14 19:21:02] [INFO ] [http                     ] [afd01742518a] GET /chat/history/7f2f5a80-83a8-4d5e-acc8-f82b86cab7b2 → 200
+[2026-06-14 19:21:06] [INFO ] [http                     ] [7c9d42bdf2bb] GET /chat/history/aad3a939-7ece-45fa-af27-6c8337f19ca7 → 200
+[2026-06-14 19:21:08] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=aad3a939-7ece-45fa-af27-6c8337f19ca7 msg_len=22
+[2026-06-14 19:21:28] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 19:21:28] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=aad3a939-7ece-45fa-af27-6c8337f19ca7 status=waiting_user reply_len=27
+[2026-06-14 19:21:28] [INFO ] [http                     ] [eb54d340c664] POST /api/ppt/chat → 200
+[2026-06-14 19:21:46] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=aad3a939-7ece-45fa-af27-6c8337f19ca7 msg_len=6
+[2026-06-14 19:21:49] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 19:21:49] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=aad3a939-7ece-45fa-af27-6c8337f19ca7 status=waiting_material reply_len=98
+[2026-06-14 19:21:49] [INFO ] [http                     ] [bda832792f5d] POST /api/ppt/chat → 200
+[2026-06-14 19:21:53] [INFO ] [api.ppt_agent_router     ] [c215ae6dab32] PPT 素材上传: name=transformer_zh_cn.pdf session=aad3a939-7ece-45fa-af27-6c8337f19ca7
+[2026-06-14 19:21:54] [INFO ] [api.ppt_agent_router     ] [c215ae6dab32] PPT 素材上传成功: name=transformer_zh_cn.pdf text_len=18799 preview=在提供适当署名的前提下，Google 特此授予仅为新闻或学术作品复制本文 中表格和图形的许可。 Attention Is All You Need Ashish Vaswani∗ Google Bra...
+[2026-06-14 19:21:54] [INFO ] [http                     ] [f5e39f87e1a9] POST /api/ppt/upload → 200
+[2026-06-14 19:21:56] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=aad3a939-7ece-45fa-af27-6c8337f19ca7 msg_len=2
+[2026-06-14 19:22:33] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 19:22:33] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=aad3a939-7ece-45fa-af27-6c8337f19ca7 status=waiting_confirm reply_len=355
+[2026-06-14 19:22:33] [INFO ] [http                     ] [c78f266c6102] POST /api/ppt/chat → 200
+[2026-06-14 19:22:37] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务开始: session=aad3a939-7ece-45fa-af27-6c8337f19ca7
+[2026-06-14 19:22:37] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务已启动: session=aad3a939-7ece-45fa-af27-6c8337f19ca7
+[2026-06-14 19:22:37] [INFO ] [http                     ] [97eba19f60fb] POST /api/ppt/chat → 200
+[2026-06-14 19:22:37] [INFO ] [http                     ] [1d3b4f7210a3] GET /api/ppt/stream/aad3a939-7ece-45fa-af27-6c8337f19ca7 → 200
+[2026-06-14 19:23:16] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 19:23:33] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 19:23:42] [INFO ] [http                     ] [5be9d2b5931b] GET /api/ppt/status/aad3a939-7ece-45fa-af27-6c8337f19ca7 → 200
+[2026-06-14 19:23:47] [INFO ] [http                     ] [29397837d88f] GET /api/ppt/status/aad3a939-7ece-45fa-af27-6c8337f19ca7 → 200
+[2026-06-14 19:23:52] [INFO ] [http                     ] [0e3622f9fb68] GET /api/ppt/status/aad3a939-7ece-45fa-af27-6c8337f19ca7 → 200
+[2026-06-14 19:23:57] [INFO ] [http                     ] [85590f58e6b3] GET /api/ppt/status/aad3a939-7ece-45fa-af27-6c8337f19ca7 → 200
+[2026-06-14 19:24:02] [INFO ] [http                     ] [2d3235fb71ff] GET /api/ppt/status/aad3a939-7ece-45fa-af27-6c8337f19ca7 → 200
+[2026-06-14 19:24:07] [INFO ] [http                     ] [49b229a9d223] GET /api/ppt/status/aad3a939-7ece-45fa-af27-6c8337f19ca7 → 200
+[2026-06-14 19:24:12] [INFO ] [http                     ] [8c137c60748c] GET /api/ppt/status/aad3a939-7ece-45fa-af27-6c8337f19ca7 → 200
+[2026-06-14 19:24:17] [INFO ] [http                     ] [d35b0ef58fc8] GET /api/ppt/status/aad3a939-7ece-45fa-af27-6c8337f19ca7 → 200
+[2026-06-14 19:24:22] [INFO ] [http                     ] [76a7a839effa] GET /api/ppt/status/aad3a939-7ece-45fa-af27-6c8337f19ca7 → 200
+[2026-06-14 19:24:27] [INFO ] [http                     ] [e4f007a53770] GET /api/ppt/status/aad3a939-7ece-45fa-af27-6c8337f19ca7 → 200
+[2026-06-14 19:24:32] [INFO ] [http                     ] [71eb1e858f1e] GET /api/ppt/status/aad3a939-7ece-45fa-af27-6c8337f19ca7 → 200
+[2026-06-14 19:24:37] [INFO ] [http                     ] [e4f3aa3f24cb] GET /api/ppt/status/aad3a939-7ece-45fa-af27-6c8337f19ca7 → 200
+[2026-06-14 19:24:41] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 19:24:41] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务完成: session=aad3a939-7ece-45fa-af27-6c8337f19ca7 status=failed reply_len=46
+[2026-06-14 19:24:42] [INFO ] [http                     ] [be2f3031c206] GET /api/ppt/status/aad3a939-7ece-45fa-af27-6c8337f19ca7 → 200
