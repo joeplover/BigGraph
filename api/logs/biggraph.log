@@ -2026,3 +2026,16 @@ NameError: name 'UserStore' is not defined
 [2026-06-14 13:28:19] [INFO ] [http                     ] [0c4b38c2ac19] GET /chat/history/deb1129d-7d59-4743-b7b0-85009d551bdb → 200
 [2026-06-14 13:28:35] [INFO ] [__main__                 ] [-] 会话已创建: session_id=ebedf27f-ea95-4a5e-b79d-caf6fd520b6f
 [2026-06-14 13:28:35] [INFO ] [http                     ] [c9c706f733e7] POST /chat/sessions → 200
+[2026-06-14 13:28:54] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 13:28:54] [INFO ] [__main__                 ] [-] AI 回复成功: len=1872 history=0 request_id=4dbfd18ce89d
+[2026-06-14 13:28:54] [INFO ] [http                     ] [ce13a35f270a] POST /chat → 200
+[2026-06-14 13:28:54] [INFO ] [http                     ] [a054cbd7ec4f] PATCH /chat/sessions/ebedf27f-ea95-4a5e-b79d-caf6fd520b6f → 200
+[2026-06-14 13:29:03] [INFO ] [api.auth                 ] [354db103f21e] 用户登出成功
+[2026-06-14 13:29:03] [INFO ] [http                     ] [8ededf9059e0] POST /auth/logout → 200
+[2026-06-14 13:29:10] [INFO ] [api.auth                 ] [8ac4b1731680] 用户登录成功: username=joeplover user_id=e703fa66-3318-45c6-9660-d41818663354 tenant=tenant_4bb1d927
+[2026-06-14 13:29:10] [INFO ] [http                     ] [f2a7baa4528a] POST /auth/login → 200
+[2026-06-14 13:29:10] [INFO ] [__main__                 ] [6e820504383d] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=2
+[2026-06-14 13:29:10] [INFO ] [http                     ] [3623daee3f05] GET /knowledge_bases/ → 200
+[2026-06-14 13:29:10] [INFO ] [http                     ] [98d2363300f7] GET /chat/sessions → 200
+[2026-06-14 13:29:10] [INFO ] [http                     ] [bd7d519eb1e8] GET /chat/history/175e388b-3bc1-4bb3-acff-a6cff096615a → 200
+[2026-06-14 13:29:15] [INFO ] [http                     ] [8425573de785] POST /knowledge_bases/c72c9e5a-1595-4856-aa1d-e834b9694077/share → 200
