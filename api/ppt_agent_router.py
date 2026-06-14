@@ -158,6 +158,13 @@ def _run_ppt_graph_in_background(
         # 保存最终的 State
         save_ppt_state(session_id, next_state)
 
+        # 提取结果
+        reply = next_state.get("assistant_reply", "")
+        status = next_state.get("status", "collecting")
+        pptx_download_url = ""
+        if status == "ppt_exported" and next_state.get("pptx_path"):
+            pptx_download_url = f"/api/ppt/download/{session_id}"
+
         # 写入聊天历史，支持历史记录加载
         try:
             save_chat_message(session_id, "user", message)
@@ -165,13 +172,6 @@ def _run_ppt_graph_in_background(
                 save_chat_message(session_id, "assistant", reply)
         except Exception:
             pass  # 历史记录写入失败不影响主流程
-
-        # 提取结果
-        reply = next_state.get("assistant_reply", "")
-        status = next_state.get("status", "collecting")
-        pptx_download_url = ""
-        if status == "ppt_exported" and next_state.get("pptx_path"):
-            pptx_download_url = f"/api/ppt/download/{session_id}"
 
         save_ppt_task_result(session_id, reply, pptx_download_url, "done")
 

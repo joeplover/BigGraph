@@ -26,7 +26,10 @@ from collections.abc import AsyncIterator
 from contextlib import asynccontextmanager
 from datetime import datetime
 
-from fastapi import BackgroundTasks, FastAPI, File, Form, HTTPException, UploadFile, Depends
+from fastapi import BackgroundTasks, Depends, FastAPI, File, Form, HTTPException, UploadFile
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel, Field
 
 from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
@@ -80,12 +83,21 @@ logger = get_logger(__name__)
 async def lifespan(_app: FastAPI) -> AsyncIterator[None]:
     """应用生命周期 — 启动时建表"""
     init_db()
+    _qdrant.ensure_collection()
+    _es.ensure_index()
     logger.info("数据库表已就绪")
     yield
 
 
 app = FastAPI(title="文档知识库管理系统", version="1.0.0", lifespan=lifespan)
 app.add_middleware(RequestIDMiddleware)
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 
 # ---------------------------------------------------------------------------
@@ -726,6 +738,7 @@ class ChatRequest(BaseModel):
 #  聊天
 # ===================================================================
 
+@app.post("/api/chat")
 @app.post("/chat")
 async def chat(req: ChatRequest, user: dict = Depends(get_current_user)):
     """AI 聊天 — 调用 LLM 返回回复，自动保存聊天历史"""
@@ -789,6 +802,7 @@ class RenameRequest(BaseModel):
     title: str = Field(..., min_length=1, max_length=100, description="新标题")
 
 
+@app.post("/api/chat/sessions")
 @app.post("/chat/sessions")
 async def create_session(user: dict = Depends(get_current_user)):
     """创建新会话"""
@@ -799,6 +813,7 @@ async def create_session(user: dict = Depends(get_current_user)):
     return session
 
 
+@app.get("/api/chat/sessions")
 @app.get("/chat/sessions")
 async def list_sessions(user: dict = Depends(get_current_user)):
     """列出当前用户的所有会话"""
@@ -806,6 +821,7 @@ async def list_sessions(user: dict = Depends(get_current_user)):
     return {"sessions": sessions}
 
 
+@app.patch("/api/chat/sessions/{session_id}")
 @app.patch("/chat/sessions/{session_id}")
 async def rename_session(session_id: str, req: RenameRequest, user: dict = Depends(get_current_user)):
     """重命名会话"""
@@ -813,6 +829,7 @@ async def rename_session(session_id: str, req: RenameRequest, user: dict = Depen
     return {"message": "ok", "title": req.title}
 
 
+@app.get("/api/chat/history/{session_id}")
 @app.get("/chat/history/{session_id}")
 async def chat_history(session_id: str, user: dict = Depends(get_current_user)):
     """获取指定会话的聊天历史"""
@@ -820,6 +837,7 @@ async def chat_history(session_id: str, user: dict = Depends(get_current_user)):
     return {"messages": history, "session_id": session_id}
 
 
+@app.delete("/api/chat/history/{session_id}")
 @app.delete("/chat/history/{session_id}")
 async def delete_chat_history(session_id: str, user: dict = Depends(get_current_user)):
     """彻底删除指定会话（元数据 + 聊天记录）"""
@@ -837,18 +855,46 @@ def _single_embed(text: str) -> list[float]:
     return _batch_embed([text])[0]
 
 
+# ---------------------------------------------------------------------------
+# Runtime routes
+# ---------------------------------------------------------------------------
+
+app.include_router(auth_router)
+
+from api.ppt_agent_router import router as ppt_agent_router
+
+app.include_router(ppt_agent_router)
+
+
+@app.get("/health", include_in_schema=False)
+def health() -> dict[str, str]:
+    return {"status": "ok"}
+
+
+FRONTEND_DIST = _bg_root / "frontend" / "dist"
+
+if (FRONTEND_DIST / "assets").exists():
+    app.mount("/assets", StaticFiles(directory=FRONTEND_DIST / "assets"), name="frontend-assets")
+
+
+@app.get("/{full_path:path}", include_in_schema=False)
+def serve_frontend(full_path: str) -> FileResponse:
+    requested = FRONTEND_DIST / full_path
+    if requested.is_file():
+        return FileResponse(requested)
+
+    index = FRONTEND_DIST / "index.html"
+    if index.exists():
+        return FileResponse(index)
+
+    raise HTTPException(status_code=404, detail="Frontend build not found")
+
+
 # ===================================================================
 #  启动入口
 # ===================================================================
 
 if __name__ == "__main__":
-    # 注册认证路由
-    app.include_router(auth_router)
-
-    # 注册 PPT Agent 路由（低耦合集成）
-    from api.ppt_agent_router import router as ppt_agent_router
-    app.include_router(ppt_agent_router)
-
     import uvicorn
 
     uvicorn.run(app, host="0.0.0.0", port=8000)
