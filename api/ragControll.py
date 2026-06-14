@@ -79,8 +79,16 @@ logger = get_logger(__name__)
 
 @asynccontextmanager
 async def lifespan(_app: FastAPI) -> AsyncIterator[None]:
-    """应用生命周期 — 启动时建表"""
+    """应用生命周期 — 启动时建表 + 初始化向量/全文索引"""
     init_db()
+    try:
+        _es.ensure_index()
+    except Exception:
+        logger.warning("Elasticsearch 索引初始化失败（可稍后自动创建）")
+    try:
+        _qdrant.ensure_collection()
+    except Exception:
+        logger.warning("Qdrant 集合初始化失败（可稍后自动创建）")
     logger.info("数据库表已就绪")
     yield
 
