@@ -1,0 +1,1 @@
+llama-server -m .\bge-m3-Q4_K_M.gguf --host 0.0.0.0 --port 1233 --embedding --ctx-size 8192 --ubatch-size 1024

@@ -1,0 +1,94 @@
+# =============================================================================
+# BigGraph Docker 编排 — 仅打包应用层
+#
+# PostgreSQL / Redis / Elasticsearch / Qdrant 已在宿主环境运行，
+# 通过 host.docker.internal 访问（Docker Desktop Windows 自动支持）。
+# =============================================================================
+
+services:
+  # ================================================================
+  # Embedding — LLama.cpp + bge-m3 向量化服务
+  # 注意: 模型文件 emb/bge-m3-Q4_K_M.gguf 需要先放到项目根目录
+  # ================================================================
+  embedding:
+    build:
+      context: .
+      dockerfile: docker/embedding/Dockerfile
+    container_name: biggraph-embedding
+    ports:
+      - "1233:1233"
+    volumes:
+      - ./emb/bge-m3-Q4_K_M.gguf:/model/bge-m3-Q4_K_M.gguf:ro
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "curl -s -o /dev/null -w '%{http_code}' -X POST http://localhost:1233/v1/embeddings -H 'Content-Type: application/json' -d '{\"input\":\"hi\",\"model\":\"bge-m3\"}' | grep -q 200",
+        ]
+      interval: 30s
+      timeout: 15s
+      retries: 10
+      start_period: 30s
+    restart: unless-stopped
+
+  # ================================================================
+  # Backend — FastAPI 后端（通过 host.docker.internal 连接宿主服务）
+  # ================================================================
+  backend:
+    build:
+      context: .
+      dockerfile: docker/backend/Dockerfile
+    container_name: biggraph-backend
+    depends_on:
+      embedding:
+        condition: service_healthy
+    environment:
+      # --- 数据库（宿主已有容器） ---
+      PG_HOST: host.docker.internal
+      PG_PORT: "5432"
+      PG_USER: workface
+      PG_PASSWORD: 678678
+      PG_DATABASE: workface
+      # --- 缓存 ---
+      REDIS_HOST: host.docker.internal
+      REDIS_PORT: "6379"
+      # --- 向量库 ---
+      QDRANT_URL: http://host.docker.internal:6333
+      QDRANT_COLLECTION: enterprise_knowledge_chunks
+      QDRANT_VECTOR_SIZE: "1024"
+      # --- 全文检索 ---
+      ES_HOSTS: http://host.docker.internal:9200
+      ES_USER: elastic
+      ES_PASSWORD: changeme
+      # --- Embedding ---
+      EMBEDDING_BASE_URL: http://embedding:1233/v1
+      EMBEDDING_MODEL: bge-m3
+      EMBEDDING_API_KEY: ""
+      # --- LLM ---
+      LLM_API_KEY: ${LLM_API_KEY}
+      LLM_BASE_URL: ${LLM_BASE_URL}
+      LLM_MODEL: ${LLM_MODEL:-DeepSeek-V4-Flash[free]}
+      # --- 日志 ---
+      LOG_LEVEL: INFO
+      LOG_DIR: /app/logs
+      TZ: Asia/Shanghai
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./docker-data/uploads:/app/uploads
+      - ./docker-data/logs:/app/logs
+    restart: unless-stopped
+
+  # ================================================================
+  # Frontend — Vue3 Nginx
+  # ================================================================
+  frontend:
+    build:
+      context: .
+      dockerfile: docker/frontend/Dockerfile
+    container_name: biggraph-frontend
+    depends_on:
+      - backend
+    ports:
+      - "80:80"
+    restart: unless-stopped

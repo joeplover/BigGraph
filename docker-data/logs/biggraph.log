@@ -1,0 +1,919 @@
+[2026-06-14 14:55:07] [INFO ] [api.ragControll          ] [-] 数据库表已就绪
+[2026-06-14 14:55:29] [INFO ] [http                     ] [da67125029c0] GET /health → 404
+[2026-06-14 14:55:29] [WARNING] [api.auth                 ] [0ea3822c4de2] 登录失败，用户不存在: test
+[2026-06-14 14:55:29] [INFO ] [http                     ] [fe974de8f657] POST /auth/login → 401
+[2026-06-14 14:55:42] [INFO ] [http                     ] [dc7036319674] GET /api/chat/sessions → 404
+[2026-06-14 14:55:42] [WARNING] [api.auth                 ] [7619daef3690] 登录失败，用户不存在: joeplover
+[2026-06-14 14:55:42] [INFO ] [http                     ] [4c409d1a4874] POST /auth/login → 401
+[2026-06-14 14:56:03] [INFO ] [http                     ] [c7737343f107] GET /api/chat/sessions → 404
+[2026-06-14 14:56:04] [INFO ] [api.auth                 ] [e4bec4d84469] 用户注册成功: username=joeplover email=1665637752@qq.com user_id=c570c2d5-1145-4945-8ba5-4a9e7350f73a tenant=tenant_2a2047ae
+[2026-06-14 14:56:04] [INFO ] [http                     ] [6eda0b51c92c] POST /auth/register → 200
+[2026-06-14 14:56:04] [INFO ] [http                     ] [19663b460a3d] GET /api/chat/sessions → 404
+[2026-06-14 14:56:04] [INFO ] [api.ragControll          ] [3670be6858b2] 知识库列表: user=c570c2d5-1145-4945-8ba5-4a9e7350f73a count=0
+[2026-06-14 14:56:04] [INFO ] [http                     ] [2229de7fac45] GET /knowledge_bases/ → 200
+[2026-06-14 14:56:27] [INFO ] [api.ragControll          ] [14ee896851cd] 创建知识库: name=joe的知识库 tenant=tenant_2a2047ae owner=c570c2d5-1145-4945-8ba5-4a9e7350f73a
+[2026-06-14 14:56:27] [INFO ] [http                     ] [fec97ee3df21] POST /knowledge_bases/ → 200
+[2026-06-14 14:56:27] [INFO ] [api.ragControll          ] [d585cd3ea523] 知识库列表: user=c570c2d5-1145-4945-8ba5-4a9e7350f73a count=1
+[2026-06-14 14:56:27] [INFO ] [http                     ] [13aa2f0b8ba8] GET /knowledge_bases/ → 200
+[2026-06-14 14:56:32] [INFO ] [http                     ] [77fb2fc47330] GET /knowledge_bases/d84c9db7-85d5-44a6-a018-ac741ebeff15/members → 200
+[2026-06-14 14:56:33] [INFO ] [http                     ] [b7476b28783c] GET /api/chat/sessions → 404
+[2026-06-14 14:56:33] [INFO ] [api.ragControll          ] [4e3eda1113d9] 知识库列表: user=c570c2d5-1145-4945-8ba5-4a9e7350f73a count=1
+[2026-06-14 14:56:33] [INFO ] [http                     ] [f89bfd029332] GET /knowledge_bases/ → 200
+[2026-06-14 14:59:00] [INFO ] [http                     ] [b3c470a71edb] GET /chat/ → 307
+[2026-06-14 14:59:00] [INFO ] [http                     ] [83a34118dfe7] GET /chat/ → 307
+[2026-06-14 14:59:00] [INFO ] [http                     ] [268f25b0a338] GET /chat/ → 307
+[2026-06-14 14:59:00] [INFO ] [http                     ] [f63febe8af6f] GET /chat/ → 307
+[2026-06-14 14:59:00] [INFO ] [http                     ] [e0bafce6e385] GET /chat/ → 307
+[2026-06-14 14:59:00] [INFO ] [http                     ] [4ac87a74ef32] GET /chat/ → 307
+[2026-06-14 14:59:00] [INFO ] [http                     ] [70d0d8f8163d] GET /chat/ → 307
+[2026-06-14 14:59:00] [INFO ] [http                     ] [9d00cb975afb] GET /chat/ → 307
+[2026-06-14 14:59:00] [INFO ] [http                     ] [80b5170646e2] GET /chat/ → 307
+[2026-06-14 14:59:00] [INFO ] [http                     ] [3b6eee920c4b] GET /chat/ → 307
+[2026-06-14 14:59:01] [INFO ] [http                     ] [19f2273de04d] GET /chat/ → 307
+[2026-06-14 14:59:01] [INFO ] [http                     ] [04f93fcdde12] GET /chat/ → 307
+[2026-06-14 14:59:01] [INFO ] [http                     ] [4789a2c69b8d] GET /chat/ → 307
+[2026-06-14 14:59:01] [INFO ] [http                     ] [6c837fe613a4] GET /chat/ → 307
+[2026-06-14 14:59:01] [INFO ] [http                     ] [79018b5aa2eb] GET /chat/ → 307
+[2026-06-14 14:59:01] [INFO ] [http                     ] [f82f2ee29ee7] GET /chat/ → 307
+[2026-06-14 14:59:01] [INFO ] [http                     ] [7d75205b46a4] GET /chat/ → 307
+[2026-06-14 14:59:01] [INFO ] [http                     ] [4d89d9037a25] GET /chat/ → 307
+[2026-06-14 14:59:01] [INFO ] [http                     ] [d3c31a1fe3d3] GET /chat/ → 307
+[2026-06-14 14:59:01] [INFO ] [http                     ] [83b2e3f432ab] GET /chat/ → 307
+[2026-06-14 14:59:01] [INFO ] [http                     ] [adfdc9d840d3] GET /chat/ → 307
+[2026-06-14 14:59:01] [INFO ] [http                     ] [1fdbcc6390bd] GET /chat/ → 307
+[2026-06-14 14:59:01] [INFO ] [http                     ] [fc11c9eb5d58] GET /chat/ → 307
+[2026-06-14 14:59:01] [INFO ] [http                     ] [911a8265e057] GET /chat/ → 307
+[2026-06-14 14:59:01] [INFO ] [http                     ] [abbdb11992bc] GET /chat/ → 307
+[2026-06-14 14:59:01] [INFO ] [http                     ] [dbb2d79cd2fa] GET /chat/ → 307
+[2026-06-14 14:59:02] [INFO ] [http                     ] [eeb400b15a8c] GET /chat/ → 307
+[2026-06-14 14:59:02] [INFO ] [http                     ] [31e6b5cb8a6f] GET /chat/ → 307
+[2026-06-14 14:59:07] [INFO ] [http                     ] [daa742a7cf71] GET /api/chat/sessions → 404
+[2026-06-14 14:59:07] [INFO ] [api.ragControll          ] [6f4b0712db9e] 知识库列表: user=c570c2d5-1145-4945-8ba5-4a9e7350f73a count=1
+[2026-06-14 14:59:07] [INFO ] [http                     ] [490563bd0728] GET /knowledge_bases/ → 200
+[2026-06-14 14:59:07] [INFO ] [http                     ] [21465cf7c6fc] GET /api/chat/sessions → 404
+[2026-06-14 15:05:33] [INFO ] [http                     ] [fa446241e654] GET /chat/sessions → 422
+[2026-06-14 15:05:58] [INFO ] [http                     ] [b623a743626c] GET /chat/ → 307
+[2026-06-14 15:05:58] [INFO ] [http                     ] [a680d1e366f0] GET /chat/ → 307
+[2026-06-14 15:05:58] [INFO ] [http                     ] [4616fb6e8d8d] GET /chat/ → 307
+[2026-06-14 15:05:58] [INFO ] [http                     ] [9d754adb9eec] GET /chat/ → 307
+[2026-06-14 15:05:58] [INFO ] [http                     ] [0cebd8416f75] GET /chat/ → 307
+[2026-06-14 15:05:58] [INFO ] [http                     ] [6dc38c03adc7] GET /chat/ → 307
+[2026-06-14 15:05:58] [INFO ] [http                     ] [c0c64288f06e] GET /chat/ → 307
+[2026-06-14 15:05:58] [INFO ] [http                     ] [bf0de73309de] GET /chat/ → 307
+[2026-06-14 15:05:58] [INFO ] [http                     ] [b81ca3f3015c] GET /chat/ → 307
+[2026-06-14 15:05:58] [INFO ] [http                     ] [adc657ab297b] GET /chat/ → 307
+[2026-06-14 15:05:59] [INFO ] [http                     ] [4ac5be6b6bbd] GET /chat/ → 307
+[2026-06-14 15:05:59] [INFO ] [http                     ] [859c7bf93df0] GET /chat/ → 307
+[2026-06-14 15:05:59] [INFO ] [http                     ] [bba0a02b577a] GET /chat/ → 307
+[2026-06-14 15:05:59] [INFO ] [http                     ] [b80c8f231b3d] GET /chat/ → 307
+[2026-06-14 15:05:59] [INFO ] [http                     ] [f03f4b99bdc8] GET /chat/ → 307
+[2026-06-14 15:05:59] [INFO ] [http                     ] [acee62b34c0d] GET /chat/ → 307
+[2026-06-14 15:05:59] [INFO ] [http                     ] [3d7958ea5ad7] GET /chat/ → 307
+[2026-06-14 15:05:59] [INFO ] [http                     ] [f7efea2614f6] GET /chat/ → 307
+[2026-06-14 15:05:59] [INFO ] [http                     ] [c726aede40a9] GET /chat/ → 307
+[2026-06-14 15:05:59] [INFO ] [http                     ] [440c59f6cef6] GET /chat/ → 307
+[2026-06-14 15:06:00] [INFO ] [http                     ] [24a9ed0d3259] GET /chat/ → 307
+[2026-06-14 15:06:00] [INFO ] [http                     ] [2ecf9b479df1] GET /chat/ → 307
+[2026-06-14 15:06:00] [INFO ] [http                     ] [416d43cc7cc1] GET /chat/ → 307
+[2026-06-14 15:06:00] [INFO ] [http                     ] [ce8abecf8233] GET /chat/ → 307
+[2026-06-14 15:06:00] [INFO ] [http                     ] [c89fa6f78044] GET /chat/ → 307
+[2026-06-14 15:06:00] [INFO ] [http                     ] [ceb45d646990] GET /chat/ → 307
+[2026-06-14 15:06:00] [INFO ] [http                     ] [3898c3aba394] GET /chat/ → 307
+[2026-06-14 15:06:00] [INFO ] [http                     ] [c5c8e3f50370] GET /chat/ → 307
+[2026-06-14 15:06:00] [INFO ] [http                     ] [d00b00426c24] GET /chat/ → 307
+[2026-06-14 15:06:00] [INFO ] [http                     ] [1c7f70b8ce05] GET /chat/ → 307
+[2026-06-14 15:06:03] [INFO ] [http                     ] [166d705d47d7] GET /chat/ → 307
+[2026-06-14 15:06:03] [INFO ] [http                     ] [2b2dda49ee13] GET /chat/ → 307
+[2026-06-14 15:06:03] [INFO ] [http                     ] [ab61829588e3] GET /chat/ → 307
+[2026-06-14 15:06:03] [INFO ] [http                     ] [fb75401b3ed8] GET /chat/ → 307
+[2026-06-14 15:06:03] [INFO ] [http                     ] [c9a72dea9ed1] GET /chat/ → 307
+[2026-06-14 15:06:03] [INFO ] [http                     ] [a084879b1a46] GET /chat/ → 307
+[2026-06-14 15:06:03] [INFO ] [http                     ] [93acc085f825] GET /chat/ → 307
+[2026-06-14 15:06:03] [INFO ] [http                     ] [ef41bd5bf2b9] GET /chat/ → 307
+[2026-06-14 15:06:03] [INFO ] [http                     ] [84895f72f520] GET /chat/ → 307
+[2026-06-14 15:06:03] [INFO ] [http                     ] [ec9af3dcefec] GET /chat/ → 307
+[2026-06-14 15:06:08] [INFO ] [http                     ] [bed9cf3506f4] GET /chat/sessions → 200
+[2026-06-14 15:06:08] [INFO ] [api.ragControll          ] [2fd2a14f7ba3] 知识库列表: user=c570c2d5-1145-4945-8ba5-4a9e7350f73a count=1
+[2026-06-14 15:06:08] [INFO ] [http                     ] [89c0e71a79a3] GET /knowledge_bases/ → 200
+[2026-06-14 15:06:08] [INFO ] [http                     ] [5abcfa688fcf] GET /chat/sessions → 200
+[2026-06-14 15:06:22] [INFO ] [api.ragControll          ] [c1ebb3c61baf] 收到上传请求: name=transformer_zh_cn.pdf kb=d84c9db7-85d5-44a6-a018-ac741ebeff15 tenant=tenant_2a2047ae user=c570c2d5-1145-4945-8ba5-4a9e7350f73a
+[2026-06-14 15:06:22] [INFO ] [api.ragControll          ] [c1ebb3c61baf] 上传完成: job_id=63d486f1-99ed-4cd4-b66e-0c1522858c35 file_id=dc97f89f-36ac-46e7-8ede-88483e9d5b31 size=1437032
+[2026-06-14 15:06:22] [INFO ] [http                     ] [671368aa2610] POST /upload/d84c9db7-85d5-44a6-a018-ac741ebeff15 → 200
+[2026-06-14 15:06:22] [INFO ] [api.ragControll          ] [c1ebb3c61baf/ee2d3748516b] 后台任务开始: job_id=63d486f1-99ed-4cd4-b66e-0c1522858c35 file_id=dc97f89f-36ac-46e7-8ede-88483e9d5b31
+[2026-06-14 15:06:25] [DEBUG] [jieba                    ] [-] Building prefix dict from the default dictionary ...
+[2026-06-14 15:06:26] [DEBUG] [jieba                    ] [-] Dumping model to file cache /tmp/jieba.cache
+[2026-06-14 15:06:26] [DEBUG] [jieba                    ] [-] Loading model cost 0.635 seconds.
+[2026-06-14 15:06:26] [DEBUG] [jieba                    ] [-] Prefix dict has been built successfully.
+[2026-06-14 15:06:26] [INFO ] [api.ragControll          ] [c1ebb3c61baf/ee2d3748516b] 解析完成: chunks=29
+[2026-06-14 15:06:26] [INFO ] [http                     ] [ae493dbcd2df] GET /jobs/63d486f1-99ed-4cd4-b66e-0c1522858c35 → 200
+[2026-06-14 15:06:28] [INFO ] [http                     ] [c3085724bb77] GET /jobs/63d486f1-99ed-4cd4-b66e-0c1522858c35 → 200
+[2026-06-14 15:06:30] [INFO ] [http                     ] [20382c530e6b] GET /jobs/63d486f1-99ed-4cd4-b66e-0c1522858c35 → 200
+[2026-06-14 15:06:32] [INFO ] [http                     ] [a26d15c05644] GET /jobs/63d486f1-99ed-4cd4-b66e-0c1522858c35 → 200
+[2026-06-14 15:06:34] [INFO ] [http                     ] [4b0723fbd1ef] GET /jobs/63d486f1-99ed-4cd4-b66e-0c1522858c35 → 200
+[2026-06-14 15:06:36] [INFO ] [http                     ] [e39a6d236229] GET /jobs/63d486f1-99ed-4cd4-b66e-0c1522858c35 → 200
+[2026-06-14 15:06:38] [INFO ] [http                     ] [222dff0bca1c] GET /jobs/63d486f1-99ed-4cd4-b66e-0c1522858c35 → 200
+[2026-06-14 15:06:40] [INFO ] [http                     ] [a9f13cecbb8b] GET /jobs/63d486f1-99ed-4cd4-b66e-0c1522858c35 → 200
+[2026-06-14 15:06:42] [INFO ] [http                     ] [bf659d60aa23] GET /jobs/63d486f1-99ed-4cd4-b66e-0c1522858c35 → 200
+[2026-06-14 15:06:44] [INFO ] [http                     ] [87596566da81] GET /jobs/63d486f1-99ed-4cd4-b66e-0c1522858c35 → 200
+[2026-06-14 15:06:46] [INFO ] [http                     ] [734555c36125] GET /jobs/63d486f1-99ed-4cd4-b66e-0c1522858c35 → 200
+[2026-06-14 15:06:48] [INFO ] [http                     ] [d25aa3fadf93] GET /jobs/63d486f1-99ed-4cd4-b66e-0c1522858c35 → 200
+[2026-06-14 15:06:49] [INFO ] [httpx                    ] [-] HTTP Request: PUT http://host.docker.internal:6333/collections/enterprise_knowledge_chunks/points?wait=true "HTTP/1.1 404 Not Found"
+[2026-06-14 15:06:51] [INFO ] [elastic_transport.transport] [-] PUT http://host.docker.internal:9200/_bulk?refresh=wait_for [status:200 duration:1.445s]
+[2026-06-14 15:06:51] [INFO ] [api.ragControll          ] [c1ebb3c61baf/ee2d3748516b] 后台任务完成: job_id=63d486f1-99ed-4cd4-b66e-0c1522858c35 chunks=29 qdrant=False es=True
+[2026-06-14 15:06:51] [INFO ] [http                     ] [eeb22040a937] GET /jobs/63d486f1-99ed-4cd4-b66e-0c1522858c35 → 200
+[2026-06-14 15:06:59] [INFO ] [api.ragControll          ] [-] 会话已创建: session_id=0c1b24ef-9dba-41e0-9c5c-600bebd33f11
+[2026-06-14 15:06:59] [INFO ] [http                     ] [7efef102b437] POST /chat/sessions → 200
+[2026-06-14 15:07:14] [INFO ] [api.ragControll          ] [2aa720ec3e1a] 搜索请求: query=编码器由多少层组成 kb=d84c9db7-85d5-44a6-a018-ac741ebeff15 user=c570c2d5-1145-4945-8ba5-4a9e7350f73a
+[2026-06-14 15:07:14] [INFO ] [httpx                    ] [-] HTTP Request: POST http://host.docker.internal:6333/collections/enterprise_knowledge_chunks/points/search "HTTP/1.1 404 Not Found"
+[2026-06-14 15:07:14] [ERROR] [api.ragControll          ] [9f9c649408f2] 未捕获异常: Unexpected Response: 404 (Not Found)
+Raw response content:
+b'{"status":{"error":"Not found: Collection `enterprise_knowledge_chunks` doesn\'t exist!"},"time":0.000021672}'
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/app/core/logging.py", line 148, in __call__
+    await self.app(scope, receive, log_send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 212, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/api/ragControll.py", line 692, in search_documents
+    qdrant_hits = _qdrant.search(
+                  ^^^^^^^^^^^^^^^
+  File "/app/storage/qdrant.py", line 52, in search
+    hits = self.client.search(
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/qdrant_client/qdrant_client.py", line 387, in search
+    return self._client.search(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/qdrant_client/qdrant_remote.py", line 563, in search
+    search_result = self.http.points_api.search_points(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/qdrant_client/http/api/points_api.py", line 1820, in search_points
+    return self._build_for_search_points(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/qdrant_client/http/api/points_api.py", line 852, in _build_for_search_points
+    return self.api_client.request(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/qdrant_client/http/api_client.py", line 79, in request
+    return self.send(request, type_)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/qdrant_client/http/api_client.py", line 102, in send
+    raise UnexpectedResponse.for_response(response)
+qdrant_client.http.exceptions.UnexpectedResponse: Unexpected Response: 404 (Not Found)
+Raw response content:
+b'{"status":{"error":"Not found: Collection `enterprise_knowledge_chunks` doesn\'t exist!"},"time":0.000021672}'
+[2026-06-14 15:08:16] [INFO ] [api.ragControll          ] [d2fdc43cd912] 搜索请求: query=编码器由多少层组成 kb=d84c9db7-85d5-44a6-a018-ac741ebeff15 user=c570c2d5-1145-4945-8ba5-4a9e7350f73a
+[2026-06-14 15:08:16] [INFO ] [httpx                    ] [-] HTTP Request: POST http://host.docker.internal:6333/collections/enterprise_knowledge_chunks/points/search "HTTP/1.1 404 Not Found"
+[2026-06-14 15:08:16] [ERROR] [api.ragControll          ] [520845ee13a3] 未捕获异常: Unexpected Response: 404 (Not Found)
+Raw response content:
+b'{"status":{"error":"Not found: Collection `enterprise_knowledge_chunks` doesn\'t exist!"},"time":0.000016882}'
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/app/core/logging.py", line 148, in __call__
+    await self.app(scope, receive, log_send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 212, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/api/ragControll.py", line 692, in search_documents
+    qdrant_hits = _qdrant.search(
+                  ^^^^^^^^^^^^^^^
+  File "/app/storage/qdrant.py", line 52, in search
+    hits = self.client.search(
+           ^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/qdrant_client/qdrant_client.py", line 387, in search
+    return self._client.search(
+           ^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/qdrant_client/qdrant_remote.py", line 563, in search
+    search_result = self.http.points_api.search_points(
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/qdrant_client/http/api/points_api.py", line 1820, in search_points
+    return self._build_for_search_points(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/qdrant_client/http/api/points_api.py", line 852, in _build_for_search_points
+    return self.api_client.request(
+           ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/qdrant_client/http/api_client.py", line 79, in request
+    return self.send(request, type_)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/qdrant_client/http/api_client.py", line 102, in send
+    raise UnexpectedResponse.for_response(response)
+qdrant_client.http.exceptions.UnexpectedResponse: Unexpected Response: 404 (Not Found)
+Raw response content:
+b'{"status":{"error":"Not found: Collection `enterprise_knowledge_chunks` doesn\'t exist!"},"time":0.000016882}'
+[2026-06-14 15:13:34] [ERROR] [api.ragControll          ] [9fc55c83542d] 未捕获异常: (psycopg.errors.ForeignKeyViolation) update or delete on table "uploaded_files" violates foreign key constraint "ingestion_jobs_file_id_fkey" on table "ingestion_jobs"
+DETAIL:  Key (id)=(dc97f89f-36ac-46e7-8ede-88483e9d5b31) is still referenced from table "ingestion_jobs".
+[SQL: DELETE FROM uploaded_files WHERE uploaded_files.knowledge_base_id = %(knowledge_base_id_1)s::UUID RETURNING uploaded_files.id]
+[parameters: {'knowledge_base_id_1': 'd84c9db7-85d5-44a6-a018-ac741ebeff15'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+  File "/usr/local/lib/python3.11/site-packages/psycopg/cursor.py", line 97, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.ForeignKeyViolation: update or delete on table "uploaded_files" violates foreign key constraint "ingestion_jobs_file_id_fkey" on table "ingestion_jobs"
+DETAIL:  Key (id)=(dc97f89f-36ac-46e7-8ede-88483e9d5b31) is still referenced from table "ingestion_jobs".
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/app/core/logging.py", line 148, in __call__
+    await self.app(scope, receive, log_send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 212, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/api/ragControll.py", line 751, in delete_knowledge_base
+    file_count = UploadedFileStore.delete_by_kb(db, kb_id)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/storage/postgres.py", line 259, in delete_by_kb
+    count = db.query(UploadedFile).filter(UploadedFile.knowledge_base_id == kb_id).delete(synchronize_session="fetch")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 3162, in delete
+    result: CursorResult[Any] = self.session.execute(
+                                ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2362, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2247, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/bulk_persistence.py", line 2021, in orm_execute_statement
+    return super().orm_execute_statement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 305, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1418, in execute
+    return meth(
+           ^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 515, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1640, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+  File "/usr/local/lib/python3.11/site-packages/psycopg/cursor.py", line 97, in execute
+    raise ex.with_traceback(None)
+sqlalchemy.exc.IntegrityError: (psycopg.errors.ForeignKeyViolation) update or delete on table "uploaded_files" violates foreign key constraint "ingestion_jobs_file_id_fkey" on table "ingestion_jobs"
+DETAIL:  Key (id)=(dc97f89f-36ac-46e7-8ede-88483e9d5b31) is still referenced from table "ingestion_jobs".
+[SQL: DELETE FROM uploaded_files WHERE uploaded_files.knowledge_base_id = %(knowledge_base_id_1)s::UUID RETURNING uploaded_files.id]
+[parameters: {'knowledge_base_id_1': 'd84c9db7-85d5-44a6-a018-ac741ebeff15'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+[2026-06-14 15:14:02] [INFO ] [api.ragControll          ] [-] 数据库表已就绪
+[2026-06-14 15:14:10] [INFO ] [api.ragControll          ] [4bae53f19301] 知识库列表: user=c570c2d5-1145-4945-8ba5-4a9e7350f73a count=1
+[2026-06-14 15:14:10] [INFO ] [http                     ] [77eb8c062422] GET /knowledge_bases/ → 200
+[2026-06-14 15:14:10] [INFO ] [http                     ] [1e41e0b194c1] GET /chat/sessions → 200
+[2026-06-14 15:14:10] [INFO ] [http                     ] [493a41259fdc] GET /chat/sessions → 200
+[2026-06-14 15:14:10] [INFO ] [http                     ] [013753b1977b] GET /chat/history/0c1b24ef-9dba-41e0-9c5c-600bebd33f11 → 200
+[2026-06-14 15:14:10] [INFO ] [http                     ] [59b2b78a6394] GET /chat/history/0c1b24ef-9dba-41e0-9c5c-600bebd33f11 → 200
+[2026-06-14 15:14:13] [ERROR] [api.ragControll          ] [1ad4a875cff8] 未捕获异常: (psycopg.errors.ForeignKeyViolation) update or delete on table "uploaded_files" violates foreign key constraint "ingestion_jobs_file_id_fkey" on table "ingestion_jobs"
+DETAIL:  Key (id)=(dc97f89f-36ac-46e7-8ede-88483e9d5b31) is still referenced from table "ingestion_jobs".
+[SQL: DELETE FROM uploaded_files WHERE uploaded_files.knowledge_base_id = %(knowledge_base_id_1)s::UUID RETURNING uploaded_files.id]
+[parameters: {'knowledge_base_id_1': 'd84c9db7-85d5-44a6-a018-ac741ebeff15'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+  File "/usr/local/lib/python3.11/site-packages/psycopg/cursor.py", line 97, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.ForeignKeyViolation: update or delete on table "uploaded_files" violates foreign key constraint "ingestion_jobs_file_id_fkey" on table "ingestion_jobs"
+DETAIL:  Key (id)=(dc97f89f-36ac-46e7-8ede-88483e9d5b31) is still referenced from table "ingestion_jobs".
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/app/core/logging.py", line 148, in __call__
+    await self.app(scope, receive, log_send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 212, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/api/ragControll.py", line 751, in delete_knowledge_base
+    file_count = UploadedFileStore.delete_by_kb(db, kb_id)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/storage/postgres.py", line 259, in delete_by_kb
+    count = db.query(UploadedFile).filter(UploadedFile.knowledge_base_id == kb_id).delete(synchronize_session="fetch")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 3162, in delete
+    result: CursorResult[Any] = self.session.execute(
+                                ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2362, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2247, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/bulk_persistence.py", line 2021, in orm_execute_statement
+    return super().orm_execute_statement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 305, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1418, in execute
+    return meth(
+           ^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 515, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1640, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+  File "/usr/local/lib/python3.11/site-packages/psycopg/cursor.py", line 97, in execute
+    raise ex.with_traceback(None)
+sqlalchemy.exc.IntegrityError: (psycopg.errors.ForeignKeyViolation) update or delete on table "uploaded_files" violates foreign key constraint "ingestion_jobs_file_id_fkey" on table "ingestion_jobs"
+DETAIL:  Key (id)=(dc97f89f-36ac-46e7-8ede-88483e9d5b31) is still referenced from table "ingestion_jobs".
+[SQL: DELETE FROM uploaded_files WHERE uploaded_files.knowledge_base_id = %(knowledge_base_id_1)s::UUID RETURNING uploaded_files.id]
+[parameters: {'knowledge_base_id_1': 'd84c9db7-85d5-44a6-a018-ac741ebeff15'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+[2026-06-14 15:17:59] [INFO ] [http                     ] [d5d9f6763397] GET /chat/ → 307
+[2026-06-14 15:17:59] [INFO ] [http                     ] [cc1724317c98] GET /chat/ → 307
+[2026-06-14 15:17:59] [INFO ] [http                     ] [4cda058d6912] GET /chat/ → 307
+[2026-06-14 15:17:59] [INFO ] [http                     ] [583fbb61d7d7] GET /chat/ → 307
+[2026-06-14 15:17:59] [INFO ] [http                     ] [d6b649c87f7d] GET /chat/ → 307
+[2026-06-14 15:17:59] [INFO ] [http                     ] [8e0a0d918667] GET /chat/ → 307
+[2026-06-14 15:17:59] [INFO ] [http                     ] [1bab64af07e1] GET /chat/ → 307
+[2026-06-14 15:17:59] [INFO ] [http                     ] [608b288e91ee] GET /chat/ → 307
+[2026-06-14 15:17:59] [INFO ] [http                     ] [5c7cbb832129] GET /chat/ → 307
+[2026-06-14 15:17:59] [INFO ] [http                     ] [856ce800fed4] GET /chat/ → 307
+[2026-06-14 15:29:27] [INFO ] [http                     ] [f2abd82a42e3] GET /chat/sessions → 422
+[2026-06-14 15:29:27] [INFO ] [http                     ] [3e9f9eb10bf1] GET /auth/me → 422
+[2026-06-14 15:29:28] [INFO ] [http                     ] [754d54228009] GET /knowledge_bases/ → 422
+[2026-06-14 15:30:44] [INFO ] [http                     ] [6debe50b3433] GET /chat/ → 307
+[2026-06-14 15:30:44] [INFO ] [http                     ] [32ee2ab4ef0c] GET /chat/ → 307
+[2026-06-14 15:30:44] [INFO ] [http                     ] [889dd55f44c1] GET /chat/ → 307
+[2026-06-14 15:30:44] [INFO ] [http                     ] [8283317c9c4a] GET /chat/ → 307
+[2026-06-14 15:30:44] [INFO ] [http                     ] [3d65c692a9ed] GET /chat/ → 307
+[2026-06-14 15:30:44] [INFO ] [http                     ] [72b419c9b26b] GET /chat/ → 307
+[2026-06-14 15:30:44] [INFO ] [http                     ] [3c4ffcf73400] GET /chat/ → 307
+[2026-06-14 15:30:44] [INFO ] [http                     ] [ca20b6b70ab5] GET /chat/ → 307
+[2026-06-14 15:30:44] [INFO ] [http                     ] [ca513dded73a] GET /chat/ → 307
+[2026-06-14 15:30:44] [INFO ] [http                     ] [078134cb4ac5] GET /chat/ → 307
+[2026-06-14 15:30:45] [INFO ] [http                     ] [7ac5cce7799b] GET /chat/ → 307
+[2026-06-14 15:30:45] [INFO ] [http                     ] [64d229ea21f6] GET /chat/ → 307
+[2026-06-14 15:30:45] [INFO ] [http                     ] [dfbbd3d50c9e] GET /chat/ → 307
+[2026-06-14 15:30:45] [INFO ] [http                     ] [a5633d59e8b9] GET /chat/ → 307
+[2026-06-14 15:30:45] [INFO ] [http                     ] [a17a50f01788] GET /chat/ → 307
+[2026-06-14 15:30:45] [INFO ] [http                     ] [33c6c968b4c9] GET /chat/ → 307
+[2026-06-14 15:30:45] [INFO ] [http                     ] [ff19f225b8bd] GET /chat/ → 307
+[2026-06-14 15:30:45] [INFO ] [http                     ] [a0ed610abe51] GET /chat/ → 307
+[2026-06-14 15:30:45] [INFO ] [http                     ] [bc393286c7b0] GET /chat/ → 307
+[2026-06-14 15:30:45] [INFO ] [http                     ] [243ef9ea86b1] GET /chat/ → 307
+[2026-06-14 15:30:51] [INFO ] [api.ragControll          ] [3827c315c558] 知识库列表: user=c570c2d5-1145-4945-8ba5-4a9e7350f73a count=1
+[2026-06-14 15:30:51] [INFO ] [http                     ] [e574adad2d7d] GET /knowledge_bases/ → 200
+[2026-06-14 15:30:51] [INFO ] [http                     ] [dcecc9616a7d] GET /chat/sessions → 200
+[2026-06-14 15:30:51] [INFO ] [http                     ] [242bbae0ae48] GET /chat/sessions → 200
+[2026-06-14 15:30:51] [INFO ] [http                     ] [2f53a60c85e0] GET /chat/history/0c1b24ef-9dba-41e0-9c5c-600bebd33f11 → 200
+[2026-06-14 15:30:51] [INFO ] [http                     ] [a8ead57fd3c2] GET /chat/history/0c1b24ef-9dba-41e0-9c5c-600bebd33f11 → 200
+[2026-06-14 15:30:52] [INFO ] [http                     ] [cfabd2151c7e] GET /chat/ → 307
+[2026-06-14 15:30:52] [INFO ] [http                     ] [32624555dc11] GET /chat/ → 307
+[2026-06-14 15:30:52] [INFO ] [http                     ] [91f172ac3f97] GET /chat/ → 307
+[2026-06-14 15:30:52] [INFO ] [http                     ] [fe79a5ca5a29] GET /chat/ → 307
+[2026-06-14 15:30:52] [INFO ] [http                     ] [cb3a5fc65bb2] GET /chat/ → 307
+[2026-06-14 15:30:52] [INFO ] [http                     ] [3efc643720e6] GET /chat/ → 307
+[2026-06-14 15:30:52] [INFO ] [http                     ] [1058339e08af] GET /chat/ → 307
+[2026-06-14 15:30:52] [INFO ] [http                     ] [7226730153c6] GET /chat/ → 307
+[2026-06-14 15:30:52] [INFO ] [http                     ] [d50d700aa7c2] GET /chat/ → 307
+[2026-06-14 15:30:52] [INFO ] [http                     ] [709ec8fc7147] GET /chat/ → 307
+[2026-06-14 15:30:54] [INFO ] [http                     ] [c94c4a9cc695] GET /chat/ → 307
+[2026-06-14 15:30:54] [INFO ] [http                     ] [3139e6768237] GET /chat/ → 307
+[2026-06-14 15:30:54] [INFO ] [http                     ] [e7bbb37bd822] GET /chat/ → 307
+[2026-06-14 15:30:54] [INFO ] [http                     ] [6c96f12ff781] GET /chat/ → 307
+[2026-06-14 15:30:54] [INFO ] [http                     ] [94a9818eb541] GET /chat/ → 307
+[2026-06-14 15:30:54] [INFO ] [http                     ] [2185bc4d34ef] GET /chat/ → 307
+[2026-06-14 15:30:54] [INFO ] [http                     ] [7e3c72e4c5f6] GET /chat/ → 307
+[2026-06-14 15:30:54] [INFO ] [http                     ] [375aef29fc62] GET /chat/ → 307
+[2026-06-14 15:30:54] [INFO ] [http                     ] [892cc1334a5b] GET /chat/ → 307
+[2026-06-14 15:30:54] [INFO ] [http                     ] [97e1bacd606a] GET /chat/ → 307
+[2026-06-14 15:30:56] [INFO ] [http                     ] [146318a69f12] GET /chat/ → 307
+[2026-06-14 15:30:56] [INFO ] [http                     ] [54f8bf9918d8] GET /chat/ → 307
+[2026-06-14 15:30:56] [INFO ] [http                     ] [6fee2eb3f233] GET /chat/ → 307
+[2026-06-14 15:30:56] [INFO ] [http                     ] [4fd6fd0498d1] GET /chat/ → 307
+[2026-06-14 15:30:56] [INFO ] [http                     ] [ff8a166bcbf4] GET /chat/ → 307
+[2026-06-14 15:30:56] [INFO ] [http                     ] [72bc4fc99f97] GET /chat/ → 307
+[2026-06-14 15:30:56] [INFO ] [http                     ] [2c6f10d23e7b] GET /chat/ → 307
+[2026-06-14 15:30:56] [INFO ] [http                     ] [c919f5d0a939] GET /chat/ → 307
+[2026-06-14 15:30:56] [INFO ] [http                     ] [a0e20b7e4814] GET /chat/ → 307
+[2026-06-14 15:30:56] [INFO ] [http                     ] [758761109c75] GET /chat/ → 307
+[2026-06-14 15:30:56] [INFO ] [http                     ] [6f0382e1b073] GET /chat/ → 307
+[2026-06-14 15:30:56] [INFO ] [http                     ] [ad7d493aff32] GET /chat/ → 307
+[2026-06-14 15:30:56] [INFO ] [http                     ] [8b7e190cc13e] GET /chat/ → 307
+[2026-06-14 15:30:56] [INFO ] [http                     ] [0bfb08bdc0fb] GET /chat/ → 307
+[2026-06-14 15:30:56] [INFO ] [http                     ] [dcdabc944c75] GET /chat/ → 307
+[2026-06-14 15:30:56] [INFO ] [http                     ] [887d6c63f0b1] GET /chat/ → 307
+[2026-06-14 15:30:56] [INFO ] [http                     ] [a848869259b3] GET /chat/ → 307
+[2026-06-14 15:30:57] [INFO ] [http                     ] [9d2dc7e16a4f] GET /chat/ → 307
+[2026-06-14 15:30:57] [INFO ] [http                     ] [c53aabf37a5e] GET /chat/ → 307
+[2026-06-14 15:30:57] [INFO ] [http                     ] [684a7f85ee67] GET /chat/ → 307
+[2026-06-14 15:30:57] [INFO ] [http                     ] [783fcff15c3d] GET /chat/ → 307
+[2026-06-14 15:30:57] [INFO ] [http                     ] [8e3538afd95e] GET /chat/ → 307
+[2026-06-14 15:30:57] [INFO ] [http                     ] [0a09679d4a23] GET /chat/ → 307
+[2026-06-14 15:30:57] [INFO ] [http                     ] [809d7ca2549b] GET /chat/ → 307
+[2026-06-14 15:30:57] [INFO ] [http                     ] [abb1a0263d6a] GET /chat/ → 307
+[2026-06-14 15:30:57] [INFO ] [http                     ] [e7365e197695] GET /chat/ → 307
+[2026-06-14 15:30:57] [INFO ] [http                     ] [2990d56e5940] GET /chat/ → 307
+[2026-06-14 15:30:57] [INFO ] [http                     ] [1b744eab9b50] GET /chat/ → 307
+[2026-06-14 15:30:57] [INFO ] [http                     ] [0cdff198f3dc] GET /chat/ → 307
+[2026-06-14 15:30:57] [INFO ] [http                     ] [a8c53aad7ca3] GET /chat/ → 307
+[2026-06-14 15:30:57] [INFO ] [http                     ] [d89f21a40a10] GET /chat/ → 307
+[2026-06-14 15:30:57] [INFO ] [http                     ] [d060bfe490af] GET /chat/ → 307
+[2026-06-14 15:30:57] [INFO ] [http                     ] [652c9225637d] GET /chat/ → 307
+[2026-06-14 15:30:58] [INFO ] [http                     ] [325519c9882c] GET /chat/ → 307
+[2026-06-14 15:30:58] [INFO ] [http                     ] [cca023544227] GET /chat/ → 307
+[2026-06-14 15:30:58] [INFO ] [http                     ] [d7fe25980916] GET /chat/ → 307
+[2026-06-14 15:30:58] [INFO ] [http                     ] [9ac7a7c22214] GET /chat/ → 307
+[2026-06-14 15:30:58] [INFO ] [http                     ] [240fd11c09bd] GET /chat/ → 307
+[2026-06-14 15:30:58] [INFO ] [http                     ] [a5dd8da5dad9] GET /chat/ → 307
+[2026-06-14 15:30:58] [INFO ] [http                     ] [e3810ff5a70b] GET /chat/ → 307
+[2026-06-14 15:30:58] [INFO ] [http                     ] [907e9436c65b] GET /chat/ → 307
+[2026-06-14 15:30:58] [INFO ] [http                     ] [06b0a2bfac43] GET /chat/ → 307
+[2026-06-14 15:30:58] [INFO ] [http                     ] [d7a6dfa7500c] GET /chat/ → 307
+[2026-06-14 15:30:58] [INFO ] [http                     ] [529e7bac5d71] GET /chat/ → 307
+[2026-06-14 15:30:58] [INFO ] [http                     ] [8cdded81bd64] GET /chat/ → 307
+[2026-06-14 15:30:58] [INFO ] [http                     ] [0a475ed3c582] GET /chat/ → 307
+[2026-06-14 15:30:58] [INFO ] [http                     ] [cc0be8ed397c] GET /chat/ → 307
+[2026-06-14 15:30:58] [INFO ] [http                     ] [9bbd0d63af74] GET /chat/ → 307
+[2026-06-14 15:30:58] [INFO ] [http                     ] [485d30d63997] GET /chat/ → 307
+[2026-06-14 15:30:58] [INFO ] [http                     ] [edf1459d287f] GET /chat/ → 307
+[2026-06-14 15:30:58] [INFO ] [http                     ] [09ea13e4eb5d] GET /chat/ → 307
+[2026-06-14 15:30:58] [INFO ] [http                     ] [79f3fdaad1ce] GET /chat/ → 307
+[2026-06-14 15:30:58] [INFO ] [http                     ] [002c9279914c] GET /chat/ → 307
+[2026-06-14 15:30:58] [INFO ] [http                     ] [bd30a84637f3] GET /chat/ → 307
+[2026-06-14 15:30:58] [INFO ] [http                     ] [61f91db505a1] GET /chat/ → 307
+[2026-06-14 15:30:58] [INFO ] [http                     ] [63de19d552b3] GET /chat/ → 307
+[2026-06-14 15:30:58] [INFO ] [http                     ] [7e309499f0d3] GET /chat/ → 307
+[2026-06-14 15:30:58] [INFO ] [http                     ] [712ceff687c8] GET /chat/ → 307
+[2026-06-14 15:31:01] [INFO ] [http                     ] [a01f4b9cd073] GET /chat/sessions → 200
+[2026-06-14 15:31:01] [INFO ] [api.ragControll          ] [52c9981c401d] 知识库列表: user=c570c2d5-1145-4945-8ba5-4a9e7350f73a count=1
+[2026-06-14 15:31:01] [INFO ] [http                     ] [32c5ba83ff63] GET /knowledge_bases/ → 200
+[2026-06-14 15:31:01] [INFO ] [http                     ] [0f3918de6b56] GET /chat/history/0c1b24ef-9dba-41e0-9c5c-600bebd33f11 → 200
+[2026-06-14 15:31:01] [INFO ] [http                     ] [77ee91458f63] GET /chat/sessions → 200
+[2026-06-14 15:31:02] [INFO ] [http                     ] [b04830723364] GET /chat/history/0c1b24ef-9dba-41e0-9c5c-600bebd33f11 → 200
+[2026-06-14 15:31:04] [INFO ] [http                     ] [3eacf8f6940e] GET /chat/history/0c1b24ef-9dba-41e0-9c5c-600bebd33f11 → 200
+[2026-06-14 15:31:10] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 15:31:10] [INFO ] [api.ragControll          ] [-] AI 回复成功: len=41 history=0 request_id=1ef9776189c9
+[2026-06-14 15:31:10] [INFO ] [http                     ] [49726075126e] POST /chat → 200
+[2026-06-14 15:31:10] [INFO ] [http                     ] [12260e5d64ee] PATCH /chat/sessions/0c1b24ef-9dba-41e0-9c5c-600bebd33f11 → 200
+[2026-06-14 15:31:27] [INFO ] [api.ragControll          ] [697cd6cdf044] 搜索请求: query=编码器由几个层级构成 kb=d84c9db7-85d5-44a6-a018-ac741ebeff15 user=c570c2d5-1145-4945-8ba5-4a9e7350f73a
+[2026-06-14 15:31:27] [INFO ] [httpx                    ] [-] HTTP Request: POST http://host.docker.internal:6333/collections/enterprise_knowledge_chunks/points/search "HTTP/1.1 200 OK"
+[2026-06-14 15:31:27] [INFO ] [api.ragControll          ] [697cd6cdf044] 搜索无结果: query=编码器由几个层级构成
+[2026-06-14 15:31:27] [INFO ] [http                     ] [a7ad8d3783ec] GET /search/d84c9db7-85d5-44a6-a018-ac741ebeff15 → 200
+[2026-06-14 15:31:40] [ERROR] [api.ragControll          ] [34f09c9011a0] 未捕获异常: (psycopg.errors.ForeignKeyViolation) update or delete on table "uploaded_files" violates foreign key constraint "ingestion_jobs_file_id_fkey" on table "ingestion_jobs"
+DETAIL:  Key (id)=(dc97f89f-36ac-46e7-8ede-88483e9d5b31) is still referenced from table "ingestion_jobs".
+[SQL: DELETE FROM uploaded_files WHERE uploaded_files.knowledge_base_id = %(knowledge_base_id_1)s::UUID RETURNING uploaded_files.id]
+[parameters: {'knowledge_base_id_1': 'd84c9db7-85d5-44a6-a018-ac741ebeff15'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+  File "/usr/local/lib/python3.11/site-packages/psycopg/cursor.py", line 97, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.ForeignKeyViolation: update or delete on table "uploaded_files" violates foreign key constraint "ingestion_jobs_file_id_fkey" on table "ingestion_jobs"
+DETAIL:  Key (id)=(dc97f89f-36ac-46e7-8ede-88483e9d5b31) is still referenced from table "ingestion_jobs".
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/app/core/logging.py", line 148, in __call__
+    await self.app(scope, receive, log_send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 212, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/api/ragControll.py", line 751, in delete_knowledge_base
+    file_count = UploadedFileStore.delete_by_kb(db, kb_id)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/storage/postgres.py", line 259, in delete_by_kb
+    count = db.query(UploadedFile).filter(UploadedFile.knowledge_base_id == kb_id).delete(synchronize_session="fetch")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 3162, in delete
+    result: CursorResult[Any] = self.session.execute(
+                                ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2362, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2247, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/bulk_persistence.py", line 2021, in orm_execute_statement
+    return super().orm_execute_statement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 305, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1418, in execute
+    return meth(
+           ^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 515, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1640, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+  File "/usr/local/lib/python3.11/site-packages/psycopg/cursor.py", line 97, in execute
+    raise ex.with_traceback(None)
+sqlalchemy.exc.IntegrityError: (psycopg.errors.ForeignKeyViolation) update or delete on table "uploaded_files" violates foreign key constraint "ingestion_jobs_file_id_fkey" on table "ingestion_jobs"
+DETAIL:  Key (id)=(dc97f89f-36ac-46e7-8ede-88483e9d5b31) is still referenced from table "ingestion_jobs".
+[SQL: DELETE FROM uploaded_files WHERE uploaded_files.knowledge_base_id = %(knowledge_base_id_1)s::UUID RETURNING uploaded_files.id]
+[parameters: {'knowledge_base_id_1': 'd84c9db7-85d5-44a6-a018-ac741ebeff15'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+[2026-06-14 15:32:15] [INFO ] [api.ragControll          ] [85e3803a9e81] 创建知识库: name=123 tenant=tenant_2a2047ae owner=c570c2d5-1145-4945-8ba5-4a9e7350f73a
+[2026-06-14 15:32:15] [INFO ] [http                     ] [bcb39f2bb545] POST /knowledge_bases/ → 200
+[2026-06-14 15:32:15] [INFO ] [api.ragControll          ] [fe646180a9bc] 知识库列表: user=c570c2d5-1145-4945-8ba5-4a9e7350f73a count=2
+[2026-06-14 15:32:15] [INFO ] [http                     ] [abd406446aaa] GET /knowledge_bases/ → 200
+[2026-06-14 15:32:23] [INFO ] [api.ragControll          ] [e4ad7971627d] 收到上传请求: name=transformer_zh_cn.pdf kb=c9ff64f2-d948-4332-a5b4-a2c53ce3b1ff tenant=tenant_2a2047ae user=c570c2d5-1145-4945-8ba5-4a9e7350f73a
+[2026-06-14 15:32:23] [INFO ] [api.ragControll          ] [e4ad7971627d] 上传完成: job_id=f2990f71-a2e5-4ab0-88e1-e972bdc1a6f4 file_id=178a8795-182f-44c9-97bd-18b2ad3d36ef size=1437032
+[2026-06-14 15:32:23] [INFO ] [http                     ] [4c8b57298cba] POST /upload/c9ff64f2-d948-4332-a5b4-a2c53ce3b1ff → 200
+[2026-06-14 15:32:23] [INFO ] [api.ragControll          ] [e4ad7971627d/1ed3c73b9e36] 后台任务开始: job_id=f2990f71-a2e5-4ab0-88e1-e972bdc1a6f4 file_id=178a8795-182f-44c9-97bd-18b2ad3d36ef
+[2026-06-14 15:32:26] [DEBUG] [jieba                    ] [-] Building prefix dict from the default dictionary ...
+[2026-06-14 15:32:26] [DEBUG] [jieba                    ] [-] Loading model from cache /tmp/jieba.cache
+[2026-06-14 15:32:26] [DEBUG] [jieba                    ] [-] Loading model cost 0.833 seconds.
+[2026-06-14 15:32:26] [DEBUG] [jieba                    ] [-] Prefix dict has been built successfully.
+[2026-06-14 15:32:27] [INFO ] [api.ragControll          ] [e4ad7971627d/1ed3c73b9e36] 解析完成: chunks=29
+[2026-06-14 15:32:27] [INFO ] [http                     ] [addf1c161ff7] GET /jobs/f2990f71-a2e5-4ab0-88e1-e972bdc1a6f4 → 200
+[2026-06-14 15:32:29] [INFO ] [http                     ] [9a1bd56db1d5] GET /jobs/f2990f71-a2e5-4ab0-88e1-e972bdc1a6f4 → 200
+[2026-06-14 15:32:31] [INFO ] [http                     ] [a59cdc3df4f7] GET /jobs/f2990f71-a2e5-4ab0-88e1-e972bdc1a6f4 → 200
+[2026-06-14 15:32:33] [INFO ] [http                     ] [29f45ce64a19] GET /jobs/f2990f71-a2e5-4ab0-88e1-e972bdc1a6f4 → 200
+[2026-06-14 15:32:35] [INFO ] [http                     ] [a16cb4c5f550] GET /jobs/f2990f71-a2e5-4ab0-88e1-e972bdc1a6f4 → 200
+[2026-06-14 15:32:37] [INFO ] [http                     ] [8688c24410fa] GET /jobs/f2990f71-a2e5-4ab0-88e1-e972bdc1a6f4 → 200
+[2026-06-14 15:32:39] [INFO ] [http                     ] [f2733954bfc6] GET /jobs/f2990f71-a2e5-4ab0-88e1-e972bdc1a6f4 → 200
+[2026-06-14 15:32:41] [INFO ] [http                     ] [e5a245aae020] GET /jobs/f2990f71-a2e5-4ab0-88e1-e972bdc1a6f4 → 200
+[2026-06-14 15:32:43] [INFO ] [http                     ] [52717c30656a] GET /jobs/f2990f71-a2e5-4ab0-88e1-e972bdc1a6f4 → 200
+[2026-06-14 15:32:45] [INFO ] [http                     ] [479e3bed787c] GET /jobs/f2990f71-a2e5-4ab0-88e1-e972bdc1a6f4 → 200
+[2026-06-14 15:32:47] [INFO ] [http                     ] [6a86bd4986e3] GET /jobs/f2990f71-a2e5-4ab0-88e1-e972bdc1a6f4 → 200
+[2026-06-14 15:32:49] [INFO ] [http                     ] [44e6aab58f0b] GET /jobs/f2990f71-a2e5-4ab0-88e1-e972bdc1a6f4 → 200
+[2026-06-14 15:32:50] [INFO ] [httpx                    ] [-] HTTP Request: PUT http://host.docker.internal:6333/collections/enterprise_knowledge_chunks/points?wait=true "HTTP/1.1 200 OK"
+[2026-06-14 15:32:51] [INFO ] [elastic_transport.transport] [-] PUT http://host.docker.internal:9200/_bulk?refresh=wait_for [status:200 duration:0.408s]
+[2026-06-14 15:32:51] [INFO ] [api.ragControll          ] [e4ad7971627d/1ed3c73b9e36] 后台任务完成: job_id=f2990f71-a2e5-4ab0-88e1-e972bdc1a6f4 chunks=29 qdrant=True es=True
+[2026-06-14 15:32:51] [INFO ] [http                     ] [99c50fc0c2cf] GET /jobs/f2990f71-a2e5-4ab0-88e1-e972bdc1a6f4 → 200
+[2026-06-14 15:33:05] [INFO ] [api.ragControll          ] [9fb958081534] 搜索请求: query=编码器由几个层级构成 kb=c9ff64f2-d948-4332-a5b4-a2c53ce3b1ff user=c570c2d5-1145-4945-8ba5-4a9e7350f73a
+[2026-06-14 15:33:05] [INFO ] [httpx                    ] [-] HTTP Request: POST http://host.docker.internal:6333/collections/enterprise_knowledge_chunks/points/search "HTTP/1.1 200 OK"
+[2026-06-14 15:33:06] [INFO ] [elastic_transport.transport] [-] POST http://host.docker.internal:9200/enterprise_knowledge_chunks/_search [status:200 duration:0.947s]
+[2026-06-14 15:33:06] [INFO ] [api.ragControll          ] [9fb958081534] 搜索完成: results=5
+[2026-06-14 15:33:06] [INFO ] [http                     ] [09f90f5ed236] GET /search/c9ff64f2-d948-4332-a5b4-a2c53ce3b1ff → 200
+[2026-06-14 15:33:13] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 15:33:13] [INFO ] [api.ragControll          ] [-] AI 回复成功: len=49 history=3 request_id=923499ba739f
+[2026-06-14 15:33:13] [INFO ] [http                     ] [bdba85294df2] POST /chat → 200
+[2026-06-14 15:34:47] [ERROR] [api.ragControll          ] [4a0ae691a3be] 未捕获异常: (psycopg.errors.ForeignKeyViolation) update or delete on table "uploaded_files" violates foreign key constraint "ingestion_jobs_file_id_fkey" on table "ingestion_jobs"
+DETAIL:  Key (id)=(dc97f89f-36ac-46e7-8ede-88483e9d5b31) is still referenced from table "ingestion_jobs".
+[SQL: DELETE FROM uploaded_files WHERE uploaded_files.knowledge_base_id = %(knowledge_base_id_1)s::UUID RETURNING uploaded_files.id]
+[parameters: {'knowledge_base_id_1': 'd84c9db7-85d5-44a6-a018-ac741ebeff15'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+  File "/usr/local/lib/python3.11/site-packages/psycopg/cursor.py", line 97, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.ForeignKeyViolation: update or delete on table "uploaded_files" violates foreign key constraint "ingestion_jobs_file_id_fkey" on table "ingestion_jobs"
+DETAIL:  Key (id)=(dc97f89f-36ac-46e7-8ede-88483e9d5b31) is still referenced from table "ingestion_jobs".
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/app/core/logging.py", line 148, in __call__
+    await self.app(scope, receive, log_send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 212, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/api/ragControll.py", line 751, in delete_knowledge_base
+    file_count = UploadedFileStore.delete_by_kb(db, kb_id)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/storage/postgres.py", line 259, in delete_by_kb
+    count = db.query(UploadedFile).filter(UploadedFile.knowledge_base_id == kb_id).delete(synchronize_session="fetch")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 3162, in delete
+    result: CursorResult[Any] = self.session.execute(
+                                ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2362, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2247, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/bulk_persistence.py", line 2021, in orm_execute_statement
+    return super().orm_execute_statement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 305, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1418, in execute
+    return meth(
+           ^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 515, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1640, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+  File "/usr/local/lib/python3.11/site-packages/psycopg/cursor.py", line 97, in execute
+    raise ex.with_traceback(None)
+sqlalchemy.exc.IntegrityError: (psycopg.errors.ForeignKeyViolation) update or delete on table "uploaded_files" violates foreign key constraint "ingestion_jobs_file_id_fkey" on table "ingestion_jobs"
+DETAIL:  Key (id)=(dc97f89f-36ac-46e7-8ede-88483e9d5b31) is still referenced from table "ingestion_jobs".
+[SQL: DELETE FROM uploaded_files WHERE uploaded_files.knowledge_base_id = %(knowledge_base_id_1)s::UUID RETURNING uploaded_files.id]
+[parameters: {'knowledge_base_id_1': 'd84c9db7-85d5-44a6-a018-ac741ebeff15'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+[2026-06-14 15:34:54] [ERROR] [api.ragControll          ] [b5fe1c41366a] 未捕获异常: (psycopg.errors.ForeignKeyViolation) update or delete on table "uploaded_files" violates foreign key constraint "ingestion_jobs_file_id_fkey" on table "ingestion_jobs"
+DETAIL:  Key (id)=(178a8795-182f-44c9-97bd-18b2ad3d36ef) is still referenced from table "ingestion_jobs".
+[SQL: DELETE FROM uploaded_files WHERE uploaded_files.knowledge_base_id = %(knowledge_base_id_1)s::UUID RETURNING uploaded_files.id]
+[parameters: {'knowledge_base_id_1': 'c9ff64f2-d948-4332-a5b4-a2c53ce3b1ff'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+  File "/usr/local/lib/python3.11/site-packages/psycopg/cursor.py", line 97, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.ForeignKeyViolation: update or delete on table "uploaded_files" violates foreign key constraint "ingestion_jobs_file_id_fkey" on table "ingestion_jobs"
+DETAIL:  Key (id)=(178a8795-182f-44c9-97bd-18b2ad3d36ef) is still referenced from table "ingestion_jobs".
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/app/core/logging.py", line 148, in __call__
+    await self.app(scope, receive, log_send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 212, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/api/ragControll.py", line 751, in delete_knowledge_base
+    file_count = UploadedFileStore.delete_by_kb(db, kb_id)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/storage/postgres.py", line 259, in delete_by_kb
+    count = db.query(UploadedFile).filter(UploadedFile.knowledge_base_id == kb_id).delete(synchronize_session="fetch")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/query.py", line 3162, in delete
+    result: CursorResult[Any] = self.session.execute(
+                                ^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2362, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/session.py", line 2247, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/bulk_persistence.py", line 2021, in orm_execute_statement
+    return super().orm_execute_statement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/orm/context.py", line 305, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1418, in execute
+    return meth(
+           ^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/sql/elements.py", line 515, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1640, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "/usr/local/lib/python3.11/site-packages/sqlalchemy/engine/default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+  File "/usr/local/lib/python3.11/site-packages/psycopg/cursor.py", line 97, in execute
+    raise ex.with_traceback(None)
+sqlalchemy.exc.IntegrityError: (psycopg.errors.ForeignKeyViolation) update or delete on table "uploaded_files" violates foreign key constraint "ingestion_jobs_file_id_fkey" on table "ingestion_jobs"
+DETAIL:  Key (id)=(178a8795-182f-44c9-97bd-18b2ad3d36ef) is still referenced from table "ingestion_jobs".
+[SQL: DELETE FROM uploaded_files WHERE uploaded_files.knowledge_base_id = %(knowledge_base_id_1)s::UUID RETURNING uploaded_files.id]
+[parameters: {'knowledge_base_id_1': 'c9ff64f2-d948-4332-a5b4-a2c53ce3b1ff'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+[2026-06-14 15:59:23] [INFO ] [api.ragControll          ] [-] 数据库表已就绪
+[2026-06-14 16:02:03] [INFO ] [httpx                    ] [-] HTTP Request: POST http://host.docker.internal:6333/collections/enterprise_knowledge_chunks/points/delete?wait=true "HTTP/1.1 200 OK"
+[2026-06-14 16:02:04] [INFO ] [elastic_transport.transport] [-] POST http://host.docker.internal:9200/enterprise_knowledge_chunks/_delete_by_query?refresh=true [status:200 duration:0.656s]
+[2026-06-14 16:02:04] [INFO ] [api.ragControll          ] [394f6f1ec65f] 知识库已删除: kb_id=c9ff64f2-d948-4332-a5b4-a2c53ce3b1ff user=c570c2d5-1145-4945-8ba5-4a9e7350f73a chunks=29 docs=1 files=1 jobs=1 members=0
+[2026-06-14 16:02:04] [INFO ] [http                     ] [185375a048da] DELETE /knowledge_bases/c9ff64f2-d948-4332-a5b4-a2c53ce3b1ff → 200
+[2026-06-14 16:02:04] [INFO ] [api.ragControll          ] [a2edb06d6f50] 知识库列表: user=c570c2d5-1145-4945-8ba5-4a9e7350f73a count=1
+[2026-06-14 16:02:04] [INFO ] [http                     ] [f53a715c253e] GET /knowledge_bases/ → 200

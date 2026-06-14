@@ -2039,3 +2039,294 @@ NameError: name 'UserStore' is not defined
 [2026-06-14 13:29:10] [INFO ] [http                     ] [98d2363300f7] GET /chat/sessions → 200
 [2026-06-14 13:29:10] [INFO ] [http                     ] [bd7d519eb1e8] GET /chat/history/175e388b-3bc1-4bb3-acff-a6cff096615a → 200
 [2026-06-14 13:29:15] [INFO ] [http                     ] [8425573de785] POST /knowledge_bases/c72c9e5a-1595-4856-aa1d-e834b9694077/share → 200
+[2026-06-14 15:35:50] [INFO ] [langchain_openai.chat_models._client_utils] [-] langchain-openai detected system proxy configuration and no explicit `http_socket_options` / `http_client` / `http_async_client` / `openai_proxy`; skipping the custom `httpx` transport so httpx's env-proxy auto-detection applies. Pass `http_socket_options=[...]` to opt back into kernel-level TCP keepalive tuning on top of the env proxy.
+[2026-06-14 15:35:55] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-14 15:36:00] [WARNING] [api.auth                 ] [5bc40da554d6] Token 无效或已过期
+[2026-06-14 15:36:00] [WARNING] [api.auth                 ] [e33962b25add] Token 无效或已过期
+[2026-06-14 15:36:00] [INFO ] [http                     ] [902ddd2b1ee4] GET /chat/sessions → 401
+[2026-06-14 15:36:00] [INFO ] [http                     ] [26930f2ff994] GET /knowledge_bases/ → 401
+[2026-06-14 15:36:00] [WARNING] [api.auth                 ] [73b5e06bc7c8] Token 无效或已过期
+[2026-06-14 15:36:00] [INFO ] [http                     ] [87d0fec98da0] GET /chat/sessions → 401
+[2026-06-14 15:36:00] [INFO ] [api.auth                 ] [3b63a5550fdc] Token 刷新成功: user_id=e703fa66-3318-45c6-9660-d41818663354
+[2026-06-14 15:36:00] [INFO ] [api.auth                 ] [855a9b5694ab] Token 刷新成功: user_id=e703fa66-3318-45c6-9660-d41818663354
+[2026-06-14 15:36:00] [ERROR] [__main__                 ] [e3996a0af3b0] 未捕获异常: 1 validation error for UserInfoResponse
+email
+  Field required [type=missing, input_value={'user_id': 'e703fa66-331...27', 'created_at': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.10/v/missing
+Traceback (most recent call last):
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "F:\Github\BigGraph\core\logging.py", line 148, in __call__
+    await self.app(scope, receive, log_send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\fastapi\routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\fastapi\routing.py", line 214, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\concurrency.py", line 39, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\anyio\_backends\_asyncio.py", line 2518, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\anyio\_backends\_asyncio.py", line 1002, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Github\BigGraph\api\auth.py", line 274, in refresh
+    user=UserInfoResponse(
+         ^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\pydantic\main.py", line 214, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pydantic_core._pydantic_core.ValidationError: 1 validation error for UserInfoResponse
+email
+  Field required [type=missing, input_value={'user_id': 'e703fa66-331...27', 'created_at': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.10/v/missing
+[2026-06-14 15:36:00] [ERROR] [__main__                 ] [dd2efca398f2] 未捕获异常: 1 validation error for UserInfoResponse
+email
+  Field required [type=missing, input_value={'user_id': 'e703fa66-331...27', 'created_at': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.10/v/missing
+Traceback (most recent call last):
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "F:\Github\BigGraph\core\logging.py", line 148, in __call__
+    await self.app(scope, receive, log_send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\fastapi\routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\fastapi\routing.py", line 214, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\concurrency.py", line 39, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\anyio\_backends\_asyncio.py", line 2518, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\anyio\_backends\_asyncio.py", line 1002, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Github\BigGraph\api\auth.py", line 274, in refresh
+    user=UserInfoResponse(
+         ^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\pydantic\main.py", line 214, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pydantic_core._pydantic_core.ValidationError: 1 validation error for UserInfoResponse
+email
+  Field required [type=missing, input_value={'user_id': 'e703fa66-331...27', 'created_at': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.10/v/missing
+[2026-06-14 15:36:00] [INFO ] [api.auth                 ] [9a8930c02cb9] Token 刷新成功: user_id=e703fa66-3318-45c6-9660-d41818663354
+[2026-06-14 15:36:00] [ERROR] [__main__                 ] [08fecce3324b] 未捕获异常: 1 validation error for UserInfoResponse
+email
+  Field required [type=missing, input_value={'user_id': 'e703fa66-331...27', 'created_at': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.10/v/missing
+Traceback (most recent call last):
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "F:\Github\BigGraph\core\logging.py", line 148, in __call__
+    await self.app(scope, receive, log_send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\fastapi\routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\fastapi\routing.py", line 214, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\concurrency.py", line 39, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\anyio\_backends\_asyncio.py", line 2518, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\anyio\_backends\_asyncio.py", line 1002, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Github\BigGraph\api\auth.py", line 274, in refresh
+    user=UserInfoResponse(
+         ^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\pydantic\main.py", line 214, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pydantic_core._pydantic_core.ValidationError: 1 validation error for UserInfoResponse
+email
+  Field required [type=missing, input_value={'user_id': 'e703fa66-331...27', 'created_at': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.10/v/missing
+[2026-06-14 15:36:07] [INFO ] [http                     ] [d162ce6d9461] GET /chat/sessions → 422
+[2026-06-14 15:36:07] [INFO ] [api.auth                 ] [f16df5ab7190] 用户登录成功: username=joeplover user_id=c570c2d5-1145-4945-8ba5-4a9e7350f73a tenant=tenant_2a2047ae
+[2026-06-14 15:36:07] [INFO ] [http                     ] [727918f0b17d] POST /auth/login → 200
+[2026-06-14 15:36:07] [INFO ] [__main__                 ] [237189daebce] 知识库列表: user=c570c2d5-1145-4945-8ba5-4a9e7350f73a count=2
+[2026-06-14 15:36:07] [INFO ] [http                     ] [dc4e2c45b6da] GET /knowledge_bases/ → 200
+[2026-06-14 15:36:07] [INFO ] [http                     ] [cf4764aea2b9] GET /chat/sessions → 200
+[2026-06-14 15:36:07] [INFO ] [http                     ] [962575ea1aa1] GET /chat/history/0c1b24ef-9dba-41e0-9c5c-600bebd33f11 → 200
+[2026-06-14 15:36:11] [ERROR] [__main__                 ] [014c013ee1ed] 未捕获异常: (psycopg.errors.ForeignKeyViolation) update or delete on table "uploaded_files" violates foreign key constraint "ingestion_jobs_file_id_fkey" on table "ingestion_jobs"
+DETAIL:  Key (id)=(178a8795-182f-44c9-97bd-18b2ad3d36ef) is still referenced from table "ingestion_jobs".
+[SQL: DELETE FROM uploaded_files WHERE uploaded_files.knowledge_base_id = %(knowledge_base_id_1)s::UUID RETURNING uploaded_files.id]
+[parameters: {'knowledge_base_id_1': 'c9ff64f2-d948-4332-a5b4-a2c53ce3b1ff'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+Traceback (most recent call last):
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\engine\default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\psycopg\cursor.py", line 97, in execute
+    raise ex.with_traceback(None)
+psycopg.errors.ForeignKeyViolation: update or delete on table "uploaded_files" violates foreign key constraint "ingestion_jobs_file_id_fkey" on table "ingestion_jobs"
+DETAIL:  Key (id)=(178a8795-182f-44c9-97bd-18b2ad3d36ef) is still referenced from table "ingestion_jobs".
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "F:\Github\BigGraph\core\logging.py", line 148, in __call__
+    await self.app(scope, receive, log_send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\fastapi\routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\fastapi\routing.py", line 212, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Github\BigGraph\api\ragControll.py", line 751, in delete_knowledge_base
+    file_count = UploadedFileStore.delete_by_kb(db, kb_id)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Github\BigGraph\storage\postgres.py", line 259, in delete_by_kb
+    count = db.query(UploadedFile).filter(UploadedFile.knowledge_base_id == kb_id).delete(synchronize_session="fetch")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\orm\query.py", line 3162, in delete
+    result: CursorResult[Any] = self.session.execute(
+                                ^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\orm\session.py", line 2362, in execute
+    return self._execute_internal(
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\orm\session.py", line 2247, in _execute_internal
+    result: Result[Any] = compile_state_cls.orm_execute_statement(
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\orm\bulk_persistence.py", line 2021, in orm_execute_statement
+    return super().orm_execute_statement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\orm\context.py", line 305, in orm_execute_statement
+    result = conn.execute(
+             ^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\engine\base.py", line 1418, in execute
+    return meth(
+           ^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\sql\elements.py", line 515, in _execute_on_connection
+    return connection._execute_clauseelement(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\engine\base.py", line 1640, in _execute_clauseelement
+    ret = self._execute_context(
+          ^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\engine\base.py", line 1846, in _execute_context
+    return self._exec_single_context(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\engine\base.py", line 1986, in _exec_single_context
+    self._handle_dbapi_exception(
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\engine\base.py", line 2355, in _handle_dbapi_exception
+    raise sqlalchemy_exception.with_traceback(exc_info[2]) from e
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\engine\base.py", line 1967, in _exec_single_context
+    self.dialect.do_execute(
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\sqlalchemy\engine\default.py", line 941, in do_execute
+    cursor.execute(statement, parameters)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\psycopg\cursor.py", line 97, in execute
+    raise ex.with_traceback(None)
+sqlalchemy.exc.IntegrityError: (psycopg.errors.ForeignKeyViolation) update or delete on table "uploaded_files" violates foreign key constraint "ingestion_jobs_file_id_fkey" on table "ingestion_jobs"
+DETAIL:  Key (id)=(178a8795-182f-44c9-97bd-18b2ad3d36ef) is still referenced from table "ingestion_jobs".
+[SQL: DELETE FROM uploaded_files WHERE uploaded_files.knowledge_base_id = %(knowledge_base_id_1)s::UUID RETURNING uploaded_files.id]
+[parameters: {'knowledge_base_id_1': 'c9ff64f2-d948-4332-a5b4-a2c53ce3b1ff'}]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)
+[2026-06-14 16:01:51] [INFO ] [langchain_openai.chat_models._client_utils] [-] langchain-openai detected system proxy configuration and no explicit `http_socket_options` / `http_client` / `http_async_client` / `openai_proxy`; skipping the custom `httpx` transport so httpx's env-proxy auto-detection applies. Pass `http_socket_options=[...]` to opt back into kernel-level TCP keepalive tuning on top of the env proxy.
+[2026-06-14 16:01:56] [INFO ] [__main__                 ] [-] 数据库表已就绪
