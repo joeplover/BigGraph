@@ -115,6 +115,9 @@
             <el-button text size="small" type="primary" @click="openUpload(kb)">
               上传
             </el-button>
+            <el-button v-if="kb.is_owner" text size="small" type="danger" @click="handleDeleteKb(kb)">
+              删除
+            </el-button>
           </div>
         </div>
         <p v-if="chatStore.kbs.length === 0" class="empty-text">暂无知识库</p>
@@ -210,11 +213,11 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { ElMessage } from 'element-plus'
+import { ElMessage, ElMessageBox } from 'element-plus'
 import { Upload } from '@element-plus/icons-vue'
 import { useChatStore } from '@/stores/chat'
 import { useAuthStore } from '@/stores/auth'
-import { createKnowledgeBase, shareKnowledgeBase, joinKnowledgeBase } from '@/api/knowledgeBase'
+import { createKnowledgeBase, shareKnowledgeBase, joinKnowledgeBase, deleteKnowledgeBase } from '@/api/knowledgeBase'
 
 const props = defineProps({ modelValue: Boolean })
 const emit = defineEmits(['update:modelValue'])
@@ -390,6 +393,29 @@ async function handleJoinKb() {
     await chatStore.fetchMyKbs()
   } finally {
     joiningKb.value = false
+  }
+}
+
+async function handleDeleteKb(kb) {
+  try {
+    await ElMessageBox.confirm(
+      `确定要删除知识库「${kb.name}」吗？删除后所有文档数据将被永久清除，不可恢复。`,
+      '删除确认',
+      { confirmButtonText: '删除', cancelButtonText: '取消', type: 'warning', confirmButtonClass: 'el-button--danger' }
+    )
+  } catch {
+    return  // 用户取消
+  }
+  try {
+    await deleteKnowledgeBase(kb.id)
+    ElMessage.success('知识库已删除')
+    await chatStore.fetchMyKbs()
+    // 如果当前选中的就是这个被删除的知识库，清除选中
+    if (chatStore.kbId === kb.id) {
+      chatStore.kbId = ''
+    }
+  } catch {
+    // handled in interceptor
   }
 }
 

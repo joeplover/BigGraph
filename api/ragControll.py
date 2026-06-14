@@ -684,6 +684,53 @@ async def search_documents(
 #  删除
 # ===================================================================
 
+@app.delete("/knowledge_bases/{kb_id}")
+async def delete_knowledge_base(kb_id: str, user: dict = Depends(get_current_user)):
+    """删除知识库及其所有关联数据（仅创建者本人可操作）"""
+    rid = make_request_id()
+    user_id = user["user_id"]
+
+    with get_session() as db:
+        kb = KnowledgeBaseStore.get(db, kb_id)
+        if not kb:
+            raise ErrorCode.KB_NOT_FOUND.exception()
+        if str(kb.owner_id) != user_id:
+            raise ErrorCode.FORBIDDEN.exception(detail="只有知识库创建者可以删除")
+
+        # 级联删除关联数据
+        tenant_id = kb.tenant_id
+        chunk_count = DocumentChunkStore.delete_by_kb(db, kb_id)
+        doc_count = DocumentStore.delete_by_kb(db, kb_id)
+        file_count = UploadedFileStore.delete_by_kb(db, kb_id)
+        job_count = IngestionJobStore.delete_by_kb(db, kb_id)
+        member_count = KbMemberStore.delete_by_kb(db, kb_id)
+        KnowledgeBaseStore.delete(db, kb_id)
+
+    # 清理向量库（Qdrant + ES）
+    try:
+        _qdrant.delete_kb_vectors(tenant_id=tenant_id, knowledge_base_id=kb_id)
+    except Exception:
+        pass
+
+    try:
+        _es.delete_kb_chunks(knowledge_base_id=kb_id)
+    except Exception:
+        pass
+
+    logger.info("知识库已删除: kb_id=%s user=%s chunks=%d docs=%d files=%d jobs=%d members=%d",
+                kb_id, user_id, chunk_count, doc_count, file_count, job_count, member_count,
+                extra={"request_id": rid})
+
+    return {
+        "message": "知识库已删除",
+        "deleted_chunks": chunk_count,
+        "deleted_documents": doc_count,
+        "deleted_files": file_count,
+        "deleted_jobs": job_count,
+        "deleted_members": member_count,
+    }
+
+
 @app.delete("/documents/{doc_id}")
 async def delete_document(doc_id: str, user: dict = Depends(get_current_user)):
     """删除文档及其关联的所有数据（PG + Qdrant + ES）。需认证。"""

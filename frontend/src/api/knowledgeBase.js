@@ -37,3 +37,8 @@ export function approveMember(kbId, memberId) {
 export function getMembers(kbId) {
   return request.get(`/knowledge_bases/${kbId}/members`)
 }
+
+// 删除知识库
+export function deleteKnowledgeBase(kbId) {
+  return request.delete(`/knowledge_bases/${kbId}`)
+}

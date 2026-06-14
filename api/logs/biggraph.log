@@ -1429,3 +1429,208 @@ email
 [2026-06-12 22:55:59] [INFO ] [http                     ] [6cb7b857038d] GET /knowledge_bases/ → 200
 [2026-06-12 22:57:25] [INFO ] [http                     ] [9472186596fe] GET /chat/history/348a61c9-da35-40f9-a1f8-9ddcc2e69b60 → 200
 [2026-06-12 22:57:25] [INFO ] [http                     ] [d03efc9c0249] GET /chat/history/c5859679-9ec9-4977-ae0d-38c4441fefbf → 200
+[2026-06-14 10:17:48] [INFO ] [langchain_openai.chat_models._client_utils] [-] langchain-openai detected system proxy configuration and no explicit `http_socket_options` / `http_client` / `http_async_client` / `openai_proxy`; skipping the custom `httpx` transport so httpx's env-proxy auto-detection applies. Pass `http_socket_options=[...]` to opt back into kernel-level TCP keepalive tuning on top of the env proxy.
+[2026-06-14 10:17:54] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-14 10:18:01] [INFO ] [http                     ] [051946e20c4f] GET /chat → 405
+[2026-06-14 10:18:01] [INFO ] [http                     ] [088cc15b0acb] GET /favicon.ico → 404
+[2026-06-14 10:18:02] [INFO ] [http                     ] [9fc6a77efb63] GET /chat → 405
+[2026-06-14 10:18:06] [INFO ] [http                     ] [a76dddcb91e2] GET / → 404
+[2026-06-14 10:18:19] [INFO ] [http                     ] [4328b1df243e] GET /login → 404
+[2026-06-14 10:19:32] [WARNING] [api.auth                 ] [b4606e9daa1f] Token 无效或已过期
+[2026-06-14 10:19:32] [WARNING] [api.auth                 ] [d9339f14153f] Token 无效或已过期
+[2026-06-14 10:19:32] [INFO ] [http                     ] [c68c4661ca70] GET /chat/sessions → 401
+[2026-06-14 10:19:32] [INFO ] [http                     ] [1ec90e0d6f7d] GET /knowledge_bases/ → 401
+[2026-06-14 10:19:32] [INFO ] [api.auth                 ] [af22887aae19] Token 刷新成功: user_id=e703fa66-3318-45c6-9660-d41818663354
+[2026-06-14 10:19:32] [ERROR] [__main__                 ] [a953bba2cd63] 未捕获异常: 1 validation error for UserInfoResponse
+email
+  Field required [type=missing, input_value={'user_id': 'e703fa66-331...27', 'created_at': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.10/v/missing
+Traceback (most recent call last):
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "F:\Github\BigGraph\core\logging.py", line 148, in __call__
+    await self.app(scope, receive, log_send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\fastapi\routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\fastapi\routing.py", line 214, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\concurrency.py", line 39, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\anyio\_backends\_asyncio.py", line 2518, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\anyio\_backends\_asyncio.py", line 1002, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Github\BigGraph\api\auth.py", line 286, in refresh
+    user=UserInfoResponse(
+         ^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\pydantic\main.py", line 214, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pydantic_core._pydantic_core.ValidationError: 1 validation error for UserInfoResponse
+email
+  Field required [type=missing, input_value={'user_id': 'e703fa66-331...27', 'created_at': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.10/v/missing
+[2026-06-14 10:19:32] [INFO ] [api.auth                 ] [5b895add70ef] Token 刷新成功: user_id=e703fa66-3318-45c6-9660-d41818663354
+[2026-06-14 10:19:32] [ERROR] [__main__                 ] [c05d70fc968f] 未捕获异常: 1 validation error for UserInfoResponse
+email
+  Field required [type=missing, input_value={'user_id': 'e703fa66-331...27', 'created_at': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.10/v/missing
+Traceback (most recent call last):
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "F:\Github\BigGraph\core\logging.py", line 148, in __call__
+    await self.app(scope, receive, log_send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\fastapi\routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\fastapi\routing.py", line 214, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\concurrency.py", line 39, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\anyio\to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\anyio\_backends\_asyncio.py", line 2518, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\anyio\_backends\_asyncio.py", line 1002, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Github\BigGraph\api\auth.py", line 286, in refresh
+    user=UserInfoResponse(
+         ^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\pydantic\main.py", line 214, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pydantic_core._pydantic_core.ValidationError: 1 validation error for UserInfoResponse
+email
+  Field required [type=missing, input_value={'user_id': 'e703fa66-331...27', 'created_at': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.10/v/missing
+[2026-06-14 10:19:39] [INFO ] [api.auth                 ] [6367de952bde] 用户登录成功: username=joeplover user_id=e703fa66-3318-45c6-9660-d41818663354 tenant=tenant_4bb1d927
+[2026-06-14 10:19:39] [INFO ] [http                     ] [131fe14879f1] POST /auth/login → 200
+[2026-06-14 10:19:39] [INFO ] [http                     ] [85f06ccb188f] GET /chat/sessions → 200
+[2026-06-14 10:19:39] [INFO ] [__main__                 ] [97af6ab67a73] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-14 10:19:39] [INFO ] [http                     ] [6feece92a0f4] GET /knowledge_bases/ → 200
+[2026-06-14 10:19:39] [INFO ] [http                     ] [39aafd494de2] GET /chat/history/c5859679-9ec9-4977-ae0d-38c4441fefbf → 200
+[2026-06-14 10:19:42] [INFO ] [http                     ] [c1dbd63a6bc8] GET /chat/history/348a61c9-da35-40f9-a1f8-9ddcc2e69b60 → 200
+[2026-06-14 10:19:43] [INFO ] [http                     ] [bf030f1bffa0] GET /chat/history/eb6d6300-d1cc-474f-8a19-86df44fd9366 → 200
+[2026-06-14 10:19:43] [INFO ] [http                     ] [6c129be2411d] GET /chat/history/c5859679-9ec9-4977-ae0d-38c4441fefbf → 200
+[2026-06-14 10:19:44] [INFO ] [http                     ] [e485fd7f2a13] GET /chat/history/348a61c9-da35-40f9-a1f8-9ddcc2e69b60 → 200
+[2026-06-14 10:19:44] [INFO ] [http                     ] [d17d487541cf] GET /chat/history/eb6d6300-d1cc-474f-8a19-86df44fd9366 → 200
+[2026-06-14 10:19:44] [INFO ] [http                     ] [e6ec69425032] GET /chat/history/348a61c9-da35-40f9-a1f8-9ddcc2e69b60 → 200
+[2026-06-14 10:19:44] [INFO ] [http                     ] [662ab0cd56f5] GET /chat/history/c5859679-9ec9-4977-ae0d-38c4441fefbf → 200
+[2026-06-14 10:19:45] [INFO ] [http                     ] [752cc4383667] GET /chat/history/348a61c9-da35-40f9-a1f8-9ddcc2e69b60 → 200
+[2026-06-14 10:19:45] [INFO ] [http                     ] [e7a316d67489] GET /chat/history/eb6d6300-d1cc-474f-8a19-86df44fd9366 → 200
+[2026-06-14 10:20:27] [INFO ] [http                     ] [8baca1c4db6b] GET /chat/history/348a61c9-da35-40f9-a1f8-9ddcc2e69b60 → 200
+[2026-06-14 10:20:27] [INFO ] [http                     ] [91ab1d0aec9b] GET /chat/history/c5859679-9ec9-4977-ae0d-38c4441fefbf → 200
+[2026-06-14 10:20:28] [INFO ] [http                     ] [2f188ffbcd5b] GET /chat/history/348a61c9-da35-40f9-a1f8-9ddcc2e69b60 → 200
+[2026-06-14 10:20:31] [INFO ] [api.auth                 ] [775d188e2a0a] 用户登出成功
+[2026-06-14 10:20:31] [INFO ] [http                     ] [38aaf6ff733e] POST /auth/logout → 200
+[2026-06-14 10:20:38] [INFO ] [api.auth                 ] [34ca70f7fd1d] 用户登录成功: username=joeplover user_id=e703fa66-3318-45c6-9660-d41818663354 tenant=tenant_4bb1d927
+[2026-06-14 10:20:38] [INFO ] [http                     ] [46f4ec5f1f42] POST /auth/login → 200
+[2026-06-14 10:20:38] [INFO ] [__main__                 ] [c6cfae1d7d40] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-14 10:20:38] [INFO ] [http                     ] [24e6225aecdc] GET /knowledge_bases/ → 200
+[2026-06-14 10:20:46] [INFO ] [http                     ] [143fe7fcfedd] GET /chat/history/c5859679-9ec9-4977-ae0d-38c4441fefbf → 200
+[2026-06-14 10:20:48] [INFO ] [http                     ] [d7c73a5e74f3] GET /chat/history/eb6d6300-d1cc-474f-8a19-86df44fd9366 → 200
+[2026-06-14 10:20:49] [INFO ] [http                     ] [ff6557bfaade] GET /chat/history/eb6d6300-d1cc-474f-8a19-86df44fd9366 → 200
+[2026-06-14 10:21:11] [INFO ] [http                     ] [79ac9e95f5b5] GET /chat/history/348a61c9-da35-40f9-a1f8-9ddcc2e69b60 → 200
+[2026-06-14 10:21:26] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 10:21:26] [INFO ] [__main__                 ] [-] AI 回复成功: len=120 history=0 request_id=dca6081d4c4f
+[2026-06-14 10:21:26] [INFO ] [http                     ] [22d2394585b3] POST /chat → 200
+[2026-06-14 10:21:32] [INFO ] [http                     ] [33501a1cfde2] GET /chat/history/eb6d6300-d1cc-474f-8a19-86df44fd9366 → 200
+[2026-06-14 10:21:38] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 10:21:38] [INFO ] [__main__                 ] [-] AI 回复成功: len=158 history=0 request_id=9dabd2d3000c
+[2026-06-14 10:21:38] [INFO ] [http                     ] [21d69a70b8ac] POST /chat → 200
+[2026-06-14 10:21:41] [INFO ] [http                     ] [148bb83d5efe] GET /chat/history/c5859679-9ec9-4977-ae0d-38c4441fefbf → 200
+[2026-06-14 10:21:56] [INFO ] [http                     ] [1c7b8cdf5858] GET /chat/history/eb6d6300-d1cc-474f-8a19-86df44fd9366 → 200
+[2026-06-14 10:21:59] [INFO ] [__main__                 ] [-] 会话已删除: session_id=c5859679-9ec9-4977-ae0d-38c4441fefbf
+[2026-06-14 10:21:59] [INFO ] [http                     ] [ee99814273de] DELETE /chat/history/c5859679-9ec9-4977-ae0d-38c4441fefbf → 200
+[2026-06-14 10:22:07] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 10:22:07] [INFO ] [__main__                 ] [-] AI 回复成功: len=88 history=2 request_id=a42736cd2f62
+[2026-06-14 10:22:07] [INFO ] [http                     ] [d0b4d2dd41ff] POST /chat → 200
+[2026-06-14 10:22:13] [INFO ] [__main__                 ] [-] 会话已删除: session_id=348a61c9-da35-40f9-a1f8-9ddcc2e69b60
+[2026-06-14 10:22:13] [INFO ] [http                     ] [80ded8b09ef5] DELETE /chat/history/348a61c9-da35-40f9-a1f8-9ddcc2e69b60 → 200
+[2026-06-14 10:22:15] [INFO ] [api.auth                 ] [8b1ebd57f8c4] 用户登出成功
+[2026-06-14 10:22:15] [INFO ] [http                     ] [769cf8b2163a] POST /auth/logout → 200
+[2026-06-14 10:22:23] [INFO ] [api.auth                 ] [c31561ba07e1] 用户登录成功: username=joeplover user_id=e703fa66-3318-45c6-9660-d41818663354 tenant=tenant_4bb1d927
+[2026-06-14 10:22:23] [INFO ] [http                     ] [43095237b1d8] POST /auth/login → 200
+[2026-06-14 10:22:23] [INFO ] [__main__                 ] [1dd9cd7954ad] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-14 10:22:23] [INFO ] [http                     ] [b5bacfd0bbb6] GET /knowledge_bases/ → 200
+[2026-06-14 11:20:28] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-14 11:20:28] [INFO ] [http                     ] [6c1a02e7ae55] GET /chat → 405
+[2026-06-14 11:20:30] [INFO ] [http                     ] [039444821e67] GET /chat → 405
+[2026-06-14 11:20:31] [INFO ] [http                     ] [f5fc2c3be7fa] GET /chat → 405
+[2026-06-14 11:20:32] [INFO ] [http                     ] [e7fd5ba13945] GET /chat → 405
+[2026-06-14 11:20:33] [INFO ] [http                     ] [4f5f62e4f601] GET /login → 404
+[2026-06-14 11:20:40] [INFO ] [http                     ] [6d3eed8e6226] GET / → 404
+[2026-06-14 11:20:42] [INFO ] [http                     ] [355e4baa4cf4] GET / → 404
+[2026-06-14 11:21:18] [WARNING] [api.auth                 ] [f851cb140b09] 邮箱已注册: 1665637752@qq.com
+[2026-06-14 11:21:18] [INFO ] [http                     ] [365a97f626fa] POST /auth/send-code → 409
+[2026-06-14 11:21:46] [ERROR] [api.mail_service         ] [-] SMTP 发送失败: Connection unexpectedly closed
+[2026-06-14 11:21:46] [INFO ] [http                     ] [88b45b49a9c7] POST /auth/send-code → 500
+[2026-06-14 11:21:53] [ERROR] [api.mail_service         ] [-] SMTP 发送失败: Connection unexpectedly closed
+[2026-06-14 11:21:53] [INFO ] [http                     ] [98dc4f2abc17] POST /auth/send-code → 500
+[2026-06-14 11:22:37] [ERROR] [api.mail_service         ] [-] SMTP 发送失败: Connection unexpectedly closed
+[2026-06-14 11:22:37] [INFO ] [http                     ] [26d74baff138] POST /auth/send-code → 500
+[2026-06-14 11:30:36] [INFO ] [api.auth                 ] [5d7513f56f53] 用户登录成功: username=joeplover user_id=e703fa66-3318-45c6-9660-d41818663354 tenant=tenant_4bb1d927
+[2026-06-14 11:30:36] [INFO ] [http                     ] [755cb0f10b8a] POST /auth/login → 200
+[2026-06-14 11:30:36] [INFO ] [http                     ] [693e0600b549] GET /chat/sessions → 200
+[2026-06-14 11:30:36] [INFO ] [__main__                 ] [3fcdfa9e5ed1] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=2
+[2026-06-14 11:30:36] [INFO ] [http                     ] [9a95e8d5e197] GET /knowledge_bases/ → 200
+[2026-06-14 11:30:36] [INFO ] [http                     ] [3102cfd273b6] GET /chat/history/d19a3b4e-ad0d-4949-9718-2f7dff2d7376 → 200
+[2026-06-14 11:31:37] [INFO ] [__main__                 ] [a6e80178255e] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=2
+[2026-06-14 11:31:37] [INFO ] [http                     ] [3b7bdcd61a43] GET /knowledge_bases/ → 200
+[2026-06-14 11:31:37] [INFO ] [http                     ] [6e0f81434ad4] GET /chat/sessions → 200
+[2026-06-14 11:31:37] [INFO ] [http                     ] [b568fc4c181b] GET /chat/history/d19a3b4e-ad0d-4949-9718-2f7dff2d7376 → 200
