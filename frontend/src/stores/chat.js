@@ -168,7 +168,7 @@ export const useChatStore = defineStore('chat', () => {
           const res = await request.post('/api/ppt/chat', {
             message: text,
             session_id: currentSessionId.value,
-          }, { timeout: 30000 })
+          }, { timeout: 300000 })
 
           // 更新 session_id（新会话的 ID 由后端生成）
           if (res.session_id && res.session_id !== currentSessionId.value) {
