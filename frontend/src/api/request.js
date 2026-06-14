@@ -26,6 +26,7 @@ request.interceptors.response.use(
     const data = error.response?.data
     const msg = data?.message || data?.detail || error.message || '请求失败'
 
+    // 401 或 422（缺少认证头）→ 尝试刷新 token
     if (status === 401 || status === 422) {
       const refreshToken = localStorage.getItem('refresh_token')
       if (refreshToken && !error.config._retry) {
@@ -55,9 +56,9 @@ request.interceptors.response.use(
       localStorage.removeItem('refresh_token')
       localStorage.removeItem('user_info')
       window.location.href = '/login'
+    } else {
+      ElMessage.error(msg)
     }
-
-    ElMessage.error(msg)
     return Promise.reject(error)
   }
 )
