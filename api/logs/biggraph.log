@@ -2350,3 +2350,12 @@ DETAIL:  Key (id)=(178a8795-182f-44c9-97bd-18b2ad3d36ef) is still referenced fro
 [2026-06-14 17:09:14] [INFO ] [httpx                    ] [-] HTTP Request: PUT http://localhost:6333/collections/enterprise_knowledge_chunks/index?wait=true "HTTP/1.1 200 OK"
 [2026-06-14 17:09:14] [INFO ] [httpx                    ] [-] HTTP Request: PUT http://localhost:6333/collections/enterprise_knowledge_chunks/index?wait=true "HTTP/1.1 200 OK"
 [2026-06-14 17:09:14] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-14 18:05:21] [INFO ] [langchain_openai.chat_models._client_utils] [-] langchain-openai detected system proxy configuration and no explicit `http_socket_options` / `http_client` / `http_async_client` / `openai_proxy`; skipping the custom `httpx` transport so httpx's env-proxy auto-detection applies. Pass `http_socket_options=[...]` to opt back into kernel-level TCP keepalive tuning on top of the env proxy.
+[2026-06-14 18:05:26] [INFO ] [elastic_transport.transport] [-] HEAD http://localhost:9200/enterprise_knowledge_chunks [status:200 duration:0.020s]
+[2026-06-14 18:05:26] [INFO ] [httpx                    ] [-] HTTP Request: GET http://localhost:6333/collections "HTTP/1.1 200 OK"
+[2026-06-14 18:05:26] [INFO ] [httpx                    ] [-] HTTP Request: PUT http://localhost:6333/collections/enterprise_knowledge_chunks/index?wait=true "HTTP/1.1 200 OK"
+[2026-06-14 18:05:26] [INFO ] [httpx                    ] [-] HTTP Request: PUT http://localhost:6333/collections/enterprise_knowledge_chunks/index?wait=true "HTTP/1.1 200 OK"
+[2026-06-14 18:05:26] [INFO ] [httpx                    ] [-] HTTP Request: PUT http://localhost:6333/collections/enterprise_knowledge_chunks/index?wait=true "HTTP/1.1 200 OK"
+[2026-06-14 18:05:26] [INFO ] [httpx                    ] [-] HTTP Request: PUT http://localhost:6333/collections/enterprise_knowledge_chunks/index?wait=true "HTTP/1.1 200 OK"
+[2026-06-14 18:05:26] [INFO ] [httpx                    ] [-] HTTP Request: PUT http://localhost:6333/collections/enterprise_knowledge_chunks/index?wait=true "HTTP/1.1 200 OK"
+[2026-06-14 18:05:26] [INFO ] [__main__                 ] [-] 数据库表已就绪
