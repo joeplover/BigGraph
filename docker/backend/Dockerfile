@@ -24,6 +24,7 @@ COPY config/ config/
 COPY core/ core/
 COPY graphs/ graphs/
 COPY ppt_agent/ ppt_agent/
+COPY ppt_creator/ ppt_creator/
 COPY storage/ storage/
 COPY scripts/ scripts/
 COPY sql/ sql/

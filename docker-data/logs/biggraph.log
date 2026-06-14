@@ -1288,3 +1288,44 @@ elasticsearch.ApiError: ApiError(503, 'search_phase_execution_exception', None)
 [2026-06-14 18:28:38] [INFO ] [httpx                    ] [-] HTTP Request: PUT http://qdrant:6333/collections/enterprise_knowledge_chunks/index?wait=true "HTTP/1.1 200 OK"
 [2026-06-14 18:28:38] [INFO ] [httpx                    ] [-] HTTP Request: PUT http://qdrant:6333/collections/enterprise_knowledge_chunks/index?wait=true "HTTP/1.1 200 OK"
 [2026-06-14 18:28:38] [INFO ] [api.ragControll          ] [-] 数据库表已就绪
+[2026-06-14 18:59:18] [INFO ] [elastic_transport.transport] [-] HEAD http://elasticsearch:9200/enterprise_knowledge_chunks [status:200 duration:0.007s]
+[2026-06-14 18:59:18] [INFO ] [httpx                    ] [-] HTTP Request: GET http://qdrant:6333/collections "HTTP/1.1 200 OK"
+[2026-06-14 18:59:18] [INFO ] [httpx                    ] [-] HTTP Request: PUT http://qdrant:6333/collections/enterprise_knowledge_chunks/index?wait=true "HTTP/1.1 200 OK"
+[2026-06-14 18:59:18] [INFO ] [httpx                    ] [-] HTTP Request: PUT http://qdrant:6333/collections/enterprise_knowledge_chunks/index?wait=true "HTTP/1.1 200 OK"
+[2026-06-14 18:59:18] [INFO ] [httpx                    ] [-] HTTP Request: PUT http://qdrant:6333/collections/enterprise_knowledge_chunks/index?wait=true "HTTP/1.1 200 OK"
+[2026-06-14 18:59:18] [INFO ] [httpx                    ] [-] HTTP Request: PUT http://qdrant:6333/collections/enterprise_knowledge_chunks/index?wait=true "HTTP/1.1 200 OK"
+[2026-06-14 18:59:18] [INFO ] [httpx                    ] [-] HTTP Request: PUT http://qdrant:6333/collections/enterprise_knowledge_chunks/index?wait=true "HTTP/1.1 200 OK"
+[2026-06-14 18:59:18] [INFO ] [api.ragControll          ] [-] 数据库表已就绪
+[2026-06-14 18:59:23] [INFO ] [http                     ] [102021555239] GET /chat/ → 307
+[2026-06-14 18:59:23] [INFO ] [http                     ] [c4028d039fb1] GET /chat/ → 307
+[2026-06-14 18:59:23] [INFO ] [http                     ] [0ff45fa62a4e] GET /chat/ → 307
+[2026-06-14 18:59:23] [INFO ] [http                     ] [bd72c112924a] GET /chat/ → 307
+[2026-06-14 18:59:23] [INFO ] [http                     ] [eb7086258c81] GET /chat/ → 307
+[2026-06-14 18:59:23] [INFO ] [http                     ] [f27806cfbf4b] GET /chat/ → 307
+[2026-06-14 18:59:23] [INFO ] [http                     ] [24ed8c8e07d6] GET /chat/ → 307
+[2026-06-14 18:59:23] [INFO ] [http                     ] [d0ca77a6737d] GET /chat/ → 307
+[2026-06-14 18:59:23] [INFO ] [http                     ] [e8c14456203b] GET /chat/ → 307
+[2026-06-14 18:59:23] [INFO ] [http                     ] [7023969ac9d6] GET /chat/ → 307
+[2026-06-14 18:59:24] [INFO ] [http                     ] [5d23ad9b77e4] GET /chat/ → 307
+[2026-06-14 18:59:24] [INFO ] [http                     ] [a9634ebc64d5] GET /chat/ → 307
+[2026-06-14 18:59:24] [INFO ] [http                     ] [72ee5eb50736] GET /chat/ → 307
+[2026-06-14 18:59:24] [INFO ] [http                     ] [c0378b8fd7f9] GET /chat/ → 307
+[2026-06-14 18:59:24] [INFO ] [http                     ] [a90ae1d8287d] GET /chat/ → 307
+[2026-06-14 18:59:24] [INFO ] [http                     ] [7fd2e68286ca] GET /chat/ → 307
+[2026-06-14 18:59:24] [INFO ] [http                     ] [13a079ba40a3] GET /chat/ → 307
+[2026-06-14 18:59:24] [INFO ] [http                     ] [d624193ded19] GET /chat/ → 307
+[2026-06-14 18:59:24] [INFO ] [http                     ] [5e8d503386b1] GET /chat/ → 307
+[2026-06-14 18:59:24] [INFO ] [http                     ] [3d39d6d97e94] GET /chat/ → 307
+[2026-06-14 18:59:24] [INFO ] [http                     ] [1f6b2afa98ba] GET /chat/ → 307
+[2026-06-14 18:59:24] [INFO ] [http                     ] [adfde54bc26d] GET /chat/ → 307
+[2026-06-14 18:59:24] [INFO ] [http                     ] [de5046c7e5ce] GET /chat/ → 307
+[2026-06-14 18:59:24] [INFO ] [http                     ] [1413f38774a6] GET /chat/ → 307
+[2026-06-14 18:59:24] [INFO ] [http                     ] [eaa6d640d1d4] GET /chat/ → 307
+[2026-06-14 18:59:24] [INFO ] [http                     ] [6a1ea3e496c6] GET /chat/ → 307
+[2026-06-14 18:59:24] [INFO ] [http                     ] [b4f741d1b9df] GET /chat/ → 307
+[2026-06-14 18:59:24] [INFO ] [http                     ] [11be0c9541d5] GET /chat/ → 307
+[2026-06-14 18:59:24] [INFO ] [http                     ] [41a10f306152] GET /chat/ → 307
+[2026-06-14 18:59:29] [INFO ] [http                     ] [df0eec87cd08] GET /chat/sessions → 200
+[2026-06-14 18:59:29] [INFO ] [api.ragControll          ] [908e161cf11b] 知识库列表: user=348fc577-af5a-4929-ab7b-6b3148359e69 count=1
+[2026-06-14 18:59:29] [INFO ] [http                     ] [6484ff102c1c] GET /knowledge_bases/ → 200
+[2026-06-14 18:59:29] [INFO ] [http                     ] [55773c1785d1] GET /chat/history/7f2f5a80-83a8-4d5e-acc8-f82b86cab7b2 → 200
