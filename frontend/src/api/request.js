@@ -26,8 +26,7 @@ request.interceptors.response.use(
     const data = error.response?.data
     const msg = data?.message || data?.detail || error.message || '请求失败'
 
-    if (status === 401) {
-      // Token 过期，尝试刷新
+    if (status === 401 || status === 422) {
       const refreshToken = localStorage.getItem('refresh_token')
       if (refreshToken && !error.config._retry) {
         error.config._retry = true
