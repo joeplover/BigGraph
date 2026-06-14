@@ -208,6 +208,21 @@ class KbMemberStore:
         db.flush()
         return count
 
+    @staticmethod
+    def user_can_access(db: Session, user_id: str, kb_id: str) -> bool:
+        """检查用户是否有权限访问该知识库"""
+        # 是 owner 吗？
+        kb = db.get(KnowledgeBase, kb_id)
+        if kb and str(kb.owner_id) == user_id:
+            return True
+        # 是已批准的成员吗？
+        member = db.query(KbMember).filter(
+            KbMember.user_id == user_id,
+            KbMember.knowledge_base_id == kb_id,
+            KbMember.status == KbMemberStatus.approved,
+        ).first()
+        return member is not None
+
 
 # ========================================================================
 # UploadedFile CRUD

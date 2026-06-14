@@ -98,6 +98,9 @@
         <el-button size="small" class="action-btn" @click="showJoinKb = true">
           加入知识库
         </el-button>
+        <el-button size="small" class="action-btn" @click="goToMembers">
+          成员审核
+        </el-button>
       </div>
 
       <!-- 我的知识库列表 -->
@@ -417,6 +420,10 @@ async function handleDeleteKb(kb) {
   } catch {
     // handled in interceptor
   }
+}
+
+function goToMembers() {
+  router.push('/kb-members')
 }
 
 async function handleLogout() {

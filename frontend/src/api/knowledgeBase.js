@@ -33,6 +33,11 @@ export function approveMember(kbId, memberId) {
   return request.post(`/knowledge_bases/${kbId}/members/${memberId}/approve`)
 }
 
+// 拒绝成员
+export function rejectMember(kbId, memberId) {
+  return request.post(`/knowledge_bases/${kbId}/members/${memberId}/reject`)
+}
+
 // 获取成员列表
 export function getMembers(kbId) {
   return request.get(`/knowledge_bases/${kbId}/members`)

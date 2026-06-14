@@ -1651,3 +1651,354 @@ email
 [2026-06-14 11:32:15] [INFO ] [http                     ] [bf2ded66f81b] DELETE /knowledge_bases/3aeb8037-ad41-4cb9-a734-1d1b7786015e → 200
 [2026-06-14 11:32:15] [INFO ] [__main__                 ] [f03563e4aca4] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
 [2026-06-14 11:32:15] [INFO ] [http                     ] [6386504f348e] GET /knowledge_bases/ → 200
+[2026-06-14 11:37:37] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-14 11:37:39] [INFO ] [http                     ] [30939db5357d] GET /chat/history/eb6d6300-d1cc-474f-8a19-86df44fd9366 → 200
+[2026-06-14 11:37:44] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 401 Unauthorized"
+[2026-06-14 11:37:44] [ERROR] [__main__                 ] [-] AI 调用失败: Error code: 401 - {'error': {'code': '', 'message': 'Invalid token (request id: 202606140337445736386588268d9d61A5nltzZ)', 'type': 'new_api_error'}} request_id=5406affd29e0
+[2026-06-14 11:37:44] [INFO ] [http                     ] [204568c6ee83] POST /chat → 500
+[2026-06-14 11:38:38] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-14 11:38:41] [INFO ] [http                     ] [7bee3dcc16cc] GET /chat/sessions → 200
+[2026-06-14 11:38:41] [INFO ] [__main__                 ] [1fcff742e366] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-14 11:38:41] [INFO ] [http                     ] [eae3ed7469b6] GET /knowledge_bases/ → 200
+[2026-06-14 11:38:41] [INFO ] [http                     ] [9f178c19c11f] GET /chat/history/eb6d6300-d1cc-474f-8a19-86df44fd9366 → 200
+[2026-06-14 11:38:52] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 11:38:52] [INFO ] [__main__                 ] [-] AI 回复成功: len=123 history=5 request_id=bc9bfb891b4a
+[2026-06-14 11:38:52] [INFO ] [http                     ] [9b163c0b34aa] POST /chat → 200
+[2026-06-14 12:13:04] [INFO ] [langchain_openai.chat_models._client_utils] [-] langchain-openai detected system proxy configuration and no explicit `http_socket_options` / `http_client` / `http_async_client` / `openai_proxy`; skipping the custom `httpx` transport so httpx's env-proxy auto-detection applies. Pass `http_socket_options=[...]` to opt back into kernel-level TCP keepalive tuning on top of the env proxy.
+[2026-06-14 12:13:08] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-14 12:13:13] [INFO ] [http                     ] [ac009feb5add] GET /chat/sessions → 200
+[2026-06-14 12:13:13] [INFO ] [__main__                 ] [c8f358568cf8] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-14 12:13:13] [INFO ] [http                     ] [e51ec028da34] GET /knowledge_bases/ → 200
+[2026-06-14 12:13:13] [INFO ] [http                     ] [1b60e5510285] GET /chat/history/eb6d6300-d1cc-474f-8a19-86df44fd9366 → 200
+[2026-06-14 12:13:15] [INFO ] [api.auth                 ] [1404306b1e4c] 用户登出成功
+[2026-06-14 12:13:15] [INFO ] [http                     ] [d8f2dd0f9958] POST /auth/logout → 200
+[2026-06-14 12:13:42] [ERROR] [api.mail_service         ] [-] Resend 发送失败: status=403 body={"statusCode":403,"message":"The biggraph.com domain is not verified. Please, add and verify your domain on https://resend.com/domains","name":"validation_error"}
+[2026-06-14 12:13:42] [INFO ] [http                     ] [d42aa3bd8491] POST /auth/send-code → 500
+[2026-06-14 12:16:09] [INFO ] [langchain_openai.chat_models._client_utils] [-] langchain-openai detected system proxy configuration and no explicit `http_socket_options` / `http_client` / `http_async_client` / `openai_proxy`; skipping the custom `httpx` transport so httpx's env-proxy auto-detection applies. Pass `http_socket_options=[...]` to opt back into kernel-level TCP keepalive tuning on top of the env proxy.
+[2026-06-14 12:16:12] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-14 12:16:15] [ERROR] [api.mail_service         ] [-] Resend 发送失败: status=422 body={"statusCode":422,"name":"validation_error","message":"Invalid `from` field. The email address needs to follow the `email@example.com` or `Name <email@example.com>` format."}
+[2026-06-14 12:16:15] [INFO ] [http                     ] [c55887b0b69e] POST /auth/send-code → 500
+[2026-06-14 12:16:17] [ERROR] [api.mail_service         ] [-] Resend 发送失败: status=422 body={"statusCode":422,"name":"validation_error","message":"Invalid `from` field. The email address needs to follow the `email@example.com` or `Name <email@example.com>` format."}
+[2026-06-14 12:16:17] [INFO ] [http                     ] [91dd05ce506a] POST /auth/send-code → 500
+[2026-06-14 12:17:58] [INFO ] [langchain_openai.chat_models._client_utils] [-] langchain-openai detected system proxy configuration and no explicit `http_socket_options` / `http_client` / `http_async_client` / `openai_proxy`; skipping the custom `httpx` transport so httpx's env-proxy auto-detection applies. Pass `http_socket_options=[...]` to opt back into kernel-level TCP keepalive tuning on top of the env proxy.
+[2026-06-14 12:18:02] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-14 12:18:05] [ERROR] [api.mail_service         ] [-] Resend 发送失败: status=403 body={"statusCode":403,"name":"validation_error","message":"You can only send testing emails to your own email address (1665637752@qq.com). To send emails to other recipients, please verify a domain at resend.com/domains, and change the `from` address to an email using this domain."}
+[2026-06-14 12:18:05] [INFO ] [http                     ] [69b4f61b3a30] POST /auth/send-code → 500
+[2026-06-14 12:27:51] [INFO ] [langchain_openai.chat_models._client_utils] [-] langchain-openai detected system proxy configuration and no explicit `http_socket_options` / `http_client` / `http_async_client` / `openai_proxy`; skipping the custom `httpx` transport so httpx's env-proxy auto-detection applies. Pass `http_socket_options=[...]` to opt back into kernel-level TCP keepalive tuning on top of the env proxy.
+[2026-06-14 12:27:55] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-14 12:28:18] [INFO ] [api.auth                 ] [5aaa4ec3bb9d] 用户注册成功: username=minijoe email=None user_id=b492582f-780a-48e9-a24c-cb0cc1b7fb07 tenant=tenant_7288e148
+[2026-06-14 12:28:18] [INFO ] [http                     ] [8f09dc2bb8e3] POST /auth/register → 200
+[2026-06-14 12:28:18] [INFO ] [__main__                 ] [a5682fc64672] 知识库列表: user=b492582f-780a-48e9-a24c-cb0cc1b7fb07 count=0
+[2026-06-14 12:28:18] [INFO ] [http                     ] [240018b091ca] GET /knowledge_bases/ → 200
+[2026-06-14 12:28:20] [INFO ] [__main__                 ] [62dffed7daef] 知识库列表: user=b492582f-780a-48e9-a24c-cb0cc1b7fb07 count=0
+[2026-06-14 12:28:20] [INFO ] [http                     ] [a299cad5f584] GET /knowledge_bases/ → 200
+[2026-06-14 12:28:20] [INFO ] [http                     ] [3d562e4f78aa] GET /chat/sessions → 200
+[2026-06-14 12:28:29] [INFO ] [api.auth                 ] [a73f79882524] 用户登出成功
+[2026-06-14 12:28:29] [INFO ] [http                     ] [5e6ef57049e5] POST /auth/logout → 200
+[2026-06-14 12:28:39] [INFO ] [api.auth                 ] [fd42f9b512b7] 用户登录成功: username=joeplover user_id=e703fa66-3318-45c6-9660-d41818663354 tenant=tenant_4bb1d927
+[2026-06-14 12:28:39] [INFO ] [http                     ] [f841b8b5977e] POST /auth/login → 200
+[2026-06-14 12:28:39] [INFO ] [__main__                 ] [d6b814455737] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-14 12:28:39] [INFO ] [http                     ] [9e1096a6c8da] GET /knowledge_bases/ → 200
+[2026-06-14 12:28:43] [INFO ] [__main__                 ] [d94215954857] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-14 12:28:43] [INFO ] [http                     ] [e2d64491c741] GET /knowledge_bases/ → 200
+[2026-06-14 12:28:43] [INFO ] [http                     ] [048a9f8ec1c2] GET /chat/sessions → 200
+[2026-06-14 12:28:43] [INFO ] [http                     ] [768ff9ab33b6] GET /chat/history/eb6d6300-d1cc-474f-8a19-86df44fd9366 → 200
+[2026-06-14 12:29:17] [INFO ] [http                     ] [b7b9e934993d] POST /knowledge_bases/06d1a48e-2533-4a72-88fc-3853575f011b/share → 200
+[2026-06-14 12:29:22] [INFO ] [api.auth                 ] [2fb3fa74a5a6] 用户登出成功
+[2026-06-14 12:29:22] [INFO ] [http                     ] [afb7c92e51af] POST /auth/logout → 200
+[2026-06-14 12:29:42] [INFO ] [api.auth                 ] [cec21c140699] 用户登录成功: username=minijoe user_id=b492582f-780a-48e9-a24c-cb0cc1b7fb07 tenant=tenant_7288e148
+[2026-06-14 12:29:42] [INFO ] [http                     ] [8133f37f8bc9] POST /auth/login → 200
+[2026-06-14 12:29:42] [INFO ] [__main__                 ] [e75f5f6e6bd6] 知识库列表: user=b492582f-780a-48e9-a24c-cb0cc1b7fb07 count=0
+[2026-06-14 12:29:42] [INFO ] [http                     ] [169477548236] GET /knowledge_bases/ → 200
+[2026-06-14 12:29:44] [INFO ] [__main__                 ] [efb19a3dc032] 知识库列表: user=b492582f-780a-48e9-a24c-cb0cc1b7fb07 count=0
+[2026-06-14 12:29:44] [INFO ] [http                     ] [7a3e1a432c60] GET /knowledge_bases/ → 200
+[2026-06-14 12:29:44] [INFO ] [http                     ] [27555d4c8cad] GET /chat/sessions → 200
+[2026-06-14 12:29:49] [INFO ] [http                     ] [1dd98aa08e3b] POST /knowledge_bases/join/KB-JT7KbmgjJaI1j8vWfajxmA → 200
+[2026-06-14 12:29:49] [INFO ] [__main__                 ] [278d7b2591c1] 知识库列表: user=b492582f-780a-48e9-a24c-cb0cc1b7fb07 count=0
+[2026-06-14 12:29:49] [INFO ] [http                     ] [cd049ddfaf50] GET /knowledge_bases/ → 200
+[2026-06-14 12:29:54] [INFO ] [api.auth                 ] [ef3bbcea10ef] 用户登出成功
+[2026-06-14 12:29:54] [INFO ] [http                     ] [38c22bd57c4b] POST /auth/logout → 200
+[2026-06-14 12:30:00] [INFO ] [api.auth                 ] [fa77401057fc] 用户登录成功: username=joeplover user_id=e703fa66-3318-45c6-9660-d41818663354 tenant=tenant_4bb1d927
+[2026-06-14 12:30:00] [INFO ] [http                     ] [523fd4c8b20d] POST /auth/login → 200
+[2026-06-14 12:30:00] [INFO ] [__main__                 ] [e8011680a4d6] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=1
+[2026-06-14 12:30:00] [INFO ] [http                     ] [58c2a9c1b402] GET /knowledge_bases/ → 200
+[2026-06-14 12:30:21] [INFO ] [__main__                 ] [7078b136cdd3] 创建知识库: name=123 tenant=tenant_4bb1d927 owner=e703fa66-3318-45c6-9660-d41818663354
+[2026-06-14 12:30:21] [INFO ] [http                     ] [e38de03d879b] POST /knowledge_bases/ → 200
+[2026-06-14 12:30:21] [INFO ] [__main__                 ] [f7ecedb8b1af] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=2
+[2026-06-14 12:30:21] [INFO ] [http                     ] [9ad6e33cba70] GET /knowledge_bases/ → 200
+[2026-06-14 12:30:52] [INFO ] [__main__                 ] [475fa2aa2f0e] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=2
+[2026-06-14 12:30:52] [INFO ] [http                     ] [794bb3878c4b] GET /knowledge_bases/ → 200
+[2026-06-14 12:30:52] [INFO ] [__main__                 ] [85001afb57e1] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=2
+[2026-06-14 12:30:52] [INFO ] [http                     ] [93ec9416e128] GET /knowledge_bases/ → 200
+[2026-06-14 12:32:19] [INFO ] [http                     ] [08ae7958372c] GET /chat/sessions → 200
+[2026-06-14 12:32:19] [INFO ] [__main__                 ] [a784bd80f080] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=2
+[2026-06-14 12:32:19] [INFO ] [http                     ] [ead89b53d9e3] GET /knowledge_bases/ → 200
+[2026-06-14 12:32:19] [INFO ] [http                     ] [06a8746de2fe] GET /chat/sessions → 200
+[2026-06-14 12:32:19] [INFO ] [http                     ] [30840262198c] GET /chat/history/eb6d6300-d1cc-474f-8a19-86df44fd9366 → 200
+[2026-06-14 12:32:19] [INFO ] [http                     ] [051702eea1ca] GET /chat/history/eb6d6300-d1cc-474f-8a19-86df44fd9366 → 200
+[2026-06-14 12:43:38] [INFO ] [__main__                 ] [cd1efef1f6bf] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=2
+[2026-06-14 12:43:38] [INFO ] [http                     ] [daff2b0b4d83] GET /knowledge_bases/ → 200
+[2026-06-14 12:43:38] [INFO ] [http                     ] [61c95bfb6420] GET /chat/sessions → 200
+[2026-06-14 12:43:38] [INFO ] [http                     ] [f1689f6b51d0] GET /chat/sessions → 200
+[2026-06-14 12:43:38] [INFO ] [http                     ] [de3d56dfcfcd] GET /chat/history/eb6d6300-d1cc-474f-8a19-86df44fd9366 → 200
+[2026-06-14 12:43:38] [INFO ] [http                     ] [d2b8c971b6bd] GET /chat/history/eb6d6300-d1cc-474f-8a19-86df44fd9366 → 200
+[2026-06-14 12:45:14] [INFO ] [http                     ] [0a9ed3468d6e] GET /chat/sessions → 200
+[2026-06-14 12:45:14] [INFO ] [__main__                 ] [3259940866cb] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=2
+[2026-06-14 12:45:14] [INFO ] [http                     ] [089db688eb58] GET /knowledge_bases/ → 200
+[2026-06-14 12:45:14] [INFO ] [http                     ] [e3355070f6d7] GET /chat/history/eb6d6300-d1cc-474f-8a19-86df44fd9366 → 200
+[2026-06-14 12:47:25] [INFO ] [http                     ] [92318d66e88d] GET /chat/sessions → 200
+[2026-06-14 12:47:26] [INFO ] [__main__                 ] [98753d1916b0] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=2
+[2026-06-14 12:47:26] [INFO ] [http                     ] [75977f7279c4] GET /knowledge_bases/ → 200
+[2026-06-14 12:47:26] [INFO ] [http                     ] [53046096dc22] GET /chat/sessions → 200
+[2026-06-14 12:47:26] [INFO ] [http                     ] [e869bcffa21b] GET /chat/history/eb6d6300-d1cc-474f-8a19-86df44fd9366 → 200
+[2026-06-14 12:47:26] [INFO ] [http                     ] [6dbeccceea25] GET /chat/history/eb6d6300-d1cc-474f-8a19-86df44fd9366 → 200
+[2026-06-14 12:50:53] [INFO ] [__main__                 ] [9f0da9fef2af] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=2
+[2026-06-14 12:50:53] [INFO ] [http                     ] [31601e09fed9] GET /knowledge_bases/ → 200
+[2026-06-14 12:50:53] [INFO ] [http                     ] [94c60d3e5854] GET /chat/sessions → 200
+[2026-06-14 12:50:53] [INFO ] [http                     ] [6da893608a37] GET /chat/sessions → 200
+[2026-06-14 12:50:53] [INFO ] [http                     ] [7e773e589fd8] GET /chat/history/eb6d6300-d1cc-474f-8a19-86df44fd9366 → 200
+[2026-06-14 12:50:53] [INFO ] [http                     ] [3d1ebeff2fdc] GET /chat/history/eb6d6300-d1cc-474f-8a19-86df44fd9366 → 200
+[2026-06-14 12:56:01] [INFO ] [http                     ] [f052d22c010c] GET /chat/sessions → 200
+[2026-06-14 12:56:01] [INFO ] [__main__                 ] [ab576b006e03] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=2
+[2026-06-14 12:56:01] [INFO ] [http                     ] [876afb9c0f20] GET /knowledge_bases/ → 200
+[2026-06-14 12:56:01] [INFO ] [http                     ] [244bb0a8daf1] GET /chat/sessions → 200
+[2026-06-14 12:56:01] [INFO ] [http                     ] [5da1d774e792] GET /chat/history/eb6d6300-d1cc-474f-8a19-86df44fd9366 → 200
+[2026-06-14 12:56:01] [INFO ] [http                     ] [b0f00a67f639] GET /chat/history/eb6d6300-d1cc-474f-8a19-86df44fd9366 → 200
+[2026-06-14 12:56:05] [INFO ] [http                     ] [aac243b83b29] GET /knowledge_bases/06d1a48e-2533-4a72-88fc-3853575f011b/members → 200
+[2026-06-14 12:56:06] [INFO ] [http                     ] [d8e9f4b5bd14] GET /knowledge_bases/c72c9e5a-1595-4856-aa1d-e834b9694077/members → 200
+[2026-06-14 12:56:09] [INFO ] [http                     ] [cf9c7ce0f350] POST /knowledge_bases/06d1a48e-2533-4a72-88fc-3853575f011b/members/e1e25704-0b54-4967-8205-3d905e100c20/approve → 200
+[2026-06-14 12:56:09] [INFO ] [http                     ] [2d000bd2a66d] GET /knowledge_bases/06d1a48e-2533-4a72-88fc-3853575f011b/members → 200
+[2026-06-14 12:56:11] [INFO ] [__main__                 ] [2d0270323a86] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=2
+[2026-06-14 12:56:11] [INFO ] [http                     ] [9908802b645d] GET /knowledge_bases/ → 200
+[2026-06-14 12:56:11] [INFO ] [http                     ] [12cee12e22c7] GET /chat/sessions → 200
+[2026-06-14 12:56:11] [INFO ] [http                     ] [277cbaa142f2] GET /chat/history/eb6d6300-d1cc-474f-8a19-86df44fd9366 → 200
+[2026-06-14 12:56:16] [INFO ] [api.auth                 ] [3bb37cbeaa57] 用户登出成功
+[2026-06-14 12:56:16] [INFO ] [http                     ] [f212ffa5ca82] POST /auth/logout → 200
+[2026-06-14 12:56:24] [INFO ] [api.auth                 ] [c63b797b697d] 用户登录成功: username=minijoe user_id=b492582f-780a-48e9-a24c-cb0cc1b7fb07 tenant=tenant_7288e148
+[2026-06-14 12:56:24] [INFO ] [http                     ] [bd045ecea2e3] POST /auth/login → 200
+[2026-06-14 12:56:24] [INFO ] [__main__                 ] [305be0e05953] 知识库列表: user=b492582f-780a-48e9-a24c-cb0cc1b7fb07 count=1
+[2026-06-14 12:56:24] [INFO ] [http                     ] [63a6708d106d] GET /knowledge_bases/ → 200
+[2026-06-14 12:56:24] [INFO ] [http                     ] [16a8305459d2] GET /chat/sessions → 200
+[2026-06-14 12:56:29] [INFO ] [http                     ] [96107750df92] GET /chat/sessions → 200
+[2026-06-14 12:56:29] [INFO ] [__main__                 ] [c36b1faec9d8] 知识库列表: user=b492582f-780a-48e9-a24c-cb0cc1b7fb07 count=1
+[2026-06-14 12:56:29] [INFO ] [http                     ] [198247718083] GET /knowledge_bases/ → 200
+[2026-06-14 12:56:29] [INFO ] [http                     ] [fde5e2c9a96f] GET /chat/sessions → 200
+[2026-06-14 12:56:36] [INFO ] [http                     ] [042ee0bb080a] POST /knowledge_bases/06d1a48e-2533-4a72-88fc-3853575f011b/share → 403
+[2026-06-14 12:56:44] [INFO ] [__main__                 ] [8ad003eb9cf4] 知识库列表: user=b492582f-780a-48e9-a24c-cb0cc1b7fb07 count=1
+[2026-06-14 12:56:44] [INFO ] [http                     ] [6d6d7159dda8] GET /knowledge_bases/ → 200
+[2026-06-14 12:56:44] [INFO ] [http                     ] [f7aedda1909b] GET /chat/sessions → 200
+[2026-06-14 12:57:02] [INFO ] [__main__                 ] [-] 会话已创建: session_id=deb1129d-7d59-4743-b7b0-85009d551bdb
+[2026-06-14 12:57:02] [INFO ] [http                     ] [82ed00db8b38] POST /chat/sessions → 200
+[2026-06-14 12:57:03] [INFO ] [__main__                 ] [55564f7bf5b4] 搜索请求: query=编码器由多少层级组成 kb=06d1a48e-2533-4a72-88fc-3853575f011b tenant=tenant_7288e148 user=b492582f-780a-48e9-a24c-cb0cc1b7fb07
+[2026-06-14 12:57:03] [INFO ] [http                     ] [316cca5fd71d] GET /search/06d1a48e-2533-4a72-88fc-3853575f011b → 403
+[2026-06-14 12:57:16] [INFO ] [__main__                 ] [ea3382ba0bc1] 搜索请求: query=编码器由多少层级组成 kb=06d1a48e-2533-4a72-88fc-3853575f011b tenant=tenant_7288e148 user=b492582f-780a-48e9-a24c-cb0cc1b7fb07
+[2026-06-14 12:57:16] [INFO ] [http                     ] [59551a4fb516] GET /search/06d1a48e-2533-4a72-88fc-3853575f011b → 403
+[2026-06-14 13:02:07] [INFO ] [langchain_openai.chat_models._client_utils] [-] langchain-openai detected system proxy configuration and no explicit `http_socket_options` / `http_client` / `http_async_client` / `openai_proxy`; skipping the custom `httpx` transport so httpx's env-proxy auto-detection applies. Pass `http_socket_options=[...]` to opt back into kernel-level TCP keepalive tuning on top of the env proxy.
+[2026-06-14 13:02:11] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-14 13:02:19] [INFO ] [__main__                 ] [9a65f44b5d26] 搜索请求: query=编码器由多少层级组成 kb=06d1a48e-2533-4a72-88fc-3853575f011b user=b492582f-780a-48e9-a24c-cb0cc1b7fb07
+[2026-06-14 13:02:19] [ERROR] [__main__                 ] [a43a69171611] 未捕获异常: type object 'KbMemberStore' has no attribute 'user_can_access'
+Traceback (most recent call last):
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "F:\Github\BigGraph\core\logging.py", line 148, in __call__
+    await self.app(scope, receive, log_send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\fastapi\routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\fastapi\routing.py", line 212, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Github\BigGraph\api\ragControll.py", line 659, in search_documents
+    if not KbMemberStore.user_can_access(db, user_id, knowledge_base_id):
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'KbMemberStore' has no attribute 'user_can_access'
+[2026-06-14 13:05:29] [INFO ] [langchain_openai.chat_models._client_utils] [-] langchain-openai detected system proxy configuration and no explicit `http_socket_options` / `http_client` / `http_async_client` / `openai_proxy`; skipping the custom `httpx` transport so httpx's env-proxy auto-detection applies. Pass `http_socket_options=[...]` to opt back into kernel-level TCP keepalive tuning on top of the env proxy.
+[2026-06-14 13:05:32] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-14 13:05:44] [INFO ] [__main__                 ] [f6e10720f295] 搜索请求: query=编码器由多少层级组成 kb=06d1a48e-2533-4a72-88fc-3853575f011b user=b492582f-780a-48e9-a24c-cb0cc1b7fb07
+[2026-06-14 13:05:44] [INFO ] [httpx                    ] [-] HTTP Request: POST http://localhost:6333/collections/enterprise_knowledge_chunks/points/search "HTTP/1.1 200 OK"
+[2026-06-14 13:05:44] [INFO ] [elastic_transport.transport] [-] POST http://localhost:9200/enterprise_knowledge_chunks/_search [status:200 duration:0.096s]
+[2026-06-14 13:05:44] [INFO ] [__main__                 ] [f6e10720f295] 搜索完成: results=5
+[2026-06-14 13:05:44] [INFO ] [http                     ] [ac3119b87edc] GET /search/06d1a48e-2533-4a72-88fc-3853575f011b → 200
+[2026-06-14 13:05:47] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 13:05:47] [INFO ] [__main__                 ] [-] AI 回复成功: len=14 history=1 request_id=393ac6d5423b
+[2026-06-14 13:05:47] [INFO ] [http                     ] [769c2750fe7a] POST /chat → 200
+[2026-06-14 13:05:47] [INFO ] [http                     ] [d9086131436a] PATCH /chat/sessions/deb1129d-7d59-4743-b7b0-85009d551bdb → 200
+[2026-06-14 13:05:53] [INFO ] [api.auth                 ] [2e235f5fb1c8] 用户登出成功
+[2026-06-14 13:05:53] [INFO ] [http                     ] [405c0ef7ac83] POST /auth/logout → 200
+[2026-06-14 13:05:59] [INFO ] [api.auth                 ] [bdab8d8c55e1] 用户登录成功: username=joeplover user_id=e703fa66-3318-45c6-9660-d41818663354 tenant=tenant_4bb1d927
+[2026-06-14 13:05:59] [INFO ] [http                     ] [5222c3c81b6d] POST /auth/login → 200
+[2026-06-14 13:05:59] [INFO ] [__main__                 ] [599f3e78b1a8] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=2
+[2026-06-14 13:05:59] [INFO ] [http                     ] [96b76ec9e45f] GET /knowledge_bases/ → 200
+[2026-06-14 13:05:59] [INFO ] [http                     ] [248cd3be2fce] GET /chat/sessions → 200
+[2026-06-14 13:05:59] [INFO ] [http                     ] [6a345bdc90e2] GET /chat/history/d19a3b4e-ad0d-4949-9718-2f7dff2d7376 → 200
+[2026-06-14 13:06:02] [INFO ] [__main__                 ] [a4519de855f0] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=2
+[2026-06-14 13:06:02] [INFO ] [http                     ] [5477a3296d00] GET /knowledge_bases/ → 200
+[2026-06-14 13:06:02] [INFO ] [http                     ] [c60b11f721e6] GET /chat/sessions → 200
+[2026-06-14 13:06:02] [INFO ] [http                     ] [fa43204fd147] GET /chat/sessions → 200
+[2026-06-14 13:06:02] [INFO ] [http                     ] [01f1434d7aec] GET /chat/history/d19a3b4e-ad0d-4949-9718-2f7dff2d7376 → 200
+[2026-06-14 13:06:02] [INFO ] [http                     ] [7283465009ff] GET /chat/history/d19a3b4e-ad0d-4949-9718-2f7dff2d7376 → 200
+[2026-06-14 13:06:02] [INFO ] [http                     ] [0e74ae24174b] GET /chat/history/d19a3b4e-ad0d-4949-9718-2f7dff2d7376 → 200
+[2026-06-14 13:06:11] [INFO ] [__main__                 ] [-] 会话已创建: session_id=175e388b-3bc1-4bb3-acff-a6cff096615a
+[2026-06-14 13:06:11] [INFO ] [http                     ] [28dce003dc9f] POST /chat/sessions → 200
+[2026-06-14 13:06:35] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 13:06:35] [INFO ] [__main__                 ] [-] AI 回复成功: len=438 history=0 request_id=c7461b3a1204
+[2026-06-14 13:06:35] [INFO ] [http                     ] [4d0611d69f51] POST /chat → 200
+[2026-06-14 13:06:35] [INFO ] [http                     ] [d4a93379f9af] PATCH /chat/sessions/175e388b-3bc1-4bb3-acff-a6cff096615a → 200
+[2026-06-14 13:07:25] [INFO ] [__main__                 ] [4af3178617a7] 搜索请求: query=编码器有多少个层级 kb=06d1a48e-2533-4a72-88fc-3853575f011b user=e703fa66-3318-45c6-9660-d41818663354
+[2026-06-14 13:07:25] [INFO ] [httpx                    ] [-] HTTP Request: POST http://localhost:6333/collections/enterprise_knowledge_chunks/points/search "HTTP/1.1 200 OK"
+[2026-06-14 13:07:25] [INFO ] [elastic_transport.transport] [-] POST http://localhost:9200/enterprise_knowledge_chunks/_search [status:200 duration:0.019s]
+[2026-06-14 13:07:25] [INFO ] [__main__                 ] [4af3178617a7] 搜索完成: results=5
+[2026-06-14 13:07:25] [INFO ] [http                     ] [031505dfbf53] GET /search/06d1a48e-2533-4a72-88fc-3853575f011b → 200
+[2026-06-14 13:07:27] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 13:07:27] [INFO ] [__main__                 ] [-] AI 回复成功: len=42 history=3 request_id=19a3b5e65e48
+[2026-06-14 13:07:27] [INFO ] [http                     ] [ac9316849d57] POST /chat → 200
+[2026-06-14 13:07:33] [ERROR] [__main__                 ] [a5e027560312] 未捕获异常: name 'UserStore' is not defined
+Traceback (most recent call last):
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "F:\Github\BigGraph\core\logging.py", line 148, in __call__
+    await self.app(scope, receive, log_send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\fastapi\routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\fastapi\routing.py", line 212, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Github\BigGraph\api\ragControll.py", line 334, in list_kb_members
+    member_user = UserStore.get(db, str(m.user_id))
+                  ^^^^^^^^^
+NameError: name 'UserStore' is not defined
+[2026-06-14 13:07:36] [INFO ] [__main__                 ] [31928afdc8c2] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=2
+[2026-06-14 13:07:36] [INFO ] [http                     ] [8cc0f2fe3812] GET /knowledge_bases/ → 200
+[2026-06-14 13:07:36] [INFO ] [http                     ] [2cc51bd7276e] GET /chat/sessions → 200
+[2026-06-14 13:07:36] [INFO ] [http                     ] [301575df4bd6] GET /chat/history/175e388b-3bc1-4bb3-acff-a6cff096615a → 200
+[2026-06-14 13:07:37] [ERROR] [__main__                 ] [69c4fcd888f9] 未捕获异常: name 'UserStore' is not defined
+Traceback (most recent call last):
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "F:\Github\BigGraph\core\logging.py", line 148, in __call__
+    await self.app(scope, receive, log_send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\fastapi\routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\fastapi\routing.py", line 212, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Github\BigGraph\api\ragControll.py", line 334, in list_kb_members
+    member_user = UserStore.get(db, str(m.user_id))
+                  ^^^^^^^^^
+NameError: name 'UserStore' is not defined
+[2026-06-14 13:07:41] [INFO ] [http                     ] [74cbd30a2131] GET /chat/sessions → 200
+[2026-06-14 13:07:41] [INFO ] [__main__                 ] [0981a05b1819] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=2
+[2026-06-14 13:07:41] [INFO ] [http                     ] [e1e734b8ecd9] GET /knowledge_bases/ → 200
+[2026-06-14 13:07:41] [INFO ] [http                     ] [7d7000ee0f0b] GET /chat/history/175e388b-3bc1-4bb3-acff-a6cff096615a → 200
+[2026-06-14 13:07:51] [ERROR] [__main__                 ] [c11cbd4bc7b7] 未捕获异常: name 'UserStore' is not defined
+Traceback (most recent call last):
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\middleware\errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "F:\Github\BigGraph\core\logging.py", line 148, in __call__
+    await self.app(scope, receive, log_send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\middleware\exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\starlette\routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\fastapi\routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\photo_to_vedio\BigGraph\biggraph_env\Lib\site-packages\fastapi\routing.py", line 212, in run_endpoint_function
+    return await dependant.call(**values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "F:\Github\BigGraph\api\ragControll.py", line 334, in list_kb_members
+    member_user = UserStore.get(db, str(m.user_id))
+                  ^^^^^^^^^
+NameError: name 'UserStore' is not defined
+[2026-06-14 13:18:13] [INFO ] [langchain_openai.chat_models._client_utils] [-] langchain-openai detected system proxy configuration and no explicit `http_socket_options` / `http_client` / `http_async_client` / `openai_proxy`; skipping the custom `httpx` transport so httpx's env-proxy auto-detection applies. Pass `http_socket_options=[...]` to opt back into kernel-level TCP keepalive tuning on top of the env proxy.
+[2026-06-14 13:18:18] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-14 13:18:19] [INFO ] [http                     ] [37c527521f16] GET /chat/sessions → 200
+[2026-06-14 13:18:19] [INFO ] [__main__                 ] [bf90b06f6fd9] 知识库列表: user=e703fa66-3318-45c6-9660-d41818663354 count=2
+[2026-06-14 13:18:19] [INFO ] [http                     ] [94a0c11f4831] GET /knowledge_bases/ → 200
+[2026-06-14 13:18:19] [INFO ] [http                     ] [57024bd723c2] GET /chat/sessions → 200
+[2026-06-14 13:18:19] [INFO ] [http                     ] [ac4b772aeadc] GET /chat/history/175e388b-3bc1-4bb3-acff-a6cff096615a → 200
+[2026-06-14 13:18:19] [INFO ] [http                     ] [04ccf25945fc] GET /chat/history/175e388b-3bc1-4bb3-acff-a6cff096615a → 200
+[2026-06-14 13:18:25] [INFO ] [http                     ] [f69f04557a8c] GET /knowledge_bases/06d1a48e-2533-4a72-88fc-3853575f011b/members → 200
+[2026-06-14 13:18:27] [INFO ] [http                     ] [80c6c11242d4] GET /knowledge_bases/c72c9e5a-1595-4856-aa1d-e834b9694077/members → 200

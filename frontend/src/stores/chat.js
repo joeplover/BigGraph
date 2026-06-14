@@ -368,6 +368,22 @@ export const useChatStore = defineStore('chat', () => {
   }
 
   // ================================================================
+  //  重置（切换账号时清空）
+  // ================================================================
+
+  function reset() {
+    sessions.value = []
+    currentSessionId.value = null
+    messages.value = []
+    ragMode.value = false
+    pptMode.value = false
+    kbId.value = ''
+    kbs.value = []
+    pptDownloadUrl.value = ''
+    loading.value = false
+  }
+
+  // ================================================================
   //  启动：加载数据
   // ================================================================
   loadFromBackend()
@@ -388,6 +404,8 @@ export const useChatStore = defineStore('chat', () => {
     selectSession,
     sendMessage,
     fetchMyKbs,
+    loadFromBackend,
+    reset,
     toggleRagMode,
     togglePptMode,
     setKbId,

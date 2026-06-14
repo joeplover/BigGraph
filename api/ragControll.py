@@ -55,6 +55,7 @@ from storage.postgres import (
     KbMemberStore,
     KnowledgeBaseStore,
     UploadedFileStore,
+    UserStore,
     get_session,
     init_db,
 )
@@ -294,6 +295,28 @@ async def approve_kb_member(kb_id: str, member_id: str, user: dict = Depends(get
         return {"message": "已批准加入", "member_id": member_id, "status": "approved"}
 
 
+@app.post("/knowledge_bases/{kb_id}/members/{member_id}/reject")
+async def reject_kb_member(kb_id: str, member_id: str, user: dict = Depends(get_current_user)):
+    """拒绝成员加入知识库（仅 owner）"""
+    user_id = user["user_id"]
+    with get_session() as db:
+        kb = KnowledgeBaseStore.get(db, kb_id)
+        if not kb:
+            raise ErrorCode.KB_NOT_FOUND.exception()
+        if str(kb.owner_id) != user_id:
+            raise ErrorCode.FORBIDDEN.exception(detail="只有知识库创建者可以审批成员")
+
+        member = KbMemberStore.get(db, member_id)
+        if not member or str(member.knowledge_base_id) != kb_id:
+            raise ErrorCode.NOT_FOUND.exception(detail="成员申请不存在")
+
+        if member.status != KbMemberStatus.pending:
+            raise ErrorCode.CONFLICT.exception(detail=f"该申请已被{member.status.value}")
+
+        KbMemberStore.update_status(db, member_id, KbMemberStatus.rejected)
+        return {"message": "已拒绝加入", "member_id": member_id, "status": "rejected"}
+
+
 @app.get("/knowledge_bases/{kb_id}/members")
 async def list_kb_members(kb_id: str, user: dict = Depends(get_current_user)):
     """查看知识库成员列表（仅 owner）"""
@@ -308,9 +331,13 @@ async def list_kb_members(kb_id: str, user: dict = Depends(get_current_user)):
         members = KbMemberStore.list_by_kb(db, kb_id)
         result = []
         for m in members:
+            # 查找用户名
+            member_user = UserStore.get(db, str(m.user_id))
+            display_name = member_user.display_name if member_user else str(m.user_id)[:8]
             result.append({
                 "id": str(m.id),
                 "user_id": str(m.user_id),
+                "display_name": display_name,
                 "role": m.role.value,
                 "status": m.status.value,
                 "created_at": _local_iso(m.created_at),
@@ -622,16 +649,17 @@ async def search_documents(
 ):
     """在知识库中执行向量语义搜索（需认证）。"""
     rid = make_request_id()
-    tenant_id = user["tenant_id"]
-    logger.info("搜索请求: query=%s kb=%s tenant=%s user=%s",
-                 query, knowledge_base_id, tenant_id, user["user_id"], extra={"request_id": rid})
-    # 校验知识库存在且属于该租户
+    user_id = user["user_id"]
+    logger.info("搜索请求: query=%s kb=%s user=%s",
+                 query, knowledge_base_id, user_id, extra={"request_id": rid})
+    # 校验知识库存在且有权限访问（owner 或已批准的成员）
     with get_session() as db:
         kb = KnowledgeBaseStore.get(db, knowledge_base_id)
         if not kb:
             raise ErrorCode.KB_NOT_FOUND.exception()
-        if kb.tenant_id != tenant_id:
-            raise ErrorCode.TENANT_MISMATCH.exception()
+        if not KbMemberStore.user_can_access(db, user_id, knowledge_base_id):
+            raise ErrorCode.FORBIDDEN.exception(detail="无权限访问该知识库")
+        kb_tenant_id = kb.tenant_id
 
     # 验证搜索词
     if not query or not query.strip():
@@ -644,7 +672,7 @@ async def search_documents(
     # 2. Qdrant 向量检索
     qdrant_hits = _qdrant.search(
         query_vector=query_vector,
-        tenant_id=tenant_id,
+        tenant_id=kb_tenant_id,
         knowledge_base_ids=[knowledge_base_id],
         top_k=limit,
     )
