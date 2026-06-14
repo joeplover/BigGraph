@@ -1,14 +1,100 @@
 # =============================================================================
-# BigGraph Docker 编排 — 仅打包应用层
+# BigGraph Docker 编排 — 全量部署
 #
-# PostgreSQL / Redis / Elasticsearch / Qdrant 已在宿主环境运行，
-# 通过 host.docker.internal 访问（Docker Desktop Windows 自动支持）。
+# 所有数据持久化到项目根目录 docker-data/ 下统一管理
+#
+# 启动:
+#   docker compose up -d
+#
+# 环境变量（自动从 .env 文件读取）:
+#   LLM_API_KEY    — LLM API 密钥
+#   LLM_BASE_URL   — LLM API 地址
 # =============================================================================
 
 services:
   # ================================================================
+  # PostgreSQL — 元数据与持久化层
+  # ================================================================
+  postgres:
+    image: postgres:16-alpine
+    container_name: biggraph-postgres
+    environment:
+      POSTGRES_USER: workface
+      POSTGRES_PASSWORD: 678678
+      POSTGRES_DB: workface
+      TZ: Asia/Shanghai
+    volumes:
+      - ./docker-data/postgres:/var/lib/postgresql/data
+      - ./sql/schema.sql:/docker-entrypoint-initdb.d/01-schema.sql
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U workface"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+
+  # ================================================================
+  # Redis — 缓存 / 会话 / PPT 状态
+  # ================================================================
+  redis:
+    image: redis:7-alpine
+    container_name: biggraph-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./docker-data/redis:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+
+  # ================================================================
+  # Qdrant — 向量数据库
+  # ================================================================
+  qdrant:
+    image: qdrant/qdrant:v1.12.6
+    container_name: biggraph-qdrant
+    volumes:
+      - ./docker-data/qdrant:/qdrant/storage
+    ports:
+      - "6333:6333"
+      - "6334:6334"
+    healthcheck:
+      test: ["CMD-SHELL", "apt-get update -qq && apt-get install -y -qq curl && curl -s -o /dev/null http://localhost:6333/healthz"]
+      interval: 30s
+      timeout: 15s
+      retries: 5
+      start_period: 10s
+    restart: unless-stopped
+
+  # ================================================================
+  # Elasticsearch — 全文检索引擎
+  # ================================================================
+  elasticsearch:
+    image: elasticsearch:8.17.1
+    container_name: biggraph-es
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+      - ES_JAVA_OPTS=-Xms512m -Xmx512m
+      - ingest.geoip.downloader.enabled=false
+    volumes:
+      - ./docker-data/elasticsearch:/usr/share/elasticsearch/data
+    ports:
+      - "9200:9200"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9200/_cluster/health"]
+      interval: 15s
+      timeout: 10s
+      retries: 5
+    restart: unless-stopped
+
+  # ================================================================
   # Embedding — LLama.cpp + bge-m3 向量化服务
-  # 注意: 模型文件 emb/bge-m3-Q4_K_M.gguf 需要先放到项目根目录
   # ================================================================
   embedding:
     build:
@@ -32,7 +118,7 @@ services:
     restart: unless-stopped
 
   # ================================================================
-  # Backend — FastAPI 后端（通过 host.docker.internal 连接宿主服务）
+  # Backend — FastAPI 后端
   # ================================================================
   backend:
     build:
@@ -40,35 +126,36 @@ services:
       dockerfile: docker/backend/Dockerfile
     container_name: biggraph-backend
     depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+      qdrant:
+        condition: service_healthy
+      elasticsearch:
+        condition: service_healthy
       embedding:
         condition: service_healthy
     environment:
-      # --- 数据库（宿主已有容器） ---
-      PG_HOST: host.docker.internal
+      PG_HOST: postgres
       PG_PORT: "5432"
       PG_USER: workface
       PG_PASSWORD: 678678
       PG_DATABASE: workface
-      # --- 缓存 ---
-      REDIS_HOST: host.docker.internal
+      REDIS_HOST: redis
       REDIS_PORT: "6379"
-      # --- 向量库 ---
-      QDRANT_URL: http://host.docker.internal:6333
+      QDRANT_URL: http://qdrant:6333
       QDRANT_COLLECTION: enterprise_knowledge_chunks
       QDRANT_VECTOR_SIZE: "1024"
-      # --- 全文检索 ---
-      ES_HOSTS: http://host.docker.internal:9200
+      ES_HOSTS: http://elasticsearch:9200
       ES_USER: elastic
       ES_PASSWORD: changeme
-      # --- Embedding ---
       EMBEDDING_BASE_URL: http://embedding:1233/v1
       EMBEDDING_MODEL: bge-m3
       EMBEDDING_API_KEY: ""
-      # --- LLM ---
       LLM_API_KEY: ${LLM_API_KEY}
       LLM_BASE_URL: ${LLM_BASE_URL}
       LLM_MODEL: ${LLM_MODEL:-DeepSeek-V4-Flash[free]}
-      # --- 日志 ---
       LOG_LEVEL: INFO
       LOG_DIR: /app/logs
       TZ: Asia/Shanghai
