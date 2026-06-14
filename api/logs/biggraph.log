@@ -2400,3 +2400,68 @@ DETAIL:  Key (id)=(178a8795-182f-44c9-97bd-18b2ad3d36ef) is still referenced fro
 [2026-06-14 18:22:50] [INFO ] [http                     ] [4fc3f78f9f5e] GET /knowledge_bases/ → 200
 [2026-06-14 18:22:50] [INFO ] [http                     ] [04c2b12cf23a] GET /chat/sessions → 200
 [2026-06-14 18:22:50] [INFO ] [http                     ] [9014c88b19d8] GET /chat/history/e79f8c83-495e-4216-acb0-5d843c2452de → 200
+[2026-06-14 18:27:01] [INFO ] [__main__                 ] [40637af6ee94] 知识库列表: user=348fc577-af5a-4929-ab7b-6b3148359e69 count=1
+[2026-06-14 18:27:01] [INFO ] [http                     ] [dd84885bd12a] GET /knowledge_bases/ → 200
+[2026-06-14 18:27:01] [INFO ] [http                     ] [e7777b346aef] GET /chat/sessions → 200
+[2026-06-14 18:27:01] [INFO ] [http                     ] [29b5c718c1cb] GET /chat/history/e79f8c83-495e-4216-acb0-5d843c2452de → 200
+[2026-06-14 18:28:02] [INFO ] [__main__                 ] [d94ca8440ab8] 知识库列表: user=348fc577-af5a-4929-ab7b-6b3148359e69 count=1
+[2026-06-14 18:28:02] [INFO ] [http                     ] [0248cdf93120] GET /knowledge_bases/ → 200
+[2026-06-14 18:28:02] [INFO ] [http                     ] [4a95691be403] GET /chat/sessions → 200
+[2026-06-14 18:28:02] [INFO ] [http                     ] [aaac9b1bf63c] GET /chat/history/e79f8c83-495e-4216-acb0-5d843c2452de → 200
+[2026-06-14 18:47:22] [INFO ] [elastic_transport.transport] [-] HEAD http://localhost:9200/enterprise_knowledge_chunks [status:200 duration:0.023s]
+[2026-06-14 18:47:22] [INFO ] [httpx                    ] [-] HTTP Request: GET http://localhost:6333/collections "HTTP/1.1 200 OK"
+[2026-06-14 18:47:22] [INFO ] [httpx                    ] [-] HTTP Request: PUT http://localhost:6333/collections/enterprise_knowledge_chunks/index?wait=true "HTTP/1.1 200 OK"
+[2026-06-14 18:47:22] [INFO ] [httpx                    ] [-] HTTP Request: PUT http://localhost:6333/collections/enterprise_knowledge_chunks/index?wait=true "HTTP/1.1 200 OK"
+[2026-06-14 18:47:22] [INFO ] [httpx                    ] [-] HTTP Request: PUT http://localhost:6333/collections/enterprise_knowledge_chunks/index?wait=true "HTTP/1.1 200 OK"
+[2026-06-14 18:47:22] [INFO ] [httpx                    ] [-] HTTP Request: PUT http://localhost:6333/collections/enterprise_knowledge_chunks/index?wait=true "HTTP/1.1 200 OK"
+[2026-06-14 18:47:22] [INFO ] [httpx                    ] [-] HTTP Request: PUT http://localhost:6333/collections/enterprise_knowledge_chunks/index?wait=true "HTTP/1.1 200 OK"
+[2026-06-14 18:47:22] [INFO ] [__main__                 ] [-] 数据库表已就绪
+[2026-06-14 18:47:30] [INFO ] [api.auth                 ] [1922dd17d1ae] 用户登录成功: username=joeplover user_id=348fc577-af5a-4929-ab7b-6b3148359e69 tenant=tenant_5a0d4402
+[2026-06-14 18:47:30] [INFO ] [http                     ] [28ba476116f7] POST /auth/login → 200
+[2026-06-14 18:47:30] [INFO ] [http                     ] [f2af81974020] GET /chat/sessions → 200
+[2026-06-14 18:47:30] [INFO ] [__main__                 ] [ad552a82f01b] 知识库列表: user=348fc577-af5a-4929-ab7b-6b3148359e69 count=1
+[2026-06-14 18:47:30] [INFO ] [http                     ] [8f4258b4cf7f] GET /knowledge_bases/ → 200
+[2026-06-14 18:47:30] [INFO ] [http                     ] [df8b3794749c] GET /chat/history/3f356836-a1cf-4d95-a707-c33fd847adae → 200
+[2026-06-14 18:47:32] [INFO ] [__main__                 ] [-] 会话已创建: session_id=7f2f5a80-83a8-4d5e-acc8-f82b86cab7b2
+[2026-06-14 18:47:32] [INFO ] [http                     ] [07bac7ba593a] POST /chat/sessions → 200
+[2026-06-14 18:47:42] [INFO ] [http                     ] [32bc1a5b46d1] GET /chat/history/3f356836-a1cf-4d95-a707-c33fd847adae → 200
+[2026-06-14 18:47:47] [INFO ] [http                     ] [21f06dedc251] GET /chat/history/7f2f5a80-83a8-4d5e-acc8-f82b86cab7b2 → 200
+[2026-06-14 18:47:49] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=7f2f5a80-83a8-4d5e-acc8-f82b86cab7b2 msg_len=6
+[2026-06-14 18:47:53] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 18:47:53] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=7f2f5a80-83a8-4d5e-acc8-f82b86cab7b2 status=waiting_user reply_len=137
+[2026-06-14 18:47:53] [INFO ] [http                     ] [e9c00a5a808f] POST /api/ppt/chat → 200
+[2026-06-14 18:47:53] [INFO ] [http                     ] [74b824cc4d0c] PATCH /chat/sessions/7f2f5a80-83a8-4d5e-acc8-f82b86cab7b2 → 200
+[2026-06-14 18:47:55] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=7f2f5a80-83a8-4d5e-acc8-f82b86cab7b2 msg_len=22
+[2026-06-14 18:47:58] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 18:47:58] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=7f2f5a80-83a8-4d5e-acc8-f82b86cab7b2 status=waiting_material reply_len=98
+[2026-06-14 18:47:58] [INFO ] [http                     ] [10f4156df1b0] POST /api/ppt/chat → 200
+[2026-06-14 18:48:05] [INFO ] [api.ppt_agent_router     ] [a963df9a04ed] PPT 素材上传: name=transformer_zh_cn.pdf session=7f2f5a80-83a8-4d5e-acc8-f82b86cab7b2
+[2026-06-14 18:48:05] [INFO ] [api.ppt_agent_router     ] [a963df9a04ed] PPT 素材上传成功: name=transformer_zh_cn.pdf text_len=18799 preview=在提供适当署名的前提下，Google 特此授予仅为新闻或学术作品复制本文 中表格和图形的许可。 Attention Is All You Need Ashish Vaswani∗ Google Bra...
+[2026-06-14 18:48:05] [INFO ] [http                     ] [856e0534861a] POST /api/ppt/upload → 200
+[2026-06-14 18:48:09] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=7f2f5a80-83a8-4d5e-acc8-f82b86cab7b2 msg_len=2
+[2026-06-14 18:48:23] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 18:48:23] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=7f2f5a80-83a8-4d5e-acc8-f82b86cab7b2 status=waiting_confirm reply_len=289
+[2026-06-14 18:48:23] [INFO ] [http                     ] [957a0a90d044] POST /api/ppt/chat → 200
+[2026-06-14 18:48:27] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务开始: session=7f2f5a80-83a8-4d5e-acc8-f82b86cab7b2
+[2026-06-14 18:48:27] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务已启动: session=7f2f5a80-83a8-4d5e-acc8-f82b86cab7b2
+[2026-06-14 18:48:27] [INFO ] [http                     ] [011168f257a4] POST /api/ppt/chat → 200
+[2026-06-14 18:48:27] [INFO ] [http                     ] [447b84ddedf0] GET /api/ppt/stream/7f2f5a80-83a8-4d5e-acc8-f82b86cab7b2 → 200
+[2026-06-14 18:48:58] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 18:49:13] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 18:51:11] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 18:51:12] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务完成: session=7f2f5a80-83a8-4d5e-acc8-f82b86cab7b2 status=ppt_exported reply_len=18
+[2026-06-14 18:51:19] [INFO ] [http                     ] [248e34283cb6] GET /api/ppt/download/7f2f5a80-83a8-4d5e-acc8-f82b86cab7b2 → 200
+[2026-06-14 18:51:31] [INFO ] [__main__                 ] [-] 会话已删除: session_id=3f356836-a1cf-4d95-a707-c33fd847adae
+[2026-06-14 18:51:31] [INFO ] [http                     ] [a474f454bc23] DELETE /chat/history/3f356836-a1cf-4d95-a707-c33fd847adae → 200
+[2026-06-14 18:51:33] [INFO ] [__main__                 ] [-] 会话已删除: session_id=d13dd49d-7a96-46c5-b554-eb77bdc41d10
+[2026-06-14 18:51:33] [INFO ] [http                     ] [b1df4b6ee985] DELETE /chat/history/d13dd49d-7a96-46c5-b554-eb77bdc41d10 → 200
+[2026-06-14 18:54:44] [INFO ] [__main__                 ] [5e4121104a89] 知识库列表: user=348fc577-af5a-4929-ab7b-6b3148359e69 count=1
+[2026-06-14 18:54:44] [INFO ] [http                     ] [8cd7d375a7f0] GET /knowledge_bases/ → 200
+[2026-06-14 18:54:44] [INFO ] [http                     ] [7c946f9aef1c] GET /chat/sessions → 200
+[2026-06-14 18:54:44] [INFO ] [http                     ] [838a8984ffa6] GET /chat/history/7f2f5a80-83a8-4d5e-acc8-f82b86cab7b2 → 200
+[2026-06-14 18:55:09] [INFO ] [api.auth                 ] [0733b29c78a0] 用户登录成功: username=joeplover user_id=348fc577-af5a-4929-ab7b-6b3148359e69 tenant=tenant_5a0d4402
+[2026-06-14 18:55:09] [INFO ] [http                     ] [292aa63990e7] POST /auth/login → 200
+[2026-06-14 18:55:09] [INFO ] [http                     ] [67a883d50f85] GET /chat/sessions → 200
+[2026-06-14 18:55:09] [INFO ] [__main__                 ] [b0e18961567f] 知识库列表: user=348fc577-af5a-4929-ab7b-6b3148359e69 count=1
+[2026-06-14 18:55:09] [INFO ] [http                     ] [f07dc24c6150] GET /knowledge_bases/ → 200
+[2026-06-14 18:55:10] [INFO ] [http                     ] [b8b4e5ab5344] GET /chat/history/7f2f5a80-83a8-4d5e-acc8-f82b86cab7b2 → 200
