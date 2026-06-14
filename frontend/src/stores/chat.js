@@ -384,9 +384,9 @@ export const useChatStore = defineStore('chat', () => {
   }
 
   // ================================================================
-  //  启动：加载数据
+  //  （启动由 ChatView.vue 的 onMounted 触发，不在 store 初始化时调用）
   // ================================================================
-  loadFromBackend()
+  // (removed auto-call to loadFromBackend() to avoid race during login)
 
   return {
     sessions,
