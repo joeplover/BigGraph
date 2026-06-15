@@ -1386,3 +1386,872 @@ elasticsearch.ApiError: ApiError(503, 'search_phase_execution_exception', None)
 [2026-06-14 19:24:41] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
 [2026-06-14 19:24:41] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务完成: session=aad3a939-7ece-45fa-af27-6c8337f19ca7 status=failed reply_len=46
 [2026-06-14 19:24:42] [INFO ] [http                     ] [be2f3031c206] GET /api/ppt/status/aad3a939-7ece-45fa-af27-6c8337f19ca7 → 200
+[2026-06-14 19:46:09] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=aad3a939-7ece-45fa-af27-6c8337f19ca7 msg_len=2
+[2026-06-14 19:46:12] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 19:46:22] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 19:46:22] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=aad3a939-7ece-45fa-af27-6c8337f19ca7 status=waiting_confirm reply_len=335
+[2026-06-14 19:46:22] [INFO ] [http                     ] [a16122014d6f] POST /api/ppt/chat → 200
+[2026-06-14 19:46:27] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务开始: session=aad3a939-7ece-45fa-af27-6c8337f19ca7
+[2026-06-14 19:46:27] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务已启动: session=aad3a939-7ece-45fa-af27-6c8337f19ca7
+[2026-06-14 19:46:27] [INFO ] [http                     ] [e8192bbe1f68] POST /api/ppt/chat → 200
+[2026-06-14 19:46:27] [INFO ] [http                     ] [e8d8d8898d45] GET /api/ppt/stream/aad3a939-7ece-45fa-af27-6c8337f19ca7 → 200
+[2026-06-14 19:46:37] [WARNING] [api.auth                 ] [5e919ea6a060] Token 无效或已过期
+[2026-06-14 19:46:37] [INFO ] [http                     ] [fc8ca2c449d1] DELETE /chat/history/aad3a939-7ece-45fa-af27-6c8337f19ca7 → 401
+[2026-06-14 19:46:37] [INFO ] [api.auth                 ] [553de68a3635] Token 刷新成功: user_id=348fc577-af5a-4929-ab7b-6b3148359e69
+[2026-06-14 19:46:37] [ERROR] [api.ragControll          ] [5541cdef3335] 未捕获异常: 1 validation error for UserInfoResponse
+email
+  Field required [type=missing, input_value={'user_id': '348fc577-af5...02', 'created_at': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.10/v/missing
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/app/core/logging.py", line 148, in __call__
+    await self.app(scope, receive, log_send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 214, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/starlette/concurrency.py", line 39, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/anyio/to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 2518, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 1002, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/api/auth.py", line 274, in refresh
+    user=UserInfoResponse(
+         ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pydantic/main.py", line 214, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pydantic_core._pydantic_core.ValidationError: 1 validation error for UserInfoResponse
+email
+  Field required [type=missing, input_value={'user_id': '348fc577-af5...02', 'created_at': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.10/v/missing
+[2026-06-14 19:46:37] [INFO ] [http                     ] [7e4ea98c7ad3] GET /chat/history/7f2f5a80-83a8-4d5e-acc8-f82b86cab7b2 → 422
+[2026-06-14 19:46:44] [INFO ] [api.auth                 ] [33501b29b072] 用户登录成功: username=joeplover user_id=348fc577-af5a-4929-ab7b-6b3148359e69 tenant=tenant_5a0d4402
+[2026-06-14 19:46:44] [INFO ] [http                     ] [b55d9327a5bb] POST /auth/login → 200
+[2026-06-14 19:46:44] [INFO ] [api.ragControll          ] [c43bea6316d9] 知识库列表: user=348fc577-af5a-4929-ab7b-6b3148359e69 count=1
+[2026-06-14 19:46:44] [INFO ] [http                     ] [8930552096dc] GET /knowledge_bases/ → 200
+[2026-06-14 19:46:44] [INFO ] [http                     ] [6e67b2e8a17e] GET /chat/sessions → 200
+[2026-06-14 19:46:44] [INFO ] [http                     ] [440386eebaf2] GET /chat/history/7f2f5a80-83a8-4d5e-acc8-f82b86cab7b2 → 200
+[2026-06-14 19:46:46] [INFO ] [http                     ] [a8795f99d903] GET /chat/history/aad3a939-7ece-45fa-af27-6c8337f19ca7 → 200
+[2026-06-14 19:46:48] [INFO ] [api.ragControll          ] [-] 会话已删除: session_id=aad3a939-7ece-45fa-af27-6c8337f19ca7
+[2026-06-14 19:46:48] [INFO ] [http                     ] [7b69bb1fa6ed] DELETE /chat/history/aad3a939-7ece-45fa-af27-6c8337f19ca7 → 200
+[2026-06-14 19:46:48] [INFO ] [http                     ] [9d541b0226b5] GET /chat/history/7f2f5a80-83a8-4d5e-acc8-f82b86cab7b2 → 200
+[2026-06-14 19:46:49] [INFO ] [api.ragControll          ] [-] 会话已创建: session_id=7b2a7073-508d-4e30-a093-d534f731e841
+[2026-06-14 19:46:49] [INFO ] [http                     ] [c5d13ba0e190] POST /chat/sessions → 200
+[2026-06-14 19:47:00] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=7b2a7073-508d-4e30-a093-d534f731e841 msg_len=6
+[2026-06-14 19:47:04] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 19:47:04] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 19:47:04] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=7b2a7073-508d-4e30-a093-d534f731e841 status=waiting_user reply_len=137
+[2026-06-14 19:47:04] [INFO ] [http                     ] [f4cbe8f724b2] POST /api/ppt/chat → 200
+[2026-06-14 19:47:04] [INFO ] [http                     ] [c59120f625f6] PATCH /chat/sessions/7b2a7073-508d-4e30-a093-d534f731e841 → 200
+[2026-06-14 19:47:07] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=7b2a7073-508d-4e30-a093-d534f731e841 msg_len=22
+[2026-06-14 19:47:16] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 19:47:16] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=7b2a7073-508d-4e30-a093-d534f731e841 status=waiting_material reply_len=98
+[2026-06-14 19:47:16] [INFO ] [http                     ] [c8b13dced086] POST /api/ppt/chat → 200
+[2026-06-14 19:47:21] [INFO ] [api.ppt_agent_router     ] [292049be2548] PPT 素材上传: name=transformer_zh_cn.pdf session=7b2a7073-508d-4e30-a093-d534f731e841
+[2026-06-14 19:47:21] [INFO ] [api.ppt_agent_router     ] [292049be2548] PPT 素材上传成功: name=transformer_zh_cn.pdf text_len=18799 preview=在提供适当署名的前提下，Google 特此授予仅为新闻或学术作品复制本文 中表格和图形的许可。 Attention Is All You Need Ashish Vaswani∗ Google Bra...
+[2026-06-14 19:47:21] [INFO ] [http                     ] [8b48ad41222b] POST /api/ppt/upload → 200
+[2026-06-14 19:47:23] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 19:47:27] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=7b2a7073-508d-4e30-a093-d534f731e841 msg_len=2
+[2026-06-14 19:47:43] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 19:47:43] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=7b2a7073-508d-4e30-a093-d534f731e841 status=waiting_confirm reply_len=225
+[2026-06-14 19:47:43] [INFO ] [http                     ] [a1aa3048b5d5] POST /api/ppt/chat → 200
+[2026-06-14 19:47:49] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务开始: session=7b2a7073-508d-4e30-a093-d534f731e841
+[2026-06-14 19:47:49] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务已启动: session=7b2a7073-508d-4e30-a093-d534f731e841
+[2026-06-14 19:47:49] [INFO ] [http                     ] [7f62aeabd6eb] POST /api/ppt/chat → 200
+[2026-06-14 19:47:49] [INFO ] [http                     ] [d34aebe8037b] GET /api/ppt/stream/7b2a7073-508d-4e30-a093-d534f731e841 → 200
+[2026-06-14 19:48:14] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 19:48:33] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 19:48:33] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务完成: session=aad3a939-7ece-45fa-af27-6c8337f19ca7 status=failed reply_len=46
+[2026-06-14 19:48:47] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 19:48:55] [INFO ] [http                     ] [4a93285c73af] GET /api/ppt/status/7b2a7073-508d-4e30-a093-d534f731e841 → 200
+[2026-06-14 19:49:00] [INFO ] [http                     ] [6462508c9190] GET /api/ppt/status/7b2a7073-508d-4e30-a093-d534f731e841 → 200
+[2026-06-14 19:49:05] [INFO ] [http                     ] [2d94aa1568b1] GET /api/ppt/status/7b2a7073-508d-4e30-a093-d534f731e841 → 200
+[2026-06-14 19:49:10] [INFO ] [http                     ] [c20ab8504fb4] GET /api/ppt/status/7b2a7073-508d-4e30-a093-d534f731e841 → 200
+[2026-06-14 19:49:15] [INFO ] [http                     ] [34f7a8cc585b] GET /api/ppt/status/7b2a7073-508d-4e30-a093-d534f731e841 → 200
+[2026-06-14 19:49:20] [INFO ] [http                     ] [34f7934bb0a6] GET /api/ppt/status/7b2a7073-508d-4e30-a093-d534f731e841 → 200
+[2026-06-14 19:49:25] [INFO ] [http                     ] [2af4609375c7] GET /api/ppt/status/7b2a7073-508d-4e30-a093-d534f731e841 → 200
+[2026-06-14 19:49:30] [INFO ] [http                     ] [c9064a0294f4] GET /api/ppt/status/7b2a7073-508d-4e30-a093-d534f731e841 → 200
+[2026-06-14 19:49:35] [INFO ] [http                     ] [5c3c1811e546] GET /api/ppt/status/7b2a7073-508d-4e30-a093-d534f731e841 → 200
+[2026-06-14 19:49:40] [INFO ] [http                     ] [4635f13c4fde] GET /api/ppt/status/7b2a7073-508d-4e30-a093-d534f731e841 → 200
+[2026-06-14 19:49:45] [INFO ] [http                     ] [351cc9bb5889] GET /api/ppt/status/7b2a7073-508d-4e30-a093-d534f731e841 → 200
+[2026-06-14 19:49:50] [INFO ] [http                     ] [8480a581a345] GET /api/ppt/status/7b2a7073-508d-4e30-a093-d534f731e841 → 200
+[2026-06-14 19:49:55] [INFO ] [http                     ] [558499406b85] GET /api/ppt/status/7b2a7073-508d-4e30-a093-d534f731e841 → 200
+[2026-06-14 19:50:00] [INFO ] [http                     ] [567c4ba30013] GET /api/ppt/status/7b2a7073-508d-4e30-a093-d534f731e841 → 200
+[2026-06-14 19:50:05] [INFO ] [http                     ] [aa686499cfde] GET /api/ppt/status/7b2a7073-508d-4e30-a093-d534f731e841 → 200
+[2026-06-14 19:50:10] [INFO ] [http                     ] [6a838d56b1e0] GET /api/ppt/status/7b2a7073-508d-4e30-a093-d534f731e841 → 200
+[2026-06-14 19:50:15] [INFO ] [http                     ] [8b3ad0330c3d] GET /api/ppt/status/7b2a7073-508d-4e30-a093-d534f731e841 → 200
+[2026-06-14 19:50:20] [INFO ] [http                     ] [babe6e61dc56] GET /api/ppt/status/7b2a7073-508d-4e30-a093-d534f731e841 → 200
+[2026-06-14 19:50:22] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 19:50:22] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务完成: session=7b2a7073-508d-4e30-a093-d534f731e841 status=ppt_exported reply_len=18
+[2026-06-14 19:50:25] [INFO ] [http                     ] [80bc8ee0be98] GET /api/ppt/status/7b2a7073-508d-4e30-a093-d534f731e841 → 200
+[2026-06-14 19:50:28] [INFO ] [http                     ] [cb0733ffba5a] GET /api/ppt/download/7b2a7073-508d-4e30-a093-d534f731e841 → 200
+[2026-06-14 22:37:44] [INFO ] [elastic_transport.transport] [-] HEAD http://elasticsearch:9200/enterprise_knowledge_chunks [status:200 duration:0.025s]
+[2026-06-14 22:37:44] [INFO ] [httpx                    ] [-] HTTP Request: GET http://qdrant:6333/collections "HTTP/1.1 200 OK"
+[2026-06-14 22:37:44] [INFO ] [httpx                    ] [-] HTTP Request: PUT http://qdrant:6333/collections/enterprise_knowledge_chunks/index?wait=true "HTTP/1.1 200 OK"
+[2026-06-14 22:37:44] [INFO ] [httpx                    ] [-] HTTP Request: PUT http://qdrant:6333/collections/enterprise_knowledge_chunks/index?wait=true "HTTP/1.1 200 OK"
+[2026-06-14 22:37:44] [INFO ] [httpx                    ] [-] HTTP Request: PUT http://qdrant:6333/collections/enterprise_knowledge_chunks/index?wait=true "HTTP/1.1 200 OK"
+[2026-06-14 22:37:44] [INFO ] [httpx                    ] [-] HTTP Request: PUT http://qdrant:6333/collections/enterprise_knowledge_chunks/index?wait=true "HTTP/1.1 200 OK"
+[2026-06-14 22:37:44] [INFO ] [httpx                    ] [-] HTTP Request: PUT http://qdrant:6333/collections/enterprise_knowledge_chunks/index?wait=true "HTTP/1.1 200 OK"
+[2026-06-14 22:37:44] [INFO ] [api.ragControll          ] [-] 数据库表已就绪
+[2026-06-14 22:37:44] [WARNING] [api.auth                 ] [3bbe0c883911] Token 无效或已过期
+[2026-06-14 22:37:44] [WARNING] [api.auth                 ] [3b5c987df042] Token 无效或已过期
+[2026-06-14 22:37:44] [INFO ] [http                     ] [009acd5f071e] GET /knowledge_bases/ → 401
+[2026-06-14 22:37:44] [INFO ] [http                     ] [e9126948e7a7] GET /chat/sessions → 401
+[2026-06-14 22:37:44] [INFO ] [api.auth                 ] [cb4b24e0bdf6] Token 刷新成功: user_id=348fc577-af5a-4929-ab7b-6b3148359e69
+[2026-06-14 22:37:44] [INFO ] [api.auth                 ] [a5516aecf2b3] Token 刷新成功: user_id=348fc577-af5a-4929-ab7b-6b3148359e69
+[2026-06-14 22:37:44] [ERROR] [api.ragControll          ] [ed4083e97cf1] 未捕获异常: 1 validation error for UserInfoResponse
+email
+  Field required [type=missing, input_value={'user_id': '348fc577-af5...02', 'created_at': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.10/v/missing
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/app/core/logging.py", line 148, in __call__
+    await self.app(scope, receive, log_send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 214, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/starlette/concurrency.py", line 39, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/anyio/to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 2518, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 1002, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/api/auth.py", line 274, in refresh
+    user=UserInfoResponse(
+         ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pydantic/main.py", line 214, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pydantic_core._pydantic_core.ValidationError: 1 validation error for UserInfoResponse
+email
+  Field required [type=missing, input_value={'user_id': '348fc577-af5...02', 'created_at': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.10/v/missing
+[2026-06-14 22:37:44] [ERROR] [api.ragControll          ] [cce0c2ed8550] 未捕获异常: 1 validation error for UserInfoResponse
+email
+  Field required [type=missing, input_value={'user_id': '348fc577-af5...02', 'created_at': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.10/v/missing
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/app/core/logging.py", line 148, in __call__
+    await self.app(scope, receive, log_send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 214, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/starlette/concurrency.py", line 39, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/anyio/to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 2518, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 1002, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/api/auth.py", line 274, in refresh
+    user=UserInfoResponse(
+         ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pydantic/main.py", line 214, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pydantic_core._pydantic_core.ValidationError: 1 validation error for UserInfoResponse
+email
+  Field required [type=missing, input_value={'user_id': '348fc577-af5...02', 'created_at': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.10/v/missing
+[2026-06-14 22:37:52] [INFO ] [api.auth                 ] [9c368ae40cef] 用户登录成功: username=joeplover user_id=348fc577-af5a-4929-ab7b-6b3148359e69 tenant=tenant_5a0d4402
+[2026-06-14 22:37:52] [INFO ] [http                     ] [fd94a0d584c5] POST /auth/login → 200
+[2026-06-14 22:37:52] [INFO ] [api.ragControll          ] [180378c86f59] 知识库列表: user=348fc577-af5a-4929-ab7b-6b3148359e69 count=1
+[2026-06-14 22:37:52] [INFO ] [http                     ] [c972e5b40345] GET /knowledge_bases/ → 200
+[2026-06-14 22:37:52] [INFO ] [http                     ] [e71cd6843f6a] GET /chat/sessions → 200
+[2026-06-14 22:37:52] [INFO ] [http                     ] [7ba05eb11009] GET /chat/history/7f2f5a80-83a8-4d5e-acc8-f82b86cab7b2 → 200
+[2026-06-14 22:51:55] [INFO ] [api.auth                 ] [5876bf726811] 用户登录成功: username=joeplover user_id=348fc577-af5a-4929-ab7b-6b3148359e69 tenant=tenant_5a0d4402
+[2026-06-14 22:51:55] [INFO ] [http                     ] [03acc2a9a902] POST /auth/login → 200
+[2026-06-14 22:51:56] [INFO ] [api.ragControll          ] [08df31cc383f] 知识库列表: user=348fc577-af5a-4929-ab7b-6b3148359e69 count=1
+[2026-06-14 22:51:56] [INFO ] [http                     ] [cda8a7becbd7] GET /knowledge_bases/ → 200
+[2026-06-14 22:51:56] [INFO ] [http                     ] [6506b6f432c5] GET /chat/sessions → 200
+[2026-06-14 22:51:56] [INFO ] [http                     ] [48cd0534cdcc] GET /chat/history/7b2a7073-508d-4e30-a093-d534f731e841 → 200
+[2026-06-14 22:53:21] [INFO ] [http                     ] [df7eb2beed1a] GET /chat/sessions → 200
+[2026-06-14 22:53:21] [INFO ] [api.ragControll          ] [0f3bf242df1c] 知识库列表: user=348fc577-af5a-4929-ab7b-6b3148359e69 count=1
+[2026-06-14 22:53:21] [INFO ] [http                     ] [be74589ed4e2] GET /knowledge_bases/ → 200
+[2026-06-14 22:53:21] [INFO ] [http                     ] [8dd9e0b7dd3f] GET /chat/history/7f2f5a80-83a8-4d5e-acc8-f82b86cab7b2 → 200
+[2026-06-14 22:53:26] [INFO ] [http                     ] [5afcf11f0db6] GET /chat/history/7b2a7073-508d-4e30-a093-d534f731e841 → 200
+[2026-06-14 22:54:00] [INFO ] [api.ragControll          ] [-] 会话已创建: session_id=5637c80a-2d3e-49b0-bb31-42f95eecf13f
+[2026-06-14 22:54:00] [INFO ] [http                     ] [26dd69b1605e] POST /chat/sessions → 200
+[2026-06-14 22:54:02] [INFO ] [api.ragControll          ] [-] 会话已删除: session_id=7b2a7073-508d-4e30-a093-d534f731e841
+[2026-06-14 22:54:02] [INFO ] [http                     ] [d3ebc6e16df2] DELETE /chat/history/7b2a7073-508d-4e30-a093-d534f731e841 → 200
+[2026-06-14 22:54:04] [INFO ] [api.ragControll          ] [-] 会话已删除: session_id=7f2f5a80-83a8-4d5e-acc8-f82b86cab7b2
+[2026-06-14 22:54:04] [INFO ] [http                     ] [e0488faf1298] DELETE /chat/history/7f2f5a80-83a8-4d5e-acc8-f82b86cab7b2 → 200
+[2026-06-14 22:54:04] [INFO ] [http                     ] [d3c0fbf958f1] GET /chat/history/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 22:54:24] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 22:54:24] [INFO ] [api.ragControll          ] [-] AI 回复成功: len=327 history=0 request_id=17f6005b10c9
+[2026-06-14 22:54:24] [INFO ] [http                     ] [95f968206edd] POST /chat → 200
+[2026-06-14 22:54:24] [INFO ] [http                     ] [a66136f8a3c7] PATCH /chat/sessions/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 22:55:09] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=5637c80a-2d3e-49b0-bb31-42f95eecf13f msg_len=11
+[2026-06-14 22:55:13] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 22:55:13] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=5637c80a-2d3e-49b0-bb31-42f95eecf13f status=waiting_user reply_len=121
+[2026-06-14 22:55:13] [INFO ] [http                     ] [9b83bb8fcf7b] POST /api/ppt/chat → 200
+[2026-06-14 22:55:38] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=5637c80a-2d3e-49b0-bb31-42f95eecf13f msg_len=18
+[2026-06-14 22:55:49] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 22:55:49] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=5637c80a-2d3e-49b0-bb31-42f95eecf13f status=waiting_user reply_len=45
+[2026-06-14 22:55:49] [INFO ] [http                     ] [441b7e9b1eee] POST /api/ppt/chat → 200
+[2026-06-14 22:56:01] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=5637c80a-2d3e-49b0-bb31-42f95eecf13f msg_len=6
+[2026-06-14 22:56:05] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 22:56:05] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=5637c80a-2d3e-49b0-bb31-42f95eecf13f status=waiting_material reply_len=98
+[2026-06-14 22:56:05] [INFO ] [http                     ] [805d6d3102bd] POST /api/ppt/chat → 200
+[2026-06-14 22:56:10] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=5637c80a-2d3e-49b0-bb31-42f95eecf13f msg_len=2
+[2026-06-14 22:56:15] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 22:56:15] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=5637c80a-2d3e-49b0-bb31-42f95eecf13f status=waiting_confirm reply_len=313
+[2026-06-14 22:56:15] [INFO ] [http                     ] [d9770c7524cf] POST /api/ppt/chat → 200
+[2026-06-14 22:56:41] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务开始: session=5637c80a-2d3e-49b0-bb31-42f95eecf13f
+[2026-06-14 22:56:41] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务已启动: session=5637c80a-2d3e-49b0-bb31-42f95eecf13f
+[2026-06-14 22:56:41] [INFO ] [http                     ] [1a7f4c7c7815] POST /api/ppt/chat → 200
+[2026-06-14 22:56:41] [INFO ] [http                     ] [12e980d991c4] GET /api/ppt/stream/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 22:57:00] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 22:57:31] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 22:57:47] [INFO ] [http                     ] [9d250d640a2c] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 22:57:51] [INFO ] [http                     ] [4fb6d93c7438] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 22:57:56] [INFO ] [http                     ] [6809c2a6b1a2] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 22:58:01] [INFO ] [http                     ] [84497ccf3f77] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 22:58:07] [INFO ] [http                     ] [c8b552baeb51] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 22:58:12] [INFO ] [http                     ] [ffdc22970c28] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 22:58:17] [INFO ] [http                     ] [379115876d45] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 22:58:22] [INFO ] [http                     ] [b476e47b25a4] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 22:58:27] [INFO ] [http                     ] [2e05bbba970c] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 22:58:32] [INFO ] [http                     ] [3d8be3094185] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 22:58:37] [INFO ] [http                     ] [5df2e8406098] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 22:58:42] [INFO ] [http                     ] [bd04a4a6a913] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 22:58:47] [INFO ] [http                     ] [a2973868b037] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 22:58:52] [INFO ] [http                     ] [8fe6c56087cb] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 22:58:57] [INFO ] [http                     ] [ed89ed6faa67] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 22:59:02] [INFO ] [http                     ] [d94e7fa2d4f8] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 22:59:06] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 22:59:47] [INFO ] [http                     ] [5f96ad847704] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 22:59:52] [INFO ] [http                     ] [19fd8442563c] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 22:59:57] [INFO ] [http                     ] [22fce43919fb] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 23:00:00] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 23:00:01] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务完成: session=5637c80a-2d3e-49b0-bb31-42f95eecf13f status=ppt_exported reply_len=18
+[2026-06-14 23:00:02] [INFO ] [http                     ] [f57b73c74939] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 23:01:28] [INFO ] [http                     ] [98ec6630cb7b] GET /api/ppt/download/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 23:01:59] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=5637c80a-2d3e-49b0-bb31-42f95eecf13f msg_len=9
+[2026-06-14 23:02:05] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 23:02:19] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 23:02:19] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=5637c80a-2d3e-49b0-bb31-42f95eecf13f status=waiting_confirm reply_len=398
+[2026-06-14 23:02:19] [INFO ] [http                     ] [3394ce612e60] POST /api/ppt/chat → 200
+[2026-06-14 23:02:28] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务开始: session=5637c80a-2d3e-49b0-bb31-42f95eecf13f
+[2026-06-14 23:02:28] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务已启动: session=5637c80a-2d3e-49b0-bb31-42f95eecf13f
+[2026-06-14 23:02:28] [INFO ] [http                     ] [8ae16d73c974] POST /api/ppt/chat → 200
+[2026-06-14 23:02:28] [INFO ] [http                     ] [f2cce1aa317e] GET /api/ppt/stream/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 23:02:31] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 23:02:32] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务开始: session=5637c80a-2d3e-49b0-bb31-42f95eecf13f
+[2026-06-14 23:02:32] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务已启动: session=5637c80a-2d3e-49b0-bb31-42f95eecf13f
+[2026-06-14 23:02:32] [INFO ] [http                     ] [d02d3faadf77] POST /api/ppt/chat → 200
+[2026-06-14 23:02:32] [INFO ] [http                     ] [8fbf51601013] GET /api/ppt/stream/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 23:02:46] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 23:02:46] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务完成: session=5637c80a-2d3e-49b0-bb31-42f95eecf13f status=waiting_confirm reply_len=220
+[2026-06-14 23:02:51] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 23:03:22] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 23:03:52] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务开始: session=5637c80a-2d3e-49b0-bb31-42f95eecf13f
+[2026-06-14 23:03:52] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务已启动: session=5637c80a-2d3e-49b0-bb31-42f95eecf13f
+[2026-06-14 23:03:52] [INFO ] [http                     ] [47626d4b9a96] POST /api/ppt/chat → 200
+[2026-06-14 23:03:52] [INFO ] [http                     ] [7c5e48f83eb2] GET /api/ppt/stream/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 23:04:06] [INFO ] [api.auth                 ] [e76cb38579a9] 用户注册成功: username=儒本孺 email=None user_id=02397430-acac-4ed5-949d-06c023757c6b tenant=tenant_c0797b3c
+[2026-06-14 23:04:06] [INFO ] [http                     ] [a2f2b023784b] POST /auth/register → 200
+[2026-06-14 23:04:07] [INFO ] [api.ragControll          ] [36c103171a60] 知识库列表: user=02397430-acac-4ed5-949d-06c023757c6b count=0
+[2026-06-14 23:04:07] [INFO ] [http                     ] [9b636019edb5] GET /knowledge_bases/ → 200
+[2026-06-14 23:04:07] [INFO ] [http                     ] [91fb171bef19] GET /chat/sessions → 200
+[2026-06-14 23:04:15] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 23:04:15] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 23:04:18] [INFO ] [api.ragControll          ] [-] 会话已创建: session_id=27c83003-37ba-497a-a722-13b1bee58ac7
+[2026-06-14 23:04:18] [INFO ] [http                     ] [5768c04b6425] POST /chat/sessions → 200
+[2026-06-14 23:04:24] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 23:04:26] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 23:04:26] [INFO ] [api.ragControll          ] [-] AI 回复成功: len=500 history=0 request_id=dd449926b9d2
+[2026-06-14 23:04:26] [INFO ] [http                     ] [fc6af633a7e0] POST /chat → 200
+[2026-06-14 23:04:26] [INFO ] [http                     ] [e14df7a102d6] PATCH /chat/sessions/27c83003-37ba-497a-a722-13b1bee58ac7 → 200
+[2026-06-14 23:04:57] [INFO ] [api.ragControll          ] [1d4e9cccf0b9] 知识库列表: user=02397430-acac-4ed5-949d-06c023757c6b count=0
+[2026-06-14 23:04:57] [INFO ] [http                     ] [a4640b60ccb5] GET /knowledge_bases/ → 200
+[2026-06-14 23:04:57] [INFO ] [http                     ] [06aaf5ebabaf] GET /chat/sessions → 200
+[2026-06-14 23:04:57] [INFO ] [http                     ] [a5a6f34bb45d] GET /chat/history/27c83003-37ba-497a-a722-13b1bee58ac7 → 200
+[2026-06-14 23:04:58] [INFO ] [http                     ] [fef5d5f17148] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 23:05:03] [INFO ] [http                     ] [641147ad7fba] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 23:05:08] [INFO ] [http                     ] [134d3da15944] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 23:05:13] [INFO ] [http                     ] [d630592dca4e] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 23:05:18] [INFO ] [http                     ] [b5065ab368c3] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 23:05:23] [INFO ] [http                     ] [798b05ae6696] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 23:05:28] [INFO ] [http                     ] [7637d92e395a] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 23:05:33] [INFO ] [http                     ] [43c1d4bcdf05] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 23:05:33] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 23:05:38] [INFO ] [http                     ] [ddb70f8456ae] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 23:05:43] [INFO ] [http                     ] [51dd3d5a6748] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 23:05:48] [INFO ] [http                     ] [5798b03b2b49] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 23:05:53] [INFO ] [http                     ] [aaab707162f9] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 23:05:58] [INFO ] [http                     ] [33b437329f07] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 23:06:03] [INFO ] [http                     ] [672361e810b0] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 23:06:08] [INFO ] [http                     ] [645ec6e0b311] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 23:06:21] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 524 <none>"
+[2026-06-14 23:06:21] [INFO ] [openai._base_client      ] [-] Retrying request to /chat/completions in 0.479833 seconds
+[2026-06-14 23:06:39] [INFO ] [http                     ] [93419345e9d5] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 23:06:43] [INFO ] [http                     ] [d04f36c1a411] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 23:06:48] [INFO ] [http                     ] [965e648a180c] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 23:06:53] [INFO ] [http                     ] [5557b1c4a67c] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 23:06:58] [INFO ] [http                     ] [86f059ead5a0] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 23:07:03] [INFO ] [http                     ] [0eaf8ffc313c] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 23:07:05] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 23:07:08] [INFO ] [http                     ] [bfc465ad6102] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 23:07:13] [INFO ] [http                     ] [bc97849ac1f3] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 23:07:18] [INFO ] [http                     ] [272f3bf3c93f] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 23:07:23] [INFO ] [http                     ] [b009108a9c92] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 23:07:28] [INFO ] [http                     ] [a165ef566833] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 23:07:33] [INFO ] [http                     ] [4801744eb3df] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 23:07:38] [INFO ] [http                     ] [ad9a30bc4592] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 23:07:49] [INFO ] [http                     ] [f4c6b6cdfc16] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 23:08:10] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 23:08:38] [INFO ] [http                     ] [0f4b9c1f938e] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 23:08:43] [INFO ] [http                     ] [df9e1c8ecb52] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 23:08:48] [INFO ] [http                     ] [e09c8cdb6733] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 23:08:53] [INFO ] [http                     ] [1a91a6e93b94] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 23:08:56] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 23:08:57] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务完成: session=5637c80a-2d3e-49b0-bb31-42f95eecf13f status=ppt_exported reply_len=18
+[2026-06-14 23:08:58] [INFO ] [http                     ] [fab7ceb26b5e] GET /api/ppt/status/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 23:09:03] [INFO ] [api.auth                 ] [6c83eec40fcc] 用户登录成功: username=儒本孺 user_id=02397430-acac-4ed5-949d-06c023757c6b tenant=tenant_c0797b3c
+[2026-06-14 23:09:03] [INFO ] [http                     ] [d53c02ab63cf] POST /auth/login → 200
+[2026-06-14 23:09:07] [INFO ] [api.ragControll          ] [acfac5768393] 知识库列表: user=02397430-acac-4ed5-949d-06c023757c6b count=0
+[2026-06-14 23:09:07] [INFO ] [http                     ] [f962cad5fdc5] GET /knowledge_bases/ → 200
+[2026-06-14 23:09:07] [INFO ] [http                     ] [7d615a14915f] GET /chat/sessions → 200
+[2026-06-14 23:09:07] [INFO ] [http                     ] [04041d949859] GET /chat/history/27c83003-37ba-497a-a722-13b1bee58ac7 → 200
+[2026-06-14 23:10:16] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 524 <none>"
+[2026-06-14 23:10:16] [INFO ] [openai._base_client      ] [-] Retrying request to /chat/completions in 0.434050 seconds
+[2026-06-14 23:10:47] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 23:10:47] [INFO ] [api.ragControll          ] [-] AI 回复成功: len=652 history=2 request_id=6f157c3af5c1
+[2026-06-14 23:10:47] [INFO ] [http                     ] [01cc36198185] POST /chat → 200
+[2026-06-14 23:10:57] [INFO ] [http                     ] [fc0a1d5a8ecb] GET /api/ppt/download/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 23:11:16] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 23:11:16] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务完成: session=5637c80a-2d3e-49b0-bb31-42f95eecf13f status=ppt_exported reply_len=18
+[2026-06-14 23:12:04] [INFO ] [api.ppt_agent_router     ] [a73d1dea48f4] PPT 素材上传: name=超超临界CFB锅炉炉膛受热面管寿命预测研究.pdf session=27c83003-37ba-497a-a722-13b1bee58ac7
+[2026-06-14 23:12:04] [INFO ] [http                     ] [8fe364d40a5a] POST /api/ppt/upload → 404
+[2026-06-14 23:12:18] [INFO ] [api.ppt_agent_router     ] [5b6c61ef058a] PPT 素材上传: name=文献整理.docx session=27c83003-37ba-497a-a722-13b1bee58ac7
+[2026-06-14 23:12:18] [INFO ] [http                     ] [0366c7fb4bee] POST /api/ppt/upload → 404
+[2026-06-14 23:12:24] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=27c83003-37ba-497a-a722-13b1bee58ac7 msg_len=1
+[2026-06-14 23:12:27] [INFO ] [api.ragControll          ] [-] 会话已创建: session_id=a3df6a5a-e438-41e6-996d-276fbbc5f991
+[2026-06-14 23:12:27] [INFO ] [http                     ] [bfeabef9a580] POST /chat/sessions → 200
+[2026-06-14 23:12:28] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 23:12:28] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=27c83003-37ba-497a-a722-13b1bee58ac7 status=waiting_user reply_len=137
+[2026-06-14 23:12:28] [INFO ] [http                     ] [4523048c0f3e] POST /api/ppt/chat → 200
+[2026-06-14 23:12:30] [INFO ] [api.ragControll          ] [-] 会话已创建: session_id=b61908ac-8c99-4339-91aa-08676376e346
+[2026-06-14 23:12:30] [INFO ] [http                     ] [61ce01510ee7] POST /chat/sessions → 200
+[2026-06-14 23:12:34] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=b61908ac-8c99-4339-91aa-08676376e346 msg_len=21
+[2026-06-14 23:12:40] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 23:12:40] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=b61908ac-8c99-4339-91aa-08676376e346 status=waiting_user reply_len=108
+[2026-06-14 23:12:40] [INFO ] [http                     ] [543b8e5c44e3] POST /api/ppt/chat → 200
+[2026-06-14 23:12:41] [INFO ] [http                     ] [571657c041ab] PATCH /chat/sessions/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:12:51] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=b61908ac-8c99-4339-91aa-08676376e346 msg_len=4
+[2026-06-14 23:12:57] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 23:12:58] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=b61908ac-8c99-4339-91aa-08676376e346 status=waiting_user reply_len=108
+[2026-06-14 23:12:58] [INFO ] [http                     ] [9c57bb9cb664] POST /api/ppt/chat → 200
+[2026-06-14 23:13:28] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=b61908ac-8c99-4339-91aa-08676376e346 msg_len=21
+[2026-06-14 23:13:34] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 23:13:34] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=b61908ac-8c99-4339-91aa-08676376e346 status=waiting_material reply_len=98
+[2026-06-14 23:13:34] [INFO ] [http                     ] [4409cff6dc6d] POST /api/ppt/chat → 200
+[2026-06-14 23:14:01] [INFO ] [api.ppt_agent_router     ] [fa9bfe8152d7] PPT 素材上传: name=碳中和微专业结课论文.docx session=b61908ac-8c99-4339-91aa-08676376e346
+[2026-06-14 23:14:01] [INFO ] [api.ppt_agent_router     ] [fa9bfe8152d7] PPT 素材上传成功: name=碳中和微专业结课论文.docx text_len=15907 preview=内蒙古科技大学  碳中和微专业毕业论文  题   目：我国电力行业碳减排技术与路径分析  学生姓名：王俊儒  学    号：2262162123  专    业：能源与动力工程  班    级：能源2...
+[2026-06-14 23:14:01] [INFO ] [http                     ] [ee8b43f8cdb0] POST /api/ppt/upload → 200
+[2026-06-14 23:14:28] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=b61908ac-8c99-4339-91aa-08676376e346 msg_len=7
+[2026-06-14 23:14:40] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 23:14:40] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=b61908ac-8c99-4339-91aa-08676376e346 status=waiting_confirm reply_len=826
+[2026-06-14 23:14:40] [INFO ] [http                     ] [7ef9ae370eea] POST /api/ppt/chat → 200
+[2026-06-14 23:15:00] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务开始: session=b61908ac-8c99-4339-91aa-08676376e346
+[2026-06-14 23:15:00] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务已启动: session=b61908ac-8c99-4339-91aa-08676376e346
+[2026-06-14 23:15:00] [INFO ] [http                     ] [aa895d7a3573] POST /api/ppt/chat → 200
+[2026-06-14 23:15:00] [INFO ] [http                     ] [4626da3120a3] GET /api/ppt/stream/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:15:05] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 23:15:20] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 23:15:20] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务完成: session=b61908ac-8c99-4339-91aa-08676376e346 status=waiting_confirm reply_len=835
+[2026-06-14 23:15:39] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务开始: session=b61908ac-8c99-4339-91aa-08676376e346
+[2026-06-14 23:15:39] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务已启动: session=b61908ac-8c99-4339-91aa-08676376e346
+[2026-06-14 23:15:39] [INFO ] [http                     ] [7827a6dae941] POST /api/ppt/chat → 200
+[2026-06-14 23:15:39] [INFO ] [http                     ] [7f85c852e7c3] GET /api/ppt/stream/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:16:45] [INFO ] [http                     ] [03b3fd55ff26] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:16:46] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 23:16:49] [INFO ] [http                     ] [08f048faeecf] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:16:54] [INFO ] [http                     ] [688d606b078a] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:16:59] [INFO ] [http                     ] [976a717f27c4] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:17:04] [INFO ] [http                     ] [f5db7f2060a6] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:17:09] [INFO ] [http                     ] [fe03007851d9] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:17:14] [INFO ] [http                     ] [6f2960b4a039] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:17:19] [INFO ] [http                     ] [9bab6c64a3e9] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:17:24] [INFO ] [http                     ] [32d1875b828c] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:17:29] [INFO ] [http                     ] [f83b55779c06] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:17:34] [INFO ] [http                     ] [fc11c2610655] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:17:35] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 23:17:39] [INFO ] [http                     ] [43721073e5a9] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:17:44] [INFO ] [http                     ] [b89671a7275c] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:17:49] [INFO ] [http                     ] [26a461763df0] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:17:54] [INFO ] [http                     ] [d124d7d4e47d] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:17:59] [INFO ] [http                     ] [8c634688f1d2] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:18:04] [INFO ] [http                     ] [0e39daf63f3a] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:18:09] [INFO ] [http                     ] [6ed79ed987d8] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:18:14] [INFO ] [http                     ] [c8b7ac9523fe] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:18:19] [INFO ] [http                     ] [a93b8e10a33b] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:18:24] [INFO ] [http                     ] [a2e7d16ea926] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:18:29] [INFO ] [http                     ] [83cb6ef560a0] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:18:34] [INFO ] [http                     ] [9ce47ed239fa] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:18:39] [INFO ] [http                     ] [d6eaa34fa1c1] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:18:44] [INFO ] [http                     ] [15e2c84a883c] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:18:49] [INFO ] [http                     ] [910a20154b18] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:18:54] [INFO ] [http                     ] [857c386eaf2a] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:18:59] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 23:18:59] [INFO ] [http                     ] [2497a838862f] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:19:04] [INFO ] [http                     ] [3fc0c23f5ac8] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:19:09] [INFO ] [http                     ] [c95dba3df1c9] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:19:14] [INFO ] [http                     ] [b430f5bead9f] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:19:19] [INFO ] [http                     ] [f7150e8b9155] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:19:24] [INFO ] [http                     ] [57ee1f90d6af] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:19:29] [INFO ] [http                     ] [d523812f4df7] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:19:34] [INFO ] [http                     ] [bc568e8a96b0] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:19:39] [INFO ] [http                     ] [6a2da09ed591] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:19:44] [INFO ] [http                     ] [518e9ec961bb] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:19:49] [INFO ] [http                     ] [dd2dceef45ea] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:19:54] [INFO ] [http                     ] [1ac437b11294] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:19:59] [INFO ] [http                     ] [357596d5ae59] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:20:04] [INFO ] [http                     ] [db61998614d2] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:20:09] [INFO ] [http                     ] [b0b6e306a111] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:20:14] [INFO ] [http                     ] [45cd856acd0f] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:20:19] [INFO ] [http                     ] [5f74e04f0612] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:20:24] [INFO ] [http                     ] [5aee5939e403] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:20:29] [INFO ] [http                     ] [40853a212de7] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:20:34] [INFO ] [http                     ] [4b02b2c52deb] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:20:39] [INFO ] [http                     ] [9d6011926839] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:20:44] [INFO ] [http                     ] [5f8702dd2505] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:20:49] [INFO ] [http                     ] [7b46aa8054b6] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:20:54] [INFO ] [http                     ] [25e96bf1a5fa] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:20:59] [INFO ] [http                     ] [d7bdac1f5de6] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:21:04] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 524 <none>"
+[2026-06-14 23:21:04] [INFO ] [openai._base_client      ] [-] Retrying request to /chat/completions in 0.472267 seconds
+[2026-06-14 23:21:04] [INFO ] [http                     ] [7a864677efac] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:21:09] [INFO ] [http                     ] [aac2e4957c12] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:21:14] [INFO ] [http                     ] [2feb68ca736b] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:21:19] [INFO ] [http                     ] [c54156574f87] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:21:24] [INFO ] [http                     ] [4a8b56309aba] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:21:29] [INFO ] [http                     ] [cd2bdcbc552f] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:21:34] [INFO ] [http                     ] [3d961641f109] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:21:39] [INFO ] [http                     ] [3a7662bd8c17] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:21:44] [INFO ] [http                     ] [ba5f76204d83] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:21:49] [INFO ] [http                     ] [133c0cf69991] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:21:54] [INFO ] [http                     ] [745d2a23ed94] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:21:59] [INFO ] [http                     ] [83a41dc69db6] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:22:04] [INFO ] [http                     ] [eea9489ac77b] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:22:09] [INFO ] [http                     ] [29b1eafed812] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:22:14] [INFO ] [http                     ] [18b0ccd3b74c] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:22:19] [INFO ] [http                     ] [5c907d88e1ba] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:22:24] [INFO ] [http                     ] [f947d770dfd0] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:22:25] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 23:22:29] [INFO ] [http                     ] [4ca1734a4289] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:22:34] [INFO ] [http                     ] [18e89b72a9b5] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:22:39] [INFO ] [http                     ] [787f791b79eb] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:22:44] [INFO ] [http                     ] [5c6109651d11] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:22:49] [INFO ] [http                     ] [6ad600872c54] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:22:54] [INFO ] [http                     ] [0bd98867eb5e] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:22:59] [INFO ] [http                     ] [568a259db626] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:23:04] [INFO ] [http                     ] [451453a3944d] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:23:09] [INFO ] [http                     ] [7d5d2d44b04d] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:23:14] [INFO ] [http                     ] [6392cd5f3bac] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:23:19] [INFO ] [http                     ] [262460cb7206] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:23:24] [INFO ] [http                     ] [ee44f090d174] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:23:29] [INFO ] [http                     ] [ab58b61eba2f] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:23:34] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 23:23:34] [INFO ] [http                     ] [6d0ab3f2f224] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:23:39] [INFO ] [http                     ] [351453310dba] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:23:44] [INFO ] [http                     ] [e791c30c5229] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:23:49] [INFO ] [http                     ] [b7c676a52e22] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:23:54] [INFO ] [http                     ] [f6bca8ce7e0c] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:23:59] [INFO ] [http                     ] [b4b78f7f3127] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:24:04] [INFO ] [http                     ] [6f10601380c3] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:24:09] [INFO ] [http                     ] [437833b4b220] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:24:11] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 23:24:14] [INFO ] [http                     ] [b5aa4ea775c5] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:24:19] [INFO ] [http                     ] [1ecd47ea8844] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:24:24] [INFO ] [http                     ] [ef7ea114d312] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:24:29] [INFO ] [http                     ] [2dc48d4381e3] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:24:34] [INFO ] [http                     ] [d362b9b7fcb0] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:24:39] [INFO ] [http                     ] [1303eaf78e43] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:24:44] [INFO ] [http                     ] [7cc44e39ce53] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:24:49] [INFO ] [http                     ] [50c2289a6fd5] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:24:54] [INFO ] [http                     ] [8ece9c5139c0] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:24:59] [INFO ] [http                     ] [6b5a3e7a8526] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:25:04] [INFO ] [http                     ] [a6698670430b] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:25:09] [INFO ] [http                     ] [16defc3a6a46] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:25:14] [INFO ] [http                     ] [29c042eabdff] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:25:18] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 23:25:19] [INFO ] [http                     ] [ef28b51f4d5d] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:25:24] [INFO ] [http                     ] [35dd27b7c389] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:25:29] [INFO ] [http                     ] [9aea6e5f48c8] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:25:34] [INFO ] [http                     ] [2210ed30106a] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:25:39] [INFO ] [http                     ] [93149ee0b926] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:25:44] [INFO ] [http                     ] [2f94619f5c4e] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:25:49] [INFO ] [http                     ] [1263b0826859] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:25:54] [INFO ] [http                     ] [1cea345ff59f] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:25:59] [INFO ] [http                     ] [51b999bd7523] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:26:04] [INFO ] [http                     ] [075ef0da226d] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:26:09] [INFO ] [http                     ] [11b4c88a6dc6] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:26:14] [INFO ] [http                     ] [2c383a36c88d] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:26:19] [INFO ] [http                     ] [6ecb0261f3a2] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:26:24] [INFO ] [http                     ] [bc3e01f324ca] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:26:29] [INFO ] [http                     ] [21a7639dd32d] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:26:34] [INFO ] [http                     ] [d48a1988a745] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:26:39] [INFO ] [http                     ] [348c9c116548] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:26:44] [INFO ] [http                     ] [1128b55e95d0] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:26:49] [INFO ] [http                     ] [590f93c0e13c] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:26:54] [INFO ] [http                     ] [5aa9fa118e11] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:26:59] [INFO ] [http                     ] [eae44db54594] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:27:04] [INFO ] [http                     ] [8a2e7ede2c60] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:27:09] [INFO ] [http                     ] [8be5de80e019] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:27:14] [INFO ] [http                     ] [eb7828556d86] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:27:19] [INFO ] [http                     ] [f0df1f0d1d16] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:27:24] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 524 <none>"
+[2026-06-14 23:27:24] [INFO ] [openai._base_client      ] [-] Retrying request to /chat/completions in 0.426035 seconds
+[2026-06-14 23:27:24] [INFO ] [http                     ] [441e9061237e] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:27:29] [INFO ] [http                     ] [f51590465fda] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:27:34] [INFO ] [http                     ] [f291452c2c5f] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:27:39] [INFO ] [http                     ] [9e4ad9dbc465] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:27:44] [INFO ] [http                     ] [d674d628ea58] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:27:49] [INFO ] [http                     ] [6ab3d3a0506f] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:27:54] [INFO ] [http                     ] [7228e78c7f7e] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:27:59] [INFO ] [http                     ] [acacb71b66aa] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:28:04] [INFO ] [http                     ] [ebca9652a5c5] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:28:09] [INFO ] [http                     ] [d69acab7d5dd] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:28:14] [INFO ] [http                     ] [267aff93443c] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:28:19] [INFO ] [http                     ] [e72aee00afc3] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:28:24] [INFO ] [http                     ] [1bc84b4102b5] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:28:29] [INFO ] [http                     ] [c6d85679953e] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:28:34] [INFO ] [http                     ] [37b1a1035c55] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:28:39] [INFO ] [http                     ] [d44b160d5b89] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:28:44] [INFO ] [http                     ] [7fe212e06e8c] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:28:49] [INFO ] [http                     ] [10ab4934cf8b] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:28:54] [INFO ] [http                     ] [55a97131e394] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:28:59] [INFO ] [http                     ] [3212d0d02cee] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:29:04] [INFO ] [http                     ] [8574b8593112] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:29:09] [INFO ] [http                     ] [bbd11c953227] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:29:14] [INFO ] [http                     ] [3e175748b916] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:29:19] [INFO ] [http                     ] [b4a5a87b13b0] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:29:24] [INFO ] [http                     ] [aca9877c3426] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:29:29] [INFO ] [http                     ] [d03622f02a54] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:29:30] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 524 <none>"
+[2026-06-14 23:29:30] [INFO ] [openai._base_client      ] [-] Retrying request to /chat/completions in 0.995815 seconds
+[2026-06-14 23:29:34] [INFO ] [http                     ] [523a47b30a60] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:29:39] [INFO ] [http                     ] [bd3bdfa257e9] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:29:44] [INFO ] [http                     ] [7f07462fa413] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:29:49] [INFO ] [http                     ] [15bfca26afa4] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:29:54] [INFO ] [http                     ] [7934028e7fc5] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:29:59] [INFO ] [http                     ] [f66972724c14] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:30:04] [INFO ] [http                     ] [feb1902b090f] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:30:09] [INFO ] [http                     ] [41f5daf7acca] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:30:14] [INFO ] [http                     ] [ac5185585e28] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:30:19] [INFO ] [http                     ] [b53ec776bece] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:30:24] [INFO ] [http                     ] [058915b516e8] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:30:29] [INFO ] [http                     ] [bed5d8d19848] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:30:34] [INFO ] [http                     ] [25a4f6b1388a] GET /api/ppt/status/b61908ac-8c99-4339-91aa-08676376e346 → 200
+[2026-06-14 23:31:18] [INFO ] [api.ragControll          ] [-] 会话已删除: session_id=5637c80a-2d3e-49b0-bb31-42f95eecf13f
+[2026-06-14 23:31:18] [INFO ] [http                     ] [f49010d895ab] DELETE /chat/history/5637c80a-2d3e-49b0-bb31-42f95eecf13f → 200
+[2026-06-14 23:31:18] [INFO ] [http                     ] [b9d30a16c2a2] GET /chat/history/c8538771-47ee-4528-bdbe-a7c649ba6450 → 200
+[2026-06-14 23:31:18] [INFO ] [api.ragControll          ] [-] 会话已创建: session_id=ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d
+[2026-06-14 23:31:18] [INFO ] [http                     ] [31ea7268bb62] POST /chat/sessions → 200
+[2026-06-14 23:31:28] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d msg_len=21
+[2026-06-14 23:31:32] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 23:31:32] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d status=waiting_user reply_len=87
+[2026-06-14 23:31:32] [INFO ] [http                     ] [05b61f21986f] POST /api/ppt/chat → 200
+[2026-06-14 23:31:32] [INFO ] [http                     ] [7bdb7e378811] PATCH /chat/sessions/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:31:36] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 524 <none>"
+[2026-06-14 23:31:37] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务完成: session=b61908ac-8c99-4339-91aa-08676376e346 status=failed reply_len=512
+[2026-06-14 23:31:38] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d msg_len=4
+[2026-06-14 23:31:42] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 23:31:42] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d status=waiting_user reply_len=87
+[2026-06-14 23:31:42] [INFO ] [http                     ] [86c123172baa] POST /api/ppt/chat → 200
+[2026-06-14 23:31:50] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d msg_len=7
+[2026-06-14 23:31:54] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 23:31:54] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d status=waiting_user reply_len=53
+[2026-06-14 23:31:54] [INFO ] [http                     ] [7939a8308d0e] POST /api/ppt/chat → 200
+[2026-06-14 23:32:08] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d msg_len=19
+[2026-06-14 23:32:24] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 23:32:24] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d status=waiting_material reply_len=98
+[2026-06-14 23:32:24] [INFO ] [http                     ] [5f73dd768894] POST /api/ppt/chat → 200
+[2026-06-14 23:32:32] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步调用: session=ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d msg_len=2
+[2026-06-14 23:32:40] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 23:32:41] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 同步回复: session=ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d status=waiting_confirm reply_len=226
+[2026-06-14 23:32:41] [INFO ] [http                     ] [bfccbdf0d9f5] POST /api/ppt/chat → 200
+[2026-06-14 23:32:55] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务开始: session=ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d
+[2026-06-14 23:32:55] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务已启动: session=ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d
+[2026-06-14 23:32:55] [INFO ] [http                     ] [3cc5308c0978] POST /api/ppt/chat → 200
+[2026-06-14 23:32:55] [INFO ] [http                     ] [223b9f372c53] GET /api/ppt/stream/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:33:00] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 23:33:29] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 23:33:29] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务完成: session=ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d status=waiting_confirm reply_len=242
+[2026-06-14 23:33:36] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务开始: session=ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d
+[2026-06-14 23:33:36] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务已启动: session=ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d
+[2026-06-14 23:33:36] [INFO ] [http                     ] [37bbd77490ae] POST /api/ppt/chat → 200
+[2026-06-14 23:33:36] [INFO ] [http                     ] [3c8475e2b35f] GET /api/ppt/stream/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:33:58] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 23:34:19] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 23:34:42] [INFO ] [http                     ] [a61b7ad5ad3e] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:34:47] [INFO ] [http                     ] [270df2ce458b] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:34:52] [INFO ] [http                     ] [f01d54076dfa] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:34:57] [INFO ] [http                     ] [9f7e627ed654] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:35:02] [INFO ] [http                     ] [575b6e4ab554] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:35:07] [INFO ] [http                     ] [926c83c0434c] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:35:42] [INFO ] [http                     ] [61c52550cca6] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:35:46] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 23:35:49] [INFO ] [http                     ] [b329a859ffed] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:36:49] [INFO ] [http                     ] [8ba80d29fae7] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:36:51] [INFO ] [http                     ] [c030d43cc5b2] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:36:56] [INFO ] [http                     ] [31ce176baa18] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:37:01] [INFO ] [http                     ] [c8684ae193c3] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:37:06] [INFO ] [http                     ] [6a68f96e210f] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:37:11] [INFO ] [http                     ] [d07a8cfa7aec] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:37:16] [INFO ] [http                     ] [423d1edc3773] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:37:21] [INFO ] [http                     ] [aa8b212c9cbe] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:37:26] [INFO ] [http                     ] [92a2ee8c24cd] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:37:31] [INFO ] [http                     ] [2dd55160216a] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:37:36] [INFO ] [http                     ] [258eea91323a] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:37:41] [INFO ] [http                     ] [36178ffa1d2e] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:37:46] [INFO ] [http                     ] [009db6ba0cea] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:37:51] [INFO ] [http                     ] [9e20a08617dc] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:37:52] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 524 <none>"
+[2026-06-14 23:37:52] [INFO ] [openai._base_client      ] [-] Retrying request to /chat/completions in 0.473690 seconds
+[2026-06-14 23:37:56] [INFO ] [http                     ] [9d33c60cee0f] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:38:01] [INFO ] [http                     ] [39012ec0c88c] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:38:06] [INFO ] [http                     ] [0e3b78203e33] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:38:11] [INFO ] [http                     ] [1f844bfb26de] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:38:16] [INFO ] [http                     ] [413fdcb4be8d] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:38:21] [INFO ] [http                     ] [97cb6f0e3f24] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:38:26] [INFO ] [http                     ] [46b6b3ffeb41] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:38:31] [INFO ] [http                     ] [73d3bc7d912c] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:38:36] [INFO ] [http                     ] [562885a141b8] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:38:41] [INFO ] [http                     ] [b8edd71564a6] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:38:46] [INFO ] [http                     ] [cdafe0eecef9] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:38:51] [INFO ] [http                     ] [ed7094664ad5] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:38:56] [INFO ] [http                     ] [2c6df0c4080a] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:39:01] [INFO ] [http                     ] [41e54632d00c] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:39:06] [INFO ] [http                     ] [e2a6daf024c7] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:39:11] [INFO ] [http                     ] [18257fbe2ee8] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:39:16] [INFO ] [http                     ] [712e35c7fec5] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:39:21] [INFO ] [http                     ] [7ec2f441c77f] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:39:26] [INFO ] [http                     ] [c33a3cd823f7] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:39:31] [INFO ] [http                     ] [174f94d1121e] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:39:36] [INFO ] [http                     ] [fb63ae2756b3] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:39:41] [INFO ] [http                     ] [a0857e4924c2] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:39:46] [INFO ] [http                     ] [96f105606543] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:39:51] [INFO ] [http                     ] [c7e7bf4056c5] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:39:56] [INFO ] [http                     ] [1fa909e07f96] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:39:58] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 524 <none>"
+[2026-06-14 23:39:58] [INFO ] [openai._base_client      ] [-] Retrying request to /chat/completions in 0.903536 seconds
+[2026-06-14 23:40:01] [INFO ] [http                     ] [76d6ca227e31] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:40:06] [INFO ] [http                     ] [306146ed28fe] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:40:11] [INFO ] [http                     ] [106807d607d1] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:40:16] [INFO ] [http                     ] [d5992b3ce860] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:40:21] [INFO ] [http                     ] [df40eef01ad9] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:40:26] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 23:40:26] [INFO ] [http                     ] [41cd4dab3ee2] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:40:31] [INFO ] [http                     ] [ad8bd2cfe788] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:40:36] [INFO ] [http                     ] [03bc6ffde77d] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:40:41] [INFO ] [http                     ] [4ab2364f215e] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:40:46] [INFO ] [http                     ] [216462573caa] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:40:51] [INFO ] [http                     ] [5b742c223bfb] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:40:56] [INFO ] [http                     ] [afcb2edcf054] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:41:01] [INFO ] [http                     ] [8aa6e07ac621] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:41:06] [INFO ] [http                     ] [606c4f344546] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:41:11] [INFO ] [http                     ] [8f1ff676b0a0] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:41:16] [INFO ] [http                     ] [3faf194dc8bc] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:41:21] [INFO ] [http                     ] [679247c3688a] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:41:26] [INFO ] [http                     ] [7eeb37e540e7] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:41:31] [INFO ] [http                     ] [c0c63451b732] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:41:36] [INFO ] [http                     ] [71821b145c87] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:41:41] [INFO ] [http                     ] [3f07ec17b85d] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:41:46] [INFO ] [http                     ] [d6c895862250] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:41:51] [INFO ] [http                     ] [41552483228e] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:41:56] [INFO ] [http                     ] [a0c67d705c29] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:42:01] [INFO ] [http                     ] [71e45544bb20] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:42:06] [INFO ] [http                     ] [87c1d412dfe3] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:42:11] [INFO ] [http                     ] [3a12e8238146] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:42:16] [INFO ] [http                     ] [baa08f386123] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:42:21] [INFO ] [http                     ] [2f52346a5d37] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:42:26] [INFO ] [http                     ] [815fdd7d7367] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:42:31] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 524 <none>"
+[2026-06-14 23:42:31] [INFO ] [openai._base_client      ] [-] Retrying request to /chat/completions in 0.383721 seconds
+[2026-06-14 23:42:31] [INFO ] [http                     ] [d4ebdef9bbd5] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:42:36] [INFO ] [http                     ] [85f2e206e704] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:42:41] [INFO ] [http                     ] [ac751f1fb167] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:42:46] [INFO ] [http                     ] [bdb890129d9d] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:42:51] [INFO ] [http                     ] [77efd9b76ae8] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:42:56] [INFO ] [http                     ] [ab2cedda1f02] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:43:01] [INFO ] [http                     ] [fa94c00a108c] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:43:06] [INFO ] [http                     ] [788cd0c98636] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:43:11] [INFO ] [http                     ] [eb387b01dd1f] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:43:16] [INFO ] [http                     ] [a7fd6df82706] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:43:21] [INFO ] [http                     ] [e91d7052aaa6] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:43:26] [INFO ] [http                     ] [c4dbfcf4d05a] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:43:31] [INFO ] [http                     ] [4a5231fd8b9a] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:43:36] [INFO ] [http                     ] [5f2523f4b52e] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:43:36] [INFO ] [httpx                    ] [-] HTTP Request: POST https://cli.999554.xyz/v1/chat/completions "HTTP/1.1 200 OK"
+[2026-06-14 23:43:37] [INFO ] [api.ppt_agent_router     ] [-] PPT Agent 后台任务完成: session=ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d status=ppt_exported reply_len=18
+[2026-06-14 23:43:41] [INFO ] [http                     ] [ebc352bda1bd] GET /api/ppt/status/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:44:38] [INFO ] [http                     ] [1de1fb58d299] GET /api/ppt/download/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:52:57] [WARNING] [api.auth                 ] [5688fd37de55] Token 无效或已过期
+[2026-06-14 23:52:57] [INFO ] [http                     ] [e4c4582c09b7] DELETE /chat/history/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 401
+[2026-06-14 23:52:57] [INFO ] [api.auth                 ] [cd77d4790cde] Token 刷新成功: user_id=348fc577-af5a-4929-ab7b-6b3148359e69
+[2026-06-14 23:52:57] [ERROR] [api.ragControll          ] [43a9997b16bc] 未捕获异常: 1 validation error for UserInfoResponse
+email
+  Field required [type=missing, input_value={'user_id': '348fc577-af5...02', 'created_at': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.10/v/missing
+Traceback (most recent call last):
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/errors.py", line 165, in __call__
+    await self.app(scope, receive, _send)
+  File "/app/core/logging.py", line 148, in __call__
+    await self.app(scope, receive, log_send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/middleware/exceptions.py", line 62, in __call__
+    await wrap_app_handling_exceptions(self.app, conn)(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 715, in __call__
+    await self.middleware_stack(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 735, in app
+    await route.handle(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 288, in handle
+    await self.app(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 76, in app
+    await wrap_app_handling_exceptions(app, request)(scope, receive, send)
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 53, in wrapped_app
+    raise exc
+  File "/usr/local/lib/python3.11/site-packages/starlette/_exception_handler.py", line 42, in wrapped_app
+    await app(scope, receive, sender)
+  File "/usr/local/lib/python3.11/site-packages/starlette/routing.py", line 73, in app
+    response = await f(request)
+               ^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 301, in app
+    raw_response = await run_endpoint_function(
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/fastapi/routing.py", line 214, in run_endpoint_function
+    return await run_in_threadpool(dependant.call, **values)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/starlette/concurrency.py", line 39, in run_in_threadpool
+    return await anyio.to_thread.run_sync(func, *args)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/anyio/to_thread.py", line 63, in run_sync
+    return await get_async_backend().run_sync_in_worker_thread(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 2518, in run_sync_in_worker_thread
+    return await future
+           ^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/anyio/_backends/_asyncio.py", line 1002, in run
+    result = context.run(func, *args)
+             ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/app/api/auth.py", line 274, in refresh
+    user=UserInfoResponse(
+         ^^^^^^^^^^^^^^^^^
+  File "/usr/local/lib/python3.11/site-packages/pydantic/main.py", line 214, in __init__
+    validated_self = self.__pydantic_validator__.validate_python(data, self_instance=self)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+pydantic_core._pydantic_core.ValidationError: 1 validation error for UserInfoResponse
+email
+  Field required [type=missing, input_value={'user_id': '348fc577-af5...02', 'created_at': None}, input_type=dict]
+    For further information visit https://errors.pydantic.dev/2.10/v/missing
+[2026-06-14 23:52:57] [INFO ] [http                     ] [03c55ffdc5db] GET /chat/history/c8538771-47ee-4528-bdbe-a7c649ba6450 → 422
+[2026-06-14 23:53:06] [INFO ] [api.auth                 ] [9c38f60fc9b7] 用户登录成功: username=joeplover user_id=348fc577-af5a-4929-ab7b-6b3148359e69 tenant=tenant_5a0d4402
+[2026-06-14 23:53:06] [INFO ] [http                     ] [e4abc910be91] POST /auth/login → 200
+[2026-06-14 23:53:07] [INFO ] [api.ragControll          ] [73cd621c0bba] 知识库列表: user=348fc577-af5a-4929-ab7b-6b3148359e69 count=1
+[2026-06-14 23:53:07] [INFO ] [http                     ] [342db20bc9d3] GET /knowledge_bases/ → 200
+[2026-06-14 23:53:07] [INFO ] [http                     ] [45808cf0d019] GET /chat/sessions → 200
+[2026-06-14 23:53:07] [INFO ] [http                     ] [838c52a27d8a] GET /chat/history/c8538771-47ee-4528-bdbe-a7c649ba6450 → 200
+[2026-06-14 23:53:09] [INFO ] [http                     ] [72797198f7f1] GET /chat/history/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
+[2026-06-14 23:53:11] [INFO ] [http                     ] [6599bf79378a] GET /chat/history/c8538771-47ee-4528-bdbe-a7c649ba6450 → 200
+[2026-06-14 23:53:13] [INFO ] [api.ragControll          ] [-] 会话已删除: session_id=ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d
+[2026-06-14 23:53:13] [INFO ] [http                     ] [135ca7a25cbc] DELETE /chat/history/ec9f6eaf-0db5-4de3-a75b-6d553d3eba7d → 200
