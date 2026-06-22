@@ -2,11 +2,10 @@ import os
 
 from langchain_openai import ChatOpenAI
 
+from config.settings import settings
+
 llm = ChatOpenAI(
-    model=os.getenv("DEEPSEEK_MODEL", "DeepSeek-V4-Flash[free]"),
-    base_url=os.getenv("DEEPSEEK_BASE_URL", "https://cli.999554.xyz/v1"),
-    api_key=os.getenv(
-        "DEEPSEEK_API_KEY",
-        "sk-uALuxh3EF7QYh8R8MUOfrQ6WuqWA4ksLoe1bzb8bsjhZIx79",
-    ),
+    model=settings.LLM_MODEL,
+    base_url=settings.LLM_BASE_URL,
+    api_key=settings.LLM_API_KEY or os.getenv("DEEPSEEK_API_KEY", ""),
 )

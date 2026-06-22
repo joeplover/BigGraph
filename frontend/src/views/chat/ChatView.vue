@@ -26,6 +26,7 @@ const ragBgActive = ref(false)
 
 onMounted(() => {
   chatStore.fetchMyKbs()
+  chatStore.loadFromBackend()
   // 初始化同步
   pptBgActive.value = chatStore.pptMode
   ragBgActive.value = chatStore.ragMode

@@ -142,6 +142,16 @@ class KnowledgeBaseStore:
     def get_by_share_code(db: Session, share_code: str) -> KnowledgeBase | None:
         return db.query(KnowledgeBase).filter(KnowledgeBase.share_code == share_code).first()
 
+    @staticmethod
+    def delete(db: Session, kb_id: str) -> bool:
+        """删除知识库记录"""
+        kb = db.get(KnowledgeBase, kb_id)
+        if not kb:
+            return False
+        db.delete(kb)
+        db.flush()
+        return True
+
 
 # ========================================================================
 # KbMember CRUD
@@ -192,6 +202,23 @@ class KbMemberStore:
         return member
 
     @staticmethod
+    def delete_member(db: Session, member_id: str) -> bool:
+        """删除成员记录"""
+        member = db.get(KbMember, member_id)
+        if not member:
+            return False
+        db.delete(member)
+        db.flush()
+        return True
+
+    @staticmethod
+    def delete_by_kb(db: Session, kb_id: str) -> int:
+        """删除知识库的所有成员记录"""
+        count = db.query(KbMember).filter(KbMember.knowledge_base_id == kb_id).delete(synchronize_session="fetch")
+        db.flush()
+        return count
+
+    @staticmethod
     def user_can_access(db: Session, user_id: str, kb_id: str) -> bool:
         """检查用户是否有权限访问该知识库"""
         # 是 owner 吗？
@@ -226,6 +253,13 @@ class UploadedFileStore:
     def get(db: Session, file_id: str) -> UploadedFile | None:
         return db.get(UploadedFile, file_id)
 
+    @staticmethod
+    def delete_by_kb(db: Session, kb_id: str) -> int:
+        """删除知识库的所有上传文件记录"""
+        count = db.query(UploadedFile).filter(UploadedFile.knowledge_base_id == kb_id).delete(synchronize_session="fetch")
+        db.flush()
+        return count
+
 
 # ========================================================================
 # Document CRUD
@@ -254,6 +288,13 @@ class DocumentStore:
             doc.status = status
             db.flush()
         return doc
+
+    @staticmethod
+    def delete_by_kb(db: Session, kb_id: str) -> int:
+        """删除知识库的所有文档记录"""
+        count = db.query(Document).filter(Document.knowledge_base_id == kb_id).delete(synchronize_session="fetch")
+        db.flush()
+        return count
 
 
 # ========================================================================
@@ -299,6 +340,13 @@ class DocumentChunkStore:
         db.flush()
         return count
 
+    @staticmethod
+    def delete_by_kb(db: Session, kb_id: str) -> int:
+        """删除知识库的所有文档分片记录"""
+        count = db.query(DocumentChunk).filter(DocumentChunk.knowledge_base_id == kb_id).delete(synchronize_session="fetch")
+        db.flush()
+        return count
+
 
 # ========================================================================
 # IngestionJob CRUD
@@ -329,3 +377,10 @@ class IngestionJobStore:
             job.error_message = error_message
         db.flush()
         return job
+
+    @staticmethod
+    def delete_by_kb(db: Session, kb_id: str) -> int:
+        """删除知识库的所有导入任务记录"""
+        count = db.query(IngestionJob).filter(IngestionJob.knowledge_base_id == kb_id).delete(synchronize_session="fetch")
+        db.flush()
+        return count

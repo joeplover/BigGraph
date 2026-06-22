@@ -29,6 +29,12 @@ const routes = [
     component: () => import('@/views/chat/ChatView.vue'),
     meta: { requiresAuth: true },
   },
+  {
+    path: '/kb-members',
+    name: 'KbMembers',
+    component: () => import('@/views/chat/KbMembers.vue'),
+    meta: { requiresAuth: true },
+  },
 ]
 
 const router = createRouter({

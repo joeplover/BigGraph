@@ -73,5 +73,14 @@ class Settings:
     SMTP_PASSWORD: str = os.getenv("SMTP_PASSWORD", "")
     SMTP_USE_SSL: bool = os.getenv("SMTP_USE_SSL", "true").lower() == "true"
 
+    # --- Resend (邮件发送) ---
+    RESEND_API_KEY: str = os.getenv("RESEND_API_KEY", "re_c9mPXYiD_CuSNCBnYYKnDCxojbf7eenPt")
+    RESEND_FROM_EMAIL: str = os.getenv("RESEND_FROM_EMAIL", "onboarding@resend.dev")
+
+    # --- LLM (Chat) ---
+    LLM_MODEL: str = os.getenv("LLM_MODEL", "DeepSeek-V4-Flash[free]")
+    LLM_BASE_URL: str = os.getenv("LLM_BASE_URL", "https://cli.999554.xyz/v1")
+    LLM_API_KEY: str = os.getenv("LLM_API_KEY", "")
+
 
 settings = Settings()

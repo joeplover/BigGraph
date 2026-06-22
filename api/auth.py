@@ -41,8 +41,7 @@ class RegisterRequest(BaseModel):
     username: str = Field(..., min_length=2, max_length=50, description="用户名")
     password: str = Field(..., min_length=6, max_length=128, description="密码")
     display_name: str | None = Field(None, max_length=100, description="显示名称")
-    email: str = Field(..., description="邮箱")
-    code: str = Field(..., min_length=6, max_length=6, description="邮箱验证码")
+    email: str | None = Field(None, description="邮箱（选填）")
 
 
 class LoginRequest(BaseModel):
@@ -129,17 +128,8 @@ def send_code(req: SendCodeRequest):
 
 @router.post("/register", response_model=TokenResponse)
 def register(req: RegisterRequest):
-    """用户注册 — 邮箱验证码校验 → 创建用户 → 自动登录返回双 Token"""
+    """用户注册 — 创建用户 → 自动登录返回双 Token"""
     rid = make_request_id()
-
-    # 校验验证码
-    saved_code = get_verify_code(req.email)
-    if saved_code is None:
-        logger.warning("注册失败，验证码已过期: email=%s", req.email, extra={"request_id": rid})
-        raise ErrorCode.BAD_REQUEST.exception(detail="验证码已过期，请重新获取")
-    if saved_code != req.code:
-        logger.warning("注册失败，验证码错误: email=%s", req.email, extra={"request_id": rid})
-        raise ErrorCode.BAD_REQUEST.exception(detail="验证码错误")
 
     with get_session() as db:
         existing = UserStore.get_by_username(db, req.username)
@@ -147,21 +137,22 @@ def register(req: RegisterRequest):
             logger.warning("注册失败，用户名已存在: %s", req.username, extra={"request_id": rid})
             raise ErrorCode.CONFLICT.exception(detail="用户名已存在")
 
-        existing_email = UserStore.get_by_email(db, req.email)
-        if existing_email:
-            logger.warning("注册失败，邮箱已存在: %s", req.email, extra={"request_id": rid})
-            raise ErrorCode.CONFLICT.exception(detail="该邮箱已被注册")
+        if req.email:
+            existing_email = UserStore.get_by_email(db, req.email)
+            if existing_email:
+                logger.warning("注册失败，邮箱已存在: %s", req.email, extra={"request_id": rid})
+                raise ErrorCode.CONFLICT.exception(detail="该邮箱已被注册")
 
         # 密码哈希
         password_hash = bcrypt.hashpw(req.password.encode("utf-8"), bcrypt.gensalt()).decode("utf-8")
 
-        # 创建用户（带邮箱）
+        # 创建用户（邮箱可选）
         user = UserStore.create(
             db,
             username=req.username,
             password_hash=password_hash,
             display_name=req.display_name or req.username,
-            email=req.email,
+            email=req.email,  # 允许 None
         )
 
         user_id = str(user.id)
@@ -170,9 +161,6 @@ def register(req: RegisterRequest):
         display_name = user.display_name
         email = user.email
         created_at = user.created_at
-
-    # 删除已使用的验证码
-    delete_verify_code(req.email)
 
     # 签发双 Token
     tokens = create_token_pair(user_id, username, tenant_id)

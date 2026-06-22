@@ -25,28 +25,10 @@
         <el-form-item prop="email">
           <el-input
             v-model="form.email"
-            placeholder="邮箱"
+            placeholder="邮箱（选填）"
             :prefix-icon="Message"
             size="large"
           />
-        </el-form-item>
-
-        <el-form-item prop="code">
-          <div class="code-wrapper">
-            <el-input
-              v-model="form.code"
-              placeholder="验证码"
-              size="large"
-            />
-            <el-button
-              size="large"
-              :disabled="countdown > 0"
-              :loading="sendingCode"
-              @click="handleSendCode"
-            >
-              {{ countdown > 0 ? `${countdown}s` : '获取验证码' }}
-            </el-button>
-          </div>
         </el-form-item>
 
         <el-form-item prop="password">
@@ -101,14 +83,10 @@ const router = useRouter()
 const authStore = useAuthStore()
 const formRef = ref(null)
 const loading = ref(false)
-const sendingCode = ref(false)
-const countdown = ref(0)
-let timer = null
 
 const form = reactive({
   username: '',
   email: '',
-  code: '',
   password: '',
   confirmPassword: '',
 })
@@ -139,40 +117,10 @@ const rules = {
     { min: 2, max: 50, message: '用户名长度2-50位', trigger: 'blur' },
   ],
   email: [
-    { required: true, message: '请输入邮箱', trigger: 'blur' },
     { type: 'email', message: '请输入有效的邮箱地址', trigger: 'blur' },
   ],
-  code: [{ required: true, message: '请输入验证码', trigger: 'blur' }],
   password: [{ validator: validatePass, trigger: 'blur' }],
   confirmPassword: [{ validator: validatePass2, trigger: 'blur' }],
-}
-
-async function handleSendCode() {
-  if (!form.email) {
-    ElMessage.warning('请先输入邮箱')
-    return
-  }
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(form.email)) {
-    ElMessage.warning('请输入有效的邮箱地址')
-    return
-  }
-
-  sendingCode.value = true
-  try {
-    await authStore.sendCode(form.email)
-    ElMessage.success('验证码已发送，请查收邮箱')
-    countdown.value = 60
-    timer = setInterval(() => {
-      countdown.value--
-      if (countdown.value <= 0) {
-        clearInterval(timer)
-      }
-    }, 1000)
-  } catch {
-    // 错误已在拦截器中处理
-  } finally {
-    sendingCode.value = false
-  }
 }
 
 async function handleRegister() {
@@ -185,8 +133,7 @@ async function handleRegister() {
       username: form.username,
       password: form.password,
       display_name: form.username,
-      email: form.email,
-      code: form.code,
+      email: form.email || undefined,
     })
     ElMessage.success('注册成功')
     router.push('/chat')
@@ -234,21 +181,6 @@ async function handleRegister() {
 
 .register-form {
   margin-bottom: 24px;
-}
-
-.code-wrapper {
-  display: flex;
-  gap: 12px;
-  width: 100%;
-}
-
-.code-wrapper .el-input {
-  flex: 1;
-}
-
-.code-wrapper .el-button {
-  flex-shrink: 0;
-  white-space: nowrap;
 }
 
 .submit-btn {

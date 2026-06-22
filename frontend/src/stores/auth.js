@@ -22,6 +22,9 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   async function login(account, password) {
+    // 切换账号时清空旧数据
+    const { useChatStore } = await import('@/stores/chat')
+    useChatStore().reset()
     const res = await loginApi({ account, password })
     saveTokens(res.access_token, res.refresh_token)
     saveUserInfo(res.user)
@@ -29,6 +32,8 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   async function register(data) {
+    const { useChatStore } = await import('@/stores/chat')
+    useChatStore().reset()
     const res = await registerApi(data)
     saveTokens(res.access_token, res.refresh_token)
     saveUserInfo(res.user)
