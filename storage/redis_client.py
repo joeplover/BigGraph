@@ -186,6 +186,15 @@ def create_chat_session(session_id: str, user_id: str, title: str = "新会话")
     return json.loads(meta)
 
 
+def get_chat_session(session_id: str) -> dict | None:
+    """Return chat session metadata by id."""
+    r = get_redis()
+    meta = r.get(f"{_CHAT_META_PREFIX}{session_id}")
+    if not meta:
+        return None
+    return json.loads(meta)
+
+
 def list_chat_sessions(user_id: str) -> list[dict]:
     """列出用户的所有会话（按时间倒序）"""
     user_key = f"{_USER_SESSIONS_PREFIX}{user_id}"
