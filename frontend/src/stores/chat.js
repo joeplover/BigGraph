@@ -168,7 +168,7 @@ export const useChatStore = defineStore('chat', () => {
           const res = await request.post('/api/ppt/chat', {
             message: text,
             session_id: currentSessionId.value,
-          }, { timeout: 30000 })
+          }, { timeout: 300000 })
 
           // 更新 session_id（新会话的 ID 由后端生成）
           if (res.session_id && res.session_id !== currentSessionId.value) {
@@ -368,9 +368,25 @@ export const useChatStore = defineStore('chat', () => {
   }
 
   // ================================================================
-  //  启动：加载数据
+  //  重置（切换账号时清空）
   // ================================================================
-  loadFromBackend()
+
+  function reset() {
+    sessions.value = []
+    currentSessionId.value = null
+    messages.value = []
+    ragMode.value = false
+    pptMode.value = false
+    kbId.value = ''
+    kbs.value = []
+    pptDownloadUrl.value = ''
+    loading.value = false
+  }
+
+  // ================================================================
+  //  （启动由 ChatView.vue 的 onMounted 触发，不在 store 初始化时调用）
+  // ================================================================
+  // (removed auto-call to loadFromBackend() to avoid race during login)
 
   return {
     sessions,
@@ -388,6 +404,8 @@ export const useChatStore = defineStore('chat', () => {
     selectSession,
     sendMessage,
     fetchMyKbs,
+    loadFromBackend,
+    reset,
     toggleRagMode,
     togglePptMode,
     setKbId,

@@ -33,7 +33,22 @@ export function approveMember(kbId, memberId) {
   return request.post(`/knowledge_bases/${kbId}/members/${memberId}/approve`)
 }
 
+// 拒绝成员
+export function rejectMember(kbId, memberId) {
+  return request.post(`/knowledge_bases/${kbId}/members/${memberId}/reject`)
+}
+
+// 移除成员
+export function removeMember(kbId, memberId) {
+  return request.delete(`/knowledge_bases/${kbId}/members/${memberId}`)
+}
+
 // 获取成员列表
 export function getMembers(kbId) {
   return request.get(`/knowledge_bases/${kbId}/members`)
+}
+
+// 删除知识库
+export function deleteKnowledgeBase(kbId) {
+  return request.delete(`/knowledge_bases/${kbId}`)
 }

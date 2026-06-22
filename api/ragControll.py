@@ -58,6 +58,7 @@ from storage.postgres import (
     KbMemberStore,
     KnowledgeBaseStore,
     UploadedFileStore,
+    UserStore,
     get_session,
     init_db,
 )
@@ -81,10 +82,16 @@ logger = get_logger(__name__)
 
 @asynccontextmanager
 async def lifespan(_app: FastAPI) -> AsyncIterator[None]:
-    """应用生命周期 — 启动时建表"""
+    """应用生命周期 — 启动时建表 + 初始化向量/全文索引"""
     init_db()
-    _qdrant.ensure_collection()
-    _es.ensure_index()
+    try:
+        _es.ensure_index()
+    except Exception:
+        logger.warning("Elasticsearch 索引初始化失败（可稍后自动创建）")
+    try:
+        _qdrant.ensure_collection()
+    except Exception:
+        logger.warning("Qdrant 集合初始化失败（可稍后自动创建）")
     logger.info("数据库表已就绪")
     yield
 
@@ -306,6 +313,47 @@ async def approve_kb_member(kb_id: str, member_id: str, user: dict = Depends(get
         return {"message": "已批准加入", "member_id": member_id, "status": "approved"}
 
 
+@app.post("/knowledge_bases/{kb_id}/members/{member_id}/reject")
+async def reject_kb_member(kb_id: str, member_id: str, user: dict = Depends(get_current_user)):
+    """拒绝成员加入知识库（仅 owner）"""
+    user_id = user["user_id"]
+    with get_session() as db:
+        kb = KnowledgeBaseStore.get(db, kb_id)
+        if not kb:
+            raise ErrorCode.KB_NOT_FOUND.exception()
+        if str(kb.owner_id) != user_id:
+            raise ErrorCode.FORBIDDEN.exception(detail="只有知识库创建者可以审批成员")
+
+        member = KbMemberStore.get(db, member_id)
+        if not member or str(member.knowledge_base_id) != kb_id:
+            raise ErrorCode.NOT_FOUND.exception(detail="成员申请不存在")
+
+        if member.status != KbMemberStatus.pending:
+            raise ErrorCode.CONFLICT.exception(detail=f"该申请已被{member.status.value}")
+
+        KbMemberStore.update_status(db, member_id, KbMemberStatus.rejected)
+        return {"message": "已拒绝加入", "member_id": member_id, "status": "rejected"}
+
+
+@app.delete("/knowledge_bases/{kb_id}/members/{member_id}")
+async def remove_kb_member(kb_id: str, member_id: str, user: dict = Depends(get_current_user)):
+    """移除知识库成员（仅 owner，可移除已通过或已拒绝的成员）"""
+    user_id = user["user_id"]
+    with get_session() as db:
+        kb = KnowledgeBaseStore.get(db, kb_id)
+        if not kb:
+            raise ErrorCode.KB_NOT_FOUND.exception()
+        if str(kb.owner_id) != user_id:
+            raise ErrorCode.FORBIDDEN.exception(detail="只有知识库创建者可以移除成员")
+
+        member = KbMemberStore.get(db, member_id)
+        if not member or str(member.knowledge_base_id) != kb_id:
+            raise ErrorCode.NOT_FOUND.exception(detail="成员记录不存在")
+
+        KbMemberStore.delete_member(db, member_id)
+        return {"message": "已移除成员", "member_id": member_id}
+
+
 @app.get("/knowledge_bases/{kb_id}/members")
 async def list_kb_members(kb_id: str, user: dict = Depends(get_current_user)):
     """查看知识库成员列表（仅 owner）"""
@@ -320,9 +368,13 @@ async def list_kb_members(kb_id: str, user: dict = Depends(get_current_user)):
         members = KbMemberStore.list_by_kb(db, kb_id)
         result = []
         for m in members:
+            # 查找用户名
+            member_user = UserStore.get(db, str(m.user_id))
+            display_name = member_user.display_name if member_user else str(m.user_id)[:8]
             result.append({
                 "id": str(m.id),
                 "user_id": str(m.user_id),
+                "display_name": display_name,
                 "role": m.role.value,
                 "status": m.status.value,
                 "created_at": _local_iso(m.created_at),
@@ -634,16 +686,17 @@ async def search_documents(
 ):
     """在知识库中执行向量语义搜索（需认证）。"""
     rid = make_request_id()
-    tenant_id = user["tenant_id"]
-    logger.info("搜索请求: query=%s kb=%s tenant=%s user=%s",
-                 query, knowledge_base_id, tenant_id, user["user_id"], extra={"request_id": rid})
-    # 校验知识库存在且属于该租户
+    user_id = user["user_id"]
+    logger.info("搜索请求: query=%s kb=%s user=%s",
+                 query, knowledge_base_id, user_id, extra={"request_id": rid})
+    # 校验知识库存在且有权限访问（owner 或已批准的成员）
     with get_session() as db:
         kb = KnowledgeBaseStore.get(db, knowledge_base_id)
         if not kb:
             raise ErrorCode.KB_NOT_FOUND.exception()
-        if kb.tenant_id != tenant_id:
-            raise ErrorCode.TENANT_MISMATCH.exception()
+        if not KbMemberStore.user_can_access(db, user_id, knowledge_base_id):
+            raise ErrorCode.FORBIDDEN.exception(detail="无权限访问该知识库")
+        kb_tenant_id = kb.tenant_id
 
     # 验证搜索词
     if not query or not query.strip():
@@ -656,7 +709,7 @@ async def search_documents(
     # 2. Qdrant 向量检索
     qdrant_hits = _qdrant.search(
         query_vector=query_vector,
-        tenant_id=tenant_id,
+        tenant_id=kb_tenant_id,
         knowledge_base_ids=[knowledge_base_id],
         top_k=limit,
     )
@@ -695,6 +748,59 @@ async def search_documents(
 # ===================================================================
 #  删除
 # ===================================================================
+
+@app.delete("/knowledge_bases/{kb_id}")
+async def delete_knowledge_base(kb_id: str, user: dict = Depends(get_current_user)):
+    """删除知识库及其所有关联数据（仅创建者本人可操作）"""
+    rid = make_request_id()
+    user_id = user["user_id"]
+
+    with get_session() as db:
+        kb = KnowledgeBaseStore.get(db, kb_id)
+        if not kb:
+            raise ErrorCode.KB_NOT_FOUND.exception()
+        if str(kb.owner_id) != user_id:
+            raise ErrorCode.FORBIDDEN.exception(detail="只有知识库创建者可以删除")
+
+        # 级联删除关联数据（注意外键依赖顺序）
+        # 先删 ingestion_jobs（FK → uploaded_files）
+        # 再删 document_chunks（FK → documents）
+        # 再删 documents（FK → uploaded_files）
+        # 再删 uploaded_files（FK → knowledge_base）
+        # 再删 kb_members（FK → knowledge_base）
+        # 最后删 knowledge_base
+        tenant_id = kb.tenant_id
+        job_count = IngestionJobStore.delete_by_kb(db, kb_id)
+        chunk_count = DocumentChunkStore.delete_by_kb(db, kb_id)
+        doc_count = DocumentStore.delete_by_kb(db, kb_id)
+        file_count = UploadedFileStore.delete_by_kb(db, kb_id)
+        member_count = KbMemberStore.delete_by_kb(db, kb_id)
+        KnowledgeBaseStore.delete(db, kb_id)
+
+    # 清理向量库（Qdrant + ES）
+    try:
+        _qdrant.delete_kb_vectors(tenant_id=tenant_id, knowledge_base_id=kb_id)
+    except Exception:
+        pass
+
+    try:
+        _es.delete_kb_chunks(knowledge_base_id=kb_id)
+    except Exception:
+        pass
+
+    logger.info("知识库已删除: kb_id=%s user=%s chunks=%d docs=%d files=%d jobs=%d members=%d",
+                kb_id, user_id, chunk_count, doc_count, file_count, job_count, member_count,
+                extra={"request_id": rid})
+
+    return {
+        "message": "知识库已删除",
+        "deleted_chunks": chunk_count,
+        "deleted_documents": doc_count,
+        "deleted_files": file_count,
+        "deleted_jobs": job_count,
+        "deleted_members": member_count,
+    }
+
 
 @app.delete("/documents/{doc_id}")
 async def delete_document(doc_id: str, user: dict = Depends(get_current_user)):

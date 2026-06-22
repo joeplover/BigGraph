@@ -11,6 +11,7 @@ export default defineConfig({
   },
   server: {
     port: 3000,
+    allowedHosts: ['aboral-rogelio-plumbless.ngrok-free.dev'],
     proxy: {
       '/api/ppt': {
         target: 'http://localhost:8000',
