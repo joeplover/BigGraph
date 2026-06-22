@@ -27,6 +27,7 @@ from contextlib import asynccontextmanager
 from datetime import datetime
 
 from fastapi import BackgroundTasks, FastAPI, File, Form, HTTPException, UploadFile, Depends
+from fastapi.responses import FileResponse
 from pydantic import BaseModel, Field
 
 from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
@@ -68,6 +69,9 @@ from storage.redis_client import (
     rename_chat_session,
     save_chat_message,
 )
+from services.chat_service import require_chat_session_owner
+from services.kb_service import require_kb_access, require_kb_editor_or_owner, require_kb_owner
+from services.search_service import SearchService
 
 # ---------------------------------------------------------------------------
 # FastAPI 应用
@@ -98,6 +102,19 @@ def _local_iso(dt: datetime | None) -> str | None:
     if dt is None:
         return None
     return dt.strftime("%Y-%m-%d %H:%M:%S")
+
+
+def _job_state(status: IngestionJobStatus | str) -> str:
+    status_value = status.value if hasattr(status, "value") else str(status)
+    if status_value == IngestionJobStatus.pending.value:
+        return "queued"
+    if status_value == IngestionJobStatus.completed.value:
+        return "completed"
+    if status_value == IngestionJobStatus.failed.value:
+        return "failed"
+    if status_value == IngestionJobStatus.cancelled.value:
+        return "cancelled"
+    return "running"
 
 
 # ---------------------------------------------------------------------------
@@ -141,6 +158,9 @@ _parser_registry = ParserRegistry()
 _chunker = StructureAwareChunker()
 _qdrant = QdrantService()
 _es = ElasticsearchService()
+_search_service = SearchService()
+ALLOWED_UPLOAD_SUFFIXES = {".txt", ".md", ".pdf", ".docx", ".csv", ".xlsx", ".html"}
+MAX_UPLOAD_BYTES = 20 * 1024 * 1024
 
 
 # ===================================================================
@@ -203,10 +223,7 @@ async def get_knowledge_base(kb_id: str, user: dict = Depends(get_current_user))
     """获取知识库详情（需认证）"""
     rid = make_request_id()
     with get_session() as db:
-        kb = KnowledgeBaseStore.get(db, kb_id)
-        if not kb:
-            logger.warning("知识库不存在: kb_id=%s", kb_id, extra={"request_id": rid})
-            raise ErrorCode.KB_NOT_FOUND.exception()
+        kb = require_kb_access(db, kb_id, user)
         return {
             "id": str(kb.id),
             "name": kb.name,
@@ -226,13 +243,8 @@ async def get_knowledge_base(kb_id: str, user: dict = Depends(get_current_user))
 @app.post("/knowledge_bases/{kb_id}/share")
 async def share_knowledge_base(kb_id: str, user: dict = Depends(get_current_user)):
     """生成或获取知识库的分享码（仅 owner 可操作）"""
-    user_id = user["user_id"]
     with get_session() as db:
-        kb = KnowledgeBaseStore.get(db, kb_id)
-        if not kb:
-            raise ErrorCode.KB_NOT_FOUND.exception()
-        if str(kb.owner_id) != user_id:
-            raise ErrorCode.FORBIDDEN.exception(detail="只有知识库创建者可以生成分享链接")
+        kb = require_kb_owner(db, kb_id, user)
 
         if not kb.share_code:
             share_code = f"KB-{secrets.token_urlsafe(16)}"
@@ -275,13 +287,8 @@ async def join_knowledge_base(share_code: str, user: dict = Depends(get_current_
 @app.post("/knowledge_bases/{kb_id}/members/{member_id}/approve")
 async def approve_kb_member(kb_id: str, member_id: str, user: dict = Depends(get_current_user)):
     """批准成员加入知识库（仅 owner）"""
-    user_id = user["user_id"]
     with get_session() as db:
-        kb = KnowledgeBaseStore.get(db, kb_id)
-        if not kb:
-            raise ErrorCode.KB_NOT_FOUND.exception()
-        if str(kb.owner_id) != user_id:
-            raise ErrorCode.FORBIDDEN.exception(detail="只有知识库创建者可以审批成员")
+        require_kb_owner(db, kb_id, user)
 
         member = KbMemberStore.get(db, member_id)
         if not member or str(member.knowledge_base_id) != kb_id:
@@ -297,13 +304,8 @@ async def approve_kb_member(kb_id: str, member_id: str, user: dict = Depends(get
 @app.get("/knowledge_bases/{kb_id}/members")
 async def list_kb_members(kb_id: str, user: dict = Depends(get_current_user)):
     """查看知识库成员列表（仅 owner）"""
-    user_id = user["user_id"]
     with get_session() as db:
-        kb = KnowledgeBaseStore.get(db, kb_id)
-        if not kb:
-            raise ErrorCode.KB_NOT_FOUND.exception()
-        if str(kb.owner_id) != user_id:
-            raise ErrorCode.FORBIDDEN.exception(detail="只有知识库创建者可以查看成员列表")
+        require_kb_owner(db, kb_id, user)
 
         members = KbMemberStore.list_by_kb(db, kb_id)
         result = []
@@ -337,9 +339,19 @@ async def upload_file(
         file.filename, knowledge_base_id, tenant_id, user["user_id"],
         extra={"request_id": rid},
     )
+    with get_session() as db:
+        kb = require_kb_editor_or_owner(db, knowledge_base_id, user)
+        tenant_id = kb.tenant_id
+
     # 先保存文件到磁盘（不涉及DB，出错也没脏数据）
+    file_ext = Path(file.filename or "").suffix.lower()
+    if file_ext not in ALLOWED_UPLOAD_SUFFIXES:
+        raise ErrorCode.INVALID_FILE_FORMAT.exception()
+
     content = await file.read()
-    file_ext = Path(file.filename).suffix
+    if len(content) > MAX_UPLOAD_BYTES:
+        raise ErrorCode.FILE_TOO_LARGE.exception()
+
     storage_path = f"uploads/{tenant_id}/{knowledge_base_id}/{uuid.uuid4()}{file_ext}"
 
     Path(storage_path).parent.mkdir(parents=True, exist_ok=True)
@@ -351,9 +363,7 @@ async def upload_file(
     # DB 操作统一放在一个 session 中，异常时整体回滚
     with get_session() as db:
         # 验证知识库存在且属于该租户
-        kb = KnowledgeBaseStore.get(db, knowledge_base_id)
-        if not kb or kb.tenant_id != tenant_id:
-            raise ErrorCode.KB_NOT_FOUND.exception()
+        require_kb_editor_or_owner(db, knowledge_base_id, user)
 
         # 写 DB
         uploaded_file = UploadedFileStore.create(
@@ -583,10 +593,13 @@ async def get_job_status(job_id: str, user: dict = Depends(get_current_user)):
         job = IngestionJobStore.get(db, job_id)
         if not job:
             raise ErrorCode.JOB_NOT_FOUND.exception()
+        state = _job_state(job.status)
         return {
             "job_id": str(job.id),
             "status": job.status.value,
+            "state": state,
             "progress": job.progress,
+            "error_code": "ingestion_failed" if state == "failed" else "",
             "error_message": job.error_message,
             "created_at": _local_iso(job.created_at),
             "updated_at": _local_iso(job.updated_at),
@@ -627,53 +640,15 @@ async def search_documents(
                  query, knowledge_base_id, tenant_id, user["user_id"], extra={"request_id": rid})
     # 校验知识库存在且属于该租户
     with get_session() as db:
-        kb = KnowledgeBaseStore.get(db, knowledge_base_id)
-        if not kb:
-            raise ErrorCode.KB_NOT_FOUND.exception()
-        if kb.tenant_id != tenant_id:
-            raise ErrorCode.TENANT_MISMATCH.exception()
+        kb = require_kb_access(db, knowledge_base_id, user)
+        tenant_id = kb.tenant_id
 
-    # 验证搜索词
-    if not query or not query.strip():
-        raise ErrorCode.INVALID_QUERY.exception()
-
-    # 1. 生成查询向量
-    loop = asyncio.get_running_loop()
-    query_vector = await loop.run_in_executor(None, _single_embed, query)
-
-    # 2. Qdrant 向量检索
-    qdrant_hits = _qdrant.search(
-        query_vector=query_vector,
+    results = _search_service.search(
+        query=query,
         tenant_id=tenant_id,
-        knowledge_base_ids=[knowledge_base_id],
-        top_k=limit,
+        knowledge_base_id=knowledge_base_id,
+        limit=limit,
     )
-
-    if not qdrant_hits:
-        logger.info("搜索无结果: query=%s", query, extra={"request_id": rid})
-        return {"results": [], "query": query, "knowledge_base_id": knowledge_base_id}
-
-    # 3. 从 ES 补充完整内容
-    chunk_ids = [h["chunk_id"] for h in qdrant_hits]
-    full_contents = _es.get_full_contents(chunk_ids)
-
-    results = []
-    for hit in qdrant_hits:
-        cid = hit["chunk_id"]
-        results.append({
-            "chunk_id": cid,
-            "document_id": hit.get("document_id", ""),
-            "file_id": hit.get("file_id", ""),
-            "file_name": hit.get("file_name") or hit.get("file_name", ""),
-            "content": full_contents.get(cid) or hit.get("content", ""),
-            "score": hit["score"],
-            "page_start": hit.get("page_start"),
-            "page_end": hit.get("page_end"),
-            "content_type": hit.get("content_type"),
-            "heading_path": hit.get("heading_path"),
-            "keywords": hit.get("keywords", []),
-            "token_count": hit.get("token_count", 0),
-        })
 
     logger.info("搜索完成: results=%d", len(results), extra={"request_id": rid})
 
@@ -684,6 +659,48 @@ async def search_documents(
 #  删除
 # ===================================================================
 
+@app.delete("/knowledge_bases/{kb_id}")
+async def delete_knowledge_base(kb_id: str, user: dict = Depends(get_current_user)):
+    """Delete a knowledge base and all related records. Owner only."""
+    with get_session() as db:
+        kb = require_kb_owner(db, kb_id, user)
+
+        tenant_id = kb.tenant_id
+        deleted_chunks = DocumentChunkStore.delete_by_knowledge_base(db, kb_id)
+        deleted_jobs = IngestionJobStore.delete_by_knowledge_base(db, kb_id)
+        deleted_documents = DocumentStore.delete_by_knowledge_base(db, kb_id)
+        deleted_files = UploadedFileStore.delete_by_knowledge_base(db, kb_id)
+        deleted_members = KbMemberStore.delete_by_knowledge_base(db, kb_id)
+        deleted_kb = 1 if KnowledgeBaseStore.delete(db, kb_id) else 0
+
+    cleanup_errors: list[str] = []
+    try:
+        _qdrant.delete_knowledge_base_vectors(tenant_id=tenant_id, knowledge_base_id=kb_id)
+    except Exception as exc:
+        cleanup_errors.append(f"qdrant:{exc}")
+        logger.error("知识库 Qdrant 清理失败: kb_id=%s error=%s", kb_id, exc)
+
+    try:
+        _es.delete_knowledge_base_chunks(knowledge_base_id=kb_id)
+    except Exception as exc:
+        cleanup_errors.append(f"elasticsearch:{exc}")
+        logger.error("知识库 Elasticsearch 清理失败: kb_id=%s error=%s", kb_id, exc)
+
+    return {
+        "message": "knowledge_base_deleted",
+        "knowledge_base_id": kb_id,
+        "deleted": {
+            "chunks": deleted_chunks,
+            "jobs": deleted_jobs,
+            "documents": deleted_documents,
+            "files": deleted_files,
+            "members": deleted_members,
+            "knowledge_bases": deleted_kb,
+        },
+        "cleanup_errors": cleanup_errors,
+    }
+
+
 @app.delete("/documents/{doc_id}")
 async def delete_document(doc_id: str, user: dict = Depends(get_current_user)):
     """删除文档及其关联的所有数据（PG + Qdrant + ES）。需认证。"""
@@ -691,6 +708,7 @@ async def delete_document(doc_id: str, user: dict = Depends(get_current_user)):
         doc = DocumentStore.get(db, doc_id)
         if not doc:
             raise ErrorCode.DOC_NOT_FOUND.exception()
+        require_kb_editor_or_owner(db, str(doc.knowledge_base_id), user)
 
         # 软删除
         DocumentStore.update_status(db, doc_id, DocumentStatus.deleted)
@@ -698,20 +716,25 @@ async def delete_document(doc_id: str, user: dict = Depends(get_current_user)):
         # 删除分片记录
         deleted_count = DocumentChunkStore.delete_by_document(db, doc_id)
 
+    cleanup_errors: list[str] = []
+
     # 从向量库删除
     try:
         _qdrant.delete_document_vectors(tenant_id=doc.tenant_id, document_id=doc_id)
-    except Exception:
-        pass  # Qdrant 删除失败不影响主流程
+    except Exception as exc:
+        cleanup_errors.append(f"qdrant:{exc}")
+        logger.error("文档 Qdrant 清理失败: doc_id=%s error=%s", doc_id, exc)
 
     try:
         _es.delete_document_chunks(document_id=doc_id)
-    except Exception:
-        pass
+    except Exception as exc:
+        cleanup_errors.append(f"elasticsearch:{exc}")
+        logger.error("文档 Elasticsearch 清理失败: doc_id=%s error=%s", doc_id, exc)
 
     return {
         "message": f"文档已删除，共删除 {deleted_count} 个分片",
         "deleted_chunks": deleted_count,
+        "cleanup_errors": cleanup_errors,
     }
 
 
@@ -753,6 +776,7 @@ async def chat(req: ChatRequest, user: dict = Depends(get_current_user)):
 
         # 2. 加载聊天历史（如果有 session_id）
         if req.session_id:
+            require_chat_session_owner(req.session_id, user)
             history = get_chat_history(req.session_id)
             for msg in history:
                 if msg["role"] == "user":
@@ -779,6 +803,8 @@ async def chat(req: ChatRequest, user: dict = Depends(get_current_user)):
                      len(content), len(llm_messages) - 1, rid)
         return {"response": content, "session_id": req.session_id}
 
+    except HTTPException:
+        raise
     except Exception as e:
         logger.error("AI 调用失败: %s request_id=%s", str(e), rid)
         raise ErrorCode.INTERNAL_ERROR.exception(detail="AI 服务暂时不可用，请稍后重试")
@@ -809,6 +835,7 @@ async def list_sessions(user: dict = Depends(get_current_user)):
 @app.patch("/chat/sessions/{session_id}")
 async def rename_session(session_id: str, req: RenameRequest, user: dict = Depends(get_current_user)):
     """重命名会话"""
+    require_chat_session_owner(session_id, user)
     rename_chat_session(session_id, req.title)
     return {"message": "ok", "title": req.title}
 
@@ -816,6 +843,7 @@ async def rename_session(session_id: str, req: RenameRequest, user: dict = Depen
 @app.get("/chat/history/{session_id}")
 async def chat_history(session_id: str, user: dict = Depends(get_current_user)):
     """获取指定会话的聊天历史"""
+    require_chat_session_owner(session_id, user)
     history = get_chat_history(session_id)
     return {"messages": history, "session_id": session_id}
 
@@ -823,6 +851,7 @@ async def chat_history(session_id: str, user: dict = Depends(get_current_user)):
 @app.delete("/chat/history/{session_id}")
 async def delete_chat_history(session_id: str, user: dict = Depends(get_current_user)):
     """彻底删除指定会话（元数据 + 聊天记录）"""
+    require_chat_session_owner(session_id, user)
     delete_chat_session(session_id, user["user_id"])
     logger.info("会话已删除: session_id=%s", session_id)
     return {"message": "会话已删除"}
@@ -840,6 +869,15 @@ def _single_embed(text: str) -> list[float]:
 # ===================================================================
 #  启动入口
 # ===================================================================
+
+@app.get("/{full_path:path}")
+async def frontend_fallback(full_path: str):
+    """Serve the built frontend for client-side routes when available."""
+    dist_index = _bg_root / "frontend" / "dist" / "index.html"
+    if dist_index.exists():
+        return FileResponse(dist_index)
+    raise HTTPException(status_code=404, detail="Not Found")
+
 
 if __name__ == "__main__":
     # 注册认证路由

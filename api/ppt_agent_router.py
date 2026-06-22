@@ -130,6 +130,7 @@ class PptStatusResponse(BaseModel):
     status: str = Field("idle", description="任务状态: idle/running/done/failed")
     response: str = Field("", description="Assistant 回复")
     pptx_download_url: str = Field("", description="PPTX 下载地址")
+    error_code: str = Field("", description="稳定错误码")
 
 
 # ---------------------------------------------------------------------------
@@ -154,6 +155,8 @@ def _run_ppt_graph_in_background(
 
         # 执行完整的 LangGraph
         next_state = ppt_graph.invoke(state)
+        reply = next_state.get("assistant_reply", "")
+        status = next_state.get("status", "collecting")
 
         # 保存最终的 State
         save_ppt_state(session_id, next_state)
@@ -167,8 +170,6 @@ def _run_ppt_graph_in_background(
             pass  # 历史记录写入失败不影响主流程
 
         # 提取结果
-        reply = next_state.get("assistant_reply", "")
-        status = next_state.get("status", "collecting")
         pptx_download_url = ""
         if status == "ppt_exported" and next_state.get("pptx_path"):
             pptx_download_url = f"/api/ppt/download/{session_id}"
@@ -189,11 +190,13 @@ def _run_ppt_graph_in_background(
 
     except Exception as exc:
         logger.error("PPT Agent 后台任务失败: session=%s error=%s", session_id, str(exc))
-        save_ppt_task_result(session_id, f"PPT 生成失败：{exc}", "", "failed")
+        safe_response = "PPT 生成失败，请稍后重试"
+        save_ppt_task_result(session_id, safe_response, "", "failed", error_code="ppt_generation_failed")
         _notify_ppt_done(session_id, {
             "status": "failed",
-            "response": f"PPT 生成失败：{exc}",
+            "response": safe_response,
             "pptx_download_url": "",
+            "error_code": "ppt_generation_failed",
         })
 
 
@@ -306,6 +309,7 @@ def get_ppt_status(session_id: str):
         status=task.get("status", "idle"),
         response=task.get("response", ""),
         pptx_download_url=task.get("pptx_download_url", ""),
+        error_code=task.get("error_code", "ppt_generation_failed" if task.get("status") == "failed" else ""),
     )
 
 
