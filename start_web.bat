@@ -9,7 +9,7 @@ set "APP_URL=http://%HOST%:%PORT%"
 
 echo.
 echo ========================================
-echo   Shengzhang Jianbao Web Launcher
+echo   BigGraph Web Launcher
 echo ========================================
 echo.
 
@@ -45,7 +45,7 @@ echo [TIP] Keep this window open. Closing it stops the service.
 echo.
 
 start "" "%APP_URL%"
-python -m uvicorn ppt_agent.web.server:app --host %HOST% --port %PORT%
+python -m uvicorn api.main:create_app --factory --host %HOST% --port %PORT%
 
 echo.
 echo [STOPPED] Service stopped.

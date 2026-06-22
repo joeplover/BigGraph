@@ -142,6 +142,15 @@ class KnowledgeBaseStore:
     def get_by_share_code(db: Session, share_code: str) -> KnowledgeBase | None:
         return db.query(KnowledgeBase).filter(KnowledgeBase.share_code == share_code).first()
 
+    @staticmethod
+    def delete(db: Session, kb_id: str) -> bool:
+        kb = db.get(KnowledgeBase, kb_id)
+        if not kb:
+            return False
+        db.delete(kb)
+        db.flush()
+        return True
+
 
 # ========================================================================
 # KbMember CRUD
@@ -206,6 +215,14 @@ class KbMemberStore:
         ).first()
         return member is not None
 
+    @staticmethod
+    def delete_by_knowledge_base(db: Session, knowledge_base_id: str) -> int:
+        count = db.query(KbMember).filter(
+            KbMember.knowledge_base_id == knowledge_base_id,
+        ).delete(synchronize_session="fetch")
+        db.flush()
+        return count
+
 
 # ========================================================================
 # UploadedFile CRUD
@@ -225,6 +242,14 @@ class UploadedFileStore:
     @staticmethod
     def get(db: Session, file_id: str) -> UploadedFile | None:
         return db.get(UploadedFile, file_id)
+
+    @staticmethod
+    def delete_by_knowledge_base(db: Session, knowledge_base_id: str) -> int:
+        count = db.query(UploadedFile).filter(
+            UploadedFile.knowledge_base_id == knowledge_base_id,
+        ).delete(synchronize_session="fetch")
+        db.flush()
+        return count
 
 
 # ========================================================================
@@ -254,6 +279,14 @@ class DocumentStore:
             doc.status = status
             db.flush()
         return doc
+
+    @staticmethod
+    def delete_by_knowledge_base(db: Session, knowledge_base_id: str) -> int:
+        count = db.query(Document).filter(
+            Document.knowledge_base_id == knowledge_base_id,
+        ).delete(synchronize_session="fetch")
+        db.flush()
+        return count
 
 
 # ========================================================================
@@ -299,6 +332,14 @@ class DocumentChunkStore:
         db.flush()
         return count
 
+    @staticmethod
+    def delete_by_knowledge_base(db: Session, knowledge_base_id: str) -> int:
+        count = db.query(DocumentChunk).filter(
+            DocumentChunk.knowledge_base_id == knowledge_base_id,
+        ).delete(synchronize_session="fetch")
+        db.flush()
+        return count
+
 
 # ========================================================================
 # IngestionJob CRUD
@@ -329,3 +370,11 @@ class IngestionJobStore:
             job.error_message = error_message
         db.flush()
         return job
+
+    @staticmethod
+    def delete_by_knowledge_base(db: Session, knowledge_base_id: str) -> int:
+        count = db.query(IngestionJob).filter(
+            IngestionJob.knowledge_base_id == knowledge_base_id,
+        ).delete(synchronize_session="fetch")
+        db.flush()
+        return count

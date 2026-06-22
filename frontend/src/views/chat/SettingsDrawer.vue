@@ -115,6 +115,17 @@
             <el-button text size="small" type="primary" @click="openUpload(kb)">
               上传
             </el-button>
+            <el-button
+              v-if="kb.is_owner"
+              text
+              size="small"
+              type="danger"
+              :icon="Delete"
+              :loading="deletingKbId === kb.id"
+              @click="handleDeleteKb(kb)"
+            >
+              删除
+            </el-button>
           </div>
         </div>
         <p v-if="chatStore.kbs.length === 0" class="empty-text">暂无知识库</p>
@@ -210,11 +221,18 @@
 <script setup>
 import { ref, computed } from 'vue'
 import { useRouter } from 'vue-router'
-import { ElMessage } from 'element-plus'
-import { Upload } from '@element-plus/icons-vue'
+import { ElMessage, ElMessageBox } from 'element-plus'
+import { Delete, Upload } from '@element-plus/icons-vue'
 import { useChatStore } from '@/stores/chat'
 import { useAuthStore } from '@/stores/auth'
-import { createKnowledgeBase, shareKnowledgeBase, joinKnowledgeBase } from '@/api/knowledgeBase'
+import {
+  createKnowledgeBase,
+  deleteKnowledgeBase,
+  getKnowledgeBase,
+  joinKnowledgeBase,
+  shareKnowledgeBase,
+} from '@/api/knowledgeBase'
+import { getJobStatus, uploadFile } from '@/api/document'
 
 const props = defineProps({ modelValue: Boolean })
 const emit = defineEmits(['update:modelValue'])
@@ -254,6 +272,7 @@ const shareCode = ref('')
 // 分享码
 const showShareCode = ref(false)
 const shareCodeResult = ref('')
+const deletingKbId = ref('')
 
 // 上传文档
 const showUpload = ref(false)
@@ -308,7 +327,6 @@ async function handleUpload() {
   uploadStatusText.value = '正在上传...'
 
   try {
-    const { uploadFile, getJobStatus } = await import('@/api/document')
     const res = await uploadFile(uploadKb.value.id, selectedFile.value)
     uploadProgress.value = 50
     uploadStatusText.value = '上传成功，后台处理中...'
@@ -368,6 +386,57 @@ async function handleShare(kbId) {
     showShareCode.value = true
   } catch {
     // handled in interceptor
+  }
+}
+
+async function handleDeleteKb(kb) {
+  if (!kb?.is_owner) {
+    ElMessage.warning('只有知识库发布者可以删除知识库')
+    return
+  }
+
+  let detail
+  try {
+    detail = await getKnowledgeBase(kb.id)
+  } catch {
+    return
+  }
+
+  if (detail.owner_id !== authStore.userInfo?.user_id) {
+    ElMessage.warning('只有知识库发布者可以删除知识库')
+    await chatStore.fetchMyKbs()
+    return
+  }
+
+  try {
+    await ElMessageBox.confirm(
+      `确定删除知识库「${kb.name}」吗？删除后其中的文档和检索数据将不可恢复。`,
+      '删除知识库',
+      {
+        confirmButtonText: '删除',
+        cancelButtonText: '取消',
+        type: 'warning',
+        confirmButtonClass: 'el-button--danger',
+      }
+    )
+  } catch {
+    return
+  }
+
+  deletingKbId.value = kb.id
+  try {
+    await deleteKnowledgeBase(kb.id)
+    ElMessage.success('知识库已删除')
+    if (chatStore.kbId === kb.id) {
+      chatStore.setKbId('')
+      selectedKb.value = ''
+    }
+    if (uploadKb.value?.id === kb.id) {
+      closeUpload()
+    }
+    await chatStore.fetchMyKbs()
+  } finally {
+    deletingKbId.value = ''
   }
 }
 

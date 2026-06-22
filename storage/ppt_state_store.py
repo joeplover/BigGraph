@@ -85,7 +85,12 @@ def save_ppt_task_running(session_id: str, message: str = "PPT 正在生成中�
     r = get_redis()
     r.setex(
         key, _PPT_TASK_TTL,
-        json.dumps({"status": "running", "response": message, "pptx_download_url": ""}, ensure_ascii=False),
+        json.dumps({
+            "status": "running",
+            "response": message,
+            "pptx_download_url": "",
+            "error_code": "",
+        }, ensure_ascii=False),
     )
 
 
@@ -94,6 +99,7 @@ def save_ppt_task_result(
     response: str,
     pptx_download_url: str = "",
     status: str = "done",
+    error_code: str = "",
 ) -> None:
     """保存 PPT 后台任务完成结果
 
@@ -111,6 +117,7 @@ def save_ppt_task_result(
             "status": status,
             "response": response,
             "pptx_download_url": pptx_download_url,
+            "error_code": error_code,
         }, ensure_ascii=False),
     )
 

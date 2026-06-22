@@ -81,5 +81,14 @@ class QdrantService:
             ]),
         )
 
+    def delete_knowledge_base_vectors(self, tenant_id: str, knowledge_base_id: str) -> None:
+        self.client.delete(
+            collection_name=self.collection,
+            points_selector=Filter(must=[
+                FieldCondition(key="tenant_id", match=MatchValue(value=tenant_id)),
+                FieldCondition(key="knowledge_base_id", match=MatchValue(value=knowledge_base_id)),
+            ]),
+        )
+
     def delete_collection(self) -> None:
         self.client.delete_collection(self.collection)
