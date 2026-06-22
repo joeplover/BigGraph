@@ -1,0 +1,71 @@
+services:
+  app:
+    build:
+      context: .
+    image: biggraph:latest
+    container_name: biggraph-app
+    env_file:
+      - .env
+    environment:
+      PYTHONPATH: /app
+      PG_HOST: workface-postgres
+      PG_PORT: "5432"
+      PG_USER: workface
+      PG_PASSWORD: "678678"
+      PG_DATABASE: workface
+      REDIS_HOST: redis
+      REDIS_PORT: "6379"
+      QDRANT_URL: http://qdrant:6333
+      QDRANT_API_KEY: iwannadobetter
+      QDRANT_VECTOR_SIZE: "1024"
+      ES_HOSTS: http://workface-elasticsearch:9200
+      ES_USER: elastic
+      ES_PASSWORD: changeme
+      EMBEDDING_MODEL: bge-m3
+      EMBEDDING_BASE_URL: http://biggraph-emb:1233/v1
+      EMBEDDING_API_KEY: "123123"
+      DEEPSEEK_MODEL: DeepSeek-V4-Flash[free]
+      DEEPSEEK_BASE_URL: https://cli.999554.xyz/v1
+      LOG_DIR: /app/logs
+      TIMEZONE: Asia/Shanghai
+    ports:
+      - "8000:8000"
+    depends_on:
+      embedding:
+        condition: service_healthy
+    networks:
+      - workface_default
+    restart: unless-stopped
+
+  embedding:
+    image: ghcr.io/ggml-org/llama.cpp:server
+    container_name: biggraph-emb
+    command:
+      - -m
+      - /models/bge-m3-Q4_K_M.gguf
+      - --host
+      - 0.0.0.0
+      - --port
+      - "1233"
+      - --embedding
+      - --ctx-size
+      - "8192"
+      - --ubatch-size
+      - "1024"
+    volumes:
+      - ./emb:/models:ro
+    ports:
+      - "1233:1233"
+    healthcheck:
+      test: ["CMD-SHELL", "curl -fsS http://localhost:1233/health || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    networks:
+      - workface_default
+    restart: unless-stopped
+
+networks:
+  workface_default:
+    external: true
