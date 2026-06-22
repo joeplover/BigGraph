@@ -33,7 +33,7 @@ request.interceptors.response.use(
         error.config._retry = true
         return axios
           .post(
-            '/api/auth/refresh',
+            '/auth/refresh',
             {},
             { headers: { 'X-Refresh-Token': refreshToken } }
           )

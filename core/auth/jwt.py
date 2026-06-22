@@ -12,19 +12,10 @@ from config.settings import settings
 # 配置
 # ---------------------------------------------------------------------------
 
+_SECRET_KEY = "biggraph-jwt-secret-key-change-in-production"
 _ALGORITHM = "HS256"
-
-
-def _secret_key() -> str:
-    return settings.JWT_SECRET_KEY
-
-
-def _access_token_expire() -> timedelta:
-    return timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
-
-
-def _refresh_token_expire() -> timedelta:
-    return timedelta(days=settings.REFRESH_TOKEN_EXPIRE_DAYS)
+_ACCESS_TOKEN_EXPIRE = timedelta(hours=1)
+_REFRESH_TOKEN_EXPIRE = timedelta(days=7)
 
 
 # ---------------------------------------------------------------------------
@@ -52,9 +43,9 @@ def create_access_token(user_id: str, username: str, tenant_id: str) -> str:
         "tenant_id": tenant_id,
         "token_type": "access",
         "iat": now,
-        "exp": now + _access_token_expire(),
+        "exp": now + _ACCESS_TOKEN_EXPIRE,
     }
-    return jwt.encode(payload, _secret_key(), algorithm=_ALGORITHM)
+    return jwt.encode(payload, _SECRET_KEY, algorithm=_ALGORITHM)
 
 
 def create_refresh_token(user_id: str, username: str, tenant_id: str) -> str:
@@ -66,9 +57,9 @@ def create_refresh_token(user_id: str, username: str, tenant_id: str) -> str:
         "tenant_id": tenant_id,
         "token_type": "refresh",
         "iat": now,
-        "exp": now + _refresh_token_expire(),
+        "exp": now + _REFRESH_TOKEN_EXPIRE,
     }
-    return jwt.encode(payload, _secret_key(), algorithm=_ALGORITHM)
+    return jwt.encode(payload, _SECRET_KEY, algorithm=_ALGORITHM)
 
 
 def create_token_pair(user_id: str, username: str, tenant_id: str) -> dict:
@@ -87,7 +78,7 @@ def create_token_pair(user_id: str, username: str, tenant_id: str) -> dict:
 def verify_token(token: str, expected_type: str | None = "access") -> dict | None:
     """验证 JWT 并返回 payload，失败返回 None"""
     try:
-        payload = jwt.decode(token, _secret_key(), algorithms=[_ALGORITHM])
+        payload = jwt.decode(token, _SECRET_KEY, algorithms=[_ALGORITHM])
         if expected_type and payload.get("token_type") != expected_type:
             return None
         return payload

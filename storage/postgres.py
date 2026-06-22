@@ -213,7 +213,10 @@ class KbMemberStore:
 
     @staticmethod
     def delete_by_kb(db: Session, kb_id: str) -> int:
-        return KbMemberStore.delete_by_knowledge_base(db, kb_id)
+        """删除知识库的所有成员记录"""
+        count = db.query(KbMember).filter(KbMember.knowledge_base_id == kb_id).delete(synchronize_session="fetch")
+        db.flush()
+        return count
 
     @staticmethod
     def user_can_access(db: Session, user_id: str, kb_id: str) -> bool:
@@ -229,14 +232,6 @@ class KbMemberStore:
             KbMember.status == KbMemberStatus.approved,
         ).first()
         return member is not None
-
-    @staticmethod
-    def delete_by_knowledge_base(db: Session, knowledge_base_id: str) -> int:
-        count = db.query(KbMember).filter(
-            KbMember.knowledge_base_id == knowledge_base_id,
-        ).delete(synchronize_session="fetch")
-        db.flush()
-        return count
 
 
 # ========================================================================
@@ -259,16 +254,11 @@ class UploadedFileStore:
         return db.get(UploadedFile, file_id)
 
     @staticmethod
-    def delete_by_knowledge_base(db: Session, knowledge_base_id: str) -> int:
-        count = db.query(UploadedFile).filter(
-            UploadedFile.knowledge_base_id == knowledge_base_id,
-        ).delete(synchronize_session="fetch")
+    def delete_by_kb(db: Session, kb_id: str) -> int:
+        """删除知识库的所有上传文件记录"""
+        count = db.query(UploadedFile).filter(UploadedFile.knowledge_base_id == kb_id).delete(synchronize_session="fetch")
         db.flush()
         return count
-
-    @staticmethod
-    def delete_by_kb(db: Session, kb_id: str) -> int:
-        return UploadedFileStore.delete_by_knowledge_base(db, kb_id)
 
 
 # ========================================================================
@@ -300,16 +290,11 @@ class DocumentStore:
         return doc
 
     @staticmethod
-    def delete_by_knowledge_base(db: Session, knowledge_base_id: str) -> int:
-        count = db.query(Document).filter(
-            Document.knowledge_base_id == knowledge_base_id,
-        ).delete(synchronize_session="fetch")
+    def delete_by_kb(db: Session, kb_id: str) -> int:
+        """删除知识库的所有文档记录"""
+        count = db.query(Document).filter(Document.knowledge_base_id == kb_id).delete(synchronize_session="fetch")
         db.flush()
         return count
-
-    @staticmethod
-    def delete_by_kb(db: Session, kb_id: str) -> int:
-        return DocumentStore.delete_by_knowledge_base(db, kb_id)
 
 
 # ========================================================================
@@ -356,16 +341,11 @@ class DocumentChunkStore:
         return count
 
     @staticmethod
-    def delete_by_knowledge_base(db: Session, knowledge_base_id: str) -> int:
-        count = db.query(DocumentChunk).filter(
-            DocumentChunk.knowledge_base_id == knowledge_base_id,
-        ).delete(synchronize_session="fetch")
+    def delete_by_kb(db: Session, kb_id: str) -> int:
+        """删除知识库的所有文档分片记录"""
+        count = db.query(DocumentChunk).filter(DocumentChunk.knowledge_base_id == kb_id).delete(synchronize_session="fetch")
         db.flush()
         return count
-
-    @staticmethod
-    def delete_by_kb(db: Session, kb_id: str) -> int:
-        return DocumentChunkStore.delete_by_knowledge_base(db, kb_id)
 
 
 # ========================================================================
@@ -399,13 +379,8 @@ class IngestionJobStore:
         return job
 
     @staticmethod
-    def delete_by_knowledge_base(db: Session, knowledge_base_id: str) -> int:
-        count = db.query(IngestionJob).filter(
-            IngestionJob.knowledge_base_id == knowledge_base_id,
-        ).delete(synchronize_session="fetch")
+    def delete_by_kb(db: Session, kb_id: str) -> int:
+        """删除知识库的所有导入任务记录"""
+        count = db.query(IngestionJob).filter(IngestionJob.knowledge_base_id == kb_id).delete(synchronize_session="fetch")
         db.flush()
         return count
-
-    @staticmethod
-    def delete_by_kb(db: Session, kb_id: str) -> int:
-        return IngestionJobStore.delete_by_knowledge_base(db, kb_id)

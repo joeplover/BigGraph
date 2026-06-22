@@ -103,15 +103,11 @@ class ElasticsearchService:
             index=self.index, body={"query": {"term": {"document_id": document_id}}}, refresh=True,
         )
 
-    def delete_knowledge_base_chunks(self, knowledge_base_id: str) -> Any:
-        return self.client.delete_by_query(
-            index=self.index,
-            body={"query": {"term": {"knowledge_base_id": knowledge_base_id}}},
-            refresh=True,
-        )
-
     def delete_kb_chunks(self, knowledge_base_id: str) -> Any:
-        return self.delete_knowledge_base_chunks(knowledge_base_id)
+        """删除知识库的所有 ES 文档"""
+        return self.client.delete_by_query(
+            index=self.index, body={"query": {"term": {"knowledge_base_id": knowledge_base_id}}}, refresh=True,
+        )
 
     def ping(self) -> bool:
         return self.client.ping()
